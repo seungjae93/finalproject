@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
-import PostCommunity from "../component/PostCommunity";
+import PostCommunity from "../components/PostCommunity";
 
 const Community = () => {
   const navigate = useNavigate();
