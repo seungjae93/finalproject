@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { throttle } from "lodash";
@@ -16,8 +16,17 @@ const MainMap = () => {
     // 지도 위치 변경시 panto를 이용할지(부드럽게 이동)
     isPanto: true,
   });
+  const mapRef = useRef();
+
   const [modalOpen, setModalOpen] = useState(false);
-  const [searchAddress, SetSearchAddress] = useState(""); //useState()
+  const [searchAddress, setSearchAddress] = useState("");
+  const [searchData, setSearchData] = useState([]);
+  const [map, setMap] = useState(); //지도
+  const [pos, setPos] = useState(); //경도 위도
+  const [level, setLevel] = useState(); //지도 줌레벨
+  const [info, setInfo] = useState(); //지도 레벨에 따른 위도 경도
+  const [click, setClick] = useState(0);
+
   const positions = [
     {
       title: "카카오",
@@ -41,36 +50,105 @@ const MainMap = () => {
     setModalOpen(!modalOpen);
   };
 
-  const geocoder = new kakao.maps.services.Geocoder();
+  const onAddressHandler = throttle(async (e) => {
+    const { value } = e.target;
+    setSearchAddress(value);
+    try {
+      const response = await axios.get(
+        `https://spart-instagram.shop/search/${value}`,
+        {
+          search: value,
+        }
+      );
 
-  let callback = function (result, status) {
+      const { data } = response.data;
+      searchData(data);
+    } catch (error) {}
+  }, 500);
+
+  //장소 검색 객체 생성
+  const ps = new kakao.maps.services.Places();
+
+  //장소검색이 완료됐을 때 호출되는 콜백함수
+  const placesSearchCB = function (data, status) {
     if (status === kakao.maps.services.Status.OK) {
-      const newSearch = result[0];
+      const newSearch = data[0];
       setState({
         center: { lat: newSearch.y, lng: newSearch.x },
       });
+      // setMap({
+      //   swLatLng: {
+      //     lat: map.getBounds().getSouthWest().getLat(),
+      //     lng: map.getBounds().getSouthWest().getLng(),
+      //   },
+      //   neLatLng: {
+      //     lat: map.getBounds().getNorthEast().getLat(),
+      //     lng: map.getBounds().getNorthEast().getLng(),
+      //   },
+      // });
     }
   };
 
-  const onAddressHandler = throttle(async (e) => {
-    const { value } = e.target;
-    SetSearchAddress(value);
-    try {
-      const response = await axios.post(`/search`, {
-        search: value,
-      });
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }, 500);
-
   //검색시 리렌더링 줄이기
-  const onSearchHandler = useCallback(() => {
-    geocoder.addressSearch(`${searchAddress}`, callback);
-    SetSearchAddress("");
+  const onSearchHandler = useCallback(async () => {
+    //키워드로 장소를 검색
+    ps.keywordSearch(`${searchAddress}`, placesSearchCB);
+    try {
+      await axios.post(`https://spart-instagram.shop/search`, {
+        text: `${searchAddress}`,
+      });
+      setClick(click + 1);
+      console.log("검색");
+    } catch (error) {}
+    setSearchAddress("");
   }, [searchAddress]);
 
+  const onPosHandler = async () => {
+    try {
+      await axios.post(`https://spart-instagram.shop/map`, {
+        ...pos,
+      });
+    } catch (error) {
+      console.log("post에러를 잡았어", error);
+    }
+  };
+
+  // const handleMapInfo = () => {
+  //   {
+  //     map &&
+  //       setPos({
+  //         center: {
+  //           lat: map.getCenter().getLat(),
+  //           lng: map.getCenter().getLng(),
+  //         },
+  //         swLatLng: {
+  //           lat: map.getBounds().getSouthWest().getLat(),
+  //           lng: map.getBounds().getSouthWest().getLng(),
+  //         },
+  //         neLatLng: {
+  //           lat: map.getBounds().getNorthEast().getLat(),
+  //           lng: map.getBounds().getNorthEast().getLng(),
+  //         },
+  //       });
+  //   }
+  // };
+  const checkCenterChanged = () => {
+    console.log("center.....");
+  };
+
+  useEffect(() => {
+    if (!map) return;
+    map.addEventListener("center_changed", checkCenterChanged);
+  }, []);
+
+  useEffect(() => {
+    console.log(mapRef.current);
+    const mapObject = mapRef.current;
+    if (!mapObject) return;
+    console.log("useEffecc!t");
+    console.log(mapObject.getBounds().getSouthWest().getLat());
+  }, [mapRef, searchAddress, click]);
+  console.log(mapRef.current);
   return (
     <>
       {modalOpen && <TotalModal modalHandler={modalHandler} />}
@@ -93,18 +171,42 @@ const MainMap = () => {
         </SearchContainer>
         <StMapContainer>
           <Map // 지도를 표시할 Container
-            center={{
+            center={
               // 지도의 중심좌표
-              lat: state.center.lat,
-              lng: state.center.lng,
-            }}
+              state.center
+            }
             isPanto={state.isPanto}
             style={{
               // 지도의 크기
               width: "100%",
               height: "100%",
             }}
+            ref={mapRef}
             level={3} // 지도의 확대 레벨
+            onZoomChanged={(map) => setLevel(map.getLevel())}
+            onCreate={(map) => {
+              console.log("oncreate!!!!!!!!!");
+              setMap(map);
+            }}
+            onDragEnd={(map) => {
+              setPos({
+                swLatLng: {
+                  lat: map.getBounds().getSouthWest().getLat(),
+                  lng: map.getBounds().getSouthWest().getLng(),
+                },
+                neLatLng: {
+                  lat: map.getBounds().getNorthEast().getLat(),
+                  lng: map.getBounds().getNorthEast().getLng(),
+                },
+              });
+              onPosHandler();
+            }}
+            onBoundsChanged={(map) =>
+              setInfo({
+                sw: map.getBounds().getSouthWest().toString(),
+                ne: map.getBounds().getNorthEast().toString(),
+              })
+            }
           >
             {positions.map((position) => {
               return (
