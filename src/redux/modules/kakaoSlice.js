@@ -1,18 +1,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-// import { setCookie } from "../../shared/cookie";
-// import setToken from "../../shared/setToken";
-import { instance } from "../api/axios";
+import axios from "axios";
+import setToken from "../../shared/setToken";
+import { setCookie } from "../../shared/cookie";
 
 export const __kakaoLogin = createAsyncThunk(
   "__kakaoLogin",
-  async (payload, thunkAPI) => {
+  async (code, thunkAPI) => {
     try {
-      // setToken();
-      const { data } = await instance.post("/auth/kakao/callback", payload);
-      return thunkAPI.fulfillWithValue(data);
-      // setCookie("token", data.token, {
-      //   path: "/",
-      // });
+      setToken();
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_DIRECT}?code=${code}`
+      );
+      setCookie("token", response.data.accessToken, {
+        path: "/",
+        expire: "after720m",
+      });
+      localStorage.setItem("nickname", response.data.nickname);
+      alert(`${response.data.nickname}님 안녕하세요 :) `);
+      return thunkAPI.fulfillWithValue(response);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
     }
@@ -20,29 +25,34 @@ export const __kakaoLogin = createAsyncThunk(
 );
 
 const initialState = {
-  isLogedIn: false,
-  isSignUp: false,
-  error: false,
-  errorMsg: "",
+  login: false,
+  isLoading: false,
+  error: null,
+  errorMessage: "",
+  nickname: "",
 };
 
 const kakaoSlice = createSlice({
   name: "kakao",
   initialState,
-  reducers: {},
+  reducers: {
+    loginCheck: (state, action) => {
+      state.login = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(__kakaoLogin.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(__kakaoLogin.fulfilled, (state, action) => {
+      .addCase(__kakaoLogin.fulfilled, (state) => {
         state.isLoading = true;
-        console.log(action.payload);
+        state.login = true;
       })
       .addCase(__kakaoLogin.rejected, (state, action) => {
         state.isLoading = false;
       });
   },
 });
-
+export const { loginCheck } = kakaoSlice.actions;
 export default kakaoSlice.reducer;
