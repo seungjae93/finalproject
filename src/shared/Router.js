@@ -6,6 +6,7 @@ import Community from "../pages/Community";
 import MainMap from "../pages/MainMap";
 import KakaoLogin from "../pages/KakaoLogin";
 import Login from "../pages/Login";
+import Review from "../pages/Review";
 
 const Router = () => {
   return (
@@ -17,6 +18,7 @@ const Router = () => {
         <Route path="/map" element={<MainMap />} />
         <Route path="/auth/kakao/callback" element={<KakaoLogin />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/review" element={<Review />} />
       </Routes>
     </BrowserRouter>
   );
