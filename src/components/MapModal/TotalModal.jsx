@@ -1,22 +1,8 @@
-import React, { useState, useRef, useEffect, Children } from "react";
+import React from "react";
 import styled from "styled-components";
 const TotalModal = (props) => {
-  // const modalOn = useRef();
-
-  // const handleClickOutside = ({ target }) => {
-  //   if (isOpen && !modalOn.current.contains(target)) setIsOpen(false);
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("click", handleClickOutside);
-  //   return () => {
-  //     window.removeEventListener("click", handleClickOutside);
-  //   };
-  // }, []);
-
   return (
     <>
-      {/* {isOpen && <StModalContainer ref={modalOn}>{Children}</StModalContainer>} */}
       <StModalContainer>x</StModalContainer>
     </>
   );
