@@ -1,5 +1,6 @@
 import axios from "axios";
-import { useMutation } from "react-query";
+
+import { useMutation } from "@tanstack/react-query";
 
 const reviewApi = axios.create({
   baseURL: "https://spart-instagram.shop",
