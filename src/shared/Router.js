@@ -3,8 +3,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "../pages/Main";
 import Header from "../components/Header";
 import Community from "../pages/Community";
-import AddPost from "../pages/AddPost";
 import MainMap from "../pages/MainMap";
+import KakaoLogin from "../pages/KakaoLogin";
+import Login from "../pages/Login";
 
 const Router = () => {
   return (
@@ -12,9 +13,10 @@ const Router = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/post" element={<AddPost />} />
         <Route path="/comm" element={<Community />} />
         <Route path="/map" element={<MainMap />} />
+        <Route path="/auth/kakao/callback" element={<KakaoLogin />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
