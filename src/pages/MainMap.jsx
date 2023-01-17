@@ -20,7 +20,7 @@ const MainMap = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [searchAddress, setSearchAddress] = useState("");
   const [searchData, setSearchData] = useState([]);
-  const [zoomLevel, setZoomLevel] = useState(); //지도 줌레벨
+  const [zoomLevel, setZoomLevel] = useState(0); //지도 줌레벨
   const [positions, setPositions] = useState();
   const markerArray = [];
 
@@ -43,7 +43,7 @@ const MainMap = () => {
       const { data } = response.data;
       setSearchData(data);
     } catch (error) {}
-  }, 500);
+  }, 700);
 
   //장소 검색 객체 생성
   const ps = new kakao.maps.services.Places();
@@ -81,6 +81,7 @@ const MainMap = () => {
       );
       const { data } = response.data;
       setPositions(data);
+      console.log(positions);
     } catch (error) {}
   };
 
@@ -95,6 +96,7 @@ const MainMap = () => {
       );
       const { data } = response.data;
       setPositions(data);
+      console.log(positions);
     } catch (error) {}
   };
 
@@ -111,6 +113,66 @@ const MainMap = () => {
       setPositions(data);
     } catch (error) {}
   };
+  console.log(zoomLevel);
+
+  const getOverlayStyle = () => {
+    if (zoomLevel > 8) {
+      return "red";
+    } else if (4 < zoomLevel < 7) {
+      return "green";
+    } else if (6 < zoomLevel < 9) {
+      return "blue";
+    } else {
+      return;
+    }
+  };
+
+  const getOverlayAreaName = () => {
+    if (zoomLevel > 8) {
+      console.log("들어가니??");
+      return "doName";
+    } else if (4 < zoomLevel < 7) {
+      console.log("dongName??");
+      return "dongName";
+    } else if (6 < zoomLevel < 9) {
+      console.log("cityName??");
+      return "cityName";
+    } else {
+      return;
+    }
+  };
+
+  const renderItem = () => {
+    if (!positions) return;
+    if (zoomLevel < 4) return;
+    return (
+      <>
+        {positions.map((el) => {
+          const name = el[getOverlayAreaName()];
+          console.log(name);
+          return (
+            <CustomOverlayMap // 커스텀 오버레이를 표시할 Container
+              key={el.lat}
+              position={el}
+            >
+              {/* 커스텀 오버레이에 표시할 내용입니다 */}
+              <div
+                className="label"
+                style={{
+                  color: "#000",
+                  backgroundColor: `${getOverlayStyle()}`,
+                }}
+              >
+                <span className="left"></span>
+                <span className="center">{name}</span>
+                <span className="right"></span>
+              </div>
+            </CustomOverlayMap>
+          );
+        })}
+      </>
+    );
+  };
 
   //레벨에 따라 response 데이터 형식이 달라 빈 배열에 push
   zoomLevel < 3
@@ -125,6 +187,7 @@ const MainMap = () => {
         }
       })
     : zoomLevel > 4 && markerArray.push(...positions);
+  console.log(markerArray);
 
   useEffect(() => {
     /* 현재 보이는 위치에 대한 좌표 값을 받아와주는 부분 */
@@ -168,109 +231,70 @@ const MainMap = () => {
           )}
           <button onClick={onSearchHandler}>검색</button>
         </SearchContainer>
-        <StReviewContainer></StReviewContainer>
-        <StMapContainer>
-          <Map // 지도를 표시할 Container
-            center={state.center}
-            isPanto={state.isPanto}
-            style={{
-              // 지도의 크기
-              width: "60%",
-              height: "100%",
-            }}
-            ref={mapRef}
-            level={3} // 지도의 확대 레벨
-            maxLevel={11}
-            onZoomChanged={(map) => setZoomLevel(map.getLevel())}
-            onDragEnd={(map) => {
-              onDragHandler({
-                swLatLng: {
-                  lat: map.getBounds().getSouthWest().getLat(),
-                  lng: map.getBounds().getSouthWest().getLng(),
-                },
-                neLatLng: {
-                  lat: map.getBounds().getNorthEast().getLat(),
-                  lng: map.getBounds().getNorthEast().getLng(),
-                },
-                zoomLevel: map.getLevel(),
-              });
-            }}
-            onBoundsChanged={debounce((map) => {
-              onPosHandler({
-                swLatLng: {
-                  lat: map.getBounds().getSouthWest().getLat(),
-                  lng: map.getBounds().getSouthWest().getLng(),
-                },
-                neLatLng: {
-                  lat: map.getBounds().getNorthEast().getLat(),
-                  lng: map.getBounds().getNorthEast().getLng(),
-                },
-                zoomLevel: map.getLevel(),
-              });
-            }, 100)}
-          >
-            //마커
-            {markerArray.map((el) => {
-              return (
-                <MapMarker
-                  key={`${el.estateId}-${el.lat}`}
-                  position={el}
-                  image={{
-                    src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png", // 마커이미지의 주소입니다
-                    size: {
-                      width: 24,
-                      height: 35,
-                    }, // 마커이미지의 크기입니다
-                  }}
-                  // title={position.title} // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-                  onClick={modalHandler}
-                />
-              );
-            })}
-            //커스텀 오버레이
-            {zoomLevel > 8
-              ? positions &&
-                positions.map((el) => {
-                  return (
-                    <CustomOverlayMap // 커스텀 오버레이를 표시할 Container
-                      key={el.lat}
-                      position={el}
-                    >
-                      {/* 커스텀 오버레이에 표시할 내용입니다 */}
-                      <div
-                        className="label"
-                        style={{ color: "#000", backgroundColor: "red" }}
-                      >
-                        <span className="left"></span>
-                        <span className="center">{el.doName}</span>
-                        <span className="right"></span>
-                      </div>
-                    </CustomOverlayMap>
-                  );
-                })
-              : 6 < zoomLevel < 9
-              ? positions &&
-                positions.map((el) => {
-                  return (
-                    <CustomOverlayMap // 커스텀 오버레이를 표시할 Container
-                      key={el.lat}
-                      position={el}
-                    >
-                      {/* 커스텀 오버레이에 표시할 내용입니다 */}
-                      <div
-                        className="label"
-                        style={{ color: "#000", backgroundColor: "blue" }}
-                      >
-                        <span className="left"></span>
-                        <span className="center">{el.cityName}</span>
-                        <span className="right"></span>
-                      </div>
-                    </CustomOverlayMap>
-                  );
-                })
-              : null}
-          </Map>
-        </StMapContainer>
+        <StWrapper>
+          <StReviewContainer>ff</StReviewContainer>
+          <StMapContainer>
+            <Map // 지도를 표시할 Container
+              center={state.center}
+              isPanto={state.isPanto}
+              style={{
+                // 지도의 크기
+                width: "100%",
+                height: "100%",
+              }}
+              ref={mapRef}
+              level={3} // 지도의 확대 레벨
+              maxLevel={11}
+              onZoomChanged={(map) => setZoomLevel(map.getLevel())}
+              onDragEnd={(map) => {
+                onDragHandler({
+                  swLatLng: {
+                    lat: map.getBounds().getSouthWest().getLat(),
+                    lng: map.getBounds().getSouthWest().getLng(),
+                  },
+                  neLatLng: {
+                    lat: map.getBounds().getNorthEast().getLat(),
+                    lng: map.getBounds().getNorthEast().getLng(),
+                  },
+                  zoomLevel: map.getLevel(),
+                });
+              }}
+              onBoundsChanged={debounce((map) => {
+                onPosHandler({
+                  swLatLng: {
+                    lat: map.getBounds().getSouthWest().getLat(),
+                    lng: map.getBounds().getSouthWest().getLng(),
+                  },
+                  neLatLng: {
+                    lat: map.getBounds().getNorthEast().getLat(),
+                    lng: map.getBounds().getNorthEast().getLng(),
+                  },
+                  zoomLevel: map.getLevel(),
+                });
+              }, 100)}
+            >
+              //마커
+              {markerArray.map((el) => {
+                return (
+                  <MapMarker
+                    key={`${el.estateId}-${el.lat}`}
+                    position={el}
+                    image={{
+                      src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png", // 마커이미지의 주소입니다
+                      size: {
+                        width: 24,
+                        height: 35,
+                      }, // 마커이미지의 크기입니다
+                    }}
+                    // title={position.title} // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                    onClick={modalHandler}
+                  />
+                );
+              })}
+              {renderItem()}
+            </Map>
+          </StMapContainer>
+        </StWrapper>
       </StContainer>
     </>
   );
@@ -324,7 +348,18 @@ const AutoSearchData = styled.li`
     cursor: pointer;
   }
 `;
-const StReviewContainer = styled.div``;
+
+const StWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+`;
+
+const StReviewContainer = styled.div`
+  width: 600px;
+  height: 100%;
+`;
 
 const StMapContainer = styled.div`
   width: 100%;
