@@ -22,7 +22,7 @@ const MainMap = () => {
   const [searchData, setSearchData] = useState([]);
   const [zoomLevel, setZoomLevel] = useState(0); //지도 줌레벨
   const [positions, setPositions] = useState();
-  const markerArray = [];
+  const [markerArray, setMarkerArray] = useState([]);
 
   const modalHandler = () => {
     setModalOpen(!modalOpen);
@@ -81,7 +81,6 @@ const MainMap = () => {
       );
       const { data } = response.data;
       setPositions(data);
-      console.log(positions);
     } catch (error) {}
   };
 
@@ -96,7 +95,6 @@ const MainMap = () => {
       );
       const { data } = response.data;
       setPositions(data);
-      console.log(positions);
     } catch (error) {}
   };
 
@@ -113,42 +111,45 @@ const MainMap = () => {
       setPositions(data);
     } catch (error) {}
   };
-  console.log(zoomLevel);
 
-  const getOverlayStyle = () => {
+  const getOverlayStyle = (zoomLevel) => {
     if (zoomLevel > 8) {
       return "red";
-    } else if (4 < zoomLevel < 7) {
+    } else if (zoomLevel === 6 || zoomLevel === 5) {
       return "green";
-    } else if (6 < zoomLevel < 9) {
+    } else if (zoomLevel === 7 || zoomLevel === 8) {
       return "blue";
     } else {
       return;
     }
   };
 
-  const getOverlayAreaName = () => {
+  const getOverlayAreaName = (zoomLevel) => {
     if (zoomLevel > 8) {
-      console.log("들어가니??");
+      //  9, 10, 11 얘는 제대로 와요
       return "doName";
-    } else if (4 < zoomLevel < 7) {
-      console.log("dongName??");
+    } else if (zoomLevel === 6 || zoomLevel === 5) {
+      // 5, 6 얘도 제대로 와요
       return "dongName";
-    } else if (6 < zoomLevel < 9) {
-      console.log("cityName??");
+    } else if (zoomLevel === 7 || zoomLevel === 8) {
+      // 7, 8
       return "cityName";
     } else {
       return;
     }
   };
 
+  console.log(zoomLevel);
+  console.log(getOverlayAreaName(zoomLevel)); //?
+  console.log(positions); // 7레벨인데 서버 응답값으로 cityName이 왔어요.
+
   const renderItem = () => {
-    if (!positions) return;
-    if (zoomLevel < 4) return;
+    if (!positions) return null;
+    if (zoomLevel < 4) return null;
     return (
       <>
         {positions.map((el) => {
-          const name = el[getOverlayAreaName()];
+          const name = el[getOverlayAreaName(zoomLevel)];
           console.log(name);
           return (
             <CustomOverlayMap // 커스텀 오버레이를 표시할 Container
@@ -160,7 +161,7 @@ const MainMap = () => {
                 className="label"
                 style={{
                   color: "#000",
-                  backgroundColor: `${getOverlayStyle()}`,
+                  backgroundColor: `${getOverlayStyle(zoomLevel)}`,
                 }}
               >
                 <span className="left"></span>
@@ -175,18 +176,29 @@ const MainMap = () => {
   };
 
   //레벨에 따라 response 데이터 형식이 달라 빈 배열에 push
-  zoomLevel < 3
-    ? positions && markerArray.push(...positions)
-    : 2 < zoomLevel < 5
-    ? positions &&
+
+  useEffect(() => {
+    if (!positions) return;
+    let newArray = [];
+    if (zoomLevel < 3) {
+      newArray.push(...positions);
+      setMarkerArray(newArray);
+    } else if (2 < zoomLevel < 5) {
       positions?.map((value) => {
         if (Array.isArray(value)) {
           value?.map((el) => {
-            markerArray.push(el);
+            newArray.push(el);
           });
+          setMarkerArray(newArray);
         }
-      })
-    : zoomLevel > 4 && markerArray.push(...positions);
+      });
+    } else if (zoomLevel > 4) {
+      newArray.push(...positions);
+      setMarkerArray(newArray);
+    }
+  }, [zoomLevel, positions]);
+  console.log(zoomLevel);
+  console.log(positions);
   console.log(markerArray);
 
   useEffect(() => {
@@ -274,23 +286,24 @@ const MainMap = () => {
               }, 100)}
             >
               //마커
-              {markerArray.map((el) => {
-                return (
-                  <MapMarker
-                    key={`${el.estateId}-${el.lat}`}
-                    position={el}
-                    image={{
-                      src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png", // 마커이미지의 주소입니다
-                      size: {
-                        width: 24,
-                        height: 35,
-                      }, // 마커이미지의 크기입니다
-                    }}
-                    // title={position.title} // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-                    onClick={modalHandler}
-                  />
-                );
-              })}
+              {zoomLevel < 5 &&
+                markerArray.map((el) => {
+                  return (
+                    <MapMarker
+                      key={`${el.estateId}-${el.lat}`}
+                      position={el}
+                      image={{
+                        src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png", // 마커이미지의 주소입니다
+                        size: {
+                          width: 24,
+                          height: 35,
+                        }, // 마커이미지의 크기입니다
+                      }}
+                      // title={position.title} // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                      onClick={modalHandler}
+                    />
+                  );
+                })}
               {renderItem()}
             </Map>
           </StMapContainer>
