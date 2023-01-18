@@ -2,9 +2,8 @@ import styled from "styled-components";
 import axios from "axios";
 import { throttle, debounce } from "lodash";
 import { Map, MapMarker, CustomOverlayMap } from "react-kakao-maps-sdk";
-import TotalModal from "../components/MapModal/TotalModal";
-import SubModal from "../components/MapModal/SubModal";
 import React, { useState, useCallback, useEffect, useRef } from "react";
+import TotalReview from "../components/Map/TotalReview";
 
 const { kakao } = window;
 
@@ -23,10 +22,6 @@ const MainMap = () => {
   const [zoomLevel, setZoomLevel] = useState(0); //지도 줌레벨
   const [positions, setPositions] = useState();
   const [markerArray, setMarkerArray] = useState([]);
-
-  const modalHandler = () => {
-    setModalOpen(!modalOpen);
-  };
 
   //검색어 받아오는 로직
   const onAddressHandler = throttle(async (e) => {
@@ -139,10 +134,6 @@ const MainMap = () => {
     }
   };
 
-  console.log(zoomLevel);
-  console.log(getOverlayAreaName(zoomLevel)); //?
-  console.log(positions); // 7레벨인데 서버 응답값으로 cityName이 왔어요.
-
   const renderItem = () => {
     if (!positions) return null;
     if (zoomLevel < 4) return null;
@@ -150,7 +141,6 @@ const MainMap = () => {
       <>
         {positions.map((el) => {
           const name = el[getOverlayAreaName(zoomLevel)];
-          console.log(name);
           return (
             <CustomOverlayMap // 커스텀 오버레이를 표시할 Container
               key={el.lat}
@@ -197,9 +187,6 @@ const MainMap = () => {
       setMarkerArray(newArray);
     }
   }, [zoomLevel, positions]);
-  console.log(zoomLevel);
-  console.log(positions);
-  console.log(markerArray);
 
   useEffect(() => {
     /* 현재 보이는 위치에 대한 좌표 값을 받아와주는 부분 */
@@ -221,8 +208,6 @@ const MainMap = () => {
 
   return (
     <>
-      {modalOpen && <TotalModal modalHandler={modalHandler} />}
-      {modalOpen && <SubModal modalHandler={modalHandler} />}
       <StContainer>
         <SearchContainer>
           <StSearch
@@ -244,7 +229,9 @@ const MainMap = () => {
           <button onClick={onSearchHandler}>검색</button>
         </SearchContainer>
         <StWrapper>
-          <StReviewContainer>ff</StReviewContainer>
+          <StReviewContainer>
+            <TotalReview />
+          </StReviewContainer>
           <StMapContainer>
             <Map // 지도를 표시할 Container
               center={state.center}
@@ -300,7 +287,6 @@ const MainMap = () => {
                         }, // 마커이미지의 크기입니다
                       }}
                       // title={position.title} // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-                      onClick={modalHandler}
                     />
                   );
                 })}
