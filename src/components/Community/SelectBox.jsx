@@ -1,17 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { hangjungdong } from "./hangjungdong";
 
 const SelectBox = () => {
   const [selected, setSelected] = useState({});
   const { postLocation1, postLocation2 } = hangjungdong;
-  const [initial, setInitial] = useState(true);
 
   const HandleChange = (e) => {
     const { name, value } = e.target;
     setSelected({ ...selected, [name]: value });
     console.log(name, value);
-
-    setInitial(false);
   };
 
   return (

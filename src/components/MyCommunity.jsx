@@ -16,7 +16,7 @@ const MyCommunity = () => {
   return (
     <>
       <div>
-        {data?.myposts.map((posts?) => {
+        {data?.myposts.map((posts) => {
           return (
             <>
               <div key={`mypage_${posts.id}`}>

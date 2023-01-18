@@ -9,7 +9,6 @@ const reviewApi = axios.create({
 export const addPost = async (post) => {
   try {
     const response = await axios.post("/review", post);
-
     if (response.status === 200) return response.data;
     else if (response.status === 401) {
       alert("로그인 먼저 해주세요");

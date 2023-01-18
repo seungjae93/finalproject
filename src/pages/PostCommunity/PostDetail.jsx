@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { deleteCommunity, detailCommunity } from "../../redux/api/communityApi";
@@ -9,18 +8,19 @@ import Comment from "../Comment";
 const PostDetail = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
-  const [post, setPosts] = useState("");
+  // const [post, setPosts] = useState("");
 
-  const { isLoading, isError, error } = useQuery(
+  const { isLoading, isError, error, data } = useQuery(
     ["posts", postId],
     () => detailCommunity(postId),
     {
       onSuccess: (post) => {
-        const postArray = Object.values(post);
-        const detailItem = postArray.filter(
-          (value) => value.postId === Number(postId)
-        );
-        setPosts(detailItem[0]);
+        // const postArray = Object.values(post);
+        // const detailItem = postArray.filter(
+        //   (value) => value.postId === Number(postId)
+        // );
+        // setPosts(detailItem[0]);
+        return data;
       },
       onError: (error) => {
         console.log(error);
@@ -36,6 +36,9 @@ const PostDetail = () => {
   if (isLoading) return <h2> 로딩중 .. </h2>;
   if (isError) return <h2> Error : {error.toString()} </h2>;
 
+  let date = new Date(2023, 0, 1, 8, 23);
+  console.log(date);
+
   return (
     <>
       <StMain>
@@ -43,23 +46,22 @@ const PostDetail = () => {
         <StButton onClick={() => navigate("/list")}> 뒤로 가기 </StButton>
       </StMain>
       <StContainer>
-        <StTitle> {post?.title} </StTitle>
+        <StTitle> {data?.post.title} </StTitle>
 
         <StInfor>
           <StNicDa>
-            <StNicName> {post?.nickname} </StNicName>
+            <StNicName> {data?.post.nickname} </StNicName>
             <StDate>
-              {" "}
-              {new Date(post.createdAt).toLocaleDateString("ko-KR", {
+              {new Date(data?.post.createdAt).toLocaleDateString("ko-KR", {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
-              })}{" "}
+              })}
             </StDate>
           </StNicDa>
 
           <div>
-            <StEdit onClick={() => navigate(`/edit/${post.postId}`)}>
+            <StEdit onClick={() => navigate(`/edit/${data?.post.postId}`)}>
               수정
             </StEdit>
 
@@ -71,12 +73,12 @@ const PostDetail = () => {
 
         <div>
           <StDetailImage
-            src={post?.postImage}
+            src={data?.post?.postImage}
             style={{ width: "100%", height: "300px" }}
           />
         </div>
 
-        <StContent> {post.content} </StContent>
+        <StContent> {data?.post.content} </StContent>
       </StContainer>
 
       <Comment />

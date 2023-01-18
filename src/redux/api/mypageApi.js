@@ -1,4 +1,7 @@
 import axios from "axios";
+import setToken from "../../shared/setToken";
+import { getCookie } from "../../shared/cookie";
+import { instance } from "./instance";
 
 export const getmypageReviews = async (myreview) => {
   const response = await axios.get(
@@ -8,6 +11,9 @@ export const getmypageReviews = async (myreview) => {
 };
 
 export const getmypagePosts = async () => {
-  const response = await axios.get("https://goldpumpkin.shop/posts/me");
+  const accessToken = getCookie("token");
+  setToken(accessToken);
+  const headers = { authorization: `Bearer ${accessToken}` };
+  const response = await instance.get("/posts/me", { headers: headers });
   return response.data;
 };
