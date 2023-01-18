@@ -4,7 +4,7 @@ import { getmypageReviews } from "../redux/api/mypageApi";
 
 const MyReview = () => {
   const { data, error, isLoading, isError } = useQuery(
-    "myreview",
+    ["myreview"],
     getmypageReviews
   );
 

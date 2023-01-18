@@ -3,9 +3,16 @@ import { getCookie } from "../../shared/cookie";
 import setToken from "../../shared/setToken";
 import { instance } from "./instance";
 
-export const getmypageReviews = async (myreview) => {
+export const getmypageReviews = async () => {
+  const accessToken = getCookie("token");
+  setToken(accessToken);
+  const headers = { authorization: `Bearer ${accessToken}` };
+
   const response = await axios.get(
-    `https://spart-instagram.shop/review/items/${myreview.reviewId}`
+    "https://spart-instagram.shop/review/myReview",
+    {
+      headers: headers,
+    }
   );
   return response.data;
 };
