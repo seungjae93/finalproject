@@ -32,7 +32,6 @@ const Header = () => {
   useEffect(() => {
     if (getCookie("token")) {
       checkCookie();
-      navigate("/");
     }
   }, []);
 
