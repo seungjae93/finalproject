@@ -9,10 +9,12 @@ const MainPage = () => {
         <StSectionHome>
           <StMainImage src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&dl=patrick-perkins-3wylDrjxH-E-unsplash.jpg&q=80&fm=jpg&crop=entropy&cs=tinysrgb" />
           <StHomeBox>
-            <span>이 집은 어떨까?</span>
-            <div>원룸,투룸,역세권 말고 진짜 살아봐야 아는 정보</div>
-            <div>중개인도, 집주인도 알려주지 않는 꿀정보를 알아보세요</div>
-            <img src={require("../images/Group 388.jpg")} alt="button" />
+            <StHomeBoxContent>
+              <span>이 집은 어떨까?</span>
+              <div>원룸,투룸,역세권 말고 진짜 살아봐야 아는 정보</div>
+              <div>중개인도, 집주인도 알려주지 않는 꿀정보를 알아보세요</div>
+              <img src={require("../images/Group 388.jpg")} alt="button" />
+            </StHomeBoxContent>
           </StHomeBox>
         </StSectionHome>
 
@@ -157,12 +159,17 @@ const StMainImage = styled.img`
 `;
 
 const StHomeBox = styled.div`
-  width: 25rem;
-  height: 10rem;
+  width: 30rem;
+  height: 15rem;
   background-color: #ffffff;
   position: absolute;
-  top: 50vh;
-  right: 10%;
+  top: 70vh;
+  left: 50%;
+`;
+
+const StHomeBoxContent = styled.div`
+  position: relative;
+  margin-top: 50px;
 `;
 
 const StSectionReview = styled.div`
@@ -203,28 +210,31 @@ const StSectionDetail = styled.div`
   background-color: #f0f0f0;
   max-width: 1920px;
   height: 1200px;
+  align-items: center;
 `;
 
 const StDetailBox1 = styled.div`
+  position: relative;
   width: 1192px;
   height: 380px;
-  flex-direction: column;
-  align-items: center;
-  display: block;
   background-color: white;
   box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  left: 10%;
+
   .detailBoxImage {
     width: 500px;
     height: 300px;
     position: relative;
     top: 5vh;
-    left: 10%;
+    left: 8%;
   }
   .detailBoxContents {
     position: relative;
-    top: -10vh;
-    left: 50%;
+    top: -15vh;
+    left: 55%;
   }
   .go {
     color: #819608;
@@ -239,14 +249,15 @@ const StDetailBox1 = styled.div`
 `;
 
 const StDetailBox2 = styled.div`
+  position: relative;
   width: 1192px;
   height: 380px;
-  flex-direction: column;
-  align-items: center;
-  display: block;
   background-color: white;
   box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  left: 10%;
   .detailBoxImage {
     width: 500px;
     height: 300px;
@@ -256,8 +267,8 @@ const StDetailBox2 = styled.div`
   }
   .detailBoxContents {
     position: relative;
-    top: -10vh;
-    left: 50%;
+    top: -13vh;
+    left: 55%;
   }
   .go {
     color: #819608;
@@ -272,14 +283,15 @@ const StDetailBox2 = styled.div`
 `;
 
 const StDetailBox3 = styled.div`
+  position: relative;
   width: 1192px;
   height: 380px;
-  flex-direction: column;
-  align-items: center;
-  display: block;
   background-color: white;
   box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  left: 10%;
   .detailBoxImage {
     width: 500px;
     height: 300px;
@@ -289,8 +301,8 @@ const StDetailBox3 = styled.div`
   }
   .detailBoxContents {
     position: relative;
-    top: -10vh;
-    left: 50%;
+    top: -15vh;
+    left: 55%;
   }
   .go {
     color: #819608;
