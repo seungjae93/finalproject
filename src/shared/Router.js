@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Main from "../pages/Main";
+import MainPage from "../pages/MainPage";
 import Header from "../components/Header";
 import MainMap from "../pages/MainMap";
 import KakaoLogin from "../pages/KakaoLogin";
@@ -17,7 +17,7 @@ const Router = () => {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<MainPage />} />
         <Route path="/map" element={<MainMap />} />
         <Route path="/auth/kakao/callback" element={<KakaoLogin />} />
         <Route path="/login" element={<Login />} />
