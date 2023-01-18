@@ -51,6 +51,7 @@ const StCardWrapper = styled(Link)`
 const StImageCarrier = styled.img`
   width: 320px;
   height: 170px;
+  border-radius: 20px;
 `;
 
 const StTitleCarrier = styled.div`

@@ -22,7 +22,7 @@ const PostForm = () => {
     reader.readAsDataURL(e.target.files[0]);
   };
 
-  const { mutate: addCommunity } = useAddCommunity();
+  const { mutate } = useAddCommunity();
 
   const onHandleAddPost = (event) => {
     event.preventDefault();
@@ -38,7 +38,7 @@ const PostForm = () => {
 
     const community = formData;
 
-    addCommunity(community);
+    mutate(community);
     navigate("/list");
   };
 

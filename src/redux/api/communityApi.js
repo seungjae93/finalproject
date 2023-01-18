@@ -17,6 +17,7 @@ export const getCommunity = async () => {
 
 //post
 const addCommunity = async (community) => {
+  console.log(community);
   const accessToken = getCookie("token");
   setToken(accessToken);
   const headers = { authorization: `Bearer ${accessToken}` };
@@ -75,36 +76,13 @@ export const updateCommunity = async (postId, formData) => {
   const headers = { authorization: `Bearer ${accessToken}` };
   const response = await instance.patch(
     `/posts/${postId}`,
-    { postId, ...formData },
+    { postId, formData },
     {
       headers: headers,
     }
   );
   return response.data;
 };
-// export const useUpdateCommunity = async () => {
-//   return useMutation(updateCommunity, {
-//     onSuccess: () => {
-//       window.alert("수정 되었습니다.");
-//     },
-//   });
-// };
-
-// export const updateCommunity = async (postid, data) => {
-//   const accessToken = getCookie("token");
-//   setToken(accessToken);
-//   const headers = { authorization: `Bearer ${accessToken}` };
-//   console.log(data);
-//   const response = await instance.patch(
-//     `/posts/${postid}`,
-//     {
-//       postid,
-//       ...data,
-//     },
-//     { headers: headers }
-//   );
-//   return response.data;
-// };
 
 //댓글 get
 export const getComment = async (postid) => {
@@ -147,6 +125,18 @@ export const deleteComment = async (commentid) => {
   const headers = { authorization: `Bearer ${accessToken}` };
   const response = await instance.delete(`/comments/${commentid}`, {
     headers: headers,
+  });
+  return response.data;
+};
+
+// 댓글 edit
+export const updateComment = async (commentid, content) => {
+  const accessToken = getCookie("token");
+  setToken(accessToken);
+  const headers = { authorization: `Bearer ${accessToken}` };
+  const response = await instance.put(`/comments/${commentid}`, {
+    headers: headers,
+    content: content,
   });
   return response.data;
 };
