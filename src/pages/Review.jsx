@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useAddPost } from "../redux/api/reviewApi";
-import PostCode from "../pages/PostCode";
+import PostCode from "../components/PostCode";
 import useInputItem from "../hooks/useInputItem";
 
 const Review = () => {

@@ -1,6 +1,7 @@
 import React from "react";
 import DaumPostcode from "react-daum-postcode";
 
+// 다음 카카오 우편번호API 를 활용하기 위한 컴포넌트
 const PostCode = ({ setAddress, setJibunAddress }) => {
   const handle = {
     selectAddress: (data) => {
