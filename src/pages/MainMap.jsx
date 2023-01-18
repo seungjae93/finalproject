@@ -22,6 +22,7 @@ const MainMap = () => {
   const [zoomLevel, setZoomLevel] = useState(0); //지도 줌레벨
   const [positions, setPositions] = useState();
   const [markerArray, setMarkerArray] = useState([]);
+  const [estateIdData, setEstateIdData] = useState([]);
 
   //검색어 받아오는 로직
   const onAddressHandler = throttle(async (e) => {
@@ -121,13 +122,10 @@ const MainMap = () => {
 
   const getOverlayAreaName = (zoomLevel) => {
     if (zoomLevel > 8) {
-      //  9, 10, 11 얘는 제대로 와요
       return "doName";
     } else if (zoomLevel === 6 || zoomLevel === 5) {
-      // 5, 6 얘도 제대로 와요
       return "dongName";
     } else if (zoomLevel === 7 || zoomLevel === 8) {
-      // 7, 8
       return "cityName";
     } else {
       return;
@@ -173,6 +171,7 @@ const MainMap = () => {
     if (zoomLevel < 3) {
       newArray.push(...positions);
       setMarkerArray(newArray);
+      setEstateIdData(newArray);
     } else if (2 < zoomLevel < 5) {
       positions?.map((value) => {
         if (Array.isArray(value)) {
@@ -180,6 +179,7 @@ const MainMap = () => {
             newArray.push(el);
           });
           setMarkerArray(newArray);
+          setEstateIdData(newArray);
         }
       });
     } else if (zoomLevel > 4) {
@@ -230,7 +230,7 @@ const MainMap = () => {
         </SearchContainer>
         <StWrapper>
           <StReviewContainer>
-            <TotalReview />
+            <TotalReview estateIdData={estateIdData[0]} />
           </StReviewContainer>
           <StMapContainer>
             <Map // 지도를 표시할 Container
@@ -272,7 +272,6 @@ const MainMap = () => {
                 });
               }, 100)}
             >
-              //마커
               {zoomLevel < 5 &&
                 markerArray.map((el) => {
                   return (
@@ -280,7 +279,8 @@ const MainMap = () => {
                       key={`${el.estateId}-${el.lat}`}
                       position={el}
                       image={{
-                        src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png", // 마커이미지의 주소입니다
+                        src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
+                        // 마커이미지의 주소입니다
                         size: {
                           width: 24,
                           height: 35,

@@ -3,25 +3,28 @@ import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
 import axios from "axios";
 
-const TotalReview = ({ estateId }) => {
-  const { isLoading, isError, data, error } = useQuery(
-    ["todos", estateId],
+const TotalReview = ({ estateIdData }) => {
+  const { isLoading, isError, isFetching, data, error } = useQuery(
+    ["showReview"],
     async () => {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_MAP_SERVER}/review/items/${estateId}`,
-        { estateId: estateId }
+        `${process.env.REACT_APP_API_MAP_SERVER}/review/items/${estateIdData.estateId}`,
+        { estateId: estateIdData.estateId }
       );
+      const { data } = response.data;
+      return data;
     },
-    {
-      onSuccess: (data) => {
-        console.log(data);
-      },
-    }
+    { refetchOnWindowFocus: false, staleTime: 5000 }
   );
 
   return (
     <>
-      <StModalContainer>x</StModalContainer>
+      <StModalContainer>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </StModalContainer>
     </>
   );
 };
