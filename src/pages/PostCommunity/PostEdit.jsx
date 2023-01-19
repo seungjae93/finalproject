@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   getUpdateCommunity,
   updateCommunity,
@@ -17,11 +17,13 @@ const PostEdit = () => {
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState();
+  const [newImage, setNewImage] = useState(null);
 
   const [selected, setSelected] = useState({});
   const { postLocation1, postLocation2 } = hangjungdong;
 
-  // 기존의 데이터 가져오기
+  const queryClient = useQueryClient();
+
   const { error, isLoading, isError } = useQuery(
     ["post", postId],
     () => getUpdateCommunity(postId),
@@ -38,37 +40,40 @@ const PostEdit = () => {
   );
 
   const onPreviewImage = (e) => {
-    setImage(e.target.files[0]);
+    setNewImage(e.target.files[0]);
+    const newImage = e.target.files[0];
+    setImage(URL.createObjectURL(newImage));
     const reader = new FileReader();
-    reader.onload = (event) => {
-      setPreview(event.target.result);
+    reader.onload = () => {
+      setPreview(URL.createObjectURL(newImage));
     };
     reader.readAsDataURL(e.target.files[0]);
   };
 
   //수정하기
-  const { mutate } = useMutation((postId, formData) =>
-    updateCommunity(postId, formData)
+  const { mutate } = useMutation(
+    (formData) => updateCommunity(postId, formData),
+    {
+      onSuccess: () => queryClient.refetchQueries(["posts"]),
+    }
   );
 
   const updateHandler = (event) => {
     event.preventDefault();
-
     const formData = new FormData();
-    formData.append("postImage", image);
+    formData.append("postImage", newImage);
     formData.append("title", title);
     formData.append("content", content);
     formData.append("postLocation1", selected.postLocation1);
     formData.append("postLocation2", selected.postLocation2);
 
-    mutate(postId, formData);
+    mutate(formData);
     navigate("/list");
   };
 
-  const handleChange = (e) => {
+  const HandleChange = (e) => {
     const { name, value } = e.target;
     setSelected({ ...selected, [name]: value });
-    console.log(name, value);
   };
 
   if (isLoading) return <h2> 로딩중 .. </h2>;
@@ -76,69 +81,126 @@ const PostEdit = () => {
 
   return (
     <>
-      <form>
-        <div>
-          <select name="postLocation1" onChange={handleChange}>
-            <option value="">시,도 선택</option>
-            {postLocation1.map((el) => (
-              <option key={el.postLocation1} value={el.postLocation1}>
-                {el.codeNm}
-              </option>
-            ))}
-          </select>
-          <select name="postLocation2" onChange={handleChange}>
-            <option value="">구,군 선택</option>
-            {postLocation2
-              .filter((el) => el.postLocation1 === selected.postLocation1)
-              .map((el) => (
-                <option key={el.postLocation2} value={el.codeNm}>
-                  {el.codeNm}
-                </option>
-              ))}
-          </select>
-        </div>
-        <StContainer>
-          <StTitle> 제목 </StTitle>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <StContent> 내용 </StContent>
-          <input
-            type="text"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          />
-          <input type="file" name="postImage" onChange={onPreviewImage} />
-          {preview && <img alt="sample" src={preview} />}
-          <div>
-            <StDetailImage
-              src={image}
-              value={image}
-              style={{ width: "100%", height: "300px" }}
+      <StAddContainer>
+        <StAddBox>
+          <StForm>
+            <StSeleteBox>
+              <StSeleteR name="postLocation1" onChange={HandleChange}>
+                <StOption value="">시,도 선택</StOption>
+                {postLocation1.map((el) => (
+                  <StOption key={el.postLocation1} value={el.postLocation1}>
+                    {el.codeNm}
+                  </StOption>
+                ))}
+              </StSeleteR>
+              <StSeleteL name="postLocation2" onChange={HandleChange}>
+                <StOption value="">구,군 선택</StOption>
+                {postLocation2
+                  .filter((el) => el.postLocation1 === selected.postLocation1)
+                  .map((el) => (
+                    <StOption key={el.postLocation2} value={el.codeNm}>
+                      {el.codeNm}
+                    </StOption>
+                  ))}
+              </StSeleteL>
+            </StSeleteBox>
+
+            <StyledInput
+              type="file"
+              id="file"
+              name="postImage"
               onChange={onPreviewImage}
+              style={{ display: "none" }}
             />
-          </div>
-          <StInfor>
+            <StUpload htmlFor="file">파일 업로드</StUpload>
+            {preview && (
+              <StyledImage
+                alt="sample"
+                src={preview}
+                style={{ display: "none" }}
+              />
+            )}
             <div>
-              <StEdit onClick={updateHandler}>수정 완료</StEdit>
-              <StRemove onClick={() => navigate("/:postId")}> 취소 </StRemove>
+              <StyledImage
+                src={image}
+                value={image}
+                onChange={onPreviewImage}
+              />
             </div>
-          </StInfor>
-        </StContainer>
-      </form>
+
+            <StTitle> 제목 </StTitle>
+            <Stinput
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <StContent> 내용 </StContent>
+            <StContentInput
+              type="text"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
+
+            <StInfor>
+              <div>
+                <StButton onClick={updateHandler}>수정 완료</StButton>
+                <StButton onClick={() => navigate("/:postId")}>취소</StButton>
+              </div>
+            </StInfor>
+          </StForm>
+        </StAddBox>
+      </StAddContainer>
     </>
   );
 };
 
 export default PostEdit;
 
-const StContainer = styled.div`
+const StAddContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StAddBox = styled.div`
   width: 60%;
-  background-color: powderblue;
-  margin-left: auto;
-  margin-right: auto;
+  background-color: white;
+  padding: 2rem 000;
+`;
+
+const StForm = styled.form`
+  height: 110%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const StSeleteBox = styled.div`
+  text-align: center;
+  margin: 0 0 20px 0;
+`;
+const StSeleteR = styled.select`
+  border: 2px solid powderblue;
+  text-align: center;
+  font-size: 20px;
+  width: 200px;
+  height: 40px;
+  border-radius: 10px;
+  margin-right: 20px;
+`;
+
+const StSeleteL = styled.select`
+  border: 2px solid powderblue;
+  text-align: center;
+  font-size: 20px;
+  width: 200px;
+  height: 40px;
+  border-radius: 10px;
+`;
+
+const StOption = styled.option`
+  border: none;
+  border: 2px solid powderblue;
 `;
 
 const StTitle = styled.div`
@@ -156,13 +218,49 @@ const StContent = styled.div`
   font-size: 20px;
 `;
 
-const StRemove = styled.button``;
+const StUpload = styled.label`
+  text-align: center;
+  padding: 6px 25px;
+  margin: 10px 0 30px 0;
+  background-color: powderblue;
+  width: 100px;
+  cursor: pointer;
+  &:hover {
+    background-color: #6688ab;
+  }
+`;
 
-const StEdit = styled.button``;
+const StyledInput = styled.input`
+  padding: 7px;
+  background: white;
+  border-radius: 10px;
+  color: #34495e;
+  height: 30px;
+  outline: none;
+  border: 1px solid #34495e;
+  font-weight: 700;
+`;
 
-const StDetailImage = styled.img`
-  border: 0px solid black;
-  margin-top: 30px;
-  width: 100%;
-  height: 200px;
+const StyledImage = styled.img`
+  width: 400px;
+  height: 300px;
+  border-radius: 200px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.23) 0px 0px 5px 6px;
+`;
+
+const Stinput = styled.input`
+  width: 50%;
+  height: 1rem;
+`;
+
+const StContentInput = styled.textarea`
+  width: 70%;
+  height: 20rem;
+  resize: none;
+`;
+
+const StButton = styled.button`
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  font-size: 20px;
 `;

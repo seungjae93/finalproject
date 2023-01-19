@@ -18,6 +18,6 @@ export const getmypageReviews = async () => {
 };
 
 export const getmypagePosts = async () => {
-  const response = await axios.get("https://goldpumpkin.shop/posts/me");
+  const response = await instance.get("/posts/me");
   return response.data;
 };

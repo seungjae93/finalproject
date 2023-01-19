@@ -25,13 +25,17 @@ const Comment = () => {
     queryClient.invalidateQueries(["comments", postId]);
   };
 
-  const { mutate } = useMutation((data) =>
-    updateComment(data.commentId, data.content)
+  const { mutate } = useMutation(
+    (data) => updateComment(data.commentId, data.content),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("comments");
+      },
+    }
   );
 
   const onEditComplete = async (commentId, content) => {
     await mutate({ commentId, content });
-    queryClient.refetchQueries(["comments", postId]);
     setEditOn("");
   };
 
@@ -42,9 +46,9 @@ const Comment = () => {
     <StCommentlistBox>
       <CommentPost />
 
-      {data.comments.map((comments) => {
+      {data.comments.map((comments, i) => {
         return comments.commentId === editOn ? (
-          <StCommentlist key={`comment_${comments.commentId}`}>
+          <StCommentlist key={`comment_${i}`}>
             <Stinput onChange={(e) => setInput(e.target.value)} value={input} />
 
             <StCommentBut>
@@ -60,7 +64,6 @@ const Comment = () => {
               </StNickDate>
               <div>
                 <StBut
-                  // onClick={() => updateMutation.mutate(comments.commentId)}
                   onClick={() => onEditComplete(comments.commentId, input)}
                 >
                   수정 완료
@@ -70,7 +73,7 @@ const Comment = () => {
             </StCommentBut>
           </StCommentlist>
         ) : (
-          <StCommentlist key={`comment_${comments.commentId}`}>
+          <StCommentlist key={`comment_${i}`}>
             <StComment>{comments.content}</StComment>
 
             <StCommentBut>
@@ -110,7 +113,7 @@ const Comment = () => {
 export default Comment;
 
 const StCommentlistBox = styled.div`
-  width: 40%;
+  width: 60%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
@@ -148,6 +151,6 @@ const StBut = styled.button`
 const Stinput = styled.input`
   border-radius: 5px;
   background-color: #f0f0f0;
-  border: 1px solid white;
-  width: 99%;
+  border: 1px solid powderblue;
+  width: 98%;
 `;

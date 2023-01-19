@@ -17,7 +17,6 @@ export const getCommunity = async () => {
 
 //post
 const addCommunity = async (community) => {
-  console.log(community);
   const accessToken = getCookie("token");
   setToken(accessToken);
   const headers = { authorization: `Bearer ${accessToken}` };
@@ -73,14 +72,13 @@ export const getUpdateCommunity = async (postid) => {
 export const updateCommunity = async (postId, formData) => {
   const accessToken = getCookie("token");
   setToken(accessToken);
-  const headers = { authorization: `Bearer ${accessToken}` };
-  const response = await instance.patch(
-    `/posts/${postId}`,
-    { postId, formData },
-    {
-      headers: headers,
-    }
-  );
+  const headers = {
+    authorization: `Bearer ${accessToken}`,
+    "content-type": "multipart/form-data",
+  };
+  const response = await instance.patch(`/posts/${postId}`, formData, {
+    headers: headers,
+  });
   return response.data;
 };
 
@@ -131,6 +129,7 @@ export const deleteComment = async (commentid) => {
 
 // 댓글 edit
 export const updateComment = async (commentid, content) => {
+  console.log(commentid);
   const accessToken = getCookie("token");
   setToken(accessToken);
   const headers = { authorization: `Bearer ${accessToken}` };
