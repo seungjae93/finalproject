@@ -9,7 +9,8 @@ export const getmypageReviews = async () => {
   const response = await instance.get("/review/myReview", {
     headers: headers,
   });
-  return response.data;
+  const { data } = response.data;
+  return data;
 };
 
 export const getmypagePosts = async () => {

@@ -16,11 +16,13 @@ const MyReview = () => {
   return (
     <>
       <div>
-        {data?.myreviews?.map((reviews) => {
+        {data?.map((reviews) => {
           return (
             <div key={`myreview_${reviews.id}`}>
-              <div>주소: {reviews.address}</div>
               <div>별점: {reviews.star}</div>
+              <div>주소: {reviews.address}</div>
+              <div>작성날짜: {reviews.createdAt}</div>
+              <div>ID: {reviews.estateId}</div>
             </div>
           );
         })}
