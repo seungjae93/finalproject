@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import proflie from "../img/proflie.png";
 import { getCookie, deleteCookie } from "../shared/cookie";
 
 const Header = () => {
@@ -30,9 +29,7 @@ const Header = () => {
   };
 
   useEffect(() => {
-    if (getCookie("token")) {
-      checkCookie();
-    }
+    checkCookie();
   }, []);
 
   return (
@@ -50,7 +47,11 @@ const Header = () => {
           <StNavbarMenuItem>마이페이지</StNavbarMenuItem>
 
           {userStatus ? (
-            <img className="profile" alt="proflie" src={proflie}></img>
+            <StImg
+              className="profile"
+              alt="proflie"
+              src={require("../images/proflie.jpg")}
+            ></StImg>
           ) : (
             <StNavbarMenuItem onClick={login}>로그인 </StNavbarMenuItem>
           )}
@@ -91,10 +92,16 @@ const StNavbarMenu = styled.ul`
 const StNavbarMenuItem = styled.li`
   list-style: none;
   padding: 7px 4px;
-  margin: 5px;
+  margin: 8px;
   cursor: pointer;
   position: relative;
   left: -10%;
   top: -3vh;
   justify-content: flex-end;
+`;
+
+const StImg = styled.img`
+  position: relative;
+  left: -10%;
+  top: -3vh;
 `;

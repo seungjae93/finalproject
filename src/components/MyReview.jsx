@@ -15,7 +15,7 @@ const MyReview = () => {
     <>
       <h1>My Page</h1>
       <div>--주소와 별점이 보여질 부분--</div>
-      {data?.myreviews.map((reviews?) => {
+      {data?.myreviews.map((reviews) => {
         return (
           <>
             <div>건물명:?? </div>

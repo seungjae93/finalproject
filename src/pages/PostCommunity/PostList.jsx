@@ -26,31 +26,31 @@ const PostList = () => {
 
   return (
     <>
-      <div>
-        <select name="postLocation1" onChange={HandleChange}>
-          <option value="">시,도 선택</option>
-          {postLocation1.map((el) => (
-            <option key={el.postLocation1} value={el.postLocation1}>
-              {el.codeNm}
-            </option>
-          ))}
-        </select>
-        <select name="postLocation2" onChange={HandleChange}>
-          <option value="">구,군 선택</option>
-          {postLocation2
-            .filter((el) => el.postLocation1 === selected.postLocation1)
-            .map((el) => (
-              <option key={el.postLocation2} value={el.codeNm}>
-                {el.codeNm}
-              </option>
-            ))}
-        </select>
-      </div>
-
       <StMain>
         <StTitle> 뒤로 가기 </StTitle>
         <StTitle onClick={() => navigate("/post")}> 작성 하기 </StTitle>
       </StMain>
+
+      <StSeleteBox>
+        <StSeleteR name="postLocation1" onChange={HandleChange}>
+          <StOption value="">시,도 선택</StOption>
+          {postLocation1.map((el) => (
+            <StOption key={el.postLocation1} value={el.postLocation1}>
+              {el.codeNm}
+            </StOption>
+          ))}
+        </StSeleteR>
+        <StSeleteL name="postLocation2" onChange={HandleChange}>
+          <StOption value="">구,군 선택</StOption>
+          {postLocation2
+            .filter((el) => el.postLocation1 === selected.postLocation1)
+            .map((el) => (
+              <StOption key={el.postLocation2} value={el.codeNm}>
+                {el.codeNm}
+              </StOption>
+            ))}
+        </StSeleteL>
+      </StSeleteBox>
 
       <STPostCon>
         {initial
@@ -98,4 +98,31 @@ const StTitle = styled.button`
   border: 1px solid black;
   background-color: white;
   cursor: pointer;
+`;
+
+const StSeleteBox = styled.div`
+  text-align: center;
+`;
+const StSeleteR = styled.select`
+  border: 2px solid powderblue;
+  text-align: center;
+  font-size: 20px;
+  width: 200px;
+  height: 40px;
+  border-radius: 10px;
+  margin-right: 20px;
+`;
+
+const StSeleteL = styled.select`
+  border: 2px solid powderblue;
+  text-align: center;
+  font-size: 20px;
+  width: 200px;
+  height: 40px;
+  border-radius: 10px;
+`;
+
+const StOption = styled.option`
+  border: none;
+  border: 2px solid powderblue;
 `;
