@@ -111,6 +111,7 @@ const StLogo = styled.img`
   width: 200px;
   height: 70px;
   cursor: pointer;
+  padding-left: 8vw;
 `;
 
 const StNavbarMenu = styled.ul`
