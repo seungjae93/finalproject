@@ -103,7 +103,7 @@ const MainPage = () => {
                   navigate("/map");
                 }}
               >
-                바로가기>
+                바로가기
               </button>
             </div>
           </StDetailBox1>
@@ -128,7 +128,7 @@ const MainPage = () => {
                   navigate("/review");
                 }}
               >
-                바로가기 >
+                바로가기
               </div>
             </div>
           </StDetailBox2>
@@ -152,7 +152,7 @@ const MainPage = () => {
                   navigate("/list");
                 }}
               >
-                바로가기 >
+                바로가기
               </div>
             </div>
           </StDetailBox3>
