@@ -36,10 +36,12 @@ const MainPage = () => {
         <StSectionReview>
           <StReviewWrap>
             <StReviewBox1>
-              <div>
+              <div className="reviewContent1">
                 진짜 살아본 사람들의 <br /> 생생한 후기
               </div>
-              <p>당신이 알고싶은 진짜 집의 정보를 알려드립니다</p>
+              <div className="reviewContent2">
+                당신이 알고싶은 진짜 집의 정보를 알려드립니다.
+              </div>
             </StReviewBox1>
             <StReviewBox2>
               <button
@@ -277,6 +279,15 @@ const StReviewBox1 = styled.div`
   position: relative;
   top: 5vh;
   left: 10%;
+  .reviewContent1 {
+    font-size: 32px;
+    font-weight: bold;
+  }
+  .reviewContent2 {
+    position: relative;
+    top: 30px;
+    font-size: 20px;
+  }
 `;
 
 const StReviewBox2 = styled.div`
@@ -314,7 +325,7 @@ const StDetailBox1 = styled.div`
     height: 300px;
     position: relative;
     top: 5vh;
-    left: 8%;
+    left: 10%;
   }
   .detailBoxContents {
     position: relative;

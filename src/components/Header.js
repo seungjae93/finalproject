@@ -49,7 +49,13 @@ const Header = () => {
           />
         </div>
         <StNavbarMenu>
-          <StNavbarMenuItem>서비스 소개</StNavbarMenuItem>
+          <StNavbarMenuItem
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            서비스 소개
+          </StNavbarMenuItem>
           <StNavbarMenuItem
             onClick={() => {
               navigate("/map");
