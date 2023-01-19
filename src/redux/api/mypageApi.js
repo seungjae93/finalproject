@@ -8,16 +8,13 @@ export const getmypageReviews = async () => {
   setToken(accessToken);
   const headers = { authorization: `Bearer ${accessToken}` };
 
-  const response = await axios.get(
-    "https://spart-instagram.shop/review/myReview",
-    {
-      headers: headers,
-    }
-  );
+  const response = await instance.get("/review/myReview", {
+    headers: headers,
+  });
   return response.data;
 };
 
 export const getmypagePosts = async () => {
-  const response = await axios.get("https://goldpumpkin.shop/posts/me");
+  const response = await instance.get("/posts/me");
   return response.data;
 };

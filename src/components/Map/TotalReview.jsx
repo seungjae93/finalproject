@@ -4,18 +4,17 @@ import styled from "styled-components";
 import axios from "axios";
 
 const TotalReview = ({ estateIdData }) => {
-  const { isLoading, isError, isFetching, data, error } = useQuery(
-    ["showReview"],
+  const { isLoading, isError, data, error } = useQuery(
+    ["showReview", estateIdData],
     async () => {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_MAP_SERVER}/review/items/${estateIdData.estateId}`,
-        { estateId: estateIdData.estateId }
+        `${process.env.REACT_APP_API_MAP_SERVER}/review/items/${estateIdData.estateId}`
       );
       const { data } = response.data;
       return data;
-    },
-    { refetchOnWindowFocus: false, staleTime: 5000 }
+    }
   );
+  console.log(data);
 
   return (
     <>

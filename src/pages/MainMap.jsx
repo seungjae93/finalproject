@@ -1,8 +1,9 @@
+import React, { useState, useCallback, useEffect, useRef } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import styled from "styled-components";
 import axios from "axios";
 import { throttle, debounce } from "lodash";
 import { Map, MapMarker, CustomOverlayMap } from "react-kakao-maps-sdk";
-import React, { useState, useCallback, useEffect, useRef } from "react";
 import TotalReview from "../components/Map/TotalReview";
 
 const { kakao } = window;
@@ -19,10 +20,13 @@ const MainMap = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [searchAddress, setSearchAddress] = useState("");
   const [searchData, setSearchData] = useState([]);
-  const [zoomLevel, setZoomLevel] = useState(0); //지도 줌레벨
+  const [zoomLevel, setZoomLevel] = useState(3); //지도 줌레벨
   const [positions, setPositions] = useState();
   const [markerArray, setMarkerArray] = useState([]);
   const [estateIdData, setEstateIdData] = useState([]);
+
+  // const { data, loading, refetch } = useQuery;
+  // const queryClient = useQueryClient();
 
   //검색어 받아오는 로직
   const onAddressHandler = throttle(async (e) => {
@@ -36,7 +40,7 @@ const MainMap = () => {
         }
       );
 
-      const { data } = response.data;
+      const { data } = response?.data;
       setSearchData(data);
     } catch (error) {}
   }, 700);
@@ -75,7 +79,7 @@ const MainMap = () => {
           ...value,
         }
       );
-      const { data } = response.data;
+      const { data } = response?.data;
       setPositions(data);
     } catch (error) {}
   };
@@ -89,7 +93,7 @@ const MainMap = () => {
           ...value,
         }
       );
-      const { data } = response.data;
+      const { data } = response?.data;
       setPositions(data);
     } catch (error) {}
   };
@@ -103,7 +107,7 @@ const MainMap = () => {
           ...geoLocation,
         }
       );
-      const { data } = response.data;
+      const { data } = response?.data;
       setPositions(data);
     } catch (error) {}
   };
@@ -172,14 +176,14 @@ const MainMap = () => {
       newArray.push(...positions);
       setMarkerArray(newArray);
       setEstateIdData(newArray);
+      // queryClient.refetchQueries(["showReview"]);
     } else if (2 < zoomLevel < 5) {
       positions?.map((value) => {
         if (Array.isArray(value)) {
-          value?.map((el) => {
-            newArray.push(el);
-          });
+          newArray.push(value);
           setMarkerArray(newArray);
           setEstateIdData(newArray);
+          // queryClient.refetchQueries(["showReview"]);
         }
       });
     } else if (zoomLevel > 4) {
@@ -188,6 +192,7 @@ const MainMap = () => {
     }
   }, [zoomLevel, positions]);
 
+  console.log(zoomLevel);
   useEffect(() => {
     /* 현재 보이는 위치에 대한 좌표 값을 받아와주는 부분 */
     const mapObject = mapRef.current;
@@ -242,7 +247,7 @@ const MainMap = () => {
                 height: "100%",
               }}
               ref={mapRef}
-              level={3} // 지도의 확대 레벨
+              // 지도의 확대 레벨
               maxLevel={11}
               onZoomChanged={(map) => setZoomLevel(map.getLevel())}
               onDragEnd={(map) => {
@@ -270,26 +275,44 @@ const MainMap = () => {
                   },
                   zoomLevel: map.getLevel(),
                 });
-              }, 100)}
+              }, 600)}
             >
-              {zoomLevel < 5 &&
-                markerArray.map((el) => {
-                  return (
-                    <MapMarker
-                      key={`${el.estateId}-${el.lat}`}
-                      position={el}
-                      image={{
-                        src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
-                        // 마커이미지의 주소입니다
-                        size: {
-                          width: 24,
-                          height: 35,
-                        }, // 마커이미지의 크기입니다
-                      }}
-                      // title={position.title} // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-                    />
-                  );
-                })}
+              {/* {zoomLevel < 5 &&
+                (zoomLevel < 3
+                  ? markerArray.map((el) => {
+                      return (
+                        <MapMarker
+                          key={`${el.estateId}-${el.lat}`}
+                          position={el}
+                          image={{
+                            src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
+                            // 마커이미지의 주소입니다
+                            size: {
+                              width: 24,
+                              height: 35,
+                            }, // 마커이미지의 크기입니다
+                          }}
+                        />
+                      );
+                    })
+                  : 2 < zoomLevel < 5
+                  ? markerArray.map((el) => {
+                      return (
+                        <MapMarker
+                          key={`${el.estateId}-${el.lat}`}
+                          position={el[0]}
+                          image={{
+                            src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
+                            // 마커이미지의 주소입니다
+                            size: {
+                              width: 24,
+                              height: 35,
+                            }, // 마커이미지의 크기입니다
+                          }}
+                        />
+                      );
+                    })
+                  : null)} */}
               {renderItem()}
             </Map>
           </StMapContainer>
