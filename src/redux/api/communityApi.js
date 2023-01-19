@@ -72,39 +72,15 @@ export const getUpdateCommunity = async (postid) => {
 export const updateCommunity = async (postId, formData) => {
   const accessToken = getCookie("token");
   setToken(accessToken);
-  const headers = { authorization: `Bearer ${accessToken}` };
-  const response = await instance.patch(
-    `/posts/${postId}`,
-    { postId, ...formData },
-    {
-      headers: headers,
-    }
-  );
+  const headers = {
+    authorization: `Bearer ${accessToken}`,
+    "content-type": "multipart/form-data",
+  };
+  const response = await instance.patch(`/posts/${postId}`, formData, {
+    headers: headers,
+  });
   return response.data;
 };
-// export const useUpdateCommunity = async () => {
-//   return useMutation(updateCommunity, {
-//     onSuccess: () => {
-//       window.alert("수정 되었습니다.");
-//     },
-//   });
-// };
-
-// export const updateCommunity = async (postid, data) => {
-//   const accessToken = getCookie("token");
-//   setToken(accessToken);
-//   const headers = { authorization: `Bearer ${accessToken}` };
-//   console.log(data);
-//   const response = await instance.patch(
-//     `/posts/${postid}`,
-//     {
-//       postid,
-//       ...data,
-//     },
-//     { headers: headers }
-//   );
-//   return response.data;
-// };
 
 //댓글 get
 export const getComment = async (postid) => {
@@ -147,6 +123,19 @@ export const deleteComment = async (commentid) => {
   const headers = { authorization: `Bearer ${accessToken}` };
   const response = await instance.delete(`/comments/${commentid}`, {
     headers: headers,
+  });
+  return response.data;
+};
+
+// 댓글 edit
+export const updateComment = async (commentid, content) => {
+  console.log(commentid);
+  const accessToken = getCookie("token");
+  setToken(accessToken);
+  const headers = { authorization: `Bearer ${accessToken}` };
+  const response = await instance.put(`/comments/${commentid}`, {
+    headers: headers,
+    content: content,
   });
   return response.data;
 };

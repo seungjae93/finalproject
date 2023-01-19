@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { deleteCommunity, detailCommunity } from "../../redux/api/communityApi";
@@ -9,23 +8,9 @@ import Comment from "../Comment";
 const PostDetail = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
-  const [post, setPosts] = useState("");
 
-  const { isLoading, isError, error } = useQuery(
-    ["posts", postId],
-    () => detailCommunity(postId),
-    {
-      onSuccess: (post) => {
-        const postArray = Object.values(post);
-        const detailItem = postArray.filter(
-          (value) => value.postId === Number(postId)
-        );
-        setPosts(detailItem[0]);
-      },
-      onError: (error) => {
-        console.log(error);
-      },
-    }
+  const { isLoading, isError, error, data } = useQuery(["posts", postId], () =>
+    detailCommunity(postId)
   );
 
   const deleteCommunityCallback = async (postId) => {
@@ -38,56 +23,63 @@ const PostDetail = () => {
 
   return (
     <>
-      <StMain>
-        <StButton> MAP </StButton>
-        <StButton onClick={() => navigate("/list")}> 뒤로 가기 </StButton>
-      </StMain>
-      <StContainer>
-        <StTitle> {post?.title} </StTitle>
+      <StDetailBox>
+        <StMain>
+          <StButton> MAP </StButton>
+          <StButton onClick={() => navigate("/list")}> 뒤로 가기 </StButton>
+        </StMain>
+        <StContainer>
+          <StTitle> {data?.post.title} </StTitle>
 
-        <StInfor>
-          <StNicDa>
-            <StNicName> {post?.nickname} </StNicName>
-            <StDate>
-              {" "}
-              {new Date(post.createdAt).toLocaleDateString("ko-KR", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}{" "}
-            </StDate>
-          </StNicDa>
+          <StInfor>
+            <StNicDa>
+              <StNicName> {data?.post.nickname} </StNicName>
+              <StDate>
+                {new Date(data?.post.createdAt).toLocaleDateString("ko-KR", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </StDate>
+            </StNicDa>
+
+            <div>
+              <StEdit onClick={() => navigate(`/edit/${data?.post.postId}`)}>
+                수정
+              </StEdit>
+
+              <StRemove onClick={() => deleteCommunityCallback(postId)}>
+                삭제
+              </StRemove>
+            </div>
+          </StInfor>
 
           <div>
-            <StEdit onClick={() => navigate(`/edit/${post.postId}`)}>
-              수정
-            </StEdit>
-
-            <StRemove onClick={() => deleteCommunityCallback(postId)}>
-              삭제
-            </StRemove>
+            <StDetailImage
+              src={data?.post?.postImage}
+              style={{ width: "100%", height: "300px" }}
+            />
           </div>
-        </StInfor>
 
-        <div>
-          <StDetailImage
-            src={post?.postImage}
-            style={{ width: "100%", height: "300px" }}
-          />
-        </div>
+          <StContent> {data?.post.content} </StContent>
+        </StContainer>
 
-        <StContent> {post.content} </StContent>
-      </StContainer>
-
-      <Comment />
+        <Comment />
+      </StDetailBox>
     </>
   );
 };
 
 export default PostDetail;
 
+const StDetailBox = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  width: 60%;
+`;
 const StContainer = styled.div`
-  width: 40%;
+  width: 60%;
   border: 2px solid powderblue;
   border-radius: 10px;
   margin-left: auto;

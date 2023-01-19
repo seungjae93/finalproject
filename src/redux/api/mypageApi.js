@@ -14,11 +14,6 @@ export const getmypageReviews = async () => {
 };
 
 export const getmypagePosts = async () => {
-  const accessToken = getCookie("token");
-  setToken(accessToken);
-  const headers = { authorization: `Bearer ${accessToken}` };
-  const response = await instance.get("/posts/me", {
-    headers: headers,
-  });
+  const response = await instance.get("/posts/me");
   return response.data;
 };

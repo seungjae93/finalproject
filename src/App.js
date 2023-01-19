@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
 import { getCookie } from "./shared/cookie";
 import { loginCheck } from "./redux/modules/kakaoSlice";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools />
         <GlobalStyle />
         <Router />
       </QueryClientProvider>

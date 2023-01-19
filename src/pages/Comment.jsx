@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router";
-import { useQuery } from "@tanstack/react-query";
-import { deleteComment, getComment } from "../redux/api/communityApi";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  deleteComment,
+  getComment,
+  updateComment,
+} from "../redux/api/communityApi";
 import CommentPost from "../components/Community/CommentPost";
 
 const Comment = () => {
+  const queryClient = useQueryClient();
   const { postId } = useParams();
+  const [editOn, setEditOn] = useState("");
+  const [input, setInput] = useState("");
 
   const { data, isLoading, isError, error } = useQuery(
     ["comments", postId],
@@ -15,6 +22,21 @@ const Comment = () => {
 
   const deleteCommentCallback = async (commentId) => {
     await deleteComment(commentId);
+    queryClient.invalidateQueries(["comments", postId]);
+  };
+
+  const { mutate } = useMutation(
+    (data) => updateComment(data.commentId, data.content),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("comments");
+      },
+    }
+  );
+
+  const onEditComplete = async (commentId, content) => {
+    await mutate({ commentId, content });
+    setEditOn("");
   };
 
   if (isLoading) return <h2> 로딩중 .. </h2>;
@@ -24,22 +46,61 @@ const Comment = () => {
     <StCommentlistBox>
       <CommentPost />
 
-      {data.comments.map((comments) => {
-        return (
-          <StCommentlist key={`comment_${comments.commentId}`}>
+      {data.comments.map((comments, i) => {
+        return comments.commentId === editOn ? (
+          <StCommentlist key={`comment_${i}`}>
+            <Stinput onChange={(e) => setInput(e.target.value)} value={input} />
+
+            <StCommentBut>
+              <StNickDate> {comments.nickname} </StNickDate>
+              <StNickDate>
+                {new Date(comments?.createdAt).toLocaleDateString("ko-KR", {
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </StNickDate>
+              <div>
+                <StBut
+                  onClick={() => onEditComplete(comments.commentId, input)}
+                >
+                  수정 완료
+                </StBut>
+                <StBut onClick={() => setEditOn("")}> 수정 취소 </StBut>
+              </div>
+            </StCommentBut>
+          </StCommentlist>
+        ) : (
+          <StCommentlist key={`comment_${i}`}>
             <StComment>{comments.content}</StComment>
 
             <StCommentBut>
-              <StNickDate> 닉네임 </StNickDate>
-              <StNickDate> 날짜 </StNickDate>
+              <StNickDate> {comments.nickname} </StNickDate>
+              <StNickDate>
+                {new Date(comments?.createdAt).toLocaleDateString("ko-KR", {
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </StNickDate>
               <div>
+                <StBut
+                  onClick={() => {
+                    setEditOn(comments.commentId);
+                    setInput(comments.content);
+                  }}
+                >
+                  수정하기
+                </StBut>
                 <StBut
                   onClick={() => deleteCommentCallback(comments.commentId)}
                 >
-                  {" "}
-                  삭제하기{" "}
+                  삭제하기
                 </StBut>
-                <StBut> 수정하기 </StBut>
               </div>
             </StCommentBut>
           </StCommentlist>
@@ -52,7 +113,7 @@ const Comment = () => {
 export default Comment;
 
 const StCommentlistBox = styled.div`
-  width: 40%;
+  width: 60%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
@@ -85,4 +146,11 @@ const StBut = styled.button`
   border: none;
   cursor: pointer;
   margin-right: 10px;
+`;
+
+const Stinput = styled.input`
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  border: 1px solid powderblue;
+  width: 98%;
 `;

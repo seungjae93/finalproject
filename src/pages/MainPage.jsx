@@ -96,6 +96,7 @@ const MainPage = () => {
                 지도를 통해 다양한 지역의 생활 후기를 알아볼 수 있습니다.
                 <br /> 다양한 사람들의 살아본 이야기를 들어보세요
               </p>
+
               <button
                 className="go"
                 onClick={() => {
@@ -120,6 +121,7 @@ const MainPage = () => {
                 <br /> 섬세하게 나누어진 문항을 따라오면 꼼꼼하게 리뷰할 수
                 있습니다.
               </p>
+
               <div
                 className="go"
                 onClick={() => {
@@ -143,6 +145,7 @@ const MainPage = () => {
                 내 주변의 이웃들과 주거와 관련된 문제를 나누어요.
                 <br /> 혼자서는 어려웠던 문제가 이웃들의 지혜로 풀립니다.
               </p>
+
               <div
                 className="go"
                 onClick={() => {

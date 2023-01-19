@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import kakao_login from "../img/kakao_login.png";
 import { KAKAO_AUTH_URL } from "./KakaoLogin";
 
 const Login = () => {
@@ -17,7 +16,10 @@ const Login = () => {
 
         <StLog>서비스 이용을 위해 로그인 해주세요</StLog>
         <a href={KAKAO_AUTH_URL}>
-          <StImg alt="kakao_login" src={kakao_login}></StImg>
+          <StImg
+            alt="kakao_login"
+            src={require("../images/kakao_login.jpg")}
+          ></StImg>
         </a>
       </StLoginBox>
     </>

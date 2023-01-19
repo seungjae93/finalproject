@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     width: 100%;
-    background-color: white;
+    background-color: rgb(243 245 245);
 
   }
 `;
