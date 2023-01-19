@@ -23,7 +23,6 @@ const Router = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/review" element={<Review />} />
         <Route path="/mypage" element={<Mypage />} />
-
         <Route path="/list" element={<PostList />} />
         <Route path="/post" element={<PostForm />} />
         <Route path="/:postId" element={<PostDetail />} />

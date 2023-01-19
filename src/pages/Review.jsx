@@ -32,7 +32,6 @@ const Review = () => {
 
   return (
     <>
-      <h1>후기를 작성하는 페이지 입니다</h1>
       <StContainer>
         <PostCode setAddress={setAddress} setJibunAddress={setJibunAddress} />
         <input
