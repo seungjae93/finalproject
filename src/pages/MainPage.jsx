@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router";
 
 const MainPage = () => {
+  const navigate = useNavigate();
   return (
     <>
       <StBody>
@@ -10,52 +12,74 @@ const MainPage = () => {
           <StMainImage src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&dl=patrick-perkins-3wylDrjxH-E-unsplash.jpg&q=80&fm=jpg&crop=entropy&cs=tinysrgb" />
           <StHomeBox>
             <StHomeBoxContent>
-              <span>이 집은 어떨까?</span>
-              <div>원룸,투룸,역세권 말고 진짜 살아봐야 아는 정보</div>
-              <div>중개인도, 집주인도 알려주지 않는 꿀정보를 알아보세요</div>
-              <img src={require("../images/Group 388.jpg")} alt="button" />
+              <div className="content1">이 집은 어떨까?</div>
+              <div className="content2">
+                원룸,투룸,역세권 말고
+                <br /> 진짜 살아봐야 아는 정보
+              </div>
+              <div className="content3">
+                중개인도, 집주인도 알려주지 않는 꿀정보를 알아보세요
+              </div>
+              <button
+                className="reviewBtn"
+                onClick={() => {
+                  navigate("/map");
+                }}
+              >
+                <img src={require("../images/Group 388.jpg")} alt="button" />
+              </button>
             </StHomeBoxContent>
           </StHomeBox>
         </StSectionHome>
 
         {/* Riview  */}
         <StSectionReview>
-          <StReviewBox1>
-            <div>
-              진짜 살아본 사람들의 <br /> 생생한 후기
-            </div>
-            <p>당신이 알고싶은 진짜 집의 정보를 알려드립니다</p>
-          </StReviewBox1>
-          <StReviewBox2>
-            <img
-              className="aboutBtn"
-              src={require("../images/Group 388.jpg")}
-              alt="button"
-            />
-            <img
-              className="aboutBtn"
-              src={require("../images/Group 464.jpg")}
-              alt="button"
-            />
-          </StReviewBox2>
+          <StReviewWrap>
+            <StReviewBox1>
+              <div className="reviewContent1">
+                진짜 살아본 사람들의 <br /> 생생한 후기
+              </div>
+              <div className="reviewContent2">
+                당신이 알고싶은 진짜 집의 정보를 알려드립니다.
+              </div>
+            </StReviewBox1>
+            <StReviewBox2>
+              <button
+                className="aboutBtn"
+                onClick={() => {
+                  navigate("/map");
+                }}
+              >
+                <img src={require("../images/Group 388.jpg")} alt="button" />
+              </button>
+              <button
+                className="aboutBtn"
+                onClick={() => {
+                  navigate("/review");
+                }}
+              >
+                <img src={require("../images/Group 464.jpg")} alt="button" />
+              </button>
+            </StReviewBox2>
 
-          <StReviewBox3>
-            <img
-              className="aboutImg"
-              src={require("../images/Group 421.jpg")}
-              alt="imgbox1"
-            />
-            <img
-              className="aboutImg"
-              src={require("../images/Group 422.jpg")}
-              alt="imgbox2"
-            />
-            <img
-              className="aboutImg"
-              src={require("../images/Group 423.jpg")}
-              alt="imgbox3"
-            />
-          </StReviewBox3>
+            <StReviewBox3>
+              <img
+                className="aboutImg"
+                src={require("../images/Group 421.jpg")}
+                alt="imgbox1"
+              />
+              <img
+                className="aboutImg"
+                src={require("../images/Group 422.jpg")}
+                alt="imgbox2"
+              />
+              <img
+                className="aboutImg"
+                src={require("../images/Group 423.jpg")}
+                alt="imgbox3"
+              />
+            </StReviewBox3>
+          </StReviewWrap>
         </StSectionReview>
 
         {/* Detail */}
@@ -72,7 +96,15 @@ const MainPage = () => {
                 지도를 통해 다양한 지역의 생활 후기를 알아볼 수 있습니다.
                 <br /> 다양한 사람들의 살아본 이야기를 들어보세요
               </p>
-              <div className="go">바로가기</div>
+
+              <button
+                className="go"
+                onClick={() => {
+                  navigate("/map");
+                }}
+              >
+                바로가기>
+              </button>
             </div>
           </StDetailBox1>
 
@@ -89,7 +121,15 @@ const MainPage = () => {
                 <br /> 섬세하게 나누어진 문항을 따라오면 꼼꼼하게 리뷰할 수
                 있습니다.
               </p>
-              <div className="go">바로가기</div>
+
+              <div
+                className="go"
+                onClick={() => {
+                  navigate("/review");
+                }}
+              >
+                바로가기 >
+              </div>
             </div>
           </StDetailBox2>
 
@@ -105,7 +145,15 @@ const MainPage = () => {
                 내 주변의 이웃들과 주거와 관련된 문제를 나누어요.
                 <br /> 혼자서는 어려웠던 문제가 이웃들의 지혜로 풀립니다.
               </p>
-              <div className="go">바로가기</div>
+
+              <div
+                className="go"
+                onClick={() => {
+                  navigate("/list");
+                }}
+              >
+                바로가기 >
+              </div>
             </div>
           </StDetailBox3>
         </StSectionDetail>
@@ -119,11 +167,14 @@ const MainPage = () => {
             </p>
             <p>도란도란 이야기 하다보면 동네의 정을 느낄 수 있어요.</p>
           </div>
-          <img
+          <button
             className="bottomBtn"
-            src={require("../images/Group 477.jpg")}
-            alt="button"
-          />
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            <img src={require("../images/Group 477.jpg")} alt="button" />
+          </button>
         </StSectionBottom>
 
         <StSectionFooter>
@@ -148,28 +199,57 @@ const StBody = styled.body`
 const StSectionHome = styled.section`
   max-width: 1920px;
   margin: auto;
-  padding: 20px;
   padding-top: 150px;
   text-align: center;
 `;
 
 const StMainImage = styled.img`
-  width: 1200px;
-  height: 600px;
+  position: relative;
+  top: -10vh;
+  width: 1400px;
+  height: 800px;
 `;
 
 const StHomeBox = styled.div`
-  width: 30rem;
-  height: 15rem;
+  width: 36rem;
+  height: 23rem;
   background-color: #ffffff;
+  opacity: 90%;
   position: absolute;
-  top: 70vh;
+  top: 420px;
   left: 50%;
 `;
 
 const StHomeBoxContent = styled.div`
-  position: relative;
   margin-top: 50px;
+  text-align: left;
+  .content1 {
+    font-size: 20px;
+    position: relative;
+    top: 2vh;
+    left: 3vw;
+  }
+  .content2 {
+    position: relative;
+    top: 3vh;
+    left: 3vw;
+    font-size: 38px;
+    font-weight: bold;
+  }
+  .content3 {
+    font-size: 22px;
+    position: relative;
+    top: 5vh;
+    left: 3vw;
+  }
+  .reviewBtn {
+    cursor: pointer;
+    position: relative;
+    top: 8vh;
+    left: 6vw;
+    border: none;
+    background-color: transparent;
+  }
 `;
 
 const StSectionReview = styled.div`
@@ -177,22 +257,40 @@ const StSectionReview = styled.div`
   margin: auto;
   max-width: 1920px;
   height: 400px;
+
   .aboutBtn {
-    width: 230px;
-    height: auto;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    width: 80px;
     display: block;
     margin-top: 15px;
   }
   .aboutImg {
+    width: 250px;
+    height: 257px;
     display: inline;
     margin-left: 25px;
   }
+`;
+
+const StReviewWrap = styled.div`
+  margin-left: 10%;
 `;
 
 const StReviewBox1 = styled.div`
   position: relative;
   top: 5vh;
   left: 10%;
+  .reviewContent1 {
+    font-size: 32px;
+    font-weight: bold;
+  }
+  .reviewContent2 {
+    position: relative;
+    top: 30px;
+    font-size: 20px;
+  }
 `;
 
 const StReviewBox2 = styled.div`
@@ -202,13 +300,14 @@ const StReviewBox2 = styled.div`
 `;
 const StReviewBox3 = styled.div`
   position: relative;
-  top: -15vh;
+  top: -12vh;
   left: 34%;
 `;
 
 const StSectionDetail = styled.div`
   background-color: #f0f0f0;
   max-width: 1920px;
+  margin: auto;
   height: 1200px;
   align-items: center;
 `;
@@ -222,14 +321,14 @@ const StDetailBox1 = styled.div`
   border-radius: 5px;
   margin-bottom: 30px;
   margin-top: 20px;
-  left: 10%;
+  left: 15%;
 
   .detailBoxImage {
     width: 500px;
     height: 300px;
     position: relative;
     top: 5vh;
-    left: 8%;
+    left: 10%;
   }
   .detailBoxContents {
     position: relative;
@@ -237,14 +336,15 @@ const StDetailBox1 = styled.div`
     left: 55%;
   }
   .go {
+    border: none;
+    background-color: transparent;
     color: #819608;
+    cursor: pointer;
     font-family: "Pretendard";
-    font-style: normal;
     font-weight: 600;
     font-size: 16px;
-    line-height: 160%;
-    width: 70px;
-    height: 26px;
+    width: 80px;
+    height: 20px;
   }
 `;
 
@@ -257,7 +357,8 @@ const StDetailBox2 = styled.div`
   border-radius: 5px;
   margin-bottom: 30px;
   margin-top: 20px;
-  left: 10%;
+  left: 15%;
+
   .detailBoxImage {
     width: 500px;
     height: 300px;
@@ -271,14 +372,15 @@ const StDetailBox2 = styled.div`
     left: 55%;
   }
   .go {
+    border: none;
+    background-color: transparent;
     color: #819608;
+    cursor: pointer;
     font-family: "Pretendard";
-    font-style: normal;
     font-weight: 600;
     font-size: 16px;
-    line-height: 160%;
-    width: 70px;
-    height: 26px;
+    width: 80px;
+    height: 20px;
   }
 `;
 
@@ -291,7 +393,8 @@ const StDetailBox3 = styled.div`
   border-radius: 5px;
   margin-bottom: 30px;
   margin-top: 20px;
-  left: 10%;
+  left: 15%;
+
   .detailBoxImage {
     width: 500px;
     height: 300px;
@@ -305,14 +408,15 @@ const StDetailBox3 = styled.div`
     left: 55%;
   }
   .go {
+    border: none;
+    background-color: transparent;
     color: #819608;
+    cursor: pointer;
     font-family: "Pretendard";
-    font-style: normal;
     font-weight: 600;
     font-size: 16px;
-    line-height: 160%;
-    width: 70px;
-    height: 26px;
+    width: 80px;
+    height: 20px;
   }
 `;
 
@@ -327,6 +431,9 @@ const StSectionBottom = styled.div`
     left: 10%;
   }
   .bottomBtn {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
     position: relative;
     top: 15vh;
     left: 40%;

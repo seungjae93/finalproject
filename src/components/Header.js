@@ -37,14 +37,50 @@ const Header = () => {
       {/* Navbar */}
       <StNavbar>
         <div>
-          <StLogo src={require("../images/logo.jpg")} alt="logo" />
+          <StLogo
+            src={require("../images/logo.jpg")}
+            alt="logo"
+            onClick={() => {
+              navigate("/");
+            }}
+          />
         </div>
         <StNavbarMenu>
-          <StNavbarMenuItem>서비스 소개</StNavbarMenuItem>
-          <StNavbarMenuItem>지도</StNavbarMenuItem>
-          <StNavbarMenuItem>후기작성</StNavbarMenuItem>
-          <StNavbarMenuItem>커뮤니티</StNavbarMenuItem>
-          <StNavbarMenuItem>마이페이지</StNavbarMenuItem>
+          <StNavbarMenuItem
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            서비스 소개
+          </StNavbarMenuItem>
+          <StNavbarMenuItem
+            onClick={() => {
+              navigate("/map");
+            }}
+          >
+            지도
+          </StNavbarMenuItem>
+          <StNavbarMenuItem
+            onClick={() => {
+              navigate("/review");
+            }}
+          >
+            후기작성
+          </StNavbarMenuItem>
+          <StNavbarMenuItem
+            onClick={() => {
+              navigate("/list");
+            }}
+          >
+            커뮤니티
+          </StNavbarMenuItem>
+          <StNavbarMenuItem
+            onClick={() => {
+              navigate("/mypage");
+            }}
+          >
+            마이페이지
+          </StNavbarMenuItem>
 
           {userStatus ? (
             <StImg
@@ -81,18 +117,22 @@ const StNavbar = styled.nav`
 const StLogo = styled.img`
   width: 200px;
   height: 70px;
+  cursor: pointer;
+  padding-left: 8vw;
 `;
 
 const StNavbarMenu = styled.ul`
   display: flex;
-  padding-left: 0;
-  padding-top: 5%;
+  padding-top: 5vh;
 `;
 
-const StNavbarMenuItem = styled.li`
-  list-style: none;
-  padding: 7px 4px;
-  margin: 8px;
+const StNavbarMenuItem = styled.button`
+  border: none;
+  background-color: transparent;
+  font-size: 17px;
+  padding: 10px 4px;
+  margin: 5px;
+
   cursor: pointer;
   position: relative;
   left: -10%;
