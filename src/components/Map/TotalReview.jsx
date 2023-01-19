@@ -19,11 +19,17 @@ const TotalReview = ({ estateIdData }) => {
   return (
     <>
       <StModalContainer>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+        <div>bugs:</div>
+        <div>communication:</div>
+        <div>floor_noise:</div>
+        <div>mold:</div>
+        <div>parking:</div>
+        <div>safe:</div>
+        <div>smell:</div>
+        <div>town_noise:</div>
+        <div>walls_noise:</div>
       </StModalContainer>
+      ;
     </>
   );
 };
