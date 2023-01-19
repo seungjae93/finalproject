@@ -11,20 +11,20 @@ const MyReview = () => {
   if (isLoading) return <h2> 로딩중 .. </h2>;
   if (isError) return <h2> Error : {error.toString()} </h2>;
 
+  console.log(data);
+
   return (
     <>
-      <h1>My Page</h1>
-      <div>--주소와 별점이 보여질 부분--</div>
-      {data?.myreviews.map((reviews?) => {
-        return (
-          <>
-            <div>건물명:?? </div>
-            <div>주소: {reviews.address}</div>
-            <div>별점: {reviews.star}</div>
-          </>
-        );
-      })}
-
+      <div>
+        {data?.myreviews?.map((reviews) => {
+          return (
+            <div key={`myreview_${reviews.id}`}>
+              <div>주소: {reviews.address}</div>
+              <div>별점: {reviews.star}</div>
+            </div>
+          );
+        })}
+      </div>
       <button onClick={() => {}}>수정</button>
       <button onClick={() => {}}>삭제</button>
     </>

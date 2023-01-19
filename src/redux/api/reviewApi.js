@@ -1,14 +1,17 @@
-import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
-
-const reviewApi = axios.create({
-  baseURL: "https://spart-instagram.shop",
-});
+import { instance } from "./instance";
+import setToken from "../../shared/setToken";
+import { getCookie } from "../../shared/cookie";
 
 // POST
 export const addPost = async (post) => {
   try {
-    const response = await axios.post("/review", post);
+    const accessToken = getCookie("token");
+    setToken(accessToken);
+    const headers = { authorization: `Bearer ${accessToken}` };
+    const response = await instance.post("/review", post, {
+      headers: headers,
+    });
 
     if (response.status === 200) return response.data;
     else if (response.status === 401) {
@@ -27,6 +30,6 @@ export const useAddPost = () => {
 
 //GET
 export const getPosts = async () => {
-  const response = await axios.get("/review");
+  const response = await instance.get("/review");
   return response.data;
 };
