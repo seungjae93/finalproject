@@ -14,8 +14,6 @@ const MyCommunity = () => {
   if (isLoading) return <h2> 로딩중 .. </h2>;
   if (isError) return <h2> Error : {error.toString()} </h2>;
 
-  console.log(data);
-
   return (
     <>
       <div>
@@ -84,7 +82,6 @@ const StCommBoxTitle = styled.div`
 const StMyComm = styled.div`
   position: relative;
   top: 10vh;
-
   border-top: 1px solid #c4cbcd;
   border-bottom: 0.5px solid #c4cbcd;
   width: 70vw;
@@ -100,7 +97,6 @@ const StMyComm = styled.div`
   .postId {
     position: relative;
     top: 5vh;
-    /* left: 20%; */
   }
   .title {
     position: relative;
