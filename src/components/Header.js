@@ -20,8 +20,9 @@ const Header = () => {
   };
 
   const logout = () => {
-    deleteCookie("token");
     window.alert("로그아웃 하시겠습니까?");
+    deleteCookie("token");
+    localStorage.clear();
     setUserStatus(false);
     navigate("/");
   };
