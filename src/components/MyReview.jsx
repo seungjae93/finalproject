@@ -31,7 +31,7 @@ const MyReview = () => {
                   <div className="star">
                     <img src={require("../images/Star 165.png")} alt="star" />
                   </div>
-                  <div className="starPoint">{reviews.star} /5</div>
+                  <div className="starPoint">{reviews.star} / 5</div>
                 </div>
               </StMyReview>
             );
