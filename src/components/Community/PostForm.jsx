@@ -36,6 +36,13 @@ const PostForm = () => {
     formData.append("postLocation1", selected.postLocation1);
     formData.append("postLocation2", selected.postLocation2);
 
+    for (let key of formData.keys()) {
+      console.log(key);
+    }
+    for (let value of formData.values()) {
+      console.log(value);
+    }
+
     const community = formData;
 
     mutate(community);
