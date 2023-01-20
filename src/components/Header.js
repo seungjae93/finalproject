@@ -74,26 +74,27 @@ const Header = () => {
           >
             커뮤니티
           </StNavbarMenuItem>
-          <StNavbarMenuItem
-            onClick={() => {
-              navigate("/mypage");
-            }}
-          >
-            마이페이지
-          </StNavbarMenuItem>
 
           {userStatus ? (
-            <StImg
-              className="profile"
-              alt="proflie"
-              src={require("../images/proflie.jpg")}
-            ></StImg>
+            <>
+              <StImg
+                className="profile"
+                alt="proflie"
+                src={require("../images/proflie.jpg")}
+                onClick={() => {
+                  navigate("/mypage");
+                }}
+              ></StImg>
+              <StNavbarMenuItem className="logoutBtn" onClick={logout}>
+                로그아웃
+              </StNavbarMenuItem>
+            </>
           ) : (
-            <StNavbarMenuItem onClick={login}>로그인 </StNavbarMenuItem>
+            <Stkakalogin
+              src={require("../images/kakaologo.jpg")}
+              onClick={login}
+            ></Stkakalogin>
           )}
-          <StNavbarMenuItem className="logoutBtn" onClick={logout}>
-            로그아웃
-          </StNavbarMenuItem>
         </StNavbarMenu>
       </StNavbar>
     </>
@@ -144,4 +145,12 @@ const StImg = styled.img`
   position: relative;
   left: -10%;
   top: -3vh;
+  cursor: pointer;
+`;
+
+const Stkakalogin = styled.img`
+  position: relative;
+  left: -10%;
+  top: -3vh;
+  cursor: pointer;
 `;
