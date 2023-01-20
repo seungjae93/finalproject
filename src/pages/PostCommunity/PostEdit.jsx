@@ -24,6 +24,7 @@ const PostEdit = () => {
 
   const queryClient = useQueryClient();
 
+  // 수정 전 가져오기
   const { error, isLoading, isError } = useQuery(
     ["post", postId],
     () => getUpdateCommunity(postId),

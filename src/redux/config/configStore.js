@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import kakaoSlice from "../modules/kakaoSlice";
+import user from "../modules/kakaoSlice";
 
-const store = configureStore({ reducer: { kakaoSlice } });
+const store = configureStore({ reducer: { user } });
 export default store;
