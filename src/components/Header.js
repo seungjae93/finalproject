@@ -3,10 +3,13 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { getCookie, deleteCookie } from "../shared/cookie";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const navigate = useNavigate();
   const [userStatus, setUserStatus] = useState(false);
+
+  const { login } = useSelector((state) => state.user);
 
   const checkCookie = () => {
     if (getCookie("token")) {
@@ -23,11 +26,16 @@ const Header = () => {
     navigate("/");
   };
 
-  const login = () => {
+  const onLogin = () => {
     navigate("/login");
     checkCookie();
   };
 
+  const onCommentHanler = () => {
+    if (login === false) {
+      alert("로그인을 해주세요");
+    } else navigate("/review");
+  };
   useEffect(() => {
     checkCookie();
   }, []);
@@ -60,13 +68,11 @@ const Header = () => {
           >
             지도
           </StNavbarMenuItem>
-          <StNavbarMenuItem
-            onClick={() => {
-              navigate("/review");
-            }}
-          >
+
+          <StNavbarMenuItem onClick={onCommentHanler}>
             후기작성
           </StNavbarMenuItem>
+
           <StNavbarMenuItem
             onClick={() => {
               navigate("/list");
@@ -92,7 +98,7 @@ const Header = () => {
           ) : (
             <Stkakalogin
               src={require("../images/kakaologo.jpg")}
-              onClick={login}
+              onClick={onLogin}
             ></Stkakalogin>
           )}
         </StNavbarMenu>

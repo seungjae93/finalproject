@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 import { getCommunity } from "../../redux/api/communityApi";
 import { hangjungdong } from "../../components/Community/hangjungdong";
@@ -13,12 +14,20 @@ const PostList = () => {
   const { postLocation1, postLocation2 } = hangjungdong;
   const [initial, setInitial] = useState(true);
 
+  const { login } = useSelector((state) => state.user);
+
   const { data, error, isLoading, isError } = useQuery(["posts"], getCommunity);
 
   const HandleChange = (e) => {
     const { name, value } = e.target;
     setSelected({ ...selected, [name]: value });
     setInitial(false);
+  };
+
+  const onPostHandler = () => {
+    if (login === false) {
+      alert("로그인을 해주세요");
+    } else navigate("/post");
   };
 
   if (isLoading) return <h2> 로딩중 .. </h2>;
@@ -28,7 +37,7 @@ const PostList = () => {
     <>
       <StMain>
         <StTitle> 뒤로 가기 </StTitle>
-        <StTitle onClick={() => navigate("/post")}> 작성 하기 </StTitle>
+        <StTitle onClick={onPostHandler}> 작성 하기 </StTitle>
       </StMain>
 
       <StSeleteBox>

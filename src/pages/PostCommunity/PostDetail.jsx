@@ -13,6 +13,8 @@ const PostDetail = () => {
     detailCommunity(postId)
   );
 
+  const nickname = localStorage.getItem("nickname");
+
   const deleteCommunityCallback = async (postId) => {
     await deleteCommunity(postId);
     navigate("/list");
@@ -44,13 +46,17 @@ const PostDetail = () => {
             </StNicDa>
 
             <div>
-              <StEdit onClick={() => navigate(`/edit/${data?.post.postId}`)}>
-                수정
-              </StEdit>
+              {data?.post.nickname === nickname ? (
+                <StEdit onClick={() => navigate(`/edit/${data?.post.postId}`)}>
+                  수정
+                </StEdit>
+              ) : null}
 
-              <StRemove onClick={() => deleteCommunityCallback(postId)}>
-                삭제
-              </StRemove>
+              {data?.post.nickname === nickname ? (
+                <StRemove onClick={() => deleteCommunityCallback(postId)}>
+                  삭제
+                </StRemove>
+              ) : null}
             </div>
           </StInfor>
 
