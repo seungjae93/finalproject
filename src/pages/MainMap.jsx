@@ -171,7 +171,6 @@ const MainMap = () => {
       </>
     );
   };
-  console.log(positions);
 
   //레벨에 따라 response 데이터 형식이 달라 빈 배열에 push
 
@@ -199,6 +198,7 @@ const MainMap = () => {
   }, [zoomLevel, positions]);
 
   console.log(zoomLevel);
+  console.log(positions);
   useEffect(() => {
     /* 현재 보이는 위치에 대한 좌표 값을 받아와주는 부분 */
     const mapObject = mapRef.current;
@@ -254,7 +254,7 @@ const MainMap = () => {
               }}
               ref={mapRef}
               // 지도의 확대 레벨
-
+              level={3}
               maxLevel={11}
               onZoomChanged={(map) => setZoomLevel(map.getLevel())}
               onDragEnd={(map) => {
@@ -285,15 +285,15 @@ const MainMap = () => {
               }, 600)}
             >
               <MarkerClusterer
-                averageCenter={true} // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
-                minLevel={4}
+                // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+                minLevel={3}
               >
                 {zoomLevel < 5 &&
                   (zoomLevel < 3
-                    ? markerArray.map((el) => {
+                    ? markerArray?.map((el) => {
                         return (
                           <MapMarker
-                            key={`${el.estateId}-${el.lat}`}
+                            key={el.estateId}
                             position={el}
                             image={{
                               src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
@@ -307,11 +307,11 @@ const MainMap = () => {
                         );
                       })
                     : 2 < zoomLevel < 5
-                    ? markerArray.map((el) => {
+                    ? markerArray?.map((el) => {
                         return (
                           <MapMarker
-                            key={`${el.estateId}-${el.lat}`}
-                            position={el[0]}
+                            key={el.estateId}
+                            position={el}
                             image={{
                               src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
                               // 마커이미지의 주소입니다
