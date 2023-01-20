@@ -16,6 +16,7 @@ export const __kakaoLogin = createAsyncThunk(
         expire: "after720m",
       });
       localStorage.setItem("nickname", response.data.nickname);
+      console.log(response);
       alert(`${response.data.nickname}님 안녕하세요 :) `);
       return thunkAPI.fulfillWithValue(response);
     } catch (error) {
