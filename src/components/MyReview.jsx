@@ -11,8 +11,6 @@ const MyReview = () => {
   if (isLoading) return <h2> 로딩중 .. </h2>;
   if (isError) return <h2> Error : {error.toString()} </h2>;
 
-  console.log(data);
-
   return (
     <>
       <div>
