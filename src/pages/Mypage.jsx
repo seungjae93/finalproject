@@ -5,7 +5,6 @@ import MyReview from "../components/MyReview";
 const Mypage = () => {
   return (
     <>
-      <h2>마이페이지(로그인 필요)</h2>
       <div>
         <div>OOO 님, 안녕하세요!</div>
         <div>이 집은 어떤가요?</div>
