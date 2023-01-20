@@ -15,6 +15,8 @@ const Comment = () => {
   const [editOn, setEditOn] = useState("");
   const [input, setInput] = useState("");
 
+  const nickname = localStorage.getItem("nickname");
+
   const { data, isLoading, isError, error } = useQuery(
     ["comments", postId],
     () => getComment(postId)
@@ -87,21 +89,24 @@ const Comment = () => {
                   minute: "2-digit",
                 })}
               </StNickDate>
-              <div>
-                <StBut
-                  onClick={() => {
-                    setEditOn(comments.commentId);
-                    setInput(comments.content);
-                  }}
-                >
-                  수정하기
-                </StBut>
-                <StBut
-                  onClick={() => deleteCommentCallback(comments.commentId)}
-                >
-                  삭제하기
-                </StBut>
-              </div>
+
+              {comments.nickname === nickname ? (
+                <div>
+                  <StBut
+                    onClick={() => {
+                      setEditOn(comments.commentId);
+                      setInput(comments.content);
+                    }}
+                  >
+                    수정하기
+                  </StBut>
+                  <StBut
+                    onClick={() => deleteCommentCallback(comments.commentId)}
+                  >
+                    삭제하기
+                  </StBut>
+                </div>
+              ) : null}
             </StCommentBut>
           </StCommentlist>
         );

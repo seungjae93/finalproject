@@ -30,7 +30,6 @@ const initialState = {
   isLoading: false,
   error: null,
   errorMessage: "",
-  nickname: "",
 };
 
 const kakaoSlice = createSlice({
@@ -50,7 +49,7 @@ const kakaoSlice = createSlice({
         state.isLoading = true;
         state.login = true;
       })
-      .addCase(__kakaoLogin.rejected, (state, action) => {
+      .addCase(__kakaoLogin.rejected, (state) => {
         state.isLoading = false;
       });
   },

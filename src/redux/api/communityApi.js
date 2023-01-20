@@ -1,7 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+// import useCheckLogin from "../../hooks/useCheckLogin";
 import { getCookie } from "../../shared/cookie";
 import setToken from "../../shared/setToken";
 import { instance } from "./instance";
+
+// const { accessToken} = useCheckLogin
 
 //get
 export const getCommunity = async () => {
