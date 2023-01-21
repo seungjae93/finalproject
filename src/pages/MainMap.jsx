@@ -19,7 +19,7 @@ const MainMap = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [searchAddress, setSearchAddress] = useState("");
   const [searchData, setSearchData] = useState([]);
-  const [zoomLevel, setZoomLevel] = useState(0); //지도 줌레벨
+  const [zoomLevel, setZoomLevel] = useState(3.5); //지도 줌레벨
   const [positions, setPositions] = useState();
   const [markerArray, setMarkerArray] = useState([]);
   const [estateIdData, setEstateIdData] = useState([]);
@@ -137,28 +137,52 @@ const MainMap = () => {
     if (zoomLevel < 3) return null;
     return (
       <>
-        {positions.map((el) => {
-          const name = el[getOverlayAreaName(zoomLevel)];
-          return (
-            <CustomOverlayMap // 커스텀 오버레이를 표시할 Container
-              key={el.lat}
-              position={el}
-            >
-              {/* 커스텀 오버레이에 표시할 내용입니다 */}
-              <div
-                className="label"
-                style={{
-                  color: "#000",
-                  backgroundColor: `${getOverlayStyle(zoomLevel)}`,
-                }}
-              >
-                <span className="left"></span>
-                <span className="center">{name}</span>
-                <span className="right"></span>
-              </div>
-            </CustomOverlayMap>
-          );
-        })}
+        {zoomLevel > 4
+          ? positions?.map((el) => {
+              const name = el[getOverlayAreaName(zoomLevel)];
+              return (
+                <CustomOverlayMap // 커스텀 오버레이를 표시할 Container
+                  key={el.estateId}
+                  position={el}
+                >
+                  {/* 커스텀 오버레이에 표시할 내용입니다 */}
+                  <div
+                    className="label"
+                    style={{
+                      color: "#000",
+                      backgroundColor: `${getOverlayStyle(zoomLevel)}`,
+                    }}
+                  >
+                    <span className="left"></span>
+                    <span className="center">{name}</span>
+                    <span className="right"></span>
+                  </div>
+                </CustomOverlayMap>
+              );
+            })
+          : 2 < zoomLevel < 5
+          ? markerArray?.map((el) => {
+              return (
+                <CustomOverlayMap // 커스텀 오버레이를 표시할 Container
+                  key={el.estateId}
+                  position={el.locate ?? el}
+                >
+                  {/* 커스텀 오버레이에 표시할 내용입니다 */}
+                  <div
+                    className="label"
+                    style={{
+                      color: "#000",
+                      backgroundColor: "blueviolet",
+                    }}
+                  >
+                    <span className="left"></span>
+                    <span className="center">{el.index}</span>
+                    <span className="right"></span>
+                  </div>
+                </CustomOverlayMap>
+              );
+            })
+          : null}
       </>
     );
   };
@@ -168,6 +192,7 @@ const MainMap = () => {
   useEffect(() => {
     if (!positions) return;
     let newArray = [];
+
     if (zoomLevel < 3) {
       newArray.push(...positions);
       setMarkerArray(newArray);
@@ -175,7 +200,8 @@ const MainMap = () => {
     } else if (2 < zoomLevel < 5) {
       positions?.map((el) => {
         if (Array.isArray(el)) {
-          console.log(el[0]);
+          newArray.push({ locate: el[0], index: el.length });
+          setMarkerArray(newArray);
         }
       });
     }
@@ -183,6 +209,7 @@ const MainMap = () => {
 
   console.log(zoomLevel);
   console.log(positions);
+  console.log(markerArray);
 
   useEffect(() => {
     /* 현재 보이는 위치에 대한 좌표 값을 받아와주는 부분 */
