@@ -166,7 +166,6 @@ const StUpload = styled.label`
   padding: 6px 25px;
   margin: 10px 0 10px 0;
   background-color: powderblue;
-
   width: 100px;
   cursor: pointer;
   &:hover {

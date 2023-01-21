@@ -13,7 +13,6 @@ const KakaoLogin = () => {
   const Auth = () => {
     const code = location.search.split("=")[1];
     dispatch(__kakaoLogin(code));
-    console.log(code);
   };
 
   useEffect(() => {
