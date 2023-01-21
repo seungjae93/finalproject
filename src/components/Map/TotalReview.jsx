@@ -1,26 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
 import axios from "axios";
 import BarChart from "./BarChart";
+import ServeReviewModal from "./ServeReviewModal";
 
 const TotalReview = ({ estateIdData }) => {
-  const { isLoading, isError, data, error } = useQuery(
-    ["showReview", estateIdData],
-    async () => {
-      const response = await axios.get(
-        `${process.env.REACT_APP_API_MAP_SERVER}/review/items/${estateIdData.estateId}`
-      );
+  const [modalOpen, setModalOpen] = useState(false);
 
-      const { data } = response.data;
+  const showModal = () => {
+    setModalOpen(true);
+  };
 
-      return data;
-    }
-  );
-  // const { estate, estateInfoArr, reviewArr } = data;
+  const { data } = useQuery(["showReview", estateIdData], async () => {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_MAP_SERVER}/review/items/${estateIdData.estateId}`
+    );
+
+    const { data } = response.data;
+
+    return data;
+  });
   const estate = data?.estate;
   const estateInfoArr = data?.estateInfoArr;
-  console.log(data);
 
   return (
     <>
@@ -37,7 +39,14 @@ const TotalReview = ({ estateIdData }) => {
         <div>town_noise:</div>
         <div>walls_noise:</div>
         <BarChart />;
+        <div>
+          <button onClick={showModal}>모달 띄우기</button>
+          {modalOpen && (
+            <ServeReviewModal setModalOpen={setModalOpen} estateIdData={data} />
+          )}
+        </div>
       </StModalContainer>
+
       {/* })} */}
     </>
   );
