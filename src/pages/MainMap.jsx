@@ -1,14 +1,8 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import styled from "styled-components";
 import axios from "axios";
 import { throttle, debounce } from "lodash";
-import {
-  Map,
-  MapMarker,
-  CustomOverlayMap,
-  MarkerClusterer,
-} from "react-kakao-maps-sdk";
+import { Map, MapMarker, CustomOverlayMap } from "react-kakao-maps-sdk";
 import TotalReview from "../components/Map/TotalReview";
 
 const { kakao } = window;
@@ -29,9 +23,6 @@ const MainMap = () => {
   const [positions, setPositions] = useState();
   const [markerArray, setMarkerArray] = useState([]);
   const [estateIdData, setEstateIdData] = useState([]);
-
-  // const { data, loading, refetch } = useQuery;
-  // const queryClient = useQueryClient();
 
   //검색어 받아오는 로직
   const onAddressHandler = throttle(async (e) => {
@@ -143,7 +134,7 @@ const MainMap = () => {
 
   const renderItem = () => {
     if (!positions) return null;
-    if (zoomLevel < 4) return null;
+    if (zoomLevel < 3) return null;
     return (
       <>
         {positions.map((el) => {
@@ -181,24 +172,18 @@ const MainMap = () => {
       newArray.push(...positions);
       setMarkerArray(newArray);
       setEstateIdData(newArray);
-      // queryClient.refetchQueries(["showReview"]);
     } else if (2 < zoomLevel < 5) {
-      positions?.map((value) => {
-        if (Array.isArray(value)) {
-          newArray.push(value);
-          setMarkerArray(newArray);
-          setEstateIdData(newArray);
-          // queryClient.refetchQueries(["showReview"]);
+      positions?.map((el) => {
+        if (Array.isArray(el)) {
+          console.log(el[0]);
         }
       });
-    } else if (zoomLevel > 4) {
-      newArray.push(...positions);
-      setMarkerArray(newArray);
     }
   }, [zoomLevel, positions]);
 
   console.log(zoomLevel);
   console.log(positions);
+
   useEffect(() => {
     /* 현재 보이는 위치에 대한 좌표 값을 받아와주는 부분 */
     const mapObject = mapRef.current;
@@ -284,47 +269,23 @@ const MainMap = () => {
                 });
               }, 600)}
             >
-              <MarkerClusterer
-                // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
-                minLevel={3}
-              >
-                {zoomLevel < 5 &&
-                  (zoomLevel < 3
-                    ? markerArray?.map((el) => {
-                        return (
-                          <MapMarker
-                            key={el.estateId}
-                            position={el}
-                            image={{
-                              src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
-                              // 마커이미지의 주소입니다
-                              size: {
-                                width: 24,
-                                height: 35,
-                              }, // 마커이미지의 크기입니다
-                            }}
-                          />
-                        );
-                      })
-                    : 2 < zoomLevel < 5
-                    ? markerArray?.map((el) => {
-                        return (
-                          <MapMarker
-                            key={el.estateId}
-                            position={el}
-                            image={{
-                              src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
-                              // 마커이미지의 주소입니다
-                              size: {
-                                width: 24,
-                                height: 35,
-                              }, // 마커이미지의 크기입니다
-                            }}
-                          />
-                        );
-                      })
-                    : null)}
-              </MarkerClusterer>
+              {zoomLevel < 3 &&
+                markerArray?.map((el) => {
+                  return (
+                    <MapMarker
+                      key={el.estateId}
+                      position={el}
+                      image={{
+                        src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
+                        // 마커이미지의 주소입니다
+                        size: {
+                          width: 24,
+                          height: 35,
+                        }, // 마커이미지의 크기입니다
+                      }}
+                    />
+                  );
+                })}
               {renderItem()}
             </Map>
           </StMapContainer>
@@ -360,7 +321,7 @@ const StSearch = styled.input`
 const AutoSearchContainer = styled.div`
   position: absolute;
   width: 23%;
-  height: 20vh;
+  height: 25vh;
   top: 45px;
   z-index: 3;
   background-color: #fff;
