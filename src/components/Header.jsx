@@ -37,9 +37,10 @@ const Header = () => {
       alert("로그인을 해주세요");
     } else navigate("/review");
   };
+
   useEffect(() => {
     checkCookie();
-  }, []);
+  }, [login]);
 
   return (
     <>
