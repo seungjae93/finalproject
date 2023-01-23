@@ -187,8 +187,6 @@ const MainMap = () => {
     );
   };
 
-  //레벨에 따라 response 데이터 형식이 달라 빈 배열에 push
-
   useEffect(() => {
     if (!positions) return;
     let newArray = [];
@@ -206,10 +204,6 @@ const MainMap = () => {
       });
     }
   }, [zoomLevel, positions]);
-
-  console.log(zoomLevel);
-  console.log(positions);
-  console.log(markerArray);
 
   useEffect(() => {
     /* 현재 보이는 위치에 대한 좌표 값을 받아와주는 부분 */
