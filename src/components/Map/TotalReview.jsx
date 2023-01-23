@@ -40,7 +40,7 @@ const TotalReview = ({ estateIdData }) => {
         <div>walls_noise:</div>
         <ReviewContainer>
           <ReviewBar point={3} />
-          {[1, 2, 3, 4, 5].map((value) => {
+          {[1, 2, 3, 4, 5, 6].map((value) => {
             return <ReviewPoint />;
           })}
         </ReviewContainer>

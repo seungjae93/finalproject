@@ -30,7 +30,7 @@ const MainMap = () => {
   const [markerArray, setMarkerArray] = useState([]);
   //props넘기는 estateId값
   const [estateIdData, setEstateIdData] = useState([]);
-
+  const inputRef = useRef();
   //검색어 받아오는 로직
   const onAddressHandler = throttle(async (e) => {
     const { value } = e.target;
@@ -53,7 +53,26 @@ const MainMap = () => {
   const clickDropDownItem = (clickedItem) => {
     setSearchAddress(clickedItem);
     setIsHaveInputValue(false);
+    onSearchHandler();
   };
+
+  // const onHandleDropDownKey = (e) => {
+  //   //input에 값이 있을때만 작동
+
+  //   if (isHaveInputValue) {
+  //     if (e.key === "ArrowDown" && searchData.length - 1 > dropDownDataIndex) {
+  //       setDropDownDataIndex(dropDownDataIndex + 1);
+  //     }
+
+  //     if (e.key === "ArrowUp" && dropDownDataIndex >= 0)
+  //       setDropDownDataIndex(dropDownDataIndex - 1);
+
+  //     if (e.key === "Enter" && dropDownDataIndex >= 0) {
+  //       clickDropDownItem(searchData[dropDownDataIndex]);
+  //       setDropDownDataIndex(-1);
+  //     }
+  //   }
+  // };
 
   //장소 검색 객체 생성
   const ps = new kakao.maps.services.Places();
@@ -240,15 +259,17 @@ const MainMap = () => {
   return (
     <>
       <StContainer>
-        <SearchContainer>
+        <SearchContainer isHaveInputValue={isHaveInputValue}>
           <StSearch
             type="search"
             onChange={onAddressHandler}
             value={searchAddress}
+            ref={inputRef}
           />
           {searchAddress && (
             <AutoSearchContainer>
               <AutoSearchWrap>
+                {/* onKeyDown={onHandleDropDownKey} */}
                 {searchData?.map((el, index) => {
                   return (
                     <AutoSearchData
