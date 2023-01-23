@@ -83,9 +83,7 @@ const Review = () => {
 
   return (
     <>
-      <StTitle>
-        <h2> 후기 작성 </h2>
-      </StTitle>
+      <StTitle>이집은 후기 작성하기</StTitle>
 
       <StSearch>
         <StButton onClick={handle.clickButton}> 주소 검색 </StButton>
@@ -123,8 +121,6 @@ const Review = () => {
           />
         </StSeAddress>
 
-        <StCon> * 등기부등본 상의 주소를 입력해 주세요 </StCon>
-
         <StType>
           <StAdd> 주거 형태 </StAdd>
 
@@ -141,33 +137,42 @@ const Review = () => {
           </StSelectOne>
         </StType>
 
-        <StBasic>
+        <StBasicWrap>
           <StAdd> 기본 정보 </StAdd>
-          <input
-            type="number"
-            name="deposit"
-            value={input.deposit}
-            onChange={onChangeHandler}
-            placeholder="보증금 입력란입니다."
-          />
-          <input
-            type="number"
-            name="monthly_payment"
-            value={input.monthly_payment}
-            onChange={onChangeHandler}
-            placeholder="월세 입력란입니다."
-          />
-          <input
-            type="number"
-            name="acreage"
-            value={input.acreage}
-            onChange={onChangeHandler}
-            placeholder="평수 입력란입니다."
-          />
-        </StBasic>
+          <StBasic>
+            <StBasicTitle>공급면적:</StBasicTitle>
+            <input
+              type="number"
+              name="acreage"
+              value={input.acreage}
+              onChange={onChangeHandler}
+              placeholder="평수 입력란입니다."
+            />
+          </StBasic>
+          <StBasic>
+            <StBasicTitle>보증금:</StBasicTitle>
+            <input
+              type="number"
+              name="deposit"
+              value={input.deposit}
+              onChange={onChangeHandler}
+              placeholder="보증금 입력란입니다."
+            />
+          </StBasic>
+          <StBasic>
+            <StBasicTitle>월세:</StBasicTitle>
+            <input
+              type="number"
+              name="monthly_payment"
+              value={input.monthly_payment}
+              onChange={onChangeHandler}
+              placeholder="월세 입력란입니다."
+            />
+          </StBasic>
+        </StBasicWrap>
 
         <StComment>
-          <StAddOne> 이집은 후기 선택 </StAddOne>
+          <StTitle> 이집은 후기 상세정보</StTitle>
           <StTitleComment> Q1 벌래가 얼마나 자주 나오나요? </StTitleComment>
           <StDetail>
             <input
@@ -482,30 +487,38 @@ const Review = () => {
             5
           </StDetail>
 
-          <StAdvantages> 이집의 장점을 적어주세요 </StAdvantages>
+          <StTitleComment> Q9 이집의 장점을 적어주세요 </StTitleComment>
           <Sttextarea
             name="good"
             value={input.good}
             onChange={onChangeHandler}
-            placeholder="장점을 적는 공간"
+            placeholder="장점을 자유롭게 적어 주세요"
             cols="75"
             rows="7"
           />
-          <br />
 
-          <StAdvantages> 이집의 단점을 적어주세요 </StAdvantages>
+          <StTitleComment> Q10 이집의 단점을 적어주세요 </StTitleComment>
           <Sttextarea
             name="bad"
             value={input.bad}
             onChange={onChangeHandler}
-            placeholder="단점을 적는 공간입니다"
+            placeholder="단점을 자유롭게 적어 주세요"
             cols="75"
             rows="7"
           />
 
-          <StPicture>
-            <StUpload htmlFor="file"> 파일 업로드 </StUpload>
+          <StTitleComment>이집의 별점을 선택해주세요</StTitleComment>
+          <StSelectStar name="star" onChange={onChangeHandler}>
+            <option value="">별점을 선택해 주세요</option>
+            <option value="1">⭐️</option>
+            <option value="2">⭐️⭐️</option>
+            <option value="3">⭐️⭐️⭐️</option>
+            <option value="4">⭐️⭐️⭐️⭐️</option>
+            <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
+          </StSelectStar>
 
+          <StPicture>
+            <StUpload htmlFor="file"> 사진 업로드 </StUpload>
             <input
               type="file"
               id="file"
@@ -526,17 +539,13 @@ const Review = () => {
             </StImageGruop>
           </StPicture>
 
-          <StSelectStar name="star" onChange={onChangeHandler}>
-            <option value="">별점을 선택해 주세요</option>
-            <option value="1">*</option>
-            <option value="2">**</option>
-            <option value="3">***</option>
-            <option value="4">****</option>
-            <option value="5">*****</option>
-          </StSelectStar>
-
           <div>
-            <StBut onClick={onSubmitHandler}>후기 제출</StBut>
+            <StBut onClick={onSubmitHandler}>
+              <img
+                src={require("../images/Group 389.jpg")}
+                alt="submit button"
+              />
+            </StBut>
           </div>
         </StComment>
       </StContainer>
@@ -546,8 +555,14 @@ const Review = () => {
 
 export default Review;
 
-const StBut = styled.button`
-  font-size: 20px;
+const StTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 20px;
 `;
 
 const StSelectStar = styled.select`
@@ -563,13 +578,13 @@ const StSelectStar = styled.select`
 const StButton = styled.button`
   padding: 6px 25px;
   background-color: white;
-  border: 1px solid powderblue;
+  border: 1px solid #aec90c;
   border-radius: 8px;
   font-size: 20px;
-  margin-bottom: 15px;
+
   cursor: pointer;
   :hover {
-    background-color: #3fb3c3;
+    background-color: #aec90c;
     transition: 0.5s;
   }
 `;
@@ -580,13 +595,6 @@ const StSearch = styled.div`
   align-items: center;
   gap: 4px;
   margin-bottom: 10px;
-`;
-
-const StTitle = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
 `;
 
 const StContainer = styled.form`
@@ -610,23 +618,18 @@ const StImageGruop = styled.div`
 const StyledImage = styled.img`
   width: 250px;
   height: 200px;
-  border-radius: 50px;
-  background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.23) 0px 0px 5px 6px;
-  margin: 30px 30px 0 0;
+  background-color: transparent;
+  border: 1px solid darkgray;
+  margin-top: 25%;
 `;
 const StUpload = styled.label`
   text-align: center;
   padding: 12px 50px;
-  margin: 10px 0 10px 0;
-  background-color: powderblue;
+  border: 1px solid #aec90c;
+  background-color: white;
   border-radius: 10px;
   width: 100px;
   cursor: pointer;
-  &:hover {
-    background-color: #6688ab;
-    transition: 0.5s;
-  }
 `;
 
 const StAddress = styled.div`
@@ -640,7 +643,7 @@ const StAddress = styled.div`
 
 const StAdd = styled.div`
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 600;
 `;
 
 const StInt = styled.input`
@@ -660,13 +663,6 @@ const StSeAddress = styled.div`
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
-`;
-
-const StCon = styled.div`
-  display: flex;
-  justify-content: center;
-  font-size: 13px;
-  color: #c4cbcd;
 `;
 
 const StType = styled.div`
@@ -692,14 +688,21 @@ const Stoption = styled.option`
   color: black;
 `;
 
-const StBasic = styled.div`
-  display: flex;
-  justify-content: center;
-  justify-content: space-between;
+const StBasicWrap = styled.div`
   width: 60%;
-  margin-left: auto;
-  margin-right: auto;
   margin-top: 30px;
+`;
+
+const StBasic = styled.div`
+  position: relative;
+  left: 20%;
+  display: flex;
+  margin-bottom: 5%;
+`;
+
+const StBasicTitle = styled.div`
+  font-size: 16px;
+  margin-right: 3%;
 `;
 
 const StComment = styled.div`
@@ -710,34 +713,30 @@ const StComment = styled.div`
   margin-top: 60px;
 `;
 
-const StAddOne = styled.div`
-  font-size: 25px;
-  font-weight: bold;
-  margin-bottom: 20px;
-`;
-
 const StTitleComment = styled.div`
-  margin-top: 25px;
-  font-weight: bold;
+  margin-top: 5%;
+  font-size: 20px;
+  font-weight: 600;
 `;
 
 const StDetail = styled.div`
   margin-top: 15px;
 `;
 
-const StAdvantages = styled.div`
-  margin-top: 40px;
-  font-size: 25px;
-  font-weight: bold;
-`;
-
 const Sttextarea = styled.textarea`
   margin-top: 20px;
-  border: 2px solid #4dcbcd;
+  border: 2px solid gray;
   border-radius: 10px;
   resize: none;
   ::placeholder {
-    color: #0d5c5d;
-    text-align: center;
+    color: gray;
   }
+`;
+
+const StBut = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin-top: 10%;
+  margin-bottom: 10%;
 `;

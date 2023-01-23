@@ -29,7 +29,6 @@ const Header = () => {
 
   const onLogin = () => {
     navigate("/login");
-    checkCookie();
   };
 
   const onCommentHanler = () => {
