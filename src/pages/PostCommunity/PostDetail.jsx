@@ -61,10 +61,7 @@ const PostDetail = () => {
           </StInfor>
 
           <div>
-            <StDetailImage
-              src={data?.post?.postImage}
-              style={{ width: "100%", height: "300px" }}
-            />
+            <StDetailImage src={data?.post?.postImage} />
           </div>
 
           <StContent> {data?.post.content} </StContent>
@@ -138,7 +135,7 @@ const StDetailImage = styled.img`
   border: 0px solid black;
   margin-top: 30px;
   width: 100%;
-  height: 200px;
+  height: 400px;
 `;
 
 const StContent = styled.div`
