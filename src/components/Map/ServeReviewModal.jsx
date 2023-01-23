@@ -117,7 +117,7 @@ export default ServeReviewModal;
 
 const StContainer = styled.div`
   position: fixed;
-  top: 0;
+  top: 95px;
   right: 0;
   z-index: 100;
   width: 20%;
