@@ -13,6 +13,8 @@ const PostDetail = () => {
     detailCommunity(postId)
   );
 
+  const nickname = localStorage.getItem("nickname");
+
   const deleteCommunityCallback = async (postId) => {
     await deleteCommunity(postId);
     navigate("/list");
@@ -44,21 +46,22 @@ const PostDetail = () => {
             </StNicDa>
 
             <div>
-              <StEdit onClick={() => navigate(`/edit/${data?.post.postId}`)}>
-                수정
-              </StEdit>
+              {data?.post.nickname === nickname ? (
+                <StEdit onClick={() => navigate(`/edit/${data?.post.postId}`)}>
+                  수정
+                </StEdit>
+              ) : null}
 
-              <StRemove onClick={() => deleteCommunityCallback(postId)}>
-                삭제
-              </StRemove>
+              {data?.post.nickname === nickname ? (
+                <StRemove onClick={() => deleteCommunityCallback(postId)}>
+                  삭제
+                </StRemove>
+              ) : null}
             </div>
           </StInfor>
 
           <div>
-            <StDetailImage
-              src={data?.post?.postImage}
-              style={{ width: "100%", height: "300px" }}
-            />
+            <StDetailImage src={data?.post?.postImage} />
           </div>
 
           <StContent> {data?.post.content} </StContent>
@@ -132,7 +135,7 @@ const StDetailImage = styled.img`
   border: 0px solid black;
   margin-top: 30px;
   width: 100%;
-  height: 200px;
+  height: 400px;
 `;
 
 const StContent = styled.div`
