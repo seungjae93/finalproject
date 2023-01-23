@@ -16,12 +16,19 @@ const MainMap = () => {
     isPanto: true,
   });
   const mapRef = useRef();
-  const [modalOpen, setModalOpen] = useState(false);
+
+  //자동검색
   const [searchAddress, setSearchAddress] = useState("");
   const [searchData, setSearchData] = useState([]);
-  const [zoomLevel, setZoomLevel] = useState(3.5); //지도 줌레벨
+  const [isHaveInputValue, setIsHaveInputValue] = useState(false);
+  const [dropDownDataIndex, setDropDownDataIndex] = useState(-1);
+  //지도 레벨
+  const [zoomLevel, setZoomLevel] = useState(3.5);
+  //서버에서 받는 지도 좌표
   const [positions, setPositions] = useState();
+  //마커 좌표
   const [markerArray, setMarkerArray] = useState([]);
+  //props넘기는 estateId값
   const [estateIdData, setEstateIdData] = useState([]);
 
   //검색어 받아오는 로직
@@ -38,8 +45,15 @@ const MainMap = () => {
 
       const { data } = response?.data;
       setSearchData(data);
+      setIsHaveInputValue(true);
     } catch (error) {}
   }, 700);
+
+  //검색어 클릭시 input값 변환
+  const clickDropDownItem = (clickedItem) => {
+    setSearchAddress(clickedItem);
+    setIsHaveInputValue(false);
+  };
 
   //장소 검색 객체 생성
   const ps = new kakao.maps.services.Places();
@@ -228,7 +242,7 @@ const MainMap = () => {
       <StContainer>
         <SearchContainer>
           <StSearch
-            type="text"
+            type="search"
             onChange={onAddressHandler}
             value={searchAddress}
           />
@@ -237,7 +251,15 @@ const MainMap = () => {
               <AutoSearchWrap>
                 {searchData?.map((el, index) => {
                   return (
-                    <AutoSearchData key={searchData.index}>{el}</AutoSearchData>
+                    <AutoSearchData
+                      key={searchData.index}
+                      onClick={() => clickDropDownItem(el)}
+                      onMouseOver={() =>
+                        setDropDownDataIndex(dropDownDataIndex)
+                      }
+                    >
+                      {el}
+                    </AutoSearchData>
                   );
                 })}
               </AutoSearchWrap>
@@ -245,6 +267,7 @@ const MainMap = () => {
           )}
           <button onClick={onSearchHandler}>검색</button>
         </SearchContainer>
+
         <StWrapper>
           <StReviewContainer>
             <TotalReview estateIdData={estateIdData[0]} />
@@ -330,6 +353,7 @@ const SearchContainer = styled.div`
   width: 100%;
   height: 45px;
   border: 0;
+  gap: 10px;
 `;
 const StSearch = styled.input`
   width: 20%;
