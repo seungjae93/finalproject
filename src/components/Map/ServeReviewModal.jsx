@@ -6,11 +6,11 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
   const [imageModal, setImageModal] = useState(false);
   const modalRef = useRef(null);
 
-  const openDetailModal = () => {
-    setDetailModal(true);
+  const openDetailModal = (reviewId) => {
+    setDetailModal({ ...detailModal, [reviewId]: true });
     const handler = (e) => {
       if (modalRef.current && !modalRef.current.contains(e.target)) {
-        setDetailModal(false);
+        setDetailModal({ ...detailModal, [reviewId]: false });
       }
     };
     document.addEventListener("mousedown", handler);
@@ -41,7 +41,7 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
         {estateIdData?.reviewArr.map((review) => {
           return (
             <StReviewBox
-              onClick={openDetailModal}
+              onClick={() => openDetailModal(review.reviewId)}
               key={`map_${review.reviewId}`}
             >
               <StReview>
@@ -64,7 +64,7 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
                 </div>
               </StReview>
 
-              {detailModal && (
+              {detailModal[review.reviewId] && (
                 <>
                   <StDetailModal ref={modalRef}>
                     <StMonthly>

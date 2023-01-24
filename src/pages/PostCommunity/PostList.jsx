@@ -85,7 +85,11 @@ const PostList = () => {
       <STPostCon>
         {initial || !Object.keys(selected).length
           ? data?.posts
-              .filter((post) => post.title.indexOf(searchText) !== -1)
+              .filter(
+                (post) =>
+                  post.title.indexOf(searchText) !== -1 ||
+                  post.content.indexOf(searchText) !== -1
+              )
               .map((posts) => {
                 return (
                   <PostListCard key={`main_${posts.postId}`} posts={posts} />
@@ -101,7 +105,12 @@ const PostList = () => {
                   post.postLocation2 === selected.postLocation2
                 );
               })
-              .filter((post) => post.title.indexOf(searchText) !== -1)
+              .filter(
+                (post) =>
+                  post.title.indexOf(searchText) !== -1 ||
+                  post.content.indexOf(searchText) !== -1
+              )
+
               .map((posts) => {
                 return (
                   <PostListCard key={`main_${posts.postId}`} posts={posts} />
