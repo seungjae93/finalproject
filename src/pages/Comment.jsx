@@ -46,6 +46,7 @@ const Comment = () => {
 
   return (
     <StCommentlistBox>
+      <StCount> 댓글 {data.comments.length} 개</StCount>
       <CommentPost />
 
       {data.comments.map((comments, i) => {
@@ -111,6 +112,13 @@ const Comment = () => {
           </StCommentlist>
         );
       })}
+      {/* <StPost>
+        <StPostBut>다음글 |</StPostBut>
+      </StPost>
+
+      <StPost>
+        <StPostBut>이전글 |</StPostBut>
+      </StPost> */}
     </StCommentlistBox>
   );
 };
@@ -118,10 +126,14 @@ const Comment = () => {
 export default Comment;
 
 const StCommentlistBox = styled.div`
-  width: 60%;
+  width: 70%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 20px;
+  margin-top: 10px;
+`;
+
+const StCount = styled.div`
+  font-size: 13px;
 `;
 
 const StCommentlist = styled.div`
@@ -133,12 +145,15 @@ const StCommentlist = styled.div`
   margin-top: 15px;
 `;
 
-const StComment = styled.div``;
+const StComment = styled.div`
+  margin: 10px 0 0 10px;
+`;
 
 const StCommentBut = styled.div`
   display: flex;
+  align-items: center;
   font-size: 11px;
-  margin-top: 20px;
+  margin-top: 15px;
   margin-left: 10px;
 `;
 
@@ -149,6 +164,7 @@ const StNickDate = styled.div`
 const StBut = styled.button`
   background-color: #f0f0f0;
   border: none;
+  font-size: 12px;
   cursor: pointer;
   margin-right: 10px;
 `;
@@ -159,3 +175,17 @@ const Stinput = styled.input`
   border: 1px solid powderblue;
   width: 98%;
 `;
+
+// const StPost = styled.div`
+//   display: flex;
+//   align-items: center;
+//   background-color: #f0f0f0;
+//   margin-top: 5px;
+//   height: 30px;
+// `;
+
+// const StPostBut = styled.button`
+//   margin: 0 0 0 30px;
+//   border: none;
+//   cursor: pointer;
+// `;

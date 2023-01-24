@@ -26,16 +26,30 @@ const PostDetail = () => {
   return (
     <>
       <StDetailBox>
-        <StMain>
-          <StButton> MAP </StButton>
-          <StButton onClick={() => navigate("/list")}> 뒤로 가기 </StButton>
-        </StMain>
         <StContainer>
-          <StTitle> {data?.post.title} </StTitle>
+          <StPostTitle>
+            <StTitle> {data?.post.title} </StTitle>
+
+            <div>
+              {data?.post.nickname === nickname ? (
+                <StButton
+                  onClick={() => navigate(`/edit/${data?.post.postId}`)}
+                >
+                  수정하기
+                </StButton>
+              ) : null}
+
+              {data?.post.nickname === nickname ? (
+                <StButton onClick={() => deleteCommunityCallback(postId)}>
+                  삭제하기
+                </StButton>
+              ) : null}
+            </div>
+          </StPostTitle>
 
           <StInfor>
             <StNicDa>
-              <StNicName> {data?.post.nickname} </StNicName>
+              <StNicName> {data?.post.nickname} | </StNicName>
               <StDate>
                 {new Date(data?.post.createdAt).toLocaleDateString("ko-KR", {
                   year: "numeric",
@@ -44,20 +58,6 @@ const PostDetail = () => {
                 })}
               </StDate>
             </StNicDa>
-
-            <div>
-              {data?.post.nickname === nickname ? (
-                <StEdit onClick={() => navigate(`/edit/${data?.post.postId}`)}>
-                  수정
-                </StEdit>
-              ) : null}
-
-              {data?.post.nickname === nickname ? (
-                <StRemove onClick={() => deleteCommunityCallback(postId)}>
-                  삭제
-                </StRemove>
-              ) : null}
-            </div>
           </StInfor>
 
           <div>
@@ -66,9 +66,23 @@ const PostDetail = () => {
 
           <StContent> {data?.post.content} </StContent>
         </StContainer>
-
-        <Comment />
       </StDetailBox>
+
+      <StCommentBox>
+        <Comment />
+      </StCommentBox>
+
+      <StPostNextBefore>
+        <StPost>
+          <StPostBut onClick={() => navigate(`/detail/${postId + 1}`)}>
+            다음글 |
+          </StPostBut>
+        </StPost>
+
+        <StPost>
+          <StPostBut>이전글 |</StPostBut>
+        </StPost>
+      </StPostNextBefore>
     </>
   );
 };
@@ -81,32 +95,30 @@ const StDetailBox = styled.div`
   background-color: white;
   width: 60%;
 `;
+
 const StContainer = styled.div`
-  width: 60%;
-  border: 2px solid powderblue;
-  border-radius: 10px;
+  width: 70%;
   margin-left: auto;
   margin-right: auto;
 `;
 
-const StButton = styled.button`
-  margin: 25px;
-  font-size: 30px;
-  font-weight: bold;
-  border: 1px solid black;
-  background-color: white;
-  cursor: pointer;
-`;
-
-const StMain = styled.div`
-  width: 100%;
-  height: 100px;
+const StPostTitle = styled.div`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const StTitle = styled.div`
   font-size: 40px;
   font-weight: bold;
+  margin-top: 10px;
+`;
+
+const StButton = styled.button`
+  background-color: white;
+  border: none;
+  margin: 0 10px 0;
+  cursor: pointer;
 `;
 
 const StInfor = styled.div`
@@ -124,20 +136,45 @@ const StNicName = styled.div`
 `;
 
 const StDate = styled.div`
-  margin-left: 20px;
+  margin-left: 10px;
 `;
-
-const StRemove = styled.button``;
-
-const StEdit = styled.button``;
 
 const StDetailImage = styled.img`
   border: 0px solid black;
   margin-top: 30px;
   width: 100%;
-  height: 400px;
+  height: 500px;
+  border-radius: 20px;
 `;
 
 const StContent = styled.div`
   font-size: 20px;
+  height: 50px;
+  margin: 10px;
+`;
+
+const StCommentBox = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  width: 60%;
+`;
+
+const StPostNextBefore = styled.div`
+  background-color: powderblue;
+  width: 70%;
+`;
+
+const StPost = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  margin-top: 5px;
+  height: 30px;
+`;
+
+const StPostBut = styled.button`
+  margin: 0 0 0 30px;
+  border: none;
+  cursor: pointer;
 `;
