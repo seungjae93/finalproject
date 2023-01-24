@@ -43,7 +43,6 @@ const Header = () => {
 
   return (
     <>
-      {/* Navbar */}
       <StNavbar>
         <div>
           <StLogo
