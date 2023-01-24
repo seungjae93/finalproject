@@ -1,9 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 
 const MainPage = () => {
   const navigate = useNavigate();
+  const { login } = useSelector((state) => state.user);
+
+  const reviewHandler = () => {
+    if (login == false) {
+      alert("로그인을 해 주세요");
+    } else navigate("/review");
+  };
+
   return (
     <>
       <StBody>
@@ -18,7 +27,7 @@ const MainPage = () => {
                 <br /> 진짜 살아봐야 아는 정보
               </div>
               <div className="content3">
-                중개인도, 집주인도 알려주지 않는 꿀정보를 알아보세요
+                중개인도, 집주인도 알려주지 않는 꿀정보를 알아보세요.
               </div>
               <button
                 className="reviewBtn"
@@ -50,15 +59,16 @@ const MainPage = () => {
                   navigate("/map");
                 }}
               >
-                <img src={require("../images/Group 388.jpg")} alt="button" />
+                <img
+                  src={require("../images/Group 388.jpg")}
+                  alt="후기 보러가기"
+                />
               </button>
-              <button
-                className="aboutBtn"
-                onClick={() => {
-                  navigate("/review");
-                }}
-              >
-                <img src={require("../images/Group 464.jpg")} alt="button" />
+              <button className="aboutBtn" onClick={reviewHandler}>
+                <img
+                  src={require("../images/Group 464.jpg")}
+                  alt="후기 쓰러가기"
+                />
               </button>
             </StReviewBox2>
 
@@ -91,11 +101,11 @@ const MainPage = () => {
               alt="img1"
             />
             <div className="detailBoxContents">
-              <p>지도로 보는 지역별 후기</p>
-              <p>
+              <div className="detailTitle">지도로 보는 지역별 후기</div>
+              <div className="detailBody">
                 지도를 통해 다양한 지역의 생활 후기를 알아볼 수 있습니다.
-                <br /> 다양한 사람들의 살아본 이야기를 들어보세요
-              </p>
+                <br /> 다양한 사람들의 살아본 이야기를 들어보세요.
+              </div>
 
               <button
                 className="go"
@@ -115,19 +125,16 @@ const MainPage = () => {
               alt="img2"
             />
             <div className="detailBoxContents">
-              <p>꼼꼼하게 돌아볼 수 있는 후기 작성</p>
-              <p>
+              <div className="detailTitle">
+                꼼꼼하게 돌아볼 수 있는 후기 작성
+              </div>
+              <div className="detailBody">
                 나를 위한, 다음 거주자를 위한 후기를 작성해보세요.
                 <br /> 섬세하게 나누어진 문항을 따라오면 꼼꼼하게 리뷰할 수
                 있습니다.
-              </p>
+              </div>
 
-              <div
-                className="go"
-                onClick={() => {
-                  navigate("/review");
-                }}
-              >
+              <div className="go" onClick={reviewHandler}>
                 바로가기
               </div>
             </div>
@@ -140,11 +147,13 @@ const MainPage = () => {
               alt="img3"
             />
             <div className="detailBoxContents">
-              <p>지역 사람들간의 대화를 위한 커뮤니티</p>
-              <p>
+              <div className="detailTitle">
+                지역 사람들간의 대화를 위한 커뮤니티
+              </div>
+              <div className="detailBody">
                 내 주변의 이웃들과 주거와 관련된 문제를 나누어요.
                 <br /> 혼자서는 어려웠던 문제가 이웃들의 지혜로 풀립니다.
-              </p>
+              </div>
 
               <div
                 className="go"
@@ -160,12 +169,16 @@ const MainPage = () => {
 
         <StSectionBottom>
           <div className="bottomContents">
-            <div>이웃들과 주거 관련 문제를 논의해요</div>
-            <p>
+            <div className="bottomTitle">
+              이웃들과 주거 관련 문제를 논의해요
+            </div>
+            <div className="bottomBody">
               마음고생이 많은 법적 분쟁 부터 집안일을 도와줄 사한 일상의 팁까지,
-              이집은 사랑방에서 모두 모여앉아 이야기꽃을 피워요
-            </p>
-            <p>도란도란 이야기 하다보면 동네의 정을 느낄 수 있어요.</p>
+              이집은 사랑방에서 모두 모여앉아 이야기꽃을 피워요.
+            </div>
+            <div className="bottomBody">
+              도란도란 이야기 하다보면 동네의 정을 느낄 수 있어요.
+            </div>
           </div>
           <button
             className="bottomBtn"
@@ -334,17 +347,23 @@ const StDetailBox1 = styled.div`
     position: relative;
     top: -15vh;
     left: 55%;
+    .detailTitle {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .detailBody {
+      font-size: 17px;
+      padding-top: 2%;
+    }
   }
   .go {
     border: none;
     background-color: transparent;
     color: #819608;
     cursor: pointer;
-    font-family: "Pretendard";
     font-weight: 600;
     font-size: 16px;
-    width: 80px;
-    height: 20px;
+    padding-top: 2.5%;
   }
 `;
 
@@ -370,17 +389,23 @@ const StDetailBox2 = styled.div`
     position: relative;
     top: -13vh;
     left: 55%;
+    .detailTitle {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .detailBody {
+      font-size: 17px;
+      padding-top: 2%;
+    }
   }
   .go {
     border: none;
     background-color: transparent;
     color: #819608;
     cursor: pointer;
-    font-family: "Pretendard";
     font-weight: 600;
     font-size: 16px;
-    width: 80px;
-    height: 20px;
+    padding-top: 2.5%;
   }
 `;
 
@@ -406,29 +431,45 @@ const StDetailBox3 = styled.div`
     position: relative;
     top: -15vh;
     left: 55%;
+    .detailTitle {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .detailBody {
+      font-size: 17px;
+      padding-top: 2%;
+    }
   }
   .go {
     border: none;
     background-color: transparent;
     color: #819608;
     cursor: pointer;
-    font-family: "Pretendard";
     font-weight: 600;
     font-size: 16px;
-    width: 80px;
-    height: 20px;
+    padding-top: 2.5%;
   }
 `;
 
 const StSectionBottom = styled.div`
   background-color: #d7dbdc;
   max-width: 1920px;
-  height: 400px;
+  height: 350px;
   margin: auto;
+  margin-top: 5%;
   .bottomContents {
     position: relative;
     top: 10vh;
-    left: 10%;
+    left: 15%;
+    .bottomTitle {
+      font-size: 24px;
+      font-weight: 600;
+      padding-bottom: 1%;
+    }
+    .bottomBody {
+      font-size: 19px;
+      font-weight: 400;
+    }
   }
   .bottomBtn {
     border: none;

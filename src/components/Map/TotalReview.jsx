@@ -5,13 +5,14 @@ import axios from "axios";
 import ServeReviewModal from "./ServeReviewModal";
 
 const TotalReview = ({ estateIdData }) => {
+  console.log(estateIdData);
   const [modalOpen, setModalOpen] = useState(false);
 
   const showModal = () => {
     setModalOpen(true);
   };
-
   const { data } = useQuery(["showReview", estateIdData], async () => {
+    // const estateId = estateIdData.filter((el) => el.estateId === es )
     const response = await axios.get(
       `${process.env.REACT_APP_API_MAP_SERVER}/review/items/${estateIdData.estateId}`
     );
@@ -22,7 +23,6 @@ const TotalReview = ({ estateIdData }) => {
   });
   const estate = data?.estate;
   const estateInfoArr = data?.estateInfoArr;
-  console.log(data);
 
   return (
     <>
@@ -40,7 +40,7 @@ const TotalReview = ({ estateIdData }) => {
         <div>walls_noise:</div>
         <ReviewContainer>
           <ReviewBar point={3} />
-          {[1, 2, 3, 4, 5].map((value) => {
+          {[1, 2, 3, 4, 5, 6].map((value) => {
             return <ReviewPoint />;
           })}
         </ReviewContainer>
