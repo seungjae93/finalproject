@@ -14,41 +14,31 @@ const MyCommunity = () => {
 
   return (
     <>
-      <div>
-        <StCommBoxWrap>
-          <StMyCommBox>
-            <StCommBoxTitle>
-              <div className="reple">내가 남긴 글</div>
-              <div className="reple">내가 남긴 댓글</div>
-            </StCommBoxTitle>
+      <StCommBoxWrap>
+        <StMyCommBox>
+          <StCommBoxTitle>
+            <div className="reple">내가 남긴 글</div>
+            <div className="reple">내가 남긴 댓글</div>
+          </StCommBoxTitle>
 
-            {data?.myposts.map((posts) => {
-              return (
-                <StMyComm>
-                  <div key={`mypage_${posts.postId}`}>
-                    <div className="time">{posts.createdAt}</div>
-                    <div className="postId">번호:{posts.postId}</div>
-                    <div className="title">게시글 제목:{posts.title}</div>
-                  </div>
-                </StMyComm>
-              );
-            })}
-          </StMyCommBox>
-        </StCommBoxWrap>
+          {data?.myposts.map((posts) => {
+            return (
+              <StMyComm>
+                <div key={`mypage_${posts.postId}`}>
+                  <div className="time">{posts.createdAt}</div>
+                  <div className="title">{posts.title}</div>
+                  <div className="body">{posts.content}</div>
+                </div>
+              </StMyComm>
+            );
+          })}
+        </StMyCommBox>
+      </StCommBoxWrap>
 
-        <StBottom>
-          <div className="myInfo">내 정보</div>
-          <div className="byebye">회원 탈퇴</div>
-        </StBottom>
-
-        <StSectionFooter>
-          <img
-            className="footerImg"
-            src={require("../images/Group 481.jpg")}
-            alt="button"
-          />
-        </StSectionFooter>
-      </div>
+      <StBottom>
+        <div className="myInfo">내 정보</div>
+        <div className="byebye">회원 탈퇴</div>
+      </StBottom>
     </>
   );
 };
@@ -56,13 +46,16 @@ const MyCommunity = () => {
 export default MyCommunity;
 
 const StCommBoxWrap = styled.div`
+  max-width: 1920px;
+  background-color: #f3f5f5;
   border-top: solid 1px #c4cbcd;
 `;
 
 const StMyCommBox = styled.div`
+  width: 1254px;
+  height: 650px;
+  background-color: #ffffff;
   margin: auto;
-  max-width: 1920px;
-  height: 80vh;
 `;
 
 const StCommBoxTitle = styled.div`
@@ -70,46 +63,50 @@ const StCommBoxTitle = styled.div`
   .reple {
     font-size: 16px;
     font-weight: 800;
-    padding-right: 2%;
-    position: relative;
-    top: 5vh;
-    left: 14%;
+    padding-left: 110px;
+    padding-top: 50px;
+    padding-bottom: 40px;
   }
 `;
 
 const StMyComm = styled.div`
-  position: relative;
-  top: 10vh;
+  /* margin-top: 50px; */
   border-top: 1px solid #c4cbcd;
   border-bottom: 0.5px solid #c4cbcd;
-  width: 70vw;
+  width: 1000px;
   height: 100px;
   padding: 1%;
   margin: auto;
+  /* display: flex; */
 
   .time {
-    position: relative;
-    top: 5vh;
+    width: 150px;
+    border: 1px solid red;
+    margin-top: 40px;
     font-size: 15px;
   }
-  .postId {
-    position: relative;
-    top: 5vh;
-  }
   .title {
-    position: relative;
-    left: 25%;
-    top: -3vh;
+    border: 1px solid blue;
+
+    margin-left: 250px;
     font-size: 20px;
     font-weight: 600;
+  }
+  .body {
+    border: 1px solid green;
+    padding-top: 10px;
+    margin-left: 250px;
+    font-size: 18px;
+    font-weight: 500;
   }
 `;
 
 const StBottom = styled.div`
-  max-width: 1920px;
+  width: 1254px;
   height: 200px;
+  background-color: #ffffff;
   border-top: 1px solid #c4cbcd;
-  position: relative;
+  margin: auto;
   .myInfo {
     position: relative;
     font-weight: 600;
@@ -120,16 +117,5 @@ const StBottom = styled.div`
     position: relative;
     top: 6vh;
     left: 15%;
-  }
-`;
-
-const StSectionFooter = styled.div`
-  max-width: 1920px;
-  height: 300px;
-  margin: auto;
-  .footerImg {
-    position: relative;
-    max-width: 1920px;
-    height: 205px;
   }
 `;

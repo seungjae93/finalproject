@@ -56,13 +56,6 @@ const Header = () => {
         <StNavbarMenu>
           <StNavbarMenuItem
             onClick={() => {
-              navigate("/");
-            }}
-          >
-            서비스 소개
-          </StNavbarMenuItem>
-          <StNavbarMenuItem
-            onClick={() => {
               navigate("/map");
             }}
           >
@@ -83,14 +76,13 @@ const Header = () => {
 
           {userStatus ? (
             <>
-              <StImg
-                className="profile"
-                alt="proflie"
-                src={require("../images/proflie.jpg")}
+              <StNavbarMenuItem
                 onClick={() => {
                   navigate("/mypage");
                 }}
-              ></StImg>
+              >
+                마이페이지
+              </StNavbarMenuItem>
               <StNavbarMenuItem className="logoutBtn" onClick={logout}>
                 로그아웃
               </StNavbarMenuItem>
@@ -114,7 +106,7 @@ const StNavbar = styled.nav`
   width: 100%;
   height: 80px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   background-color: white;
   align-items: center;
   padding: 5px;

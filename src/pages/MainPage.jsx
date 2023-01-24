@@ -2,13 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
+import Footer from "../components/Footer";
 
 const MainPage = () => {
   const navigate = useNavigate();
   const { login } = useSelector((state) => state.user);
 
   const reviewHandler = () => {
-    if (login == false) {
+    if (login === false) {
       alert("로그인을 해 주세요");
     } else navigate("/review");
   };
@@ -18,7 +19,13 @@ const MainPage = () => {
       <StBody>
         {/* Home */}
         <StSectionHome>
-          <StMainImage src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&dl=patrick-perkins-3wylDrjxH-E-unsplash.jpg&q=80&fm=jpg&crop=entropy&cs=tinysrgb" />
+          <StMainImage>
+            <img
+              className="mainImg"
+              src={require("../images/main.jpg")}
+              alt="main"
+            />
+          </StMainImage>
           <StHomeBox>
             <StHomeBoxContent>
               <div className="content1">이 집은 어떨까?</div>
@@ -51,28 +58,20 @@ const MainPage = () => {
               <div className="reviewContent2">
                 당신이 알고싶은 진짜 집의 정보를 알려드립니다.
               </div>
-            </StReviewBox1>
-            <StReviewBox2>
               <button
-                className="aboutBtn"
+                className="aboutBtn1"
                 onClick={() => {
                   navigate("/map");
                 }}
               >
-                <img
-                  src={require("../images/Group 388.jpg")}
-                  alt="후기 보러가기"
-                />
+                후기 보러가기
               </button>
-              <button className="aboutBtn" onClick={reviewHandler}>
-                <img
-                  src={require("../images/Group 464.jpg")}
-                  alt="후기 쓰러가기"
-                />
+              <button className="aboutBtn2" onClick={reviewHandler}>
+                후기 쓰러가기
               </button>
-            </StReviewBox2>
+            </StReviewBox1>
 
-            <StReviewBox3>
+            <StReviewBox2>
               <img
                 className="aboutImg"
                 src={require("../images/Group 421.jpg")}
@@ -88,7 +87,7 @@ const MainPage = () => {
                 src={require("../images/Group 423.jpg")}
                 alt="imgbox3"
               />
-            </StReviewBox3>
+            </StReviewBox2>
           </StReviewWrap>
         </StSectionReview>
 
@@ -183,20 +182,14 @@ const MainPage = () => {
           <button
             className="bottomBtn"
             onClick={() => {
-              navigate("/login");
+              navigate("/map");
             }}
           >
-            <img src={require("../images/Group 477.jpg")} alt="button" />
+            간편가입하고 이야기 나누기
           </button>
         </StSectionBottom>
 
-        <StSectionFooter>
-          <img
-            className="footerImg"
-            src={require("../images/Group 481.jpg")}
-            alt="button"
-          />
-        </StSectionFooter>
+        <Footer />
       </StBody>
     </>
   );
@@ -209,114 +202,140 @@ const StBody = styled.body`
   margin: 0;
 `;
 
+// Home
 const StSectionHome = styled.section`
   max-width: 1920px;
+  height: 550px;
   margin: auto;
-  padding-top: 150px;
+  padding-top: 85px;
+  padding-left: 170px;
   text-align: center;
+  display: flex;
 `;
 
-const StMainImage = styled.img`
-  position: relative;
-  top: -10vh;
-  width: 1400px;
-  height: 800px;
+const StMainImage = styled.div`
+  .mainImg {
+    position: relative;
+    top: -9vh;
+    width: 1254px;
+    height: 550px;
+  }
 `;
 
 const StHomeBox = styled.div`
-  width: 36rem;
-  height: 23rem;
+  width: 31rem;
+  height: 18rem;
   background-color: #ffffff;
   opacity: 90%;
   position: absolute;
-  top: 420px;
-  left: 50%;
+  margin-top: 110px;
+  margin-left: 680px;
 `;
 
 const StHomeBoxContent = styled.div`
-  margin-top: 50px;
+  margin-top: 10px;
   text-align: left;
+
   .content1 {
-    font-size: 20px;
-    position: relative;
-    top: 2vh;
-    left: 3vw;
+    font-size: 17px;
+    color: #737d81;
+    margin-top: 25px;
+    margin-left: 60px;
   }
   .content2 {
-    position: relative;
-    top: 3vh;
-    left: 3vw;
-    font-size: 38px;
+    margin-top: 5px;
+    margin-left: 60px;
+    font-size: 36px;
     font-weight: bold;
   }
   .content3 {
-    font-size: 22px;
-    position: relative;
-    top: 5vh;
-    left: 3vw;
+    margin-top: 15px;
+    margin-left: 60px;
+    font-size: 18px;
+    color: #4b5054;
   }
   .reviewBtn {
+    margin-top: 25px;
+    margin-left: 60px;
     cursor: pointer;
-    position: relative;
-    top: 8vh;
-    left: 6vw;
     border: none;
     background-color: transparent;
   }
 `;
 
+//Review
 const StSectionReview = styled.div`
   background-color: #f7fae7;
   margin: auto;
   max-width: 1920px;
-  height: 400px;
+  height: 450px;
 
-  .aboutBtn {
-    background-color: transparent;
+  .aboutBtn1 {
+    background-color: #c1de0d;
+    font-size: 20px;
+    font-weight: bold;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
-    width: 80px;
+    width: 340px;
+    height: 50px;
     display: block;
     margin-top: 15px;
+    margin-left: 75px;
+  }
+  .aboutBtn2 {
+    background-color: white;
+    border: 2px solid #c1de0d;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 340px;
+    height: 50px;
+    display: block;
+    margin-top: 15px;
+    margin-left: 75px;
   }
   .aboutImg {
     width: 250px;
     height: 257px;
     display: inline;
-    margin-left: 25px;
+    margin-left: 2vw;
   }
 `;
 
 const StReviewWrap = styled.div`
-  margin-left: 10%;
+  margin-left: 50px;
+  text-align: left;
+  display: flex;
 `;
 
 const StReviewBox1 = styled.div`
-  position: relative;
-  top: 5vh;
-  left: 10%;
+  padding-top: 70px;
+  padding-left: 40px;
+  width: 500px;
+  height: 350px;
+
   .reviewContent1 {
     font-size: 32px;
     font-weight: bold;
+    padding-bottom: 20px;
+    padding-left: 80px;
   }
   .reviewContent2 {
-    position: relative;
-    top: 30px;
     font-size: 20px;
+    padding-bottom: 20px;
+    padding-left: 80px;
   }
 `;
 
 const StReviewBox2 = styled.div`
-  position: relative;
-  top: 10vh;
-  left: 10%;
-`;
-const StReviewBox3 = styled.div`
-  position: relative;
-  top: -12vh;
-  left: 34%;
+  position: absolute;
+  padding-left: 520px;
+  top: 800px;
 `;
 
+//Detail
 const StSectionDetail = styled.div`
   background-color: #f0f0f0;
   max-width: 1920px;
@@ -326,7 +345,6 @@ const StSectionDetail = styled.div`
 `;
 
 const StDetailBox1 = styled.div`
-  position: relative;
   width: 1192px;
   height: 380px;
   background-color: white;
@@ -334,7 +352,7 @@ const StDetailBox1 = styled.div`
   border-radius: 5px;
   margin-bottom: 30px;
   margin-top: 20px;
-  left: 15%;
+  margin-left: 150px;
 
   .detailBoxImage {
     width: 500px;
@@ -368,7 +386,6 @@ const StDetailBox1 = styled.div`
 `;
 
 const StDetailBox2 = styled.div`
-  position: relative;
   width: 1192px;
   height: 380px;
   background-color: white;
@@ -376,7 +393,7 @@ const StDetailBox2 = styled.div`
   border-radius: 5px;
   margin-bottom: 30px;
   margin-top: 20px;
-  left: 15%;
+  margin-left: 150px;
 
   .detailBoxImage {
     width: 500px;
@@ -410,7 +427,6 @@ const StDetailBox2 = styled.div`
 `;
 
 const StDetailBox3 = styled.div`
-  position: relative;
   width: 1192px;
   height: 380px;
   background-color: white;
@@ -418,7 +434,7 @@ const StDetailBox3 = styled.div`
   border-radius: 5px;
   margin-bottom: 30px;
   margin-top: 20px;
-  left: 15%;
+  margin-left: 150px;
 
   .detailBoxImage {
     width: 500px;
@@ -451,6 +467,7 @@ const StDetailBox3 = styled.div`
   }
 `;
 
+//Bottom
 const StSectionBottom = styled.div`
   background-color: #d7dbdc;
   max-width: 1920px;
@@ -458,9 +475,8 @@ const StSectionBottom = styled.div`
   margin: auto;
   margin-top: 5%;
   .bottomContents {
-    position: relative;
-    top: 10vh;
-    left: 15%;
+    padding-top: 60px;
+    padding-left: 180px;
     .bottomTitle {
       font-size: 24px;
       font-weight: 600;
@@ -472,22 +488,15 @@ const StSectionBottom = styled.div`
     }
   }
   .bottomBtn {
+    background-color: #c1de0d;
+    font-size: 20px;
+    font-weight: bold;
     border: none;
-    background-color: transparent;
+    border-radius: 5px;
     cursor: pointer;
-    position: relative;
-    top: 15vh;
-    left: 40%;
-  }
-`;
-
-const StSectionFooter = styled.div`
-  max-width: 1920px;
-  height: 300px;
-  margin: auto;
-  .footerImg {
-    position: relative;
-    max-width: 1920px;
-    height: 205px;
+    width: 360px;
+    height: 50px;
+    margin-top: 60px;
+    margin-left: 630px;
   }
 `;

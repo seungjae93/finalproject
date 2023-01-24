@@ -83,477 +83,497 @@ const Review = () => {
 
   return (
     <>
-      <StTitle>이집은 후기 작성하기</StTitle>
+      <StReviewWrap>
+        <StReviewBox>
+          <StTitle>이집은 후기 작성하기</StTitle>
 
-      <StSearch>
-        <StButton onClick={handle.clickButton}> 주소 검색 </StButton>
-        {openPostcode && (
-          <DaumPostcode
-            style={{ width: "400px", height: "300px" }}
-            onComplete={handle.selectAddress} // 값을 선택할 경우 실행되는 이벤트
-            autoClose={false} // 값을 선택할 경우 사용되는 DOM을 제거하여 자동 닫힘 설정
-            defaultQuery="" // 팝업을 열때 기본적으로 입력되는 검색어
-          />
-        )}
-      </StSearch>
-
-      <StContainer>
-        <StAddress>
-          <StAdd> 주소 </StAdd>
-          <StInt
-            type="text"
-            name="address"
-            value={address}
-            onChange={() => {}}
-            placeholder="우편번호 찾기를 이용하세요(도로명주소)"
-            size="45"
-          />
-        </StAddress>
-
-        <StSeAddress>
-          <StInt
-            type="text"
-            name="setJibunAddress"
-            value={address_jibun}
-            onChange={() => {}}
-            placeholder="우편번호 찾기를 이용하세요(지번주소)"
-            size="45"
-          />
-        </StSeAddress>
-
-        <StType>
-          <StAdd> 주거 형태 </StAdd>
-
-          <StSelectOne name="residence_type" onChange={onChangeHandler}>
-            <Stoption value="">선택해 주세요</Stoption>
-            <Stoption value="원룸">원룸</Stoption>
-            <Stoption value="투룸">투룸</Stoption>
-          </StSelectOne>
-
-          <StSelectOne name="transaction_type" onChange={onChangeHandler}>
-            <Stoption value="">선택해 주세요</Stoption>
-            <Stoption value="월세">월세</Stoption>
-            <Stoption value="전세">전세</Stoption>
-          </StSelectOne>
-        </StType>
-
-        <StBasicWrap>
-          <StAdd> 기본 정보 </StAdd>
-          <StBasic>
-            <StBasicTitle>공급면적:</StBasicTitle>
-            <input
-              type="number"
-              name="acreage"
-              value={input.acreage}
-              onChange={onChangeHandler}
-              placeholder="평수 입력란입니다."
-            />
-          </StBasic>
-          <StBasic>
-            <StBasicTitle>보증금:</StBasicTitle>
-            <input
-              type="number"
-              name="deposit"
-              value={input.deposit}
-              onChange={onChangeHandler}
-              placeholder="보증금 입력란입니다."
-            />
-          </StBasic>
-          <StBasic>
-            <StBasicTitle>월세:</StBasicTitle>
-            <input
-              type="number"
-              name="monthly_payment"
-              value={input.monthly_payment}
-              onChange={onChangeHandler}
-              placeholder="월세 입력란입니다."
-            />
-          </StBasic>
-        </StBasicWrap>
-
-        <StComment>
-          <StTitle> 이집은 후기 상세정보</StTitle>
-          <StTitleComment> Q1 벌래가 얼마나 자주 나오나요? </StTitleComment>
-          <StDetail>
-            <input
-              type="radio"
-              name="communication"
-              value="1"
-              onChange={onChangeHandler}
-            />
-            1
-            <input
-              type="radio"
-              name="communication"
-              value="2"
-              onChange={onChangeHandler}
-            />
-            2
-            <input
-              type="radio"
-              name="communication"
-              value="3"
-              onChange={onChangeHandler}
-            />
-            3
-            <input
-              type="radio"
-              name="communication"
-              value="4"
-              onChange={onChangeHandler}
-            />
-            4
-            <input
-              type="radio"
-              name="communication"
-              value="5"
-              onChange={onChangeHandler}
-            />
-            5
-          </StDetail>
-
-          <StTitleComment>
-            Q2 하수구에서 냄새가 얼마나 올라오나요?
-          </StTitleComment>
-          <StDetail>
-            <input
-              type="radio"
-              name="bug"
-              value="1"
-              onChange={onChangeHandler}
-            />
-            1
-            <input
-              type="radio"
-              name="bug"
-              value="2"
-              onChange={onChangeHandler}
-            />
-            2
-            <input
-              type="radio"
-              name="bug"
-              value="3"
-              onChange={onChangeHandler}
-            />
-            3
-            <input
-              type="radio"
-              name="bug"
-              value="4"
-              onChange={onChangeHandler}
-            />
-            4
-            <input
-              type="radio"
-              name="bug"
-              value="5"
-              onChange={onChangeHandler}
-            />
-            5
-          </StDetail>
-
-          <StTitleComment> Q3 층간소음이 심한가요?</StTitleComment>
-          <StDetail>
-            <input
-              type="radio"
-              name="smell"
-              value="1"
-              onChange={onChangeHandler}
-            />
-            1
-            <input
-              type="radio"
-              name="smell"
-              value="2"
-              onChange={onChangeHandler}
-            />
-            2
-            <input
-              type="radio"
-              name="smell"
-              value="3"
-              onChange={onChangeHandler}
-            />
-            3
-            <input
-              type="radio"
-              name="smell"
-              value="4"
-              onChange={onChangeHandler}
-            />
-            4
-            <input
-              type="radio"
-              name="smell"
-              value="5"
-              onChange={onChangeHandler}
-            />
-            5
-          </StDetail>
-
-          <StTitleComment>Q4 벽간소음이 심한가요? </StTitleComment>
-          <StDetail>
-            <input
-              type="radio"
-              name="floor_noise"
-              value="1"
-              onChange={onChangeHandler}
-            />
-            1
-            <input
-              type="radio"
-              name="floor_noise"
-              value="2"
-              onChange={onChangeHandler}
-            />
-            2
-            <input
-              type="radio"
-              name="floor_noise"
-              value="3"
-              onChange={onChangeHandler}
-            />
-            3
-            <input
-              type="radio"
-              name="floor_noise"
-              value="4"
-              onChange={onChangeHandler}
-            />
-            4
-            <input
-              type="radio"
-              name="floor_noise"
-              value="5"
-              onChange={onChangeHandler}
-            />
-            5
-          </StDetail>
-
-          <StTitleComment> Q5 거주지 주변 환경은 조용한가요?</StTitleComment>
-          <StDetail>
-            <input
-              type="radio"
-              name="walls_noise"
-              value="1"
-              onChange={onChangeHandler}
-            />
-            1
-            <input
-              type="radio"
-              name="walls_noise"
-              value="2"
-              onChange={onChangeHandler}
-            />
-            2
-            <input
-              type="radio"
-              name="walls_noise"
-              value="3"
-              onChange={onChangeHandler}
-            />
-            3
-            <input
-              type="radio"
-              name="walls_noise"
-              value="4"
-              onChange={onChangeHandler}
-            />
-            4
-            <input
-              type="radio"
-              name="walls_noise"
-              value="5"
-              onChange={onChangeHandler}
-            />
-            5
-          </StDetail>
-
-          <StTitleComment>Q6 결로나 곰팡이가 보이나요? </StTitleComment>
-          <StDetail>
-            <input
-              type="radio"
-              name="town_noise"
-              value="1"
-              onChange={onChangeHandler}
-            />
-            1
-            <input
-              type="radio"
-              name="town_noise"
-              value="2"
-              onChange={onChangeHandler}
-            />
-            2
-            <input
-              type="radio"
-              name="town_noise"
-              value="3"
-              onChange={onChangeHandler}
-            />
-            3
-            <input
-              type="radio"
-              name="town_noise"
-              value="4"
-              onChange={onChangeHandler}
-            />
-            4
-            <input
-              type="radio"
-              name="town_noise"
-              value="5"
-              onChange={onChangeHandler}
-            />
-            5
-          </StDetail>
-
-          <StTitleComment>Q7 주차는 공간은 넉넉하고 편한가요?</StTitleComment>
-          <StDetail>
-            <input
-              type="radio"
-              name="mold"
-              value="1"
-              onChange={onChangeHandler}
-            />
-            1
-            <input
-              type="radio"
-              name="mold"
-              value="2"
-              onChange={onChangeHandler}
-            />
-            2
-            <input
-              type="radio"
-              name="mold"
-              value="3"
-              onChange={onChangeHandler}
-            />
-            3
-            <input
-              type="radio"
-              name="mold"
-              value="4"
-              onChange={onChangeHandler}
-            />
-            4
-            <input
-              type="radio"
-              name="mold"
-              value="5"
-              onChange={onChangeHandler}
-            />
-            5
-          </StDetail>
-
-          <StTitleComment>Q8 보안은 좋은가요?</StTitleComment>
-          <StDetail>
-            <input
-              type="radio"
-              name="parking"
-              value="1"
-              onChange={onChangeHandler}
-            />
-            1
-            <input
-              type="radio"
-              name="parking"
-              value="2"
-              onChange={onChangeHandler}
-            />
-            2
-            <input
-              type="radio"
-              name="parking"
-              value="3"
-              onChange={onChangeHandler}
-            />
-            3
-            <input
-              type="radio"
-              name="parking"
-              value="4"
-              onChange={onChangeHandler}
-            />
-            4
-            <input
-              type="radio"
-              name="parking"
-              value="5"
-              onChange={onChangeHandler}
-            />
-            5
-          </StDetail>
-
-          <StTitleComment> Q9 이집의 장점을 적어주세요 </StTitleComment>
-          <Sttextarea
-            name="good"
-            value={input.good}
-            onChange={onChangeHandler}
-            placeholder="장점을 자유롭게 적어 주세요"
-            cols="75"
-            rows="7"
-          />
-
-          <StTitleComment> Q10 이집의 단점을 적어주세요 </StTitleComment>
-          <Sttextarea
-            name="bad"
-            value={input.bad}
-            onChange={onChangeHandler}
-            placeholder="단점을 자유롭게 적어 주세요"
-            cols="75"
-            rows="7"
-          />
-
-          <StTitleComment>이집의 별점을 선택해주세요</StTitleComment>
-          <StSelectStar name="star" onChange={onChangeHandler}>
-            <option value="">별점을 선택해 주세요</option>
-            <option value="1">⭐️</option>
-            <option value="2">⭐️⭐️</option>
-            <option value="3">⭐️⭐️⭐️</option>
-            <option value="4">⭐️⭐️⭐️⭐️</option>
-            <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
-          </StSelectStar>
-
-          <StPicture>
-            <StUpload htmlFor="file"> 사진 업로드 </StUpload>
-            <input
-              type="file"
-              id="file"
-              multiple
-              accept="image/*"
-              onChange={(e) => {
-                setImage([...e.target.files]);
-                handleAddImages(e);
-              }}
-              style={{ display: "none" }}
-            />
-            <StImageGruop>
-              {showImages.map((image, id) => (
-                <div key={id}>
-                  <StyledImage src={image} alt={`${image}-${id}`} />
-                </div>
-              ))}
-            </StImageGruop>
-          </StPicture>
-
-          <div>
-            <StBut onClick={onSubmitHandler}>
-              <img
-                src={require("../images/Group 389.jpg")}
-                alt="submit button"
+          <StSearch>
+            <StButton onClick={handle.clickButton}> 주소 검색 </StButton>
+            {openPostcode && (
+              <DaumPostcode
+                style={{ width: "400px", height: "300px" }}
+                onComplete={handle.selectAddress} // 값을 선택할 경우 실행되는 이벤트
+                autoClose={false} // 값을 선택할 경우 사용되는 DOM을 제거하여 자동 닫힘 설정
+                defaultQuery="" // 팝업을 열때 기본적으로 입력되는 검색어
               />
-            </StBut>
-          </div>
-        </StComment>
-      </StContainer>
+            )}
+          </StSearch>
+
+          <StContainer>
+            <StAddress>
+              <StAdd> 주소 </StAdd>
+              <StInt
+                type="text"
+                name="address"
+                value={address}
+                onChange={() => {}}
+                placeholder="우편번호 찾기를 이용하세요(도로명주소)"
+                size="45"
+              />
+            </StAddress>
+
+            <StSeAddress>
+              <StInt
+                type="text"
+                name="setJibunAddress"
+                value={address_jibun}
+                onChange={() => {}}
+                placeholder="우편번호 찾기를 이용하세요(지번주소)"
+                size="45"
+              />
+            </StSeAddress>
+
+            <StType>
+              <StAdd> 주거 형태 </StAdd>
+
+              <StSelectOne name="residence_type" onChange={onChangeHandler}>
+                <Stoption value="">선택해 주세요</Stoption>
+                <Stoption value="원룸">원룸</Stoption>
+                <Stoption value="투룸">투룸</Stoption>
+              </StSelectOne>
+
+              <StSelectOne name="transaction_type" onChange={onChangeHandler}>
+                <Stoption value="">선택해 주세요</Stoption>
+                <Stoption value="월세">월세</Stoption>
+                <Stoption value="전세">전세</Stoption>
+              </StSelectOne>
+            </StType>
+
+            <StBasicWrap>
+              <StAdd> 기본 정보 </StAdd>
+              <StBasic>
+                <StBasicTitle>공급면적:</StBasicTitle>
+                <input
+                  type="number"
+                  name="acreage"
+                  value={input.acreage}
+                  onChange={onChangeHandler}
+                  placeholder="평수 입력란입니다."
+                />
+              </StBasic>
+              <StBasic>
+                <StBasicTitle>보증금:</StBasicTitle>
+                <input
+                  type="number"
+                  name="deposit"
+                  value={input.deposit}
+                  onChange={onChangeHandler}
+                  placeholder="보증금 입력란입니다."
+                />
+              </StBasic>
+              <StBasic>
+                <StBasicTitle>월세:</StBasicTitle>
+                <input
+                  type="number"
+                  name="monthly_payment"
+                  value={input.monthly_payment}
+                  onChange={onChangeHandler}
+                  placeholder="월세 입력란입니다."
+                />
+              </StBasic>
+            </StBasicWrap>
+
+            <StComment>
+              <StTitle> 이집은 후기 상세정보</StTitle>
+              <StTitleComment> Q1 벌래가 얼마나 자주 나오나요? </StTitleComment>
+              <StDetail>
+                <input
+                  type="radio"
+                  name="communication"
+                  value="1"
+                  onChange={onChangeHandler}
+                />
+                1
+                <input
+                  type="radio"
+                  name="communication"
+                  value="2"
+                  onChange={onChangeHandler}
+                />
+                2
+                <input
+                  type="radio"
+                  name="communication"
+                  value="3"
+                  onChange={onChangeHandler}
+                />
+                3
+                <input
+                  type="radio"
+                  name="communication"
+                  value="4"
+                  onChange={onChangeHandler}
+                />
+                4
+                <input
+                  type="radio"
+                  name="communication"
+                  value="5"
+                  onChange={onChangeHandler}
+                />
+                5
+              </StDetail>
+
+              <StTitleComment>
+                Q2 하수구에서 냄새가 얼마나 올라오나요?
+              </StTitleComment>
+              <StDetail>
+                <input
+                  type="radio"
+                  name="bug"
+                  value="1"
+                  onChange={onChangeHandler}
+                />
+                1
+                <input
+                  type="radio"
+                  name="bug"
+                  value="2"
+                  onChange={onChangeHandler}
+                />
+                2
+                <input
+                  type="radio"
+                  name="bug"
+                  value="3"
+                  onChange={onChangeHandler}
+                />
+                3
+                <input
+                  type="radio"
+                  name="bug"
+                  value="4"
+                  onChange={onChangeHandler}
+                />
+                4
+                <input
+                  type="radio"
+                  name="bug"
+                  value="5"
+                  onChange={onChangeHandler}
+                />
+                5
+              </StDetail>
+
+              <StTitleComment> Q3 층간소음이 심한가요?</StTitleComment>
+              <StDetail>
+                <input
+                  type="radio"
+                  name="smell"
+                  value="1"
+                  onChange={onChangeHandler}
+                />
+                1
+                <input
+                  type="radio"
+                  name="smell"
+                  value="2"
+                  onChange={onChangeHandler}
+                />
+                2
+                <input
+                  type="radio"
+                  name="smell"
+                  value="3"
+                  onChange={onChangeHandler}
+                />
+                3
+                <input
+                  type="radio"
+                  name="smell"
+                  value="4"
+                  onChange={onChangeHandler}
+                />
+                4
+                <input
+                  type="radio"
+                  name="smell"
+                  value="5"
+                  onChange={onChangeHandler}
+                />
+                5
+              </StDetail>
+
+              <StTitleComment>Q4 벽간소음이 심한가요? </StTitleComment>
+              <StDetail>
+                <input
+                  type="radio"
+                  name="floor_noise"
+                  value="1"
+                  onChange={onChangeHandler}
+                />
+                1
+                <input
+                  type="radio"
+                  name="floor_noise"
+                  value="2"
+                  onChange={onChangeHandler}
+                />
+                2
+                <input
+                  type="radio"
+                  name="floor_noise"
+                  value="3"
+                  onChange={onChangeHandler}
+                />
+                3
+                <input
+                  type="radio"
+                  name="floor_noise"
+                  value="4"
+                  onChange={onChangeHandler}
+                />
+                4
+                <input
+                  type="radio"
+                  name="floor_noise"
+                  value="5"
+                  onChange={onChangeHandler}
+                />
+                5
+              </StDetail>
+
+              <StTitleComment>
+                {" "}
+                Q5 거주지 주변 환경은 조용한가요?
+              </StTitleComment>
+              <StDetail>
+                <input
+                  type="radio"
+                  name="walls_noise"
+                  value="1"
+                  onChange={onChangeHandler}
+                />
+                1
+                <input
+                  type="radio"
+                  name="walls_noise"
+                  value="2"
+                  onChange={onChangeHandler}
+                />
+                2
+                <input
+                  type="radio"
+                  name="walls_noise"
+                  value="3"
+                  onChange={onChangeHandler}
+                />
+                3
+                <input
+                  type="radio"
+                  name="walls_noise"
+                  value="4"
+                  onChange={onChangeHandler}
+                />
+                4
+                <input
+                  type="radio"
+                  name="walls_noise"
+                  value="5"
+                  onChange={onChangeHandler}
+                />
+                5
+              </StDetail>
+
+              <StTitleComment>Q6 결로나 곰팡이가 보이나요? </StTitleComment>
+              <StDetail>
+                <input
+                  type="radio"
+                  name="town_noise"
+                  value="1"
+                  onChange={onChangeHandler}
+                />
+                1
+                <input
+                  type="radio"
+                  name="town_noise"
+                  value="2"
+                  onChange={onChangeHandler}
+                />
+                2
+                <input
+                  type="radio"
+                  name="town_noise"
+                  value="3"
+                  onChange={onChangeHandler}
+                />
+                3
+                <input
+                  type="radio"
+                  name="town_noise"
+                  value="4"
+                  onChange={onChangeHandler}
+                />
+                4
+                <input
+                  type="radio"
+                  name="town_noise"
+                  value="5"
+                  onChange={onChangeHandler}
+                />
+                5
+              </StDetail>
+
+              <StTitleComment>
+                Q7 주차는 공간은 넉넉하고 편한가요?
+              </StTitleComment>
+              <StDetail>
+                <input
+                  type="radio"
+                  name="mold"
+                  value="1"
+                  onChange={onChangeHandler}
+                />
+                1
+                <input
+                  type="radio"
+                  name="mold"
+                  value="2"
+                  onChange={onChangeHandler}
+                />
+                2
+                <input
+                  type="radio"
+                  name="mold"
+                  value="3"
+                  onChange={onChangeHandler}
+                />
+                3
+                <input
+                  type="radio"
+                  name="mold"
+                  value="4"
+                  onChange={onChangeHandler}
+                />
+                4
+                <input
+                  type="radio"
+                  name="mold"
+                  value="5"
+                  onChange={onChangeHandler}
+                />
+                5
+              </StDetail>
+
+              <StTitleComment>Q8 보안은 좋은가요?</StTitleComment>
+              <StDetail>
+                <input
+                  type="radio"
+                  name="parking"
+                  value="1"
+                  onChange={onChangeHandler}
+                />
+                1
+                <input
+                  type="radio"
+                  name="parking"
+                  value="2"
+                  onChange={onChangeHandler}
+                />
+                2
+                <input
+                  type="radio"
+                  name="parking"
+                  value="3"
+                  onChange={onChangeHandler}
+                />
+                3
+                <input
+                  type="radio"
+                  name="parking"
+                  value="4"
+                  onChange={onChangeHandler}
+                />
+                4
+                <input
+                  type="radio"
+                  name="parking"
+                  value="5"
+                  onChange={onChangeHandler}
+                />
+                5
+              </StDetail>
+
+              <StTitleComment> Q9 이집의 장점을 적어주세요 </StTitleComment>
+              <Sttextarea
+                name="good"
+                value={input.good}
+                onChange={onChangeHandler}
+                placeholder="장점을 자유롭게 적어 주세요"
+                cols="75"
+                rows="7"
+              />
+
+              <StTitleComment> Q10 이집의 단점을 적어주세요 </StTitleComment>
+              <Sttextarea
+                name="bad"
+                value={input.bad}
+                onChange={onChangeHandler}
+                placeholder="단점을 자유롭게 적어 주세요"
+                cols="75"
+                rows="7"
+              />
+
+              <StTitleComment>이집의 별점을 선택해주세요</StTitleComment>
+              <StSelectStar name="star" onChange={onChangeHandler}>
+                <option value="">별점을 선택해 주세요</option>
+                <option value="1">⭐️</option>
+                <option value="2">⭐️⭐️</option>
+                <option value="3">⭐️⭐️⭐️</option>
+                <option value="4">⭐️⭐️⭐️⭐️</option>
+                <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
+              </StSelectStar>
+
+              <StPicture>
+                <StUpload htmlFor="file"> 사진 업로드 </StUpload>
+                <input
+                  type="file"
+                  id="file"
+                  multiple
+                  accept="image/*"
+                  onChange={(e) => {
+                    setImage([...e.target.files]);
+                    handleAddImages(e);
+                  }}
+                  style={{ display: "none" }}
+                />
+                <StImageGruop>
+                  {showImages.map((image, id) => (
+                    <div key={id}>
+                      <StyledImage src={image} alt={`${image}-${id}`} />
+                    </div>
+                  ))}
+                </StImageGruop>
+              </StPicture>
+
+              <div>
+                <StBut onClick={onSubmitHandler}>
+                  <img
+                    src={require("../images/Group 389.jpg")}
+                    alt="submit button"
+                  />
+                </StBut>
+              </div>
+            </StComment>
+          </StContainer>
+        </StReviewBox>
+      </StReviewWrap>
     </>
   );
 };
 
 export default Review;
+
+const StReviewWrap = styled.div`
+  max-width: 1920px;
+  background-color: #f3f5f5;
+`;
+
+const StReviewBox = styled.div`
+  width: 1252px;
+  background-color: #ffffff;
+  margin: auto;
+`;
 
 const StTitle = styled.div`
   display: flex;
