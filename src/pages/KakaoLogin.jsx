@@ -10,9 +10,9 @@ const KakaoLogin = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const Auth = async () => {
+  const Auth = () => {
     const code = location.search.split("=")[1];
-    await dispatch(__kakaoLogin(code));
+    dispatch(__kakaoLogin(code));
   };
 
   useEffect(() => {
