@@ -19,11 +19,11 @@ export const getCommunity = async () => {
 };
 
 //post
-const addCommunity = async (community) => {
+const addCommunity = async (formData) => {
   const accessToken = getCookie("token");
   setToken(accessToken);
   const headers = { authorization: `Bearer ${accessToken}` };
-  const response = await instance.post("/posts", community, {
+  const response = await instance.post("/posts", formData, {
     headers: headers,
   });
   return response.data;

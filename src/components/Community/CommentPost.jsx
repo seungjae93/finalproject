@@ -13,6 +13,9 @@ const CommentPost = () => {
   const onClickHandler = (event) => {
     event.preventDefault();
     if (!input) return alert("댓글을 입력해 주세요");
+    if (input.length > 100) {
+      return alert("제목을 100글자 이내로 입력해 주세요");
+    }
 
     const comment = { text: input, postId: postId };
 
@@ -27,7 +30,7 @@ const CommentPost = () => {
         <StInput
           cols="90"
           rows="3"
-          placeholder="댓글작성"
+          placeholder="댓글작성 (최대 100자)"
           type="text"
           value={input}
           onChange={(e) => {
