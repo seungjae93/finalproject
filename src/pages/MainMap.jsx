@@ -64,21 +64,30 @@ const MainMap = () => {
     onSearchHandler();
   };
 
-  //enter키를 눌렀을 때 동작할 코드
+  // 검색창 키보드 이동
+  const ArrowDown = "ArrowDown";
+  const ArrowUp = "ArrowUp";
+  const Enter = "Enter";
+
   const onSubmitSearch = debounce((e) => {
-    if (e.key === "Enter") {
+    if (e.key === Enter) {
       onSearchHandler();
     }
-    if (isHaveInputValue) {
-      if (e.key === "ArrowDown" && searchData.length - 1 > dropDownDataIndex) {
-        setDropDownDataIndex(dropDownDataIndex + 1);
+    if (searchAddress === "") {
+      setDropDownDataIndex(-1);
+    }
+    if (e.key === ArrowDown) {
+      setDropDownDataIndex(dropDownDataIndex + 1);
+      /* childElementCount는 li tag의 개수를 의미하고, 검색 내역 인덱스 키워드에서
+           또 아래 키를 누르면 맨처음 인덱스 키워드로 돌아가라는 의미이다. */
+      if (inputRef.current === dropDownDataIndex + 1) {
+        setDropDownDataIndex(0);
       }
+    }
+    if (e.key === ArrowUp) {
+      setDropDownDataIndex(dropDownDataIndex - 1);
 
-      if (e.key === "ArrowUp" && dropDownDataIndex >= 0)
-        setDropDownDataIndex(dropDownDataIndex - 1);
-
-      if (e.key === "Enter" && dropDownDataIndex >= 0) {
-        clickDropDownItem(searchData[dropDownDataIndex]);
+      if (dropDownDataIndex <= 0) {
         setDropDownDataIndex(-1);
       }
     }
@@ -279,12 +288,10 @@ const MainMap = () => {
             onKeyDown={onSubmitSearch}
             onChange={onAddressHandler}
             value={searchAddress}
-            ref={inputRef}
           />
           {searchAddress && (
-            <AutoSearchContainer>
+            <AutoSearchContainer ref={inputRef}>
               <AutoSearchWrap>
-                {/* onKeyDown={onHandleDropDownKey} */}
                 {searchData?.map((el, index) => {
                   return (
                     <AutoSearchData

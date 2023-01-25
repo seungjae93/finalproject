@@ -17,11 +17,10 @@ const TotalReview = ({ estateIdData }) => {
     setEstateInfoData([estateInfoArr]);
     return data;
   });
-
   const showModal = () => {
     setModalOpen(true);
   };
-
+  console.log(data);
   return (
     <>
       <div>건물명 : {data?.estate?.address_jibun} </div>
