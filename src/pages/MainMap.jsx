@@ -22,14 +22,23 @@ const MainMap = () => {
   const [searchData, setSearchData] = useState([]);
   const [isHaveInputValue, setIsHaveInputValue] = useState(false);
   const [dropDownDataIndex, setDropDownDataIndex] = useState(-1);
+
   //지도 레벨
   const [zoomLevel, setZoomLevel] = useState(3.5);
+
   //서버에서 받는 지도 좌표
   const [positions, setPositions] = useState();
+
   //마커 좌표
   const [markerArray, setMarkerArray] = useState([]);
+
+  //estateId props 넘길때
+  const [markerArrayEstateId, setMarkerArrayEstateId] = useState(0);
+
+  //마커 클릭시 props 넘기기
   const [markerClickOn, setMarkerClickOn] = useState(false);
   const inputRef = useRef();
+
   //검색어 받아오는 로직
   const onAddressHandler = throttle(async (e) => {
     const { value } = e.target;
@@ -55,21 +64,30 @@ const MainMap = () => {
     onSearchHandler();
   };
 
-  //enter키를 눌렀을 때 동작할 코드
+  // 검색창 키보드 이동
+  const ArrowDown = "ArrowDown";
+  const ArrowUp = "ArrowUp";
+  const Enter = "Enter";
+
   const onSubmitSearch = debounce((e) => {
-    if (e.key === "Enter") {
+    if (e.key === Enter) {
       onSearchHandler();
     }
-    if (isHaveInputValue) {
-      if (e.key === "ArrowDown" && searchData.length - 1 > dropDownDataIndex) {
-        setDropDownDataIndex(dropDownDataIndex + 1);
+    if (searchAddress === "") {
+      setDropDownDataIndex(-1);
+    }
+    if (e.key === ArrowDown) {
+      setDropDownDataIndex(dropDownDataIndex + 1);
+      /* childElementCount는 li tag의 개수를 의미하고, 검색 내역 인덱스 키워드에서
+           또 아래 키를 누르면 맨처음 인덱스 키워드로 돌아가라는 의미이다. */
+      if (inputRef.current === dropDownDataIndex + 1) {
+        setDropDownDataIndex(0);
       }
+    }
+    if (e.key === ArrowUp) {
+      setDropDownDataIndex(dropDownDataIndex - 1);
 
-      if (e.key === "ArrowUp" && dropDownDataIndex >= 0)
-        setDropDownDataIndex(dropDownDataIndex - 1);
-
-      if (e.key === "Enter" && dropDownDataIndex >= 0) {
-        clickDropDownItem(searchData[dropDownDataIndex]);
+      if (dropDownDataIndex <= 0) {
         setDropDownDataIndex(-1);
       }
     }
@@ -81,7 +99,6 @@ const MainMap = () => {
   //장소검색이 완료됐을 때 호출되는 콜백함수
   const placesSearchCB = function (data, status) {
     if (status === kakao.maps.services.Status.OK) {
-      console.log(data);
       const newSearch = data[0];
       setState({
         center: { lat: Number(newSearch.y), lng: Number(newSearch.x) },
@@ -222,8 +239,9 @@ const MainMap = () => {
     );
   };
 
-  const MarkerClickHandler = () => {
+  const MarkerClickHandler = (estateId) => {
     setMarkerClickOn(true);
+    setMarkerArrayEstateId(estateId);
   };
 
   useEffect(() => {
@@ -261,23 +279,19 @@ const MainMap = () => {
     onGeoHandler(geoLocation);
   }, [state]);
 
-  console.log(markerArray);
-
   return (
     <>
       <StContainer>
         <SearchContainer isHaveInputValue={isHaveInputValue}>
           <StSearch
             type="search"
-            onKeyPress={onSubmitSearch}
+            onKeyDown={onSubmitSearch}
             onChange={onAddressHandler}
             value={searchAddress}
-            ref={inputRef}
           />
           {searchAddress && (
-            <AutoSearchContainer>
+            <AutoSearchContainer ref={inputRef}>
               <AutoSearchWrap>
-                {/* onKeyDown={onHandleDropDownKey} */}
                 {searchData?.map((el, index) => {
                   return (
                     <AutoSearchData
@@ -299,7 +313,9 @@ const MainMap = () => {
 
         <StWrapper>
           <StReviewContainer>
-            {markerClickOn === true && <TotalReview />}
+            {markerClickOn === true && (
+              <TotalReview estateIdData={markerArrayEstateId} />
+            )}
           </StReviewContainer>
           <StMapContainer>
             <Map // 지도를 표시할 Container
@@ -308,7 +324,7 @@ const MainMap = () => {
               style={{
                 // 지도의 크기
                 width: "100%",
-                height: "100vh",
+                height: "83.5vh",
               }}
               ref={mapRef}
               // 지도의 확대 레벨
@@ -347,7 +363,6 @@ const MainMap = () => {
                   return (
                     <MapMarker
                       key={el.estateId}
-                      // estateIdData={el.estateId}
                       position={el}
                       image={{
                         src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
@@ -357,10 +372,8 @@ const MainMap = () => {
                           height: 35,
                         }, // 마커이미지의 크기입니다
                       }}
-                      onClick={MarkerClickHandler}
-                    >
-                      {el.estateId}
-                    </MapMarker>
+                      onClick={() => MarkerClickHandler(el.estateId)}
+                    />
                   );
                 })}
               {renderItem()}
@@ -378,7 +391,7 @@ const StContainer = styled.div`
   min-width: 680px;
   height: 855px; */
   width: 100%;
-  height: 100vh;
+  height: 83.5vh;
 `;
 const SearchContainer = styled.div`
   position: relative;
