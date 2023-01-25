@@ -139,10 +139,12 @@ const StCount = styled.div`
 const StCommentlist = styled.div`
   background-color: #f0f0f0;
   width: 100%;
-  height: 70px;
+  height: 90px;
   border: 1px solid #c4cbcd;
   border-radius: 5px;
   margin-top: 15px;
+  overflow-y: auto;
+  white-space: pre-wrap;
 `;
 
 const StComment = styled.div`
@@ -154,7 +156,7 @@ const StCommentBut = styled.div`
   align-items: center;
   font-size: 11px;
   margin-top: 15px;
-  margin-left: 10px;
+  margin-left: 20px;
 `;
 
 const StNickDate = styled.div`

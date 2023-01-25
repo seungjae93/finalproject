@@ -17,6 +17,7 @@ const PostDetail = () => {
 
   const deleteCommunityCallback = async (postId) => {
     await deleteCommunity(postId);
+    window.alert("삭제되었습니다!");
     navigate("/list");
   };
 
@@ -27,8 +28,19 @@ const PostDetail = () => {
     <>
       <StDetailBox>
         <StContainer>
-          <StPostTitle>
-            <StTitle> {data?.post.title} </StTitle>
+          <StPostTitle>{data?.post.title}</StPostTitle>
+
+          <StInfor>
+            <StNicDa>
+              <StNicName> {data?.post.nickname} | </StNicName>
+              <StDate>
+                {new Date(data?.post.createdAt).toLocaleDateString("ko-KR", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </StDate>
+            </StNicDa>
 
             <div>
               {data?.post.nickname === nickname ? (
@@ -45,19 +57,6 @@ const PostDetail = () => {
                 </StButton>
               ) : null}
             </div>
-          </StPostTitle>
-
-          <StInfor>
-            <StNicDa>
-              <StNicName> {data?.post.nickname} | </StNicName>
-              <StDate>
-                {new Date(data?.post.createdAt).toLocaleDateString("ko-KR", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </StDate>
-            </StNicDa>
           </StInfor>
 
           <div>
@@ -71,7 +70,7 @@ const PostDetail = () => {
       <StCommentBox>
         <Comment />
       </StCommentBox>
-
+      {/* 
       <StPostNextBefore>
         <StPost>
           <StPostBut onClick={() => navigate(`/detail/${postId + 1}`)}>
@@ -82,7 +81,7 @@ const PostDetail = () => {
         <StPost>
           <StPostBut>이전글 |</StPostBut>
         </StPost>
-      </StPostNextBefore>
+      </StPostNextBefore> */}
     </>
   );
 };
@@ -106,9 +105,6 @@ const StPostTitle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
-
-const StTitle = styled.div`
   font-size: 40px;
   font-weight: bold;
   margin-top: 10px;
@@ -149,8 +145,16 @@ const StDetailImage = styled.img`
 
 const StContent = styled.div`
   font-size: 20px;
-  height: 50px;
-  margin: 10px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  /* @media (min-width: 600px) { 
+    max-height: 300px;
+    // 너비가 600px이상인 화면의 경우 최대 높이가 300px로 설정
+  }
+  @media (min-width: 800px) {
+    max-height: 400px;
+    // 너비가 800px 화면의 경우 최대 높이가 400px 설정
+  } */
 `;
 
 const StCommentBox = styled.div`
@@ -158,23 +162,4 @@ const StCommentBox = styled.div`
   margin-right: auto;
   background-color: white;
   width: 60%;
-`;
-
-const StPostNextBefore = styled.div`
-  background-color: powderblue;
-  width: 70%;
-`;
-
-const StPost = styled.div`
-  display: flex;
-  align-items: center;
-  background-color: #f0f0f0;
-  margin-top: 5px;
-  height: 30px;
-`;
-
-const StPostBut = styled.button`
-  margin: 0 0 0 30px;
-  border: none;
-  cursor: pointer;
 `;

@@ -22,21 +22,15 @@ const PostForm = () => {
     reader.readAsDataURL(e.target.files[0]);
   };
 
-  const handleContentChange = (e) => {
-    setContent(e.target.innerHTML);
-  };
-  const onAddImage = (e) => {
-    const img = document.createElement("img");
-    img.src = URL.createObjectURL(e.target.files[0]);
-    document.execCommand("insertHTML", false, img.outerHTML);
-  };
-
   const { mutate } = useAddCommunity();
 
   const onHandleAddPost = (event) => {
     event.preventDefault();
     if (!title || !content || !image || !postLocation1 || !postLocation2)
       return alert("양식을 확인해 주세요 ");
+    if (title.length > 50) {
+      return alert("제목을 50글자 이내로 입력해 주세요");
+    }
 
     const formData = new FormData();
     formData.append("postImage", image);
@@ -52,9 +46,7 @@ const PostForm = () => {
       console.log(value);
     }
 
-    const community = formData;
-
-    mutate(community);
+    mutate(formData);
     navigate("/list");
   };
 
@@ -92,7 +84,7 @@ const PostForm = () => {
             <StTitleInput
               type="text"
               value={title}
-              placeholder="제목을 입력해 주세요 "
+              placeholder="제목을 입력해 주세요 (최대 50자)"
               onChange={(e) => setTitle(e.target.value)}
             />
 
@@ -113,14 +105,6 @@ const PostForm = () => {
               placeholder="내용을 입력해 주세요 "
               onChange={(e) => setContent(e.target.value)}
             />
-            <div>
-              <div
-                contentEditable={true}
-                onInput={handleContentChange}
-                dangerouslySetInnerHTML={{ __html: content }}
-              />
-              <input type="file" onChange={onAddImage} />
-            </div>
 
             <StButton type="submit"> 작성 완료 </StButton>
           </StForm>
@@ -232,4 +216,5 @@ const StButton = styled.button`
   border-radius: 5px;
   background-color: #c1de0d;
   margin-top: 20px;
+  cursor: pointer;
 `;

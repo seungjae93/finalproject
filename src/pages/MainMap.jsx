@@ -347,7 +347,7 @@ const MainMap = () => {
                   return (
                     <MapMarker
                       key={el.estateId}
-                      estateIdData={el.estateId}
+                      // estateIdData={el.estateId}
                       position={el}
                       image={{
                         src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",

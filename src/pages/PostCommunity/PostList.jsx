@@ -9,7 +9,6 @@ import PostListCard from "../../components/Community/PostListCard";
 
 const PostList = () => {
   const navigate = useNavigate();
-
   const [selected, setSelected] = useState({});
   const { postLocation1, postLocation2 } = hangjungdong;
   const [initial, setInitial] = useState(true);

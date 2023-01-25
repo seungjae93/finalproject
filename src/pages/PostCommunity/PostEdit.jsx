@@ -33,6 +33,10 @@ const PostEdit = () => {
         setTitle(post.title);
         setContent(post.content);
         setImage(post.postImage);
+        setSelected({
+          postLocation1: post.postLocation1,
+          postLocation2: post.postLocation2,
+        });
       },
       onError: (error) => {
         console.log(error);
