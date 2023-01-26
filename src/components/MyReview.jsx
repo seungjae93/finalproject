@@ -14,96 +14,109 @@ const MyReview = () => {
 
   return (
     <>
-      <div>
+      <StMyReviewWrap>
         <StMyReviewBox>
           <StReviewBoxTitle>내가 남긴 리뷰</StReviewBoxTitle>
-        </StMyReviewBox>
-        <div>
-          {data?.map((reviews) => {
-            return (
-              <StMyReview>
-                <div key={`myreview_${reviews.id}`}>
-                  <div className="time">{reviews.createdAt}</div>
-                  <div className="postId">번호: {reviews.estateId}</div>
-                  <div className="address">{reviews.address}</div>
-                  <div className="star">
-                    <img src={require("../images/Star 165.png")} alt="star" />
+          <div>
+            {data?.map((reviews) => {
+              return (
+                <StMyReview>
+                  <div
+                    className="review_wrapper"
+                    key={`myreview_${reviews.id}`}
+                  >
+                    <div className="time">
+                      {new Date(reviews.createdAt).toLocaleDateString("ko-KR", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </div>
+                    <div className="address">{reviews.address}</div>
+                    <img
+                      className="star"
+                      src={require("../images/Star 165.png")}
+                      alt="star"
+                    />
+                    <div className="starPoint">{reviews.star} / 5</div>
+                    <button className="delBtn">삭제</button>
                   </div>
-                  <div className="starPoint">{reviews.star} / 5</div>
-                </div>
-              </StMyReview>
-            );
-          })}
-        </div>
-      </div>
+                </StMyReview>
+              );
+            })}
+          </div>
+        </StMyReviewBox>
+      </StMyReviewWrap>
     </>
   );
 };
 
 export default MyReview;
 
-const StMyReviewBox = styled.div`
-  margin: auto;
+const StMyReviewWrap = styled.div`
   max-width: 1920px;
-  height: 10vh;
+  background-color: #f3f5f5;
+`;
+
+const StMyReviewBox = styled.div`
+  width: 1254px;
+  height: 650px;
+  background-color: #ffffff;
+  margin: auto;
 `;
 
 const StReviewBoxTitle = styled.div`
-  display: flex;
+  padding-top: 50px;
+  padding-left: 110px;
+  padding-bottom: 30px;
   font-size: 16px;
   font-weight: 800;
-  position: relative;
-  top: 4vh;
-  left: 14%;
 `;
 
 const StMyReview = styled.div`
-  position: relative;
   background-color: #f0f0f0;
-  width: 70vw;
-  height: 100px;
+  width: 1000px;
+  height: 60px;
   padding: 1%;
   margin: auto;
   margin-bottom: 15px;
-  .time {
-    position: relative;
-    top: 3vh;
+  align-items: center;
+  display: flex;
+  .review_wrapper {
+    display: flex;
+    align-items: center;
+    text-align: left;
   }
-  .postId {
-    position: relative;
-    top: 4vh;
+
+  .time {
+    width: 180px;
+    padding-left: 10px;
   }
   .address {
-    position: relative;
-    left: 25%;
+    padding-left: 20px;
     font-size: 20px;
     font-weight: 600;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+  }
+  .star {
+    padding-right: 10px;
+    padding-left: 150px;
   }
   .starPoint {
-    position: relative;
-    left: 78%;
-    top: -5.5vh;
     font-size: 23px;
     font-weight: 600;
     color: #aec90a;
   }
-  .star {
-    position: relative;
-    left: 75%;
-    top: -2.5vh;
-  }
-`;
-
-const StMyReviewBtn = styled.div`
-  position: relative;
-  left: 75%;
-  top: -8vh;
-
-  .ReviewBtn {
-    border: none;
+  .delBtn {
+    border: 1px solid #aec90a;
+    width: 65px;
+    height: 30px;
+    border-radius: 5%;
+    color: #2d2d2d;
+    margin-left: 90px;
     cursor: pointer;
-    background-color: transparent;
-    font-size: 17px;
-    padding-right: 10px;
   }
 `;
