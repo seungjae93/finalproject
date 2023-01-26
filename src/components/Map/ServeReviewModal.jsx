@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import styled from "styled-components";
+import ImageDetailCarousel from "./ImageDetailCarousel";
 
 const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
   const [detailModal, setDetailModal] = useState(false);
@@ -107,10 +108,11 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
                     {imageModal && (
                       <ModalBackdrop>
                         <StimageDetail>
+                          <ImageDetailCarousel imageUrl={review.imageUrl} />
+                          {/* <StDetailImg alt="" src={imageModal} /> */}
                           <StCloseButton onClick={DetailCloseModal}>
                             X
                           </StCloseButton>
-                          <StDetailImg alt="" src={imageModal} />
                         </StimageDetail>
                       </ModalBackdrop>
                     )}
