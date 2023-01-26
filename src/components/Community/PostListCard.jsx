@@ -8,6 +8,7 @@ const PostListCard = ({ posts }) => {
       {posts?.postImage ? (
         <StImageCarrier alt="" src={posts?.postImage}></StImageCarrier>
       ) : null}
+
       <StCommunityBox>
         <StTitleCarrier>
           <p>{posts?.title}</p>
@@ -17,7 +18,7 @@ const PostListCard = ({ posts }) => {
         </StContentCarrier>
         <StBox>
           <StName>
-            <StNickName> {posts?.nickname} </StNickName>
+            <StNickName> {posts?.email} </StNickName>
             <div>
               {new Date(posts.createdAt).toLocaleDateString("ko-KR", {
                 year: "numeric",

@@ -15,8 +15,10 @@ export const __kakaoLogin = createAsyncThunk(
         path: "/",
         expire: "after720m",
       });
-      localStorage.setItem("nickname", response.data.nickname);
-      alert(`${response.data.nickname}님 안녕하세요 :) `);
+      const email = response.data.email;
+      const nickEmail = email.substring(0, email.indexOf("@"));
+      localStorage.setItem("email", nickEmail);
+      alert(`${nickEmail}님 안녕하세요 :) `);
       return thunkAPI.fulfillWithValue(response);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
