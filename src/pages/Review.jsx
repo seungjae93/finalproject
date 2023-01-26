@@ -65,7 +65,7 @@ const Review = () => {
       setOpenPostcode((current) => !current);
     },
 
-    // 주소 선택 이벤트
+    // 주소 선택 이벤트*
     selectAddress: (data) => {
       setAddress(data.address + data.buildingName);
       setJibunAddress(inputValue(data));
