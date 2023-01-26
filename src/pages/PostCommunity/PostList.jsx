@@ -1,48 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { getCommunity } from "../../redux/api/communityApi";
 import { hangjungdong } from "../../components/Community/hangjungdong";
 import PostListCard from "../../components/Community/PostListCard";
+import InfiniteScroll from "react-infinite-scroller";
 
 const PostList = () => {
   const navigate = useNavigate();
   const [selected, setSelected] = useState({});
   const { postLocation1, postLocation2 } = hangjungdong;
-  const [initial, setInitial] = useState(true);
-  const [searchText, setSearchText] = useState("");
-  const [sortBy, setSortBy] = useState("comments");
 
   const { login } = useSelector((state) => state.user);
 
-  const { data, error, isLoading, isError } = useQuery(["posts"], getCommunity);
+  const {
+    data,
+    error,
+    isLoading,
+    isError,
+    isFetching,
+    fetchNextPage,
+    hasNextPage,
+  } = useInfiniteQuery(
+    ["posts"],
+    ({ pageParam = 0 }) => getCommunity(pageParam),
+
+    {
+      getNextPageParam: (lastPage) =>
+        // const maxPage = lastPage.total_count / 24
+        lastPage.nextPage || undefined,
+
+      //lastPage.next이 없다면 undefined를 설정해 hasNextPage가 flase를 반환하게 한다
+    }
+  );
 
   const HandleChange = (e) => {
     const { name, value } = e.target;
     setSelected({ ...selected, [name]: value });
-    setInitial(false);
-  };
-
-  const handleViewAll = () => {
-    setSelected({});
-    setInitial(true);
   };
 
   const onPostHandler = () => {
     if (login === false) {
       alert("로그인을 해주세요");
     } else navigate("/post");
-  };
-
-  const handleSearchChange = (e) => {
-    setSearchText(e.target.value);
-    setInitial(false);
-  };
-
-  const handleSort = (e) => {
-    setSortBy(e);
   };
 
   if (isLoading) return <h2> 로딩중 .. </h2>;
@@ -53,7 +55,7 @@ const PostList = () => {
       <StSeleteBox>
         <StSelete>
           <div>
-            <StSeleteAll onClick={handleViewAll}> 모두보기 </StSeleteAll>
+            <StSeleteAll> 모두보기 </StSeleteAll>
             <StSeleteR name="postLocation1" onChange={HandleChange}>
               <option value="">시,도 선택</option>
               {postLocation1.map((el) => (
@@ -73,11 +75,7 @@ const PostList = () => {
                 ))}
             </StSeleteL>
           </div>
-          <StSearch
-            type="text"
-            placeholder="검색하기"
-            onChange={handleSearchChange}
-          />
+          <StSearch type="text" placeholder="검색하기" />
         </StSelete>
       </StSeleteBox>
       <StOrder>
@@ -85,58 +83,25 @@ const PostList = () => {
           <StPost onClick={onPostHandler}> + </StPost>
         </div>
         <div>
-          <StTrend onClick={() => handleSort("latest")}> 최신순 </StTrend>
-          <StTrend onClick={() => handleSort("comments")}> 댓글순 </StTrend>
+          <StTrend> 최신순 </StTrend>
+
+          <StTrend> 댓글순 </StTrend>
         </div>
       </StOrder>
-
-      <STPostCon>
-        {initial || !Object.keys(selected).length
-          ? data?.posts
-              .filter(
-                (post) =>
-                  post.title.indexOf(searchText) !== -1 ||
-                  post.content.indexOf(searchText) !== -1
-              )
-              .sort((a, b) =>
-                sortBy === "latest"
-                  ? new Date(b.createdAt) - new Date(a.createdAt)
-                  : (b.comments ? b.comments.length : 0) -
-                    (a.comments ? a.comments.length : 0)
-              )
-
-              .map((posts) => {
-                return (
-                  <PostListCard key={`main_${posts.postId}`} posts={posts} />
-                );
-              })
-          : data?.posts
-              .filter((post) => {
-                if (!selected.postLocation2) {
-                  return post.postLocation1 === selected.postLocation1;
-                }
-                return (
-                  post.postLocation1 === selected.postLocation1 &&
-                  post.postLocation2 === selected.postLocation2
-                );
-              })
-              .filter(
-                (post) =>
-                  post.title.indexOf(searchText) !== -1 ||
-                  post.content.indexOf(searchText) !== -1
-              )
-              .sort((a, b) =>
-                sortBy === "latest"
-                  ? new Date(b.createdAt) - new Date(a.createdAt)
-                  : (b.comments ? b.comments.length : 0) -
-                    (a.comments ? a.comments.length : 0)
-              )
-              .map((posts) => {
-                return (
-                  <PostListCard key={`main_${posts.postId}`} posts={posts} />
-                );
-              })}
-      </STPostCon>
+      {isFetching && <div>Loading..</div>}{" "}
+      <InfiniteScroll hasMore={hasNextPage} loadMore={fetchNextPage}>
+        <STPostCon>
+          {data?.pages[0]?.posts ? (
+            data?.pages[0]?.posts.map((posts) => {
+              return (
+                <PostListCard key={`main_${posts.postId}`} posts={posts} />
+              );
+            })
+          ) : (
+            <div>No data</div>
+          )}
+        </STPostCon>
+      </InfiniteScroll>
     </>
   );
 };
