@@ -26,8 +26,11 @@ const PostForm = () => {
 
   const onHandleAddPost = (event) => {
     event.preventDefault();
-    if (!title || !content || !image || !postLocation1 || !postLocation2)
+    if (!title || !content || !postLocation1 || !postLocation2)
       return alert("양식을 확인해 주세요 ");
+    if (title.length > 50) {
+      return alert("제목을 50글자 이내로 입력해 주세요");
+    }
 
     const formData = new FormData();
     formData.append("postImage", image);
@@ -43,9 +46,7 @@ const PostForm = () => {
       console.log(value);
     }
 
-    const community = formData;
-
-    mutate(community);
+    mutate(formData);
     navigate("/list");
   };
 
@@ -80,31 +81,32 @@ const PostForm = () => {
               </StSeleteL>
             </StSeleteBox>
 
-            <div>
-              <StyledInput
+            <StTitleInput
+              type="text"
+              value={title}
+              placeholder="제목을 입력해 주세요 (최대 50자)"
+              onChange={(e) => setTitle(e.target.value)}
+            />
+
+            <StImageBox>
+              <StUpload htmlFor="file"> + </StUpload>
+              <input
                 type="file"
                 id="file"
                 onChange={onPreviewImage}
                 style={{ display: "none" }}
               />
               <StyledImage src={preview} />
-            </div>
-            <StUpload htmlFor="file">파일 업로드</StUpload>
+            </StImageBox>
 
-            <div> 제목 </div>
-            <Stinput
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <div> 내용 </div>
             <StContentInput
               type="text"
               value={content}
+              placeholder="내용을 입력해 주세요 "
               onChange={(e) => setContent(e.target.value)}
             />
-            <br />
-            <StButton type="submit"> 등록하기 </StButton>
+
+            <StButton type="submit"> 작성 완료 </StButton>
           </StForm>
         </StAddBox>
       </StAddContainer>
@@ -116,7 +118,6 @@ export default PostForm;
 
 const StAddContainer = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
 `;
 
@@ -127,87 +128,92 @@ const StAddBox = styled.div`
 `;
 
 const StForm = styled.form`
-  height: 110%;
   display: flex;
   align-items: center;
   flex-direction: column;
 `;
 
 const StSeleteBox = styled.div`
-  text-align: center;
+  width: 70%;
   margin: 0 0 20px 0;
 `;
+
 const StSeleteR = styled.select`
-  border: 2px solid powderblue;
+  border: 2px solid #a6b2b9;
   text-align: center;
   font-size: 20px;
   width: 200px;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 8px;
   margin-right: 20px;
 `;
 
 const StSeleteL = styled.select`
-  border: 2px solid powderblue;
+  border: 2px solid #a6b2b9;
   text-align: center;
   font-size: 20px;
   width: 200px;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 8px;
 `;
 
 const StOption = styled.option`
   border: none;
-  border: 2px solid powderblue;
+  border: 2px solid #a6b2b9;
+`;
+
+const StTitleInput = styled.input`
+  border: 2px solid #a6b2b9;
+  border-radius: 8px;
+  width: 70%;
+  height: 2rem;
+  margin: 20px 0 20px 0;
+`;
+
+const StImageBox = styled.div`
+  width: 70%;
+  display: flex;
+  align-items: center;
 `;
 
 const StUpload = styled.label`
-  text-align: center;
-  padding: 6px 25px;
-  margin: 10px 0 10px 0;
-  background-color: powderblue;
-  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  padding: 10px 30px 20px 30px;
+  margin-right: 20px;
+  background-color: #d2d2d2;
+  border-radius: 5px;
   cursor: pointer;
   &:hover {
     background-color: #6688ab;
   }
 `;
 
-const Stinput = styled.input`
-  width: 50%;
-  height: 1rem;
+const StyledImage = styled.img`
+  width: 150px;
+  height: 120px;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 `;
 
 const StContentInput = styled.textarea`
+  margin-top: 20px;
+  border: 2px solid #a6b2b9;
+  border-radius: 8px;
   width: 70%;
   height: 20rem;
   resize: none;
 `;
 
-const StyledInput = styled.input`
-  padding: 7px;
-  background: white;
-  border-radius: 10px;
-  color: #34495e;
-  height: 30px;
-  outline: none;
-  border: 1px solid #34495e;
-  font-weight: 700;
-  ::placeholder {
-    color: #34495e;
-    opacity: 0.5;
-  }
-`;
-
-const StyledImage = styled.img`
-  width: 400px;
-  height: 300px;
-  border-radius: 50px;
-  background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.23) 0px 0px 5px 6px;
-`;
-
 const StButton = styled.button`
-  padding: 0.5rem 1rem 0.5rem 1rem;
-  font-size: 20px;
+  padding: 0.5rem 6rem 0.5rem 6rem;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  background-color: #c1de0d;
+  margin-top: 20px;
+  cursor: pointer;
 `;

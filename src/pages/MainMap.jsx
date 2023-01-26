@@ -22,14 +22,22 @@ const MainMap = () => {
   const [searchData, setSearchData] = useState([]);
   const [isHaveInputValue, setIsHaveInputValue] = useState(false);
   const [dropDownDataIndex, setDropDownDataIndex] = useState(-1);
+
   //지도 레벨
   const [zoomLevel, setZoomLevel] = useState(3.5);
+
   //서버에서 받는 지도 좌표
   const [positions, setPositions] = useState();
+
   //마커 좌표
   const [markerArray, setMarkerArray] = useState([]);
-  //props넘기는 estateId값
-  const [estateIdData, setEstateIdData] = useState([]);
+
+  //estateId props 넘길때
+  const [markerArrayEstateId, setMarkerArrayEstateId] = useState(0);
+
+  //마커 클릭시 props 넘기기
+  const [markerClickOn, setMarkerClickOn] = useState(false);
+  const inputRef = useRef();
 
   //검색어 받아오는 로직
   const onAddressHandler = throttle(async (e) => {
@@ -53,7 +61,37 @@ const MainMap = () => {
   const clickDropDownItem = (clickedItem) => {
     setSearchAddress(clickedItem);
     setIsHaveInputValue(false);
+    onSearchHandler();
   };
+
+  // 검색창 키보드 이동
+  const ArrowDown = "ArrowDown";
+  const ArrowUp = "ArrowUp";
+  const Enter = "Enter";
+
+  const onSubmitSearch = debounce((e) => {
+    if (e.key === Enter) {
+      onSearchHandler();
+    }
+    if (searchAddress === "") {
+      setDropDownDataIndex(-1);
+    }
+    if (e.key === ArrowDown) {
+      setDropDownDataIndex(dropDownDataIndex + 1);
+      /* childElementCount는 li tag의 개수를 의미하고, 검색 내역 인덱스 키워드에서
+           또 아래 키를 누르면 맨처음 인덱스 키워드로 돌아가라는 의미이다. */
+      if (inputRef.current === dropDownDataIndex + 1) {
+        setDropDownDataIndex(0);
+      }
+    }
+    if (e.key === ArrowUp) {
+      setDropDownDataIndex(dropDownDataIndex - 1);
+
+      if (dropDownDataIndex <= 0) {
+        setDropDownDataIndex(-1);
+      }
+    }
+  }, 200);
 
   //장소 검색 객체 생성
   const ps = new kakao.maps.services.Places();
@@ -185,8 +223,8 @@ const MainMap = () => {
                   <div
                     className="label"
                     style={{
-                      color: "#000",
-                      backgroundColor: "blueviolet",
+                      color: "white",
+                      backgroundColor: "skyblue",
                     }}
                   >
                     <span className="left"></span>
@@ -201,6 +239,11 @@ const MainMap = () => {
     );
   };
 
+  const MarkerClickHandler = (estateId) => {
+    setMarkerClickOn(true);
+    setMarkerArrayEstateId(estateId);
+  };
+
   useEffect(() => {
     if (!positions) return;
     let newArray = [];
@@ -208,7 +251,6 @@ const MainMap = () => {
     if (zoomLevel < 3) {
       newArray.push(...positions);
       setMarkerArray(newArray);
-      setEstateIdData(newArray);
     } else if (2 < zoomLevel < 5) {
       positions?.map((el) => {
         if (Array.isArray(el)) {
@@ -240,14 +282,15 @@ const MainMap = () => {
   return (
     <>
       <StContainer>
-        <SearchContainer>
+        <SearchContainer isHaveInputValue={isHaveInputValue}>
           <StSearch
             type="search"
+            onKeyDown={onSubmitSearch}
             onChange={onAddressHandler}
             value={searchAddress}
           />
           {searchAddress && (
-            <AutoSearchContainer>
+            <AutoSearchContainer ref={inputRef}>
               <AutoSearchWrap>
                 {searchData?.map((el, index) => {
                   return (
@@ -270,7 +313,9 @@ const MainMap = () => {
 
         <StWrapper>
           <StReviewContainer>
-            <TotalReview estateIdData={estateIdData[0]} />
+            {markerClickOn === true && (
+              <TotalReview estateIdData={markerArrayEstateId} />
+            )}
           </StReviewContainer>
           <StMapContainer>
             <Map // 지도를 표시할 Container
@@ -279,7 +324,7 @@ const MainMap = () => {
               style={{
                 // 지도의 크기
                 width: "100%",
-                height: "100%",
+                height: "83.5vh",
               }}
               ref={mapRef}
               // 지도의 확대 레벨
@@ -327,6 +372,7 @@ const MainMap = () => {
                           height: 35,
                         }, // 마커이미지의 크기입니다
                       }}
+                      onClick={() => MarkerClickHandler(el.estateId)}
                     />
                   );
                 })}
@@ -341,9 +387,11 @@ const MainMap = () => {
 export default MainMap;
 
 const StContainer = styled.div`
-  max-width: 1920px;
+  /* max-width: 1920px;
   min-width: 680px;
-  height: 855px;
+  height: 855px; */
+  width: 100%;
+  height: 83.5vh;
 `;
 const SearchContainer = styled.div`
   position: relative;

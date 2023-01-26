@@ -6,25 +6,27 @@ const PostListCard = ({ posts }) => {
   return (
     <StCardWrapper to={`/${posts.postId}`}>
       <StImageCarrier alt="" src={posts?.postImage}></StImageCarrier>
-      <StTitleCarrier>
-        <p>{posts?.title}</p>
-      </StTitleCarrier>
-      <StContentCarrier>
-        <pre> {posts?.content} </pre>
-      </StContentCarrier>
-      <StBox>
-        <StName>
-          <StNickName> {posts?.nickname} </StNickName>
-          <div>
-            {new Date(posts.createdAt).toLocaleDateString("ko-KR", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </div>
-        </StName>
-        <div> {posts.commentsCount}개의 댓글 </div>
-      </StBox>
+      <StCommunityBox>
+        <StTitleCarrier>
+          <p>{posts?.title}</p>
+        </StTitleCarrier>
+        <StContentCarrier>
+          <pre> {posts?.content} </pre>
+        </StContentCarrier>
+        <StBox>
+          <StName>
+            <StNickName> {posts?.nickname} </StNickName>
+            <div>
+              {new Date(posts.createdAt).toLocaleDateString("ko-KR", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </div>
+          </StName>
+          <div> {posts.commentsCount}개의 댓글 </div>
+        </StBox>
+      </StCommunityBox>
     </StCardWrapper>
   );
 };
@@ -33,11 +35,11 @@ export default PostListCard;
 
 const StCardWrapper = styled(Link)`
   background-color: white;
-  width: 320px;
+  width: 350px;
   height: 340px;
   border: 0px solid black;
-  border-radius: 20px;
-  margin: 100px 0 0 35px;
+  border-radius: 10px;
+  margin: 20px 0 0 10px;
   z-index: 900px;
   box-shadow: 0px 1px 5px 1px #dddddd;
   text-decoration-line: none;
@@ -49,9 +51,14 @@ const StCardWrapper = styled(Link)`
 `;
 
 const StImageCarrier = styled.img`
-  width: 320px;
+  width: 350px;
   height: 170px;
-  border-radius: 20px;
+  border-radius: 10px 10px 0 0;
+  border: none;
+`;
+
+const StCommunityBox = styled.div`
+  padding: 0 10px 0 10px;
 `;
 
 const StTitleCarrier = styled.div`

@@ -17,6 +17,7 @@ const PostDetail = () => {
 
   const deleteCommunityCallback = async (postId) => {
     await deleteCommunity(postId);
+    window.alert("삭제되었습니다!");
     navigate("/list");
   };
 
@@ -26,16 +27,12 @@ const PostDetail = () => {
   return (
     <>
       <StDetailBox>
-        <StMain>
-          <StButton> MAP </StButton>
-          <StButton onClick={() => navigate("/list")}> 뒤로 가기 </StButton>
-        </StMain>
         <StContainer>
-          <StTitle> {data?.post.title} </StTitle>
+          <StPostTitle>{data?.post.title}</StPostTitle>
 
           <StInfor>
             <StNicDa>
-              <StNicName> {data?.post.nickname} </StNicName>
+              <StNicName> {data?.post.nickname} | </StNicName>
               <StDate>
                 {new Date(data?.post.createdAt).toLocaleDateString("ko-KR", {
                   year: "numeric",
@@ -47,28 +44,42 @@ const PostDetail = () => {
 
             <div>
               {data?.post.nickname === nickname ? (
-                <StEdit onClick={() => navigate(`/edit/${data?.post.postId}`)}>
-                  수정
-                </StEdit>
+                <StButton
+                  onClick={() => navigate(`/edit/${data?.post.postId}`)}
+                >
+                  수정하기
+                </StButton>
               ) : null}
 
               {data?.post.nickname === nickname ? (
-                <StRemove onClick={() => deleteCommunityCallback(postId)}>
-                  삭제
-                </StRemove>
+                <StButton onClick={() => deleteCommunityCallback(postId)}>
+                  삭제하기
+                </StButton>
               ) : null}
             </div>
           </StInfor>
 
-          <div>
-            <StDetailImage src={data?.post?.postImage} />
-          </div>
+          <StDetailImage src={data?.post?.postImage} />
 
           <StContent> {data?.post.content} </StContent>
         </StContainer>
-
-        <Comment />
       </StDetailBox>
+
+      <StCommentBox>
+        <Comment />
+      </StCommentBox>
+      {/* 
+      <StPostNextBefore>
+        <StPost>
+          <StPostBut onClick={() => navigate(`/detail/${postId + 1}`)}>
+            다음글 |
+          </StPostBut>
+        </StPost>
+
+        <StPost>
+          <StPostBut>이전글 |</StPostBut>
+        </StPost>
+      </StPostNextBefore> */}
     </>
   );
 };
@@ -81,32 +92,27 @@ const StDetailBox = styled.div`
   background-color: white;
   width: 60%;
 `;
+
 const StContainer = styled.div`
-  width: 60%;
-  border: 2px solid powderblue;
-  border-radius: 10px;
+  width: 70%;
   margin-left: auto;
   margin-right: auto;
 `;
 
-const StButton = styled.button`
-  margin: 25px;
-  font-size: 30px;
-  font-weight: bold;
-  border: 1px solid black;
-  background-color: white;
-  cursor: pointer;
-`;
-
-const StMain = styled.div`
-  width: 100%;
-  height: 100px;
+const StPostTitle = styled.div`
   display: flex;
-`;
-
-const StTitle = styled.div`
+  justify-content: space-between;
+  align-items: center;
   font-size: 40px;
   font-weight: bold;
+  margin-top: 10px;
+`;
+
+const StButton = styled.button`
+  background-color: white;
+  border: none;
+  margin: 0 10px 0;
+  cursor: pointer;
 `;
 
 const StInfor = styled.div`
@@ -124,20 +130,33 @@ const StNicName = styled.div`
 `;
 
 const StDate = styled.div`
-  margin-left: 20px;
+  margin-left: 10px;
 `;
 
-const StRemove = styled.button``;
-
-const StEdit = styled.button``;
-
 const StDetailImage = styled.img`
-  border: 0px solid black;
+  border: none;
   margin-top: 30px;
   width: 100%;
-  height: 400px;
+  height: 500px;
 `;
 
 const StContent = styled.div`
   font-size: 20px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  /* @media (min-width: 600px) { 
+    max-height: 300px;
+    // 너비가 600px이상인 화면의 경우 최대 높이가 300px로 설정
+  }
+  @media (min-width: 800px) {
+    max-height: 400px;
+    // 너비가 800px 화면의 경우 최대 높이가 400px 설정
+  } */
+`;
+
+const StCommentBox = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  width: 60%;
 `;
