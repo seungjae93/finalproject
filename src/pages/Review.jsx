@@ -60,21 +60,20 @@ const Review = () => {
     navigate("/mypage");
   };
 
+  const openPostcodeHandler = () => {
+    setOpenPostcode(!openPostcode);
+  };
   const handle = {
-    clickButton: () => {
-      setOpenPostcode((current) => !current);
-    },
-
     // 주소 선택 이벤트
     selectAddress: (data) => {
       setAddress(data.address + data.buildingName);
       setJibunAddress(inputValue(data));
-      setOpenPostcode(false);
     },
   };
 
   const inputValue = (data) => {
     if (data.jibunAddress === "") {
+      console.log(data);
       return data.autoJibunAddress + data.buildingName;
     } else {
       return data.jibunAddress + data.buildingName;
@@ -86,10 +85,36 @@ const Review = () => {
       <StReviewWrap>
         <StReviewBox>
           <StTitle>이집은 후기 작성하기</StTitle>
-
+          <button onClick={openPostcodeHandler}>누르면 주소열림</button>
           <StContainer>
-            <StAdd> 주소 </StAdd>
-            <StButton onClick={handle.clickButton}> 주소 검색 </StButton>
+            {openPostcode && (
+              <div>
+                <DaumPostcode
+                  style={{ width: "400px", height: "500px" }}
+                  onComplete={handle.selectAddress} // 값을 선택할 경우 실행되는 이벤트
+                  autoClose={true} // 값을 선택할 경우 사용되는 DOM을 제거하여 자동 닫힘 설정
+                  defaultQuery="" // 기본적으로 입력되어있는 검색어
+                />
+              </div>
+            )}
+
+            <input
+              type="text"
+              name="address"
+              value={address}
+              onChange={() => {}}
+              placeholder="우편번호 찾기를 이용하세요(도로명주소)"
+              size="45"
+            />
+            <input
+              type="text"
+              name="setJibunAddress"
+              value={address_jibun}
+              onChange={() => {}}
+              placeholder="우편번호 찾기를 이용하세요(지번주소)"
+              size="45"
+            />
+            {/* <StButton onClick={handle.clickButton}> 주소 검색 </StButton>
             <StAddress>
               <StInt
                 type="text"
@@ -109,16 +134,16 @@ const Review = () => {
                 placeholder="주소 검색을 이용하세요(지번주소 입력)"
                 size="45"
               />
-            </StSeAddress>
+            </StSeAddress> */}
 
-            {openPostcode && (
+            {/* {openPostcode && (
               <DaumPostcode
-                style={{ width: "400px", height: "300px" }}
+                style={{ width: "300px", height: "300px" }}
                 onComplete={handle.selectAddress} // 값을 선택할 경우 실행되는 이벤트
                 autoClose={false} // 값을 선택할 경우 사용되는 DOM을 제거하여 자동 닫힘 설정
                 defaultQuery="" // 팝업을 열때 기본적으로 입력되는 검색어
               />
-            )}
+            )} */}
 
             <StHomeSection>
               <StAddStyle> 주거 형태 </StAddStyle>
