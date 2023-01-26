@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import styled from "styled-components";
+import ImageDetailCarousel from "./ImageDetailCarousel";
 
 const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
   const [detailModal, setDetailModal] = useState(false);
@@ -54,7 +55,7 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
             >
               <StReview>
                 <StScore>
-                  <div>별</div>
+                  <img src={require("../../images/Star 165.png")} alt="star" />
 
                   <StAverage> {review.star} </StAverage>
 
@@ -107,10 +108,11 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
                     {imageModal && (
                       <ModalBackdrop>
                         <StimageDetail>
+                          <ImageDetailCarousel imageUrl={review.imageUrl} />
+                          {/* <StDetailImg alt="" src={imageModal} /> */}
                           <StCloseButton onClick={DetailCloseModal}>
                             X
                           </StCloseButton>
-                          <StDetailImg alt="" src={imageModal} />
                         </StimageDetail>
                       </ModalBackdrop>
                     )}

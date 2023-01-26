@@ -20,7 +20,6 @@ const TotalReview = ({ estateIdData }) => {
   const showModal = () => {
     setModalOpen(true);
   };
-  console.log(data);
   return (
     <>
       <div>건물명 : {data?.estate?.address_jibun} </div>
