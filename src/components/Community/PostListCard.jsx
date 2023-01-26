@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 const PostListCard = ({ posts }) => {
   return (
     <StCardWrapper to={`/${posts.postId}`}>
-      <StImageCarrier alt="" src={posts?.postImage}></StImageCarrier>
+      {posts?.postImage ? (
+        <StImageCarrier alt="" src={posts?.postImage}></StImageCarrier>
+      ) : null}
       <StCommunityBox>
         <StTitleCarrier>
           <p>{posts?.title}</p>
