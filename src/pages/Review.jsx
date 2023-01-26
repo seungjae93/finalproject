@@ -111,7 +111,6 @@ const Review = () => {
                 size="45"
               />
             </StAddress>
-
             <StSeAddress>
               <StInt
                 type="text"
@@ -123,26 +122,26 @@ const Review = () => {
               />
             </StSeAddress>
 
-            <StType>
-              <StAdd> 주거 형태 </StAdd>
-
-              <StSelectOne name="residence_type" onChange={onChangeHandler}>
-                <Stoption value="">선택해 주세요</Stoption>
-                <Stoption value="원룸">원룸</Stoption>
-                <Stoption value="투룸">투룸</Stoption>
-              </StSelectOne>
-
-              <StSelectOne name="transaction_type" onChange={onChangeHandler}>
-                <Stoption value="">선택해 주세요</Stoption>
-                <Stoption value="월세">월세</Stoption>
-                <Stoption value="전세">전세</Stoption>
-              </StSelectOne>
-            </StType>
-
-            <StBasicWrap>
-              <StAdd> 기본 정보 </StAdd>
+            <StHomeSection>
+              <StAddStyle> 주거 형태 </StAddStyle>
+              <StAddStyle2>
+                <input
+                  type="radio"
+                  name="residence_type"
+                  value="원룸"
+                  onChange={onChangeHandler}
+                />
+                원룸
+                <input
+                  type="radio"
+                  name="residence_type"
+                  value="투룸"
+                  onChange={onChangeHandler}
+                />
+                투룸
+              </StAddStyle2>
               <StBasic>
-                <StBasicTitle>공급면적:</StBasicTitle>
+                <StBasicTitle>평수:</StBasicTitle>
                 <input
                   type="number"
                   name="acreage"
@@ -150,7 +149,22 @@ const Review = () => {
                   onChange={onChangeHandler}
                   placeholder="평수 입력란입니다."
                 />
+                평
               </StBasic>
+              <input
+                type="radio"
+                name="transaction_type"
+                value="월세"
+                onChange={onChangeHandler}
+              />
+              월세
+              <input
+                type="radio"
+                name="transaction_type"
+                value="전세"
+                onChange={onChangeHandler}
+              />
+              전세
               <StBasic>
                 <StBasicTitle>보증금:</StBasicTitle>
                 <input
@@ -160,6 +174,7 @@ const Review = () => {
                   onChange={onChangeHandler}
                   placeholder="보증금 입력란입니다."
                 />
+                원
               </StBasic>
               <StBasic>
                 <StBasicTitle>월세:</StBasicTitle>
@@ -170,8 +185,9 @@ const Review = () => {
                   onChange={onChangeHandler}
                   placeholder="월세 입력란입니다."
                 />
+                원
               </StBasic>
-            </StBasicWrap>
+            </StHomeSection>
 
             <StComment>
               <StTitle> 이집은 후기 상세정보</StTitle>
@@ -596,9 +612,10 @@ const StSelectStar = styled.select`
 `;
 
 const StButton = styled.button`
+  margin-left: 650px;
   padding: 6px 25px;
   background-color: white;
-  border: 1px solid #aec90c;
+  border: 2px solid #aec90c;
   border-radius: 8px;
   font-size: 20px;
 
@@ -667,7 +684,8 @@ const StAdd = styled.div`
 `;
 
 const StInt = styled.input`
-  width: 80%;
+  margin-right: 150px;
+  width: 450px;
   height: 2rem;
   border: 2px solid #c4cbcd;
   border-radius: 7px;
@@ -685,37 +703,7 @@ const StSeAddress = styled.div`
   margin-top: 10px;
 `;
 
-const StType = styled.div`
-  display: flex;
-  justify-content: center;
-  justify-content: space-between;
-  width: 60%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 30px;
-`;
-
-const StSelectOne = styled.select`
-  width: 35%;
-  height: 2rem;
-  margin: 10px;
-  border: 2px solid #c4cbcd;
-  border-radius: 10px;
-  color: black;
-`;
-
-const Stoption = styled.option`
-  color: black;
-`;
-
-const StBasicWrap = styled.div`
-  width: 60%;
-  margin-top: 30px;
-`;
-
 const StBasic = styled.div`
-  position: relative;
-  left: 20%;
   display: flex;
   margin-bottom: 5%;
 `;
@@ -723,6 +711,24 @@ const StBasic = styled.div`
 const StBasicTitle = styled.div`
   font-size: 16px;
   margin-right: 3%;
+`;
+
+const StHomeSection = styled.div`
+  border: 1px solid red;
+  display: block;
+  padding: 2%;
+  text-align: center;
+`;
+
+const StAddStyle = styled.div`
+  font-size: 20px;
+  font-weight: 600;
+  padding-top: 70px;
+  padding-bottom: 30px;
+`;
+
+const StAddStyle2 = styled.div`
+  padding-bottom: 20px;
 `;
 
 const StComment = styled.div`

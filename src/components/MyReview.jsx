@@ -21,13 +21,23 @@ const MyReview = () => {
             {data?.map((reviews) => {
               return (
                 <StMyReview>
-                  <div key={`myreview_${reviews.id}`}>
-                    <div className="time">{reviews.createdAt}</div>
-                    <div className="postId">번호: {reviews.estateId}</div>
-                    <div className="address">{reviews.address}</div>
-                    <div className="star">
-                      <img src={require("../images/Star 165.png")} alt="star" />
+                  <div
+                    className="review_wrapper"
+                    key={`myreview_${reviews.id}`}
+                  >
+                    <div className="time">
+                      {new Date(reviews.createdAt).toLocaleDateString("ko-KR", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
                     </div>
+                    <div className="address">{reviews.address}</div>
+                    <img
+                      className="star"
+                      src={require("../images/Star 165.png")}
+                      alt="star"
+                    />
                     <div className="starPoint">{reviews.star} / 5</div>
                   </div>
                 </StMyReview>
@@ -66,46 +76,37 @@ const StMyReview = styled.div`
   border: 1px solid red;
   background-color: #f0f0f0;
   width: 1000px;
-  height: 8vh;
+  height: 60px;
   padding: 1%;
   margin: auto;
   margin-bottom: 15px;
   align-items: center;
-  .time {
-    padding-top: 20px;
-    padding-left: 10px;
+  display: flex;
+  .review_wrapper {
+    display: flex;
+    /* align-items: center; */
+    /* width: 100px; */
+    text-align: left;
   }
-  .postId {
-    padding-top: 20px;
+
+  .time {
+    width: 180px;
+    border: 1px solid blue;
     padding-left: 10px;
   }
   .address {
-    padding-left: 270px;
+    border: 1px solid blue;
+    padding-left: 20px;
     font-size: 20px;
     font-weight: 600;
   }
+  .star {
+    padding-right: 10px;
+    padding-left: 280px;
+  }
   .starPoint {
-    padding-left: 900px;
     font-size: 23px;
     font-weight: 600;
     color: #aec90a;
-  }
-  .star {
-    padding-top: 20px;
-    padding-left: 850px;
-  }
-`;
-
-const StMyReviewBtn = styled.div`
-  position: relative;
-  left: 75%;
-  top: -8vh;
-
-  .ReviewBtn {
-    border: none;
-    cursor: pointer;
-    background-color: transparent;
-    font-size: 17px;
-    padding-right: 10px;
   }
 `;

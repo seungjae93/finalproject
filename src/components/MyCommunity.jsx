@@ -18,14 +18,19 @@ const MyCommunity = () => {
         <StMyCommBox>
           <StCommBoxTitle>
             <div className="reple">내가 남긴 글</div>
-            <div className="reple">내가 남긴 댓글</div>
           </StCommBoxTitle>
 
           {data?.myposts.map((posts) => {
             return (
               <StMyComm>
-                <div key={`mypage_${posts.postId}`}>
-                  <div className="time">{posts.createdAt}</div>
+                <div className="comment_wrapper" key={`mypage_${posts.postId}`}>
+                  <div className="time">
+                    {new Date(posts.createdAt).toLocaleDateString("ko-KR", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </div>
                   <div className="title">{posts.title}</div>
                   <div className="body">{posts.content}</div>
                 </div>
@@ -70,14 +75,16 @@ const StCommBoxTitle = styled.div`
 `;
 
 const StMyComm = styled.div`
-  /* margin-top: 50px; */
   border-top: 1px solid #c4cbcd;
   border-bottom: 0.5px solid #c4cbcd;
   width: 1000px;
   height: 100px;
   padding: 1%;
   margin: auto;
-  /* display: flex; */
+
+  .comment_wrapper {
+    text-align: left;
+  }
 
   .time {
     width: 150px;
@@ -87,8 +94,7 @@ const StMyComm = styled.div`
   }
   .title {
     border: 1px solid blue;
-
-    margin-left: 250px;
+    margin-left: 70px;
     font-size: 20px;
     font-weight: 600;
   }
