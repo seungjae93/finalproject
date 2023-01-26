@@ -87,27 +87,16 @@ const Review = () => {
         <StReviewBox>
           <StTitle>이집은 후기 작성하기</StTitle>
 
-          <StSearch>
-            <StButton onClick={handle.clickButton}> 주소 검색 </StButton>
-            {openPostcode && (
-              <DaumPostcode
-                style={{ width: "400px", height: "300px" }}
-                onComplete={handle.selectAddress} // 값을 선택할 경우 실행되는 이벤트
-                autoClose={false} // 값을 선택할 경우 사용되는 DOM을 제거하여 자동 닫힘 설정
-                defaultQuery="" // 팝업을 열때 기본적으로 입력되는 검색어
-              />
-            )}
-          </StSearch>
-
           <StContainer>
+            <StAdd> 주소 </StAdd>
+            <StButton onClick={handle.clickButton}> 주소 검색 </StButton>
             <StAddress>
-              <StAdd> 주소 </StAdd>
               <StInt
                 type="text"
                 name="address"
                 value={address}
                 onChange={() => {}}
-                placeholder="우편번호 찾기를 이용하세요(도로명주소)"
+                placeholder="주소 검색을 이용하세요(도로명주소 입력)"
                 size="45"
               />
             </StAddress>
@@ -117,31 +106,50 @@ const Review = () => {
                 name="setJibunAddress"
                 value={address_jibun}
                 onChange={() => {}}
-                placeholder="우편번호 찾기를 이용하세요(지번주소)"
+                placeholder="주소 검색을 이용하세요(지번주소 입력)"
                 size="45"
               />
             </StSeAddress>
 
+            {openPostcode && (
+              <DaumPostcode
+                style={{ width: "400px", height: "300px" }}
+                onComplete={handle.selectAddress} // 값을 선택할 경우 실행되는 이벤트
+                autoClose={false} // 값을 선택할 경우 사용되는 DOM을 제거하여 자동 닫힘 설정
+                defaultQuery="" // 팝업을 열때 기본적으로 입력되는 검색어
+              />
+            )}
+
             <StHomeSection>
               <StAddStyle> 주거 형태 </StAddStyle>
               <StAddStyle2>
-                <input
-                  type="radio"
-                  name="residence_type"
-                  value="원룸"
-                  onChange={onChangeHandler}
-                />
-                원룸
-                <input
-                  type="radio"
-                  name="residence_type"
-                  value="투룸"
-                  onChange={onChangeHandler}
-                />
-                투룸
+                <div className="selectOne">
+                  <label for="select1">
+                    <span>원룸</span>
+                  </label>
+                  <input
+                    type="radio"
+                    id="select1"
+                    name="residence_type"
+                    value="원룸"
+                    onChange={onChangeHandler}
+                  />
+                </div>
+                <div className="selectTwo">
+                  <label for="select2">
+                    <span>투룸</span>
+                  </label>
+                  <input
+                    id="select2"
+                    type="radio"
+                    name="residence_type"
+                    value="투룸"
+                    onChange={onChangeHandler}
+                  />
+                </div>
               </StAddStyle2>
               <StBasic>
-                <StBasicTitle>평수:</StBasicTitle>
+                <StBasicTitle>평수</StBasicTitle>
                 <input
                   type="number"
                   name="acreage"
@@ -149,8 +157,9 @@ const Review = () => {
                   onChange={onChangeHandler}
                   placeholder="평수 입력란입니다."
                 />
-                평
+                <span>평</span>
               </StBasic>
+              {/* <StAddStyle2> */}
               <input
                 type="radio"
                 name="transaction_type"
@@ -165,8 +174,9 @@ const Review = () => {
                 onChange={onChangeHandler}
               />
               전세
+              {/* </StAddStyle2> */}
               <StBasic>
-                <StBasicTitle>보증금:</StBasicTitle>
+                <StBasicTitle>보증금</StBasicTitle>
                 <input
                   type="number"
                   name="deposit"
@@ -174,10 +184,10 @@ const Review = () => {
                   onChange={onChangeHandler}
                   placeholder="보증금 입력란입니다."
                 />
-                원
+                <span>원</span>
               </StBasic>
               <StBasic>
-                <StBasicTitle>월세:</StBasicTitle>
+                <StBasicTitle>월세</StBasicTitle>
                 <input
                   type="number"
                   name="monthly_payment"
@@ -185,57 +195,56 @@ const Review = () => {
                   onChange={onChangeHandler}
                   placeholder="월세 입력란입니다."
                 />
-                원
+                <span>원</span>
               </StBasic>
             </StHomeSection>
 
             <StComment>
-              <StTitle> 이집은 후기 상세정보</StTitle>
-              <StTitleComment> Q1 벌래가 얼마나 자주 나오나요? </StTitleComment>
-              <StDetail>
-                <input
-                  type="radio"
-                  name="communication"
-                  value="1"
-                  onChange={onChangeHandler}
-                />
-                1
-                <input
-                  type="radio"
-                  name="communication"
-                  value="2"
-                  onChange={onChangeHandler}
-                />
-                2
-                <input
-                  type="radio"
-                  name="communication"
-                  value="3"
-                  onChange={onChangeHandler}
-                />
-                3
-                <input
-                  type="radio"
-                  name="communication"
-                  value="4"
-                  onChange={onChangeHandler}
-                />
-                4
-                <input
-                  type="radio"
-                  name="communication"
-                  value="5"
-                  onChange={onChangeHandler}
-                />
-                5
-              </StDetail>
-
               <StTitleComment>
-                Q2 하수구에서 냄새가 얼마나 올라오나요?
+                Q1.집주인과의 원활한 소통이 가능했나요?
               </StTitleComment>
               <StDetail>
                 <input
                   type="radio"
+                  name="communication"
+                  value="1"
+                  onChange={onChangeHandler}
+                />
+                1
+                <input
+                  type="radio"
+                  name="communication"
+                  value="2"
+                  onChange={onChangeHandler}
+                />
+                2
+                <input
+                  type="radio"
+                  name="communication"
+                  value="3"
+                  onChange={onChangeHandler}
+                />
+                3
+                <input
+                  type="radio"
+                  name="communication"
+                  value="4"
+                  onChange={onChangeHandler}
+                />
+                4
+                <input
+                  type="radio"
+                  name="communication"
+                  value="5"
+                  onChange={onChangeHandler}
+                />
+                5
+              </StDetail>
+
+              <StTitleComment>Q2 벌레가 많이 나오나요?</StTitleComment>
+              <StDetail>
+                <input
+                  type="radio"
                   name="bug"
                   value="1"
                   onChange={onChangeHandler}
@@ -271,7 +280,7 @@ const Review = () => {
                 5
               </StDetail>
 
-              <StTitleComment> Q3 층간소음이 심한가요?</StTitleComment>
+              <StTitleComment> Q3 하수구 냄새가 많이 나나요?</StTitleComment>
               <StDetail>
                 <input
                   type="radio"
@@ -310,7 +319,7 @@ const Review = () => {
                 5
               </StDetail>
 
-              <StTitleComment>Q4 벽간소음이 심한가요? </StTitleComment>
+              <StTitleComment>Q4.층간소음이 심한가요? </StTitleComment>
               <StDetail>
                 <input
                   type="radio"
@@ -349,10 +358,7 @@ const Review = () => {
                 5
               </StDetail>
 
-              <StTitleComment>
-                {" "}
-                Q5 거주지 주변 환경은 조용한가요?
-              </StTitleComment>
+              <StTitleComment>Q5 벽간 소음이 심한가요?</StTitleComment>
               <StDetail>
                 <input
                   type="radio"
@@ -391,7 +397,7 @@ const Review = () => {
                 5
               </StDetail>
 
-              <StTitleComment>Q6 결로나 곰팡이가 보이나요? </StTitleComment>
+              <StTitleComment>Q6.집 주변 환경이 조용한가요? </StTitleComment>
               <StDetail>
                 <input
                   type="radio"
@@ -430,9 +436,7 @@ const Review = () => {
                 5
               </StDetail>
 
-              <StTitleComment>
-                Q7 주차는 공간은 넉넉하고 편한가요?
-              </StTitleComment>
+              <StTitleComment>Q7.결로, 곰팡이가 심한가요?</StTitleComment>
               <StDetail>
                 <input
                   type="radio"
@@ -471,7 +475,7 @@ const Review = () => {
                 5
               </StDetail>
 
-              <StTitleComment>Q8 보안은 좋은가요?</StTitleComment>
+              <StTitleComment>Q8.주차가 편한가요?</StTitleComment>
               <StDetail>
                 <input
                   type="radio"
@@ -510,37 +514,70 @@ const Review = () => {
                 5
               </StDetail>
 
-              <StTitleComment> Q9 이집의 장점을 적어주세요 </StTitleComment>
+              <StTitleComment>Q9.보안이 잘 되어있나요?</StTitleComment>
+              <StDetail>
+                <input
+                  type="radio"
+                  name="safe"
+                  value="1"
+                  onChange={onChangeHandler}
+                />
+                1
+                <input
+                  type="radio"
+                  name="safe"
+                  value="2"
+                  onChange={onChangeHandler}
+                />
+                2
+                <input
+                  type="radio"
+                  name="safe"
+                  value="3"
+                  onChange={onChangeHandler}
+                />
+                3
+                <input
+                  type="radio"
+                  name="safe"
+                  value="4"
+                  onChange={onChangeHandler}
+                />
+                4
+                <input
+                  type="radio"
+                  name="safe"
+                  value="5"
+                  onChange={onChangeHandler}
+                />
+                5
+              </StDetail>
+
+              <StTitleComment> Q10. 이집의 장점을 적어주세요 </StTitleComment>
               <Sttextarea
                 name="good"
                 value={input.good}
                 onChange={onChangeHandler}
                 placeholder="장점을 자유롭게 적어 주세요"
-                cols="75"
+                cols="60"
                 rows="7"
               />
 
-              <StTitleComment> Q10 이집의 단점을 적어주세요 </StTitleComment>
+              <StTitleComment> Q11. 이집의 단점을 적어주세요 </StTitleComment>
               <Sttextarea
                 name="bad"
                 value={input.bad}
                 onChange={onChangeHandler}
                 placeholder="단점을 자유롭게 적어 주세요"
-                cols="75"
+                cols="60"
                 rows="7"
               />
 
-              <StTitleComment>이집의 별점을 선택해주세요</StTitleComment>
-              <StSelectStar name="star" onChange={onChangeHandler}>
-                <option value="">별점을 선택해 주세요</option>
-                <option value="1">⭐️</option>
-                <option value="2">⭐️⭐️</option>
-                <option value="3">⭐️⭐️⭐️</option>
-                <option value="4">⭐️⭐️⭐️⭐️</option>
-                <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
-              </StSelectStar>
-
               <StPicture>
+                <StTitleComment>Q12. 이집의 사진을 추가해주세요</StTitleComment>
+                <StCommentAdd>
+                  (청결도, 컨디션 등을 확인할 수 있는 사진)
+                </StCommentAdd>
                 <StUpload htmlFor="file"> 사진 업로드 </StUpload>
                 <input
                   type="file"
@@ -561,6 +598,18 @@ const Review = () => {
                   ))}
                 </StImageGruop>
               </StPicture>
+
+              <StTitleComment>
+                Q13.이 집의 종합적인 만족도를 별점으로 표현해 주세요
+              </StTitleComment>
+              <StSelectStar name="star" onChange={onChangeHandler}>
+                <option value="">별점을 선택해 주세요</option>
+                <option value="1">⭐️</option>
+                <option value="2">⭐️⭐️</option>
+                <option value="3">⭐️⭐️⭐️</option>
+                <option value="4">⭐️⭐️⭐️⭐️</option>
+                <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
+              </StSelectStar>
 
               <div>
                 <StBut onClick={onSubmitHandler}>
@@ -590,39 +639,38 @@ const StReviewBox = styled.div`
   background-color: #ffffff;
   margin: auto;
 `;
+const StContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+`;
 
 const StTitle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
   font-size: 25px;
   font-weight: bold;
-  margin-bottom: 20px;
-`;
-
-const StSelectStar = styled.select`
-  text-align: center;
-  width: 200px;
-  height: 2rem;
-  margin: 10px;
-  border: 2px solid #c4cbcd;
-  border-radius: 10px;
-  color: black;
+  padding-bottom: 30px;
+  padding-top: 50px;
 `;
 
 const StButton = styled.button`
-  margin-left: 650px;
-  padding: 6px 25px;
-  background-color: white;
-  border: 2px solid #aec90c;
-  border-radius: 8px;
+  position: absolute;
+  top: 275px;
+  margin-left: 610px;
+  width: 121px;
+  height: 34px;
+  background-color: #c4cbcd;
+  border: none;
+  border-radius: 5px;
   font-size: 20px;
 
   cursor: pointer;
   :hover {
     background-color: #aec90c;
-    transition: 0.5s;
+    transition: 0.3s;
   }
 `;
 
@@ -630,15 +678,33 @@ const StSearch = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  margin-bottom: 10px;
+  width: 500px;
 `;
 
-const StContainer = styled.form`
+const StAddress = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
+  text-align: center;
+  padding-top: 80px;
+  padding-left: 150px;
+`;
+
+const StSeAddress = styled.div`
+  display: flex;
+  margin-top: 10px;
+  margin-left: 150px;
+`;
+
+const StAdd = styled.div`
+  font-size: 20px;
+  font-weight: 600;
+  margin-right: 20px;
+  margin-top: 15px;
+  position: absolute;
+`;
+
+const StCommentAdd = styled.div`
+  font-size: 15px;
+  margin-bottom: 30px;
 `;
 
 const StPicture = styled.div`
@@ -669,20 +735,6 @@ const StUpload = styled.label`
   cursor: pointer;
 `;
 
-const StAddress = styled.div`
-  display: flex;
-  text-align: center;
-  justify-content: space-between;
-  width: 60%;
-  margin-left: auto;
-  margin-right: auto;
-`;
-
-const StAdd = styled.div`
-  font-size: 20px;
-  font-weight: 600;
-`;
-
 const StInt = styled.input`
   margin-right: 150px;
   width: 450px;
@@ -694,27 +746,18 @@ const StInt = styled.input`
   }
 `;
 
-const StSeAddress = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  width: 60%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10px;
-`;
-
 const StBasic = styled.div`
+  width: 300px;
   display: flex;
   margin-bottom: 5%;
 `;
 
 const StBasicTitle = styled.div`
   font-size: 16px;
-  margin-right: 3%;
+  margin-right: 18px;
 `;
 
 const StHomeSection = styled.div`
-  border: 1px solid red;
   display: block;
   padding: 2%;
   text-align: center;
@@ -723,20 +766,67 @@ const StHomeSection = styled.div`
 const StAddStyle = styled.div`
   font-size: 20px;
   font-weight: 600;
-  padding-top: 70px;
+  padding-top: 50px;
   padding-bottom: 30px;
 `;
 
 const StAddStyle2 = styled.div`
   padding-bottom: 20px;
+  display: flex;
+  .selectOne {
+    width: 170px;
+    height: 34px;
+    border: 1px solid gray;
+    border-radius: 10px;
+  }
+  .selectOne input[type="radio"] {
+    display: none;
+    vertical-align: middle;
+  }
+  .selectOne label {
+    cursor: pointer;
+    display: block;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 34px;
+  }
+
+  .selectOne input[type="radio"]:checked {
+    border: 2px solid #c1de0d;
+    background-color: #c1de0d;
+  }
+
+  .selectTwo {
+    width: 170px;
+    height: 34px;
+    border: 1px solid gray;
+    border-radius: 10px;
+  }
+  .selectTwo input[type="radio"] {
+    display: none;
+    vertical-align: middle;
+  }
+  .selectTwo label {
+    cursor: pointer;
+    display: block;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 34px;
+  }
+
+  /* label:hover {
+    border: 1px solid #c1de0d;
+  } */
+
+  span {
+    vertical-align: middle;
+    font-size: 18px;
+  }
 `;
 
 const StComment = styled.div`
   text-align: center;
-  width: 50%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 60px;
+  margin-top: 10px;
 `;
 
 const StTitleComment = styled.div`
@@ -751,12 +841,22 @@ const StDetail = styled.div`
 
 const Sttextarea = styled.textarea`
   margin-top: 20px;
-  border: 2px solid gray;
-  border-radius: 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
   resize: none;
   ::placeholder {
     color: gray;
   }
+`;
+
+const StSelectStar = styled.select`
+  text-align: center;
+  width: 200px;
+  height: 2rem;
+  margin: 10px;
+  border: 2px solid #c4cbcd;
+  border-radius: 10px;
+  color: black;
 `;
 
 const StBut = styled.button`

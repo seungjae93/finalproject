@@ -58,6 +58,7 @@ const MainPage = () => {
               <div className="reviewContent2">
                 당신이 알고싶은 진짜 집의 정보를 알려드립니다.
               </div>
+              {/* 이 버튼은 왜 작동을 안하는가?????? */}
               <button
                 className="aboutBtn1"
                 onClick={() => {
@@ -66,7 +67,12 @@ const MainPage = () => {
               >
                 후기 보러가기
               </button>
-              <button className="aboutBtn2" onClick={reviewHandler}>
+              <button
+                className="aboutBtn2"
+                onClick={() => {
+                  navigate("/review");
+                }}
+              >
                 후기 쓰러가기
               </button>
             </StReviewBox1>
@@ -207,7 +213,6 @@ const StSectionHome = styled.section`
   max-width: 1920px;
   height: 550px;
   margin: auto;
-  padding-top: 85px;
   padding-left: 170px;
   text-align: center;
   display: flex;
@@ -215,8 +220,6 @@ const StSectionHome = styled.section`
 
 const StMainImage = styled.div`
   .mainImg {
-    position: relative;
-    top: -9vh;
     width: 1254px;
     height: 550px;
   }
@@ -270,32 +273,6 @@ const StSectionReview = styled.div`
   max-width: 1920px;
   height: 450px;
 
-  .aboutBtn1 {
-    background-color: #c1de0d;
-    font-size: 20px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 340px;
-    height: 50px;
-    display: block;
-    margin-top: 15px;
-    margin-left: 75px;
-  }
-  .aboutBtn2 {
-    background-color: white;
-    border: 2px solid #c1de0d;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 340px;
-    height: 50px;
-    display: block;
-    margin-top: 15px;
-    margin-left: 75px;
-  }
   .aboutImg {
     width: 250px;
     height: 257px;
@@ -326,6 +303,31 @@ const StReviewBox1 = styled.div`
     font-size: 20px;
     padding-bottom: 20px;
     padding-left: 80px;
+  }
+  .aboutBtn1 {
+    background-color: #c1de0d;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 340px;
+    height: 50px;
+    margin-top: 15px;
+    margin-left: 75px;
+  }
+  .aboutBtn2 {
+    background-color: white;
+    border: 2px solid #c1de0d;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 340px;
+    height: 50px;
+    display: block;
+    margin-top: 15px;
+    margin-left: 75px;
   }
 `;
 

@@ -39,6 +39,7 @@ const MyReview = () => {
                       alt="star"
                     />
                     <div className="starPoint">{reviews.star} / 5</div>
+                    <button className="delBtn">삭제</button>
                   </div>
                 </StMyReview>
               );
@@ -73,7 +74,6 @@ const StReviewBoxTitle = styled.div`
 `;
 
 const StMyReview = styled.div`
-  border: 1px solid red;
   background-color: #f0f0f0;
   width: 1000px;
   height: 60px;
@@ -84,29 +84,39 @@ const StMyReview = styled.div`
   display: flex;
   .review_wrapper {
     display: flex;
-    /* align-items: center; */
-    /* width: 100px; */
+    align-items: center;
     text-align: left;
   }
 
   .time {
     width: 180px;
-    border: 1px solid blue;
     padding-left: 10px;
   }
   .address {
-    border: 1px solid blue;
     padding-left: 20px;
     font-size: 20px;
     font-weight: 600;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
   }
   .star {
     padding-right: 10px;
-    padding-left: 280px;
+    padding-left: 150px;
   }
   .starPoint {
     font-size: 23px;
     font-weight: 600;
     color: #aec90a;
+  }
+  .delBtn {
+    border: 1px solid #aec90a;
+    width: 65px;
+    height: 30px;
+    border-radius: 5%;
+    color: #2d2d2d;
+    margin-left: 90px;
+    cursor: pointer;
   }
 `;

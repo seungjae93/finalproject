@@ -54,26 +54,27 @@ const Header = () => {
           />
         </div>
         <StNavbarMenu>
-          <StNavbarMenuItem
-            onClick={() => {
-              navigate("/map");
-            }}
-          >
-            지도
-          </StNavbarMenuItem>
+          <div>
+            <StNavbarMenuItem
+              onClick={() => {
+                navigate("/map");
+              }}
+            >
+              지도
+            </StNavbarMenuItem>
 
-          <StNavbarMenuItem onClick={onCommentHanler}>
-            후기작성
-          </StNavbarMenuItem>
+            <StNavbarMenuItem onClick={onCommentHanler}>
+              후기작성
+            </StNavbarMenuItem>
 
-          <StNavbarMenuItem
-            onClick={() => {
-              navigate("/list");
-            }}
-          >
-            커뮤니티
-          </StNavbarMenuItem>
-
+            <StNavbarMenuItem
+              onClick={() => {
+                navigate("/list");
+              }}
+            >
+              커뮤니티
+            </StNavbarMenuItem>
+          </div>
           {userStatus ? (
             <>
               <StNavbarMenuItem
@@ -88,10 +89,7 @@ const Header = () => {
               </StNavbarMenuItem>
             </>
           ) : (
-            <Stkakalogin
-              src={require("../images/kakaologo.jpg")}
-              onClick={onLogin}
-            ></Stkakalogin>
+            <StNavbarMenuItem onClick={onLogin}>로그인</StNavbarMenuItem>
           )}
         </StNavbarMenu>
       </StNavbar>
@@ -103,13 +101,12 @@ export default Header;
 
 const StNavbar = styled.nav`
   border-bottom: 1px solid #c4cbcd;
+
+  align-items: center;
+  display: flex;
   width: 100%;
   height: 80px;
-  display: flex;
-  justify-content: space-around;
   background-color: white;
-  align-items: center;
-  padding: 5px;
   font-family: "Open Sans", sans-serif;
 `;
 
@@ -117,38 +114,22 @@ const StLogo = styled.img`
   width: 200px;
   height: 70px;
   cursor: pointer;
-  padding-left: 8vw;
+  padding-left: 200px;
 `;
 
 const StNavbarMenu = styled.ul`
   display: flex;
-  padding-top: 5vh;
+  padding-top: 10px;
+  padding-left: 500px;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const StNavbarMenuItem = styled.button`
   border: none;
   background-color: transparent;
   font-size: 17px;
-  padding: 10px 4px;
-  margin: 5px;
-
-  cursor: pointer;
-  position: relative;
-  left: -10%;
-  top: -3vh;
-  justify-content: flex-end;
-`;
-
-const StImg = styled.img`
-  position: relative;
-  left: -10%;
-  top: -3vh;
-  cursor: pointer;
-`;
-
-const Stkakalogin = styled.img`
-  position: relative;
-  left: -10%;
-  top: -3vh;
+  padding-left: 20px;
+  align-items: flex-end;
   cursor: pointer;
 `;

@@ -20,16 +20,24 @@ const Footer = () => {
             로그인/회원가입
           </Link>
         </StFooterBtn>
-        <StFooterContent>
-          <div className="footerTitle">이집은(Ezipeun)</div>
-          <div className="footerName">
-            참여자:박영호(팀장),서정득,권태형,이승재(부팀장),조민욱,이희승
-          </div>
-        </StFooterContent>
-        <StFooterLogo>
-          <div className="logo">이집은</div>
-          <div className="footerCopy">All rights reserved,2023</div>
-        </StFooterLogo>
+        <StFooterWrap>
+          <StFooterContent>
+            <div className="footerTitle">이집은(Ezipeun)</div>
+            <div className="footerName">
+              참여자: 박영호(팀장),서정득,권태형, 이승재(부팀장),조민욱,이희승
+            </div>
+          </StFooterContent>
+          <StFooterLogo>
+            <div className="logo">
+              <img
+                className="footerLogo"
+                src={require("../images/Group 478.png")}
+                alt="logo"
+              />
+            </div>
+            <div className="footerCopy">All rights reserved,2023</div>
+          </StFooterLogo>
+        </StFooterWrap>
       </StSectionFooter>
     </>
   );
@@ -41,7 +49,7 @@ const StSectionFooter = styled.div`
   max-width: 1920px;
   height: 200px;
   margin: auto;
-  background-color: #d7dbdc;
+  background-color: #f3f5f5f5;
   align-items: center;
 `;
 
@@ -60,6 +68,10 @@ const StFooterBtn = styled.div`
   }
 `;
 
+const StFooterWrap = styled.div`
+  display: flex;
+`;
+
 const StFooterContent = styled.div`
   padding-top: 60px;
   padding-left: 200px;
@@ -68,6 +80,7 @@ const StFooterContent = styled.div`
     color: #737d81;
     font-size: 20px;
     font-weight: 600;
+    padding-bottom: 15px;
   }
   .footerName {
     color: #737d81;
@@ -77,9 +90,10 @@ const StFooterContent = styled.div`
 `;
 
 const StFooterLogo = styled.div`
-  padding-left: 800px;
-  border: 1px solid red;
+  padding-left: 480px;
+  padding-top: 60px;
   .footerCopy {
     color: #737d81;
+    padding-top: 15px;
   }
 `;
