@@ -18,6 +18,23 @@ export const getCommunity = async () => {
   return response.data;
 };
 
+//무한 스크롤
+export const getScrollCommunity = async (pageParam) => {
+  const accessToken = getCookie("token");
+  setToken(accessToken);
+  const headers = { authorization: `Bearer ${accessToken}` };
+  const response = await instance.get(
+    `/posts?postLocation1=${""}&postLocation2=${""}&page=${pageParam}`,
+    { headers: headers }
+  );
+  return response.data;
+  //   return {
+  //     products: response.data,
+  //     offset: pageParam,
+  //     isLast: response.isLast,
+  // };
+};
+
 //post
 const addCommunity = async (formData) => {
   const accessToken = getCookie("token");

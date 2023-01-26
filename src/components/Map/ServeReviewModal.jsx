@@ -1,23 +1,31 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 
 const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
   const [detailModal, setDetailModal] = useState(false);
   const [imageModal, setImageModal] = useState(false);
   const modalRef = useRef(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openDetailModal = (reviewId) => {
-    setDetailModal({ ...detailModal, [reviewId]: true });
-    const handler = (e) => {
-      if (modalRef.current && !modalRef.current.contains(e.target)) {
-        setDetailModal({ ...detailModal, [reviewId]: false });
-      }
-    };
-    document.addEventListener("mousedown", handler);
-    return () => {
+    setIsModalOpen(!isModalOpen);
+    setDetailModal((prevState) => {
+      Object.keys(prevState).forEach((key) => (prevState[key] = false));
+      return { ...prevState, [reviewId]: isModalOpen };
+    });
+    let handler;
+    if (isModalOpen) {
       document.removeEventListener("mousedown", handler);
-    };
+    } else {
+      const handler = (e) => {
+        if (modalRef.current && !modalRef.current.contains(e.target)) {
+          setDetailModal({ ...detailModal, [reviewId]: false });
+        }
+      };
+      document.addEventListener("mousedown", handler);
+    }
   };
+
   const onImageModal = (imageUrl) => {
     setImageModal(imageUrl);
   };
@@ -66,7 +74,10 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
 
               {detailModal[review.reviewId] && (
                 <>
-                  <StDetailModal ref={modalRef}>
+                  <StDetailModal
+                    ref={modalRef}
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <StMonthly>
                       보증금 : {review.deposit} / 월세 :{" "}
                       {review.monthly_payment}

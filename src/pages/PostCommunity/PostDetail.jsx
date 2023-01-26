@@ -59,9 +59,7 @@ const PostDetail = () => {
             </div>
           </StInfor>
 
-          <div>
-            <StDetailImage src={data?.post?.postImage} />
-          </div>
+          <StDetailImage src={data?.post?.postImage} />
 
           <StContent> {data?.post.content} </StContent>
         </StContainer>
@@ -136,11 +134,10 @@ const StDate = styled.div`
 `;
 
 const StDetailImage = styled.img`
-  border: 0px solid black;
+  border: none;
   margin-top: 30px;
   width: 100%;
   height: 500px;
-  border-radius: 20px;
 `;
 
 const StContent = styled.div`

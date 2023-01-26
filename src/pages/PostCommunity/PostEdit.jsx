@@ -238,7 +238,6 @@ const StyledImage = styled.img`
   width: 150px;
   height: 120px;
   border: none;
-  border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 `;
 

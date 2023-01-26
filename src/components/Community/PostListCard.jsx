@@ -54,6 +54,7 @@ const StImageCarrier = styled.img`
   width: 350px;
   height: 170px;
   border-radius: 10px 10px 0 0;
+  border: none;
 `;
 
 const StCommunityBox = styled.div`
