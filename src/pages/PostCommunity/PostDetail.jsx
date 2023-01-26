@@ -13,7 +13,7 @@ const PostDetail = () => {
     detailCommunity(postId)
   );
 
-  const nickname = localStorage.getItem("nickname");
+  const email = localStorage.getItem("email");
 
   const deleteCommunityCallback = async (postId) => {
     await deleteCommunity(postId);
@@ -32,7 +32,7 @@ const PostDetail = () => {
 
           <StInfor>
             <StNicDa>
-              <StNicName> {data?.post.nickname} | </StNicName>
+              <StNicName> {data?.post.email} | </StNicName>
               <StDate>
                 {new Date(data?.post.createdAt).toLocaleDateString("ko-KR", {
                   year: "numeric",
@@ -43,7 +43,7 @@ const PostDetail = () => {
             </StNicDa>
 
             <div>
-              {data?.post.nickname === nickname ? (
+              {data?.post.email === email ? (
                 <StButton
                   onClick={() => navigate(`/edit/${data?.post.postId}`)}
                 >
@@ -51,7 +51,7 @@ const PostDetail = () => {
                 </StButton>
               ) : null}
 
-              {data?.post.nickname === nickname ? (
+              {data?.post.email === email ? (
                 <StButton onClick={() => deleteCommunityCallback(postId)}>
                   삭제하기
                 </StButton>
@@ -59,7 +59,9 @@ const PostDetail = () => {
             </div>
           </StInfor>
 
-          <StDetailImage src={data?.post?.postImage} />
+          <div>
+            <StDetailImage src={data?.post?.postImage} />
+          </div>
 
           <StContent> {data?.post.content} </StContent>
         </StContainer>

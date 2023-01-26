@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import styled from "styled-components";
 
 const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
@@ -54,7 +54,7 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
             >
               <StReview>
                 <StScore>
-                  <div>별</div>
+                  <img src={require("../../images/Star 165.png")} alt="star" />
 
                   <StAverage> {review.star} </StAverage>
 

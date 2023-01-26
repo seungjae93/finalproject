@@ -15,7 +15,7 @@ const Comment = () => {
   const [editOn, setEditOn] = useState("");
   const [input, setInput] = useState("");
 
-  const nickname = localStorage.getItem("nickname");
+  const email = localStorage.getItem("email");
 
   const { data, isLoading, isError, error } = useQuery(
     ["comments", postId],
@@ -55,7 +55,7 @@ const Comment = () => {
             <Stinput onChange={(e) => setInput(e.target.value)} value={input} />
 
             <StCommentBut>
-              <StNickDate> {comments.nickname} </StNickDate>
+              <StNickDate> {comments.email} </StNickDate>
               <StNickDate>
                 {new Date(comments?.createdAt).toLocaleDateString("ko-KR", {
                   year: "numeric",
@@ -80,7 +80,7 @@ const Comment = () => {
             <StComment>{comments.content}</StComment>
 
             <StCommentBut>
-              <StNickDate> {comments.nickname} </StNickDate>
+              <StNickDate> {comments.email} </StNickDate>
               <StNickDate>
                 {new Date(comments?.createdAt).toLocaleDateString("ko-KR", {
                   year: "numeric",
@@ -91,7 +91,7 @@ const Comment = () => {
                 })}
               </StNickDate>
 
-              {comments.nickname === nickname ? (
+              {comments.email === email ? (
                 <div>
                   <StBut
                     onClick={() => {

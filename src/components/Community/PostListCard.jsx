@@ -5,7 +5,10 @@ import { Link } from "react-router-dom";
 const PostListCard = ({ posts }) => {
   return (
     <StCardWrapper to={`/${posts.postId}`}>
-      <StImageCarrier alt="" src={posts?.postImage}></StImageCarrier>
+      {posts?.postImage ? (
+        <StImageCarrier alt="" src={posts?.postImage}></StImageCarrier>
+      ) : null}
+
       <StCommunityBox>
         <StTitleCarrier>
           <p>{posts?.title}</p>
@@ -15,7 +18,7 @@ const PostListCard = ({ posts }) => {
         </StContentCarrier>
         <StBox>
           <StName>
-            <StNickName> {posts?.nickname} </StNickName>
+            <StNickName> {posts?.email} </StNickName>
             <div>
               {new Date(posts.createdAt).toLocaleDateString("ko-KR", {
                 year: "numeric",
