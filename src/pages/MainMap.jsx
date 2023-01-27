@@ -58,10 +58,9 @@ const MainMap = () => {
   }, 700);
 
   //검색어 클릭시 input값 변환
-  const clickDropDownItem = (clickedItem) => {
-    setSearchAddress(clickedItem);
-    setIsHaveInputValue(false);
-    onSearchHandler();
+  const clickDropDownItem = (el) => {
+    setSearchAddress(el);
+    onSearchHandler(el);
   };
 
   // 검색창 키보드 이동
@@ -108,15 +107,20 @@ const MainMap = () => {
   };
 
   //키워드로 장소를 검색
-  const onSearchHandler = useCallback(async () => {
-    ps.keywordSearch(`${searchAddress}`, placesSearchCB);
-    try {
-      await axios.post(`${process.env.REACT_APP_API_MAP_SERVER}/search`, {
-        text: `${searchAddress}`,
-      });
-    } catch (error) {}
-    setSearchAddress("");
-  }, [searchAddress]);
+  const onSearchHandler = useCallback(
+    async (el) => {
+      el
+        ? ps.keywordSearch(`${el}`, placesSearchCB)
+        : ps.keywordSearch(`${searchAddress}`, placesSearchCB);
+      try {
+        await axios.post(`${process.env.REACT_APP_API_MAP_SERVER}/search`, {
+          text: `${searchAddress}`,
+        });
+      } catch (error) {}
+      setSearchAddress("");
+    },
+    [searchAddress]
+  );
 
   //마우스 휠 이동시 지도 레벨 변화에 따라 동서남북좌표 보내는 부분
   const onPosHandler = async (value) => {
