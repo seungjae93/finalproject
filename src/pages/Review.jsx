@@ -65,7 +65,7 @@ const Review = () => {
       setOpenPostcode((current) => !current);
     },
 
-    // 주소 선택 이벤트*
+    // 주소 선택 이벤트
     selectAddress: (data) => {
       setAddress(data.address + data.buildingName);
       setJibunAddress(inputValue(data));
@@ -783,6 +783,10 @@ const StAddStyle2 = styled.div`
     display: none;
     vertical-align: middle;
   }
+  .selectOne input[type="radio"]:checked {
+    border: 2px solid #c1de0d;
+    background-color: #c1de0d;
+  }
   .selectOne label {
     cursor: pointer;
     display: block;
@@ -790,12 +794,6 @@ const StAddStyle2 = styled.div`
     text-align: center;
     line-height: 34px;
   }
-
-  .selectOne input[type="radio"]:checked {
-    border: 2px solid #c1de0d;
-    background-color: #c1de0d;
-  }
-
   .selectTwo {
     width: 170px;
     height: 34px;
@@ -814,9 +812,9 @@ const StAddStyle2 = styled.div`
     line-height: 34px;
   }
 
-  /* label:hover {
+  label:hover {
     border: 1px solid #c1de0d;
-  } */
+  }
 
   span {
     vertical-align: middle;
