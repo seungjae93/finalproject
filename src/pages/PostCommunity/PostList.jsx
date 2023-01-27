@@ -1,17 +1,28 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { debounce } from "lodash";
 import { getCommunity } from "../../redux/api/communityApi";
 import { hangjungdong } from "../../components/Community/hangjungdong";
 import PostListCard from "../../components/Community/PostListCard";
 import InfiniteScroll from "react-infinite-scroller";
+import { useInView } from "react-intersection-observer";
 
 const PostList = () => {
   const navigate = useNavigate();
-  const [selected, setSelected] = useState({});
+  const [selected, setSelected] = useState({
+    postLocation1: "",
+    postLocation2: "",
+  });
   const { postLocation1, postLocation2 } = hangjungdong;
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [clickOrder, setClickOrder] = useState("");
+  const [ref, inView] = useInView({
+    // thresholed
+  });
 
   const { login } = useSelector((state) => state.user);
 
@@ -20,13 +31,18 @@ const PostList = () => {
     error,
     isLoading,
     isError,
-    isFetching,
+    // isFetching,
     fetchNextPage,
     hasNextPage,
+    refetch,
   } = useInfiniteQuery(
-    ["posts"],
-    ({ pageParam = 0 }) => getCommunity(pageParam),
+    ["posts", clickOrder, selected],
+    ({ pageParam = 1 }) =>
+      getCommunity(pageParam, searchTerm, clickOrder, selected),
 
+    // {
+    //   cacheTime: 20000, //20초
+    // },
     {
       getNextPageParam: (lastPage) =>
         // const maxPage = lastPage.total_count / 24
@@ -46,6 +62,16 @@ const PostList = () => {
       alert("로그인을 해주세요");
     } else navigate("/post");
   };
+
+  const throttledRefetch = useCallback(debounce(refetch, 200), []);
+
+  useEffect(() => {
+    throttledRefetch({ searchTerm });
+    if (!inView) {
+      return;
+    }
+    fetchNextPage();
+  }, [searchTerm, throttledRefetch, inView]);
 
   if (isLoading) return <h2> 로딩중 .. </h2>;
   if (isError) return <h2> Error : {error.toString()} </h2>;
@@ -75,24 +101,35 @@ const PostList = () => {
                 ))}
             </StSeleteL>
           </div>
-          <StSearch type="text" placeholder="검색하기" />
+          <StSearch
+            type="text"
+            placeholder="검색하기"
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              throttledRefetch();
+            }}
+          />
         </StSelete>
       </StSeleteBox>
+
       <StOrder>
         <div>
           <StPost onClick={onPostHandler}> + </StPost>
         </div>
         <div>
-          <StTrend> 최신순 </StTrend>
+          <StTrend onClick={() => setClickOrder("recent")}>최신순</StTrend>
 
-          <StTrend> 댓글순 </StTrend>
+          <StTrend onClick={() => setClickOrder("trend")}>댓글순</StTrend>
         </div>
       </StOrder>
-      {isFetching && <div>Loading..</div>}{" "}
-      <InfiniteScroll hasMore={hasNextPage} loadMore={fetchNextPage}>
+      {/* {isFetching && <div>Loading..</div>} */}
+      <InfiniteScroll
+        hasMore={hasNextPage && !isLoading}
+        loadMore={fetchNextPage}
+      >
         <STPostCon>
-          {data?.pages[0]?.posts ? (
-            data?.pages[0]?.posts.map((posts) => {
+          {data.pages[0].posts ? (
+            data.pages[0].posts.map((posts) => {
               return (
                 <PostListCard key={`main_${posts.postId}`} posts={posts} />
               );
@@ -102,6 +139,7 @@ const PostList = () => {
           )}
         </STPostCon>
       </InfiniteScroll>
+      <div ref={ref} style={{ height: "100px" }}></div>
     </>
   );
 };
