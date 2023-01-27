@@ -20,30 +20,34 @@ const TotalReview = ({ estateIdData }) => {
   const showModal = () => {
     setModalOpen(true);
   };
+
+  console.log(data);
   return (
     <>
       <div>건물명 : {data?.estate?.address_jibun} </div>
       {estateInfoData?.map((el) => {
         return (
           <StModalContainer>
-            <div>집주인이 문제를 잘 해결해주시나요? {el.communication}</div>
-            <ReviewInfoBar communication={el.communication} />
-            <div>보안은 어떤가요? {el.safe}</div>
-            <ReviewInfoBar safe={el.safe} />
-            <div>벌레가 나오나요? {el.bug}</div>
-            <ReviewInfoBar bug={el.bug} />
-            <div>하수구 냄새가 나나요? {el.smell}</div>
-            <ReviewInfoBar smell={el.smell} />
-            <div>층간소음이 심한가요? {el.floor_noise}</div>
-            <ReviewInfoBar floor_noise={el.floor_noise} />
-            <div>벽간소음이 심한가요? {el.walls_noise}</div>
-            <ReviewInfoBar walls_noise={el.walls_noise} />
-            <div>동네소음이 심한가요? {el.town_noise}</div>
-            <ReviewInfoBar town_noise={el.town_noise} />
-            <div>결로/곰팡이가 생기나요? {el.mold}</div>
-            <ReviewInfoBar mold={el.mold} />
-            <div>주차가 편리한가요? {el.parking}</div>
-            <ReviewInfoBar parking={el.parking} />
+            <div>
+              집주인이 문제를 잘 해결해주시나요? {el.communication.toFixed(1)}
+            </div>
+            <ReviewInfoBar communication={el.communication.toFixed(1)} />
+            <div>보안은 어떤가요? {el.safe.toFixed(1)}</div>
+            <ReviewInfoBar safe={el.safe.toFixed(1)} />
+            <div>벌레가 나오나요? {el.bug.toFixed(1)}</div>
+            <ReviewInfoBar bug={el.bug.toFixed(1)} />
+            <div>하수구 냄새가 나나요? {el.smell.toFixed(1)}</div>
+            <ReviewInfoBar smell={el.smell.toFixed(1)} />
+            <div>층간소음이 심한가요? {el.floor_noise.toFixed(1)}</div>
+            <ReviewInfoBar floor_noise={el.floor_noise.toFixed(1)} />
+            <div>벽간소음이 심한가요? {el.walls_noise.toFixed(1)}</div>
+            <ReviewInfoBar walls_noise={el.walls_noise.toFixed(1)} />
+            <div>동네소음이 심한가요? {el.town_noise.toFixed(1)}</div>
+            <ReviewInfoBar town_noise={el.town_noise.toFixed(1)} />
+            <div>결로/곰팡이가 생기나요? {el.mold.toFixed(1)}</div>
+            <ReviewInfoBar mold={el.mold.toFixed(1)} />
+            <div>주차가 편리한가요? {el.parking.toFixed(1)}</div>
+            <ReviewInfoBar parking={el.parking.toFixed(1)} />
           </StModalContainer>
         );
       })}
