@@ -15,7 +15,7 @@ const FeatureButton = () => {
           Large Primary Button
         </Button.Primary>
         <Button.Primary size="medium">Medium</Button.Primary>
-        <Button.Primary>Small</Button.Primary>
+        <Button.Primary size="small">Small</Button.Primary>
       </Stack>
 
       <Stack gap={10}>
@@ -27,7 +27,7 @@ const FeatureButton = () => {
           Large Negative Button
         </Button.Negative>
         <Button.Negative size="medium">Medium</Button.Negative>
-        <Button.Negative>Small</Button.Negative>
+        <Button.Negative size="small">Small</Button.Negative>
       </Stack>
     </Stack>
   );

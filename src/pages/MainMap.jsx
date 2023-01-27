@@ -4,6 +4,7 @@ import axios from "axios";
 import { throttle, debounce } from "lodash";
 import { Map, MapMarker, CustomOverlayMap } from "react-kakao-maps-sdk";
 import TotalReview from "../components/Map/TotalReview";
+import Button from "../components/button/Button";
 
 const { kakao } = window;
 
@@ -19,9 +20,12 @@ const MainMap = () => {
 
   //자동검색
   const [searchAddress, setSearchAddress] = useState("");
+  const [autoSearchKeyword, setAutoSearchKeyword] = useState("");
   const [searchData, setSearchData] = useState([]);
   const [isHaveInputValue, setIsHaveInputValue] = useState(false);
   const [dropDownDataIndex, setDropDownDataIndex] = useState(-1);
+  const inputRef = useRef(null);
+  const scrollRef = useRef(null);
 
   //지도 레벨
   const [zoomLevel, setZoomLevel] = useState(3.5);
@@ -37,7 +41,6 @@ const MainMap = () => {
 
   //마커 클릭시 props 넘기기
   const [markerClickOn, setMarkerClickOn] = useState(false);
-  const inputRef = useRef();
 
   //검색어 받아오는 로직
   const onAddressHandler = throttle(async (e) => {
@@ -53,7 +56,6 @@ const MainMap = () => {
 
       const { data } = response?.data;
       setSearchData(data);
-      setIsHaveInputValue(true);
     } catch (error) {}
   }, 700);
 
@@ -72,9 +74,23 @@ const MainMap = () => {
     if (e.key === Enter) {
       onSearchHandler();
     }
-    if (searchAddress === "") {
-      setDropDownDataIndex(-1);
+    if (searchData.length > 0) {
+      switch (e.key) {
+        case ArrowDown:
+          setDropDownDataIndex(dropDownDataIndex + 1);
+          if (inputRef.current?.childElementCount === dropDownDataIndex + 1)
+            setDropDownDataIndex(0);
+          break;
+        case ArrowUp:
+          setDropDownDataIndex(dropDownDataIndex - 1);
+          if (dropDownDataIndex <= 0) {
+            searchData([]);
+            setDropDownDataIndex(-1);
+          }
+          break;
+      }
     }
+
     if (e.key === ArrowDown) {
       setDropDownDataIndex(dropDownDataIndex + 1);
       /* childElementCount는 li tag의 개수를 의미하고, 검색 내역 인덱스 키워드에서
@@ -286,19 +302,20 @@ const MainMap = () => {
   return (
     <>
       <StContainer>
-        <SearchContainer isHaveInputValue={isHaveInputValue}>
+        <SearchContainer>
           <StSearch
             type="search"
             onKeyDown={onSubmitSearch}
             onChange={onAddressHandler}
-            value={searchAddress}
+            value={isHaveInputValue ? autoSearchKeyword : searchAddress}
           />
           {searchAddress && (
-            <AutoSearchContainer ref={inputRef}>
-              <AutoSearchWrap>
+            <AutoSearchContainer>
+              <AutoSearchWrap ref={inputRef}>
                 {searchData?.map((el, index) => {
                   return (
                     <AutoSearchData
+                      isFocus={dropDownDataIndex === index ? true : false}
                       key={searchData.index}
                       onClick={() => clickDropDownItem(el)}
                       onMouseOver={() =>
@@ -312,7 +329,9 @@ const MainMap = () => {
               </AutoSearchWrap>
             </AutoSearchContainer>
           )}
-          <button onClick={onSearchHandler}>검색</button>
+          <Button.Primary size="small" onClick={onSearchHandler}>
+            검색하기
+          </Button.Primary>
         </SearchContainer>
 
         <StWrapper>
@@ -417,7 +436,7 @@ const StSearch = styled.input`
 `;
 const AutoSearchContainer = styled.div`
   position: absolute;
-  width: 23%;
+  width: 25%;
   height: 25vh;
   top: 45px;
   z-index: 3;

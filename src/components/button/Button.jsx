@@ -28,9 +28,9 @@ const PrimaryButton = (props) => {
   return (
     <PrimitiveButton
       {...props}
-      bc="#55efc4"
+      bc="#C1DE0D"
       color="#000000"
-      activeBc="#00b894"
+      activeBc="#8CAC00"
     />
   );
 };
@@ -43,9 +43,9 @@ const NegativeButton = (props) => {
   return (
     <PrimitiveButton
       {...props}
-      bc="#fab1a0"
-      color="#d63031"
-      activeBc="#e17055"
+      bc="#C4CBCD"
+      color="#2D2D2D"
+      activeBc="#949A9C"
     />
   );
 };
@@ -59,7 +59,7 @@ export default Button;
 const StyledButton = styled.button`
   border: none;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 5px;
   background-color: ${({ bc }) => bc};
   color: ${({ color }) => color};
   font-weight: ${({ fw }) => fw};
@@ -71,17 +71,17 @@ const StyledButton = styled.button`
       case "large":
         return css`
           height: 50px;
-          width: 200px;
+          width: 340px;
         `;
       case "medium":
         return css`
-          height: 45px;
-          width: 130px;
+          height: 34px;
+          width: 121px;
         `;
       case "small":
         return css`
-          height: 40px;
-          width: 100px;
+          height: 31px;
+          width: 90px;
         `;
       default:
         return css`
