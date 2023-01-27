@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { useAddPost } from "../redux/api/reviewApi";
 import useInputItem from "../hooks/useInputItem";
 import DaumPostcode from "react-daum-postcode";
+import { useQueryClient } from "@tanstack/react-query";
 
 const Review = () => {
   const navigate = useNavigate();
@@ -12,10 +13,9 @@ const Review = () => {
   const [address_jibun, setJibunAddress] = useState("");
   const [image, setImage] = useState([]);
   const [openPostcode, setOpenPostcode] = useState(false);
-
   const [showImages, setShowImages] = useState([]);
-
   const { mutate: addPost } = useAddPost();
+  const queryClient = useQueryClient();
 
   const handleAddImages = (event) => {
     const imageLists = event.target.files;
@@ -85,7 +85,8 @@ const Review = () => {
       <StReviewWrap>
         <StReviewBox>
           <StTitle>이집은 후기 작성하기</StTitle>
-          <button onClick={openPostcodeHandler}>누르면 주소열림</button>
+          <StTitle>주소</StTitle>
+          <StButton onClick={openPostcodeHandler}>주소검색</StButton>
           <StContainer>
             {openPostcode && (
               <div>
@@ -97,31 +98,13 @@ const Review = () => {
                 />
               </div>
             )}
-
-            <input
-              type="text"
-              name="address"
-              value={address}
-              onChange={() => {}}
-              placeholder="우편번호 찾기를 이용하세요(도로명주소)"
-              size="45"
-            />
-            <input
-              type="text"
-              name="setJibunAddress"
-              value={address_jibun}
-              onChange={() => {}}
-              placeholder="우편번호 찾기를 이용하세요(지번주소)"
-              size="45"
-            />
-            {/* <StButton onClick={handle.clickButton}> 주소 검색 </StButton>
             <StAddress>
               <StInt
                 type="text"
                 name="address"
                 value={address}
                 onChange={() => {}}
-                placeholder="주소 검색을 이용하세요(도로명주소 입력)"
+                placeholder="우편번호 찾기를 이용하세요(도로명주소)"
                 size="45"
               />
             </StAddress>
@@ -131,19 +114,10 @@ const Review = () => {
                 name="setJibunAddress"
                 value={address_jibun}
                 onChange={() => {}}
-                placeholder="주소 검색을 이용하세요(지번주소 입력)"
+                placeholder="우편번호 찾기를 이용하세요(지번주소)"
                 size="45"
               />
-            </StSeAddress> */}
-
-            {/* {openPostcode && (
-              <DaumPostcode
-                style={{ width: "300px", height: "300px" }}
-                onComplete={handle.selectAddress} // 값을 선택할 경우 실행되는 이벤트
-                autoClose={false} // 값을 선택할 경우 사용되는 DOM을 제거하여 자동 닫힘 설정
-                defaultQuery="" // 팝업을 열때 기본적으로 입력되는 검색어
-              />
-            )} */}
+            </StSeAddress>
 
             <StHomeSection>
               <StAddStyle> 주거 형태 </StAddStyle>
@@ -677,14 +651,14 @@ const StTitle = styled.div`
   align-items: center;
   font-size: 25px;
   font-weight: bold;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
   padding-top: 50px;
 `;
 
 const StButton = styled.button`
   position: absolute;
-  top: 275px;
-  margin-left: 610px;
+  top: 345px;
+  margin-left: 880px;
   width: 121px;
   height: 34px;
   background-color: #c4cbcd;
@@ -699,15 +673,8 @@ const StButton = styled.button`
   }
 `;
 
-const StSearch = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 500px;
-`;
-
 const StAddress = styled.div`
-  display: flex;
+  /* display: flex; */
   text-align: center;
   padding-top: 80px;
   padding-left: 150px;
@@ -719,6 +686,16 @@ const StSeAddress = styled.div`
   margin-left: 150px;
 `;
 
+const StInt = styled.input`
+  margin-right: 150px;
+  width: 450px;
+  height: 2rem;
+  border: 2px solid #c4cbcd;
+  border-radius: 7px;
+  ::placeholder {
+    font-size: 15px;
+  }
+`;
 const StAdd = styled.div`
   font-size: 20px;
   font-weight: 600;
@@ -758,17 +735,6 @@ const StUpload = styled.label`
   border-radius: 10px;
   width: 100px;
   cursor: pointer;
-`;
-
-const StInt = styled.input`
-  margin-right: 150px;
-  width: 450px;
-  height: 2rem;
-  border: 2px solid #c4cbcd;
-  border-radius: 7px;
-  ::placeholder {
-    font-size: 15px;
-  }
 `;
 
 const StBasic = styled.div`

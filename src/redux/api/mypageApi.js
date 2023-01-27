@@ -13,6 +13,8 @@ export const getmypageReviews = async () => {
   return data;
 };
 
+export const deletemypageReviews = async () => {};
+
 export const getmypagePosts = async () => {
   const response = await instance.get("/posts/me");
   return response.data;

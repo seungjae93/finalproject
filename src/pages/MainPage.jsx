@@ -67,6 +67,7 @@ const MainPage = () => {
               >
                 후기 보러가기
               </button>
+
               <button
                 className="aboutBtn2"
                 onClick={() => {
@@ -139,9 +140,9 @@ const MainPage = () => {
                 있습니다.
               </div>
 
-              <div className="go" onClick={reviewHandler}>
+              <button className="go" onClick={reviewHandler}>
                 바로가기
-              </div>
+              </button>
             </div>
           </StDetailBox2>
 
@@ -160,14 +161,14 @@ const MainPage = () => {
                 <br /> 혼자서는 어려웠던 문제가 이웃들의 지혜로 풀립니다.
               </div>
 
-              <div
+              <button
                 className="go"
                 onClick={() => {
                   navigate("/list");
                 }}
               >
                 바로가기
-              </div>
+              </button>
             </div>
           </StDetailBox3>
         </StSectionDetail>
@@ -269,22 +270,21 @@ const StHomeBoxContent = styled.div`
 //Review
 const StSectionReview = styled.div`
   background-color: #f7fae7;
-  margin: auto;
   max-width: 1920px;
   height: 450px;
+  display: flex;
 
   .aboutImg {
     width: 250px;
     height: 257px;
     display: inline;
-    margin-left: 2vw;
+    margin-left: 25px;
   }
 `;
 
 const StReviewWrap = styled.div`
   margin-left: 50px;
   text-align: left;
-  display: flex;
 `;
 
 const StReviewBox1 = styled.div`
@@ -334,7 +334,8 @@ const StReviewBox1 = styled.div`
 const StReviewBox2 = styled.div`
   position: absolute;
   padding-left: 520px;
-  top: 800px;
+  top: 710px;
+  display: flex;
 `;
 
 //Detail
