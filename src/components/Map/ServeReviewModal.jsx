@@ -288,7 +288,6 @@ const StimageDetail = styled.div`
   transform: translate(-50%, -50%);
   background-color: white;
   border: 1px solid black;
-  border-radius: 10px;
 `;
 
 const StCloseButton = styled.button`

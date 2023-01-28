@@ -32,7 +32,7 @@ const Header = () => {
   };
 
   const onCommentHanler = () => {
-    if (login === false) {
+    if (!userStatus) {
       alert("로그인을 해주세요");
     } else navigate("/review");
   };
