@@ -114,36 +114,6 @@ const Review = () => {
               placeholder="우편번호 찾기를 이용하세요(지번주소)"
               size="45"
             />
-            {/* <StButton onClick={handle.clickButton}> 주소 검색 </StButton>
-            <StAddress>
-              <StInt
-                type="text"
-                name="address"
-                value={address}
-                onChange={() => {}}
-                placeholder="주소 검색을 이용하세요(도로명주소 입력)"
-                size="45"
-              />
-            </StAddress>
-            <StSeAddress>
-              <StInt
-                type="text"
-                name="setJibunAddress"
-                value={address_jibun}
-                onChange={() => {}}
-                placeholder="주소 검색을 이용하세요(지번주소 입력)"
-                size="45"
-              />
-            </StSeAddress> */}
-
-            {/* {openPostcode && (
-              <DaumPostcode
-                style={{ width: "300px", height: "300px" }}
-                onComplete={handle.selectAddress} // 값을 선택할 경우 실행되는 이벤트
-                autoClose={false} // 값을 선택할 경우 사용되는 DOM을 제거하여 자동 닫힘 설정
-                defaultQuery="" // 팝업을 열때 기본적으로 입력되는 검색어
-              />
-            )} */}
 
             <StHomeSection>
               <StAddStyle> 주거 형태 </StAddStyle>

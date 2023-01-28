@@ -74,22 +74,22 @@ const MainMap = () => {
     if (e.key === Enter) {
       onSearchHandler();
     }
-    if (searchData.length > 0) {
-      switch (e.key) {
-        case ArrowDown:
-          setDropDownDataIndex(dropDownDataIndex + 1);
-          if (inputRef.current?.childElementCount === dropDownDataIndex + 1)
-            setDropDownDataIndex(0);
-          break;
-        case ArrowUp:
-          setDropDownDataIndex(dropDownDataIndex - 1);
-          if (dropDownDataIndex <= 0) {
-            searchData([]);
-            setDropDownDataIndex(-1);
-          }
-          break;
-      }
-    }
+    // if (searchData.length > 0) {
+    //   switch (e.key) {
+    //     case ArrowDown:
+    //       setDropDownDataIndex(dropDownDataIndex + 1);
+    //       if (inputRef.current?.childElementCount === dropDownDataIndex + 1)
+    //         setDropDownDataIndex(0);
+    //       break;
+    //     case ArrowUp:
+    //       setDropDownDataIndex(dropDownDataIndex - 1);
+    //       if (dropDownDataIndex <= 0) {
+    //         searchData([]);
+    //         setDropDownDataIndex(-1);
+    //       }
+    //       break;
+    //   }
+    // }
 
     if (e.key === ArrowDown) {
       setDropDownDataIndex(dropDownDataIndex + 1);
@@ -347,7 +347,7 @@ const MainMap = () => {
               style={{
                 // 지도의 크기
                 width: "100%",
-                height: "83.5vh",
+                height: "86vh",
               }}
               ref={mapRef}
               // 지도의 확대 레벨
@@ -414,7 +414,7 @@ const StContainer = styled.div`
   min-width: 680px;
   height: 855px; */
   width: 100%;
-  height: 83.5vh;
+  height: 86vh;
 `;
 const SearchContainer = styled.div`
   position: relative;
