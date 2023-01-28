@@ -11,6 +11,7 @@ import PostList from "../pages/PostCommunity/PostList";
 import PostForm from "../components/Community/PostForm";
 import PostDetail from "../pages/PostCommunity/PostDetail";
 import PostEdit from "../pages/PostCommunity/PostEdit";
+import FeatureButton from "../pages/Button";
 
 const Router = () => {
   return (
@@ -25,6 +26,7 @@ const Router = () => {
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/list" element={<PostList />} />
         <Route path="/post" element={<PostForm />} />
+        <Route path="/button" element={<FeatureButton />} />
         <Route path="/:postId" element={<PostDetail />} />
         <Route path="/edit/:postId" element={<PostEdit />} />
       </Routes>
