@@ -33,6 +33,11 @@ export const getPosts = async () => {
 
 //DELETE
 export const deletePost = async (reviewId) => {
-  const response = await instance.delete(`/review/${reviewId}`);
+  const accessToken = getCookie("token");
+  setToken(accessToken);
+  const headers = { authorization: `Bearer ${accessToken}` };
+  const response = await instance.delete(`/review/${reviewId}`, {
+    headers: headers,
+  });
   return response.data;
 };

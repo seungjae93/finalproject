@@ -4,7 +4,6 @@ import { useNavigate } from "react-router";
 import { useAddPost } from "../redux/api/reviewApi";
 import useInputItem from "../hooks/useInputItem";
 import DaumPostcode from "react-daum-postcode";
-import { useQueryClient } from "@tanstack/react-query";
 
 const Review = () => {
   const navigate = useNavigate();
@@ -262,7 +261,7 @@ const Review = () => {
                 </StRadioBtnWrap2>
               </StCommentWrap>
 
-              <StTitleComment>Q2 벌레가 많이 나오나요?</StTitleComment>
+              <StTitleComment>Q2. 벌레가 많이 나오나요?</StTitleComment>
               <StRadioBtnWrap2>
                 <div className="radioBtn">
                   <input
@@ -319,7 +318,7 @@ const Review = () => {
                 </div>
               </StRadioBtnWrap2>
 
-              <StTitleComment> Q3 하수구 냄새가 많이 나나요?</StTitleComment>
+              <StTitleComment> Q3. 하수구 냄새가 많이 나나요?</StTitleComment>
               <StRadioBtnWrap2>
                 <div className="radioBtn">
                   <input
@@ -725,7 +724,9 @@ const Review = () => {
               />
 
               <StPicture>
-                <StTitleComment>Q12. 이집의 사진을 추가해주세요</StTitleComment>
+                <StTitleComment2>
+                  Q12. 이집의 사진을 추가해주세요
+                </StTitleComment2>
                 <StCommentAdd>
                   (청결도, 컨디션 등을 확인할 수 있는 사진)
                 </StCommentAdd>
@@ -811,13 +812,12 @@ const StButton = styled.button`
   position: absolute;
   top: 345px;
   margin-left: 880px;
-  width: 121px;
-  height: 34px;
+  width: 120px;
+  height: 35px;
   background-color: #c4cbcd;
   border: none;
   border-radius: 5px;
   font-size: 20px;
-
   cursor: pointer;
   :hover {
     background-color: #aec90c;
@@ -850,23 +850,33 @@ const StInt = styled.input`
 `;
 
 const StBasic = styled.div`
-  width: 300px;
+  width: 330px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   display: flex;
   align-items: center;
+  justify-content: center;
   margin-bottom: 5%;
 `;
 
 const StBasicTitle = styled.div`
   font-size: 16px;
   margin-right: 20px;
-  border: 1px solid blue;
 `;
 
 const StHomeInput = styled.input`
   width: 140px;
-  height: 35px;
+  height: 25px;
   border: 2px solid #c4cbcd;
   border-radius: 5px;
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
 `;
 
 const StHomeUnit = styled.div`
@@ -876,26 +886,26 @@ const StHomeUnit = styled.div`
 
 const StHomeSection = styled.div`
   display: block;
+  width: 330px;
   text-align: center;
-  border: 1px solid green;
 `;
 
 const StAddStyle = styled.div`
   font-size: 20px;
   font-weight: 600;
-  padding-top: 50px;
-  padding-bottom: 30px;
+  padding-top: 90px;
+  padding-bottom: 10px;
 `;
 
 const StRadioBtnWrap1 = styled.div`
-  padding-bottom: 20px;
+  padding-bottom: 30px;
+  padding-top: 30px;
   display: flex;
-  border: 1px solid red;
 
   .radioBtn {
     font-size: 18px;
     width: 140px;
-    height: 30px;
+    height: 35px;
     border: none;
     border-radius: 10px;
     padding-left: 20px;
@@ -903,14 +913,13 @@ const StRadioBtnWrap1 = styled.div`
   .radioBtn input[type="radio"] {
     display: none;
   }
-
   .radioBtn label {
     display: block;
     border-radius: 10px;
     margin: 0 auto;
     text-align: center;
     height: -webkit-fill-available;
-    line-height: 30px;
+    line-height: 32px;
     cursor: pointer;
   }
   /* Checked */
@@ -918,7 +927,6 @@ const StRadioBtnWrap1 = styled.div`
     background: #b3cd1b;
     color: #fff;
   }
-
   /* Disabled */
   .radioBtn input[type="radio"] + label {
     border: 2px solid #c4cbcd;
@@ -934,7 +942,6 @@ const StComment = styled.div`
 const StCommentWrap = styled.div`
   align-items: center;
   text-align: center;
-  border: 1px solid green;
 `;
 
 const StTitleComment = styled.div`
@@ -944,7 +951,7 @@ const StTitleComment = styled.div`
 `;
 
 const StRadioBtnWrap2 = styled.div`
-  /* margin-left: 45px; */
+  margin-left: 45px;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -971,7 +978,6 @@ const StRadioBtnWrap2 = styled.div`
     background: #b3cd1b;
     color: #fff;
   }
-
   /* Disabled */
   .radioBtn input[type="radio"] + label {
     border: 2px solid #c4cbcd;
@@ -986,6 +992,12 @@ const Sttextarea = styled.textarea`
   ::placeholder {
     color: gray;
   }
+`;
+
+const StTitleComment2 = styled.div`
+  margin: 10% 0 1% 0;
+  font-size: 20px;
+  font-weight: 600;
 `;
 
 const StCommentAdd = styled.div`
@@ -1008,8 +1020,8 @@ const StyledImage = styled.img`
   width: 250px;
   height: 200px;
   background-color: transparent;
-  margin-top: 25%;
-  padding-left: 10px;
+  margin-top: 30px;
+  padding-left: 5px;
 `;
 const StUpload = styled.label`
   text-align: center;
