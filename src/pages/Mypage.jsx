@@ -5,12 +5,13 @@ import MyReview from "../components/MyReview";
 import Footer from "../components/Footer";
 
 const Mypage = () => {
+  const email = localStorage.getItem("email");
   return (
     <>
       <StmyPageWrap>
         <StmyPageBox>
           <div className="myPageTitle">마이페이지</div>
-          <div className="myPage1">OOO 님, 안녕하세요!</div>
+          <div className="myPage1">{email} 님 안녕하세요!</div>
           <div className="myPage2">이 집은 어떤가요?</div>
         </StmyPageBox>
 
@@ -41,15 +42,15 @@ const StmyPageBox = styled.div`
   border-bottom: 1px solid #c4cbcd;
 
   .myPageTitle {
-    font-size: 25px;
+    font-size: 28px;
     font-weight: bold;
     padding-bottom: 25px;
   }
   .myPage1 {
-    font-size: 19px;
+    font-size: 20px;
     padding-bottom: 9px;
   }
   .myPage2 {
-    font-size: 17px;
+    font-size: 18px;
   }
 `;

@@ -32,4 +32,7 @@ export const getPosts = async () => {
 };
 
 //DELETE
-export const deletePost = async () => {};
+export const deletePost = async (reviewId) => {
+  const response = await instance.delete(`/review/${reviewId}`);
+  return response.data;
+};
