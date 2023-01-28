@@ -54,27 +54,26 @@ const Header = () => {
           />
         </div>
         <StNavbarMenu>
-          <div>
-            <StNavbarMenuItem
-              onClick={() => {
-                navigate("/map");
-              }}
-            >
-              지도
-            </StNavbarMenuItem>
+          <StNavbarMenuItem
+            onClick={() => {
+              navigate("/map");
+            }}
+          >
+            지도
+          </StNavbarMenuItem>
 
-            <StNavbarMenuItem onClick={onCommentHanler}>
-              후기작성
-            </StNavbarMenuItem>
+          <StNavbarMenuItem onClick={onCommentHanler}>
+            후기작성
+          </StNavbarMenuItem>
 
-            <StNavbarMenuItem
-              onClick={() => {
-                navigate("/list");
-              }}
-            >
-              커뮤니티
-            </StNavbarMenuItem>
-          </div>
+          <StNavbarMenuItem
+            onClick={() => {
+              navigate("/list");
+            }}
+          >
+            커뮤니티
+          </StNavbarMenuItem>
+
           {userStatus ? (
             <>
               <StNavbarMenuItem
@@ -99,13 +98,12 @@ const Header = () => {
 
 export default Header;
 
-const StNavbar = styled.nav`
+const StNavbar = styled.div`
+  max-width: 1920px;
+  height: 80px;
   border-bottom: 1px solid #c4cbcd;
-
   align-items: center;
   display: flex;
-  width: 100%;
-  height: 80px;
   background-color: white;
   font-family: "Open Sans", sans-serif;
 `;
@@ -117,7 +115,7 @@ const StLogo = styled.img`
   padding-left: 200px;
 `;
 
-const StNavbarMenu = styled.ul`
+const StNavbarMenu = styled.div`
   display: flex;
   padding-top: 10px;
   padding-left: 500px;
@@ -130,6 +128,5 @@ const StNavbarMenuItem = styled.button`
   background-color: transparent;
   font-size: 17px;
   padding-left: 20px;
-  align-items: flex-end;
   cursor: pointer;
 `;
