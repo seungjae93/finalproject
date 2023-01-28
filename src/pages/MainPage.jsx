@@ -58,7 +58,6 @@ const MainPage = () => {
               <div className="reviewContent2">
                 당신이 알고싶은 진짜 집의 정보를 알려드립니다.
               </div>
-              {/* 이 버튼은 왜 작동을 안하는가?????? */}
 
               <button
                 className="aboutBtn1"
@@ -68,6 +67,7 @@ const MainPage = () => {
               >
                 후기 보러가기
               </button>
+
               <button
                 className="aboutBtn2"
                 onClick={() => {
@@ -140,9 +140,9 @@ const MainPage = () => {
                 있습니다.
               </div>
 
-              <div className="go" onClick={reviewHandler}>
+              <button className="go" onClick={reviewHandler}>
                 바로가기
-              </div>
+              </button>
             </div>
           </StDetailBox2>
 
@@ -161,14 +161,14 @@ const MainPage = () => {
                 <br /> 혼자서는 어려웠던 문제가 이웃들의 지혜로 풀립니다.
               </div>
 
-              <div
+              <button
                 className="go"
                 onClick={() => {
                   navigate("/list");
                 }}
               >
                 바로가기
-              </div>
+              </button>
             </div>
           </StDetailBox3>
         </StSectionDetail>
@@ -227,8 +227,8 @@ const StMainImage = styled.div`
 `;
 
 const StHomeBox = styled.div`
-  width: 31rem;
-  height: 18rem;
+  width: 510px;
+  height: 300px;
   background-color: #ffffff;
   opacity: 90%;
   position: absolute;
@@ -270,15 +270,15 @@ const StHomeBoxContent = styled.div`
 //Review
 const StSectionReview = styled.div`
   background-color: #f7fae7;
-  margin: auto;
   max-width: 1920px;
   height: 450px;
+  display: flex;
 
   .aboutImg {
     width: 250px;
     height: 257px;
     display: inline;
-    margin-left: 2vw;
+    margin-left: 25px;
   }
 `;
 
@@ -292,7 +292,7 @@ const StReviewBox1 = styled.div`
   padding-top: 70px;
   padding-left: 40px;
   width: 500px;
-  height: 350px;
+  height: 150px;
 
   .reviewContent1 {
     font-size: 32px;
@@ -316,6 +316,7 @@ const StReviewBox1 = styled.div`
     height: 50px;
     margin-top: 15px;
     margin-left: 75px;
+    z-index: 1;
   }
   .aboutBtn2 {
     background-color: white;
@@ -334,8 +335,10 @@ const StReviewBox1 = styled.div`
 
 const StReviewBox2 = styled.div`
   position: absolute;
-  padding-left: 520px;
-  top: 800px;
+  left: 580px;
+
+  top: 710px;
+  display: flex;
 `;
 
 //Detail

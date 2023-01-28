@@ -37,7 +37,7 @@ const MyCommunity = () => {
                     <button
                       className="title"
                       onClick={() => {
-                        navigate("/:postId");
+                        navigate(`/${posts.postId}`);
                       }}
                     >
                       {posts.title}
@@ -50,11 +50,6 @@ const MyCommunity = () => {
           })}
         </StMyCommBox>
       </StCommBoxWrap>
-
-      <StBottom>
-        <div className="myInfo">내 정보</div>
-        <div className="byebye">회원 탈퇴</div>
-      </StBottom>
     </>
   );
 };
@@ -129,21 +124,4 @@ const StMyComm = styled.div`
 
 const StMyComm2 = styled.div`
   width: 1000px;
-`;
-
-const StBottom = styled.div`
-  width: 1254px;
-  height: 200px;
-  background-color: #ffffff;
-  border-top: 1px solid #c4cbcd;
-  margin: auto;
-  .myInfo {
-    font-weight: 600;
-    padding-left: 170px;
-    padding-top: 30px;
-  }
-  .byebye {
-    padding-left: 170px;
-    padding-top: 30px;
-  }
 `;

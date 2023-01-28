@@ -33,6 +33,7 @@ const MyReview = () => {
                       })}
                     </div>
                     <div className="address">{reviews.address}</div>
+
                     <img
                       className="star"
                       src={require("../images/Star 165.png")}
@@ -80,8 +81,8 @@ const StMyReview = styled.div`
   padding: 1%;
   margin: auto;
   margin-bottom: 15px;
-  align-items: center;
   display: flex;
+
   .review_wrapper {
     display: flex;
     align-items: center;
@@ -89,11 +90,11 @@ const StMyReview = styled.div`
   }
 
   .time {
-    width: 180px;
+    width: 120px;
     padding-left: 10px;
   }
   .address {
-    padding-left: 20px;
+    width: 450px;
     font-size: 20px;
     font-weight: 600;
     display: -webkit-box;
@@ -102,8 +103,8 @@ const StMyReview = styled.div`
     -webkit-line-clamp: 1;
   }
   .star {
-    padding-right: 10px;
-    padding-left: 150px;
+    margin-left: 150px;
+    padding-right: 5px;
   }
   .starPoint {
     font-size: 23px;
