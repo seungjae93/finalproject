@@ -15,7 +15,6 @@ const Review = () => {
   const [openPostcode, setOpenPostcode] = useState(false);
   const [showImages, setShowImages] = useState([]);
   const { mutate: addPost } = useAddPost();
-  const queryClient = useQueryClient();
 
   const handleAddImages = (event) => {
     const imageLists = event.target.files;
@@ -121,23 +120,19 @@ const Review = () => {
 
             <StHomeSection>
               <StAddStyle> 주거 형태 </StAddStyle>
-              <StAddStyle2>
-                <div className="selectOne">
-                  <label for="select1">
-                    <span>원룸</span>
-                  </label>
+              <StRadioBtnWrap>
+                <div className="radioBtn">
                   <input
+                    id="radio-1"
                     type="radio"
-                    id="select1"
                     name="residence_type"
                     value="원룸"
                     onChange={onChangeHandler}
+                    checked
                   />
+                  <label for="radio-1">원룸</label>
                 </div>
-                <div className="selectTwo">
-                  <label for="select2">
-                    <span>투룸</span>
-                  </label>
+                <div className="radioBtn">
                   <input
                     id="select2"
                     type="radio"
@@ -145,8 +140,9 @@ const Review = () => {
                     value="투룸"
                     onChange={onChangeHandler}
                   />
+                  <label for="radio-2">투룸</label>
                 </div>
-              </StAddStyle2>
+              </StRadioBtnWrap>
               <StBasic>
                 <StBasicTitle>평수</StBasicTitle>
                 <input
@@ -761,55 +757,39 @@ const StAddStyle = styled.div`
   padding-bottom: 30px;
 `;
 
-const StAddStyle2 = styled.div`
+const StRadioBtnWrap = styled.div`
   padding-bottom: 20px;
   display: flex;
-  .selectOne {
+
+  .radioBtn {
     width: 170px;
     height: 34px;
     border: 1px solid gray;
     border-radius: 10px;
   }
-  .selectOne input[type="radio"] {
+  .radioBtn input[type="radio"] {
     display: none;
-    vertical-align: middle;
-  }
-  .selectOne input[type="radio"]:checked {
-    border: 2px solid #c1de0d;
-    background-color: #c1de0d;
-  }
-  .selectOne label {
-    cursor: pointer;
-    display: block;
-    border-radius: 10px;
-    text-align: center;
-    line-height: 34px;
-  }
-  .selectTwo {
-    width: 170px;
-    height: 34px;
-    border: 1px solid gray;
-    border-radius: 10px;
-  }
-  .selectTwo input[type="radio"] {
-    display: none;
-    vertical-align: middle;
-  }
-  .selectTwo label {
-    cursor: pointer;
-    display: block;
-    border-radius: 10px;
-    text-align: center;
-    line-height: 34px;
   }
 
-  label:hover {
-    border: 1px solid #c1de0d;
+  .radioBtn label {
+    display: block;
+    border-radius: 10px;
+    margin: 0 auto;
+    text-align: center;
+    height: -webkit-fill-available;
+    line-height: 45px;
+    cursor: pointer;
+  }
+  /* Checked */
+  .radioBtn input[type="radio"]:checked + label {
+    background: yellowgreen;
+    color: #fff;
   }
 
-  span {
-    vertical-align: middle;
-    font-size: 18px;
+  /* Disabled */
+  .radioBtn input[type="radio"] + label {
+    background: #f9fafc;
+    color: #666;
   }
 `;
 

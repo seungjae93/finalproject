@@ -30,3 +30,6 @@ export const getPosts = async () => {
   const response = await instance.get("/review");
   return response.data;
 };
+
+//DELETE
+export const deletePost = async () => {};
