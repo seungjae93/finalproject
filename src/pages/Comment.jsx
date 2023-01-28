@@ -45,81 +45,87 @@ const Comment = () => {
   if (isError) return <h2> Error : {error.toString()} </h2>;
 
   return (
-    <StCommentlistBox>
-      <StCount> 댓글 {data.comments.length} 개</StCount>
-      <CommentPost />
+    <>
+      <StCommentlistBox>
+        <StCount> 댓글 {data.comments.length} 개</StCount>
+        <CommentPost />
 
-      {data.comments.map((comments, i) => {
-        return comments.commentId === editOn ? (
-          <StCommentlist key={`comment_${i}`}>
-            <Stinput onChange={(e) => setInput(e.target.value)} value={input} />
+        {data.comments.map((comments, i) => {
+          return comments.commentId === editOn ? (
+            <StCommentlist key={`comment_${i}`}>
+              <Stinput
+                onChange={(e) => setInput(e.target.value)}
+                value={input}
+              />
 
-            <StCommentBut>
-              <StNickDate> {comments.email} </StNickDate>
-              <StNickDate>
-                {new Date(comments?.createdAt).toLocaleDateString("ko-KR", {
-                  year: "numeric",
-                  month: "2-digit",
-                  day: "2-digit",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
-              </StNickDate>
-              <div>
-                <StBut
-                  onClick={() => onEditComplete(comments.commentId, input)}
-                >
-                  수정 완료
-                </StBut>
-                <StBut onClick={() => setEditOn("")}> 수정 취소 </StBut>
-              </div>
-            </StCommentBut>
-          </StCommentlist>
-        ) : (
-          <StCommentlist key={`comment_${i}`}>
-            <StComment>{comments.content}</StComment>
-
-            <StCommentBut>
-              <StNickDate> {comments.email} </StNickDate>
-              <StNickDate>
-                {new Date(comments?.createdAt).toLocaleDateString("ko-KR", {
-                  year: "numeric",
-                  month: "2-digit",
-                  day: "2-digit",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
-              </StNickDate>
-
-              {comments.email === email ? (
+              <StCommentBut>
+                <StNickDate> {comments.email} </StNickDate>
+                <StNickDate>
+                  {new Date(comments?.createdAt).toLocaleDateString("ko-KR", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </StNickDate>
                 <div>
                   <StBut
-                    onClick={() => {
-                      setEditOn(comments.commentId);
-                      setInput(comments.content);
-                    }}
+                    onClick={() => onEditComplete(comments.commentId, input)}
                   >
-                    수정하기
+                    수정 완료
                   </StBut>
-                  <StBut
-                    onClick={() => deleteCommentCallback(comments.commentId)}
-                  >
-                    삭제하기
-                  </StBut>
+                  <StBut onClick={() => setEditOn("")}> 수정 취소 </StBut>
                 </div>
-              ) : null}
-            </StCommentBut>
-          </StCommentlist>
-        );
-      })}
-      {/* <StPost>
+              </StCommentBut>
+            </StCommentlist>
+          ) : (
+            <StCommentlist key={`comment_${i}`}>
+              <StComment>{comments.content}</StComment>
+
+              <StCommentBut>
+                <StNickDate> {comments.email} </StNickDate>
+                <StNickDate>
+                  {new Date(comments?.createdAt).toLocaleDateString("ko-KR", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </StNickDate>
+
+                {comments.email === email ? (
+                  <div>
+                    <StBut
+                      onClick={() => {
+                        setEditOn(comments.commentId);
+                        setInput(comments.content);
+                      }}
+                    >
+                      수정하기
+                    </StBut>
+                    <StBut
+                      onClick={() => deleteCommentCallback(comments.commentId)}
+                    >
+                      삭제하기
+                    </StBut>
+                  </div>
+                ) : null}
+              </StCommentBut>
+            </StCommentlist>
+          );
+        })}
+        {/* <StPost>
         <StPostBut>다음글 |</StPostBut>
       </StPost>
 
       <StPost>
         <StPostBut>이전글 |</StPostBut>
       </StPost> */}
-    </StCommentlistBox>
+      </StCommentlistBox>
+      <div style={{ height: "50px" }}></div>
+    </>
   );
 };
 
