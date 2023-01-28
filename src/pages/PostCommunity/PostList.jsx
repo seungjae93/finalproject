@@ -2,12 +2,11 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { debounce } from "lodash";
 import { getCommunity } from "../../redux/api/communityApi";
 import { hangjungdong } from "../../components/Community/hangjungdong";
 import PostListCard from "../../components/Community/PostListCard";
-import InfiniteScroll from "react-infinite-scroller";
 import { useInView } from "react-intersection-observer";
 
 const PostList = () => {
@@ -18,37 +17,32 @@ const PostList = () => {
   });
   const { postLocation1, postLocation2 } = hangjungdong;
 
+  const { ref, inView } = useInView({
+    // ref가 화면에 나타나면 inView는 true, 아니면 false를 반환한다.
+    threshold: 0.5,
+    triggerOnce: true,
+    //50%의 화면이 보여질 때 노출되었다고 판단
+  });
+
   const [searchTerm, setSearchTerm] = useState("");
   const [clickOrder, setClickOrder] = useState("");
-  const [ref, inView] = useInView({
-    // thresholed
-  });
+  const [page, setPage] = useState(1);
+  const [postList, setPostlist] = useState("");
 
   const { login } = useSelector((state) => state.user);
 
-  const {
-    data,
-    error,
-    isLoading,
-    isError,
-    // isFetching,
-    fetchNextPage,
-    hasNextPage,
-    refetch,
-  } = useInfiniteQuery(
-    ["posts", clickOrder, selected],
-    ({ pageParam = 1 }) =>
-      getCommunity(pageParam, searchTerm, clickOrder, selected),
-
-    // {
-    //   cacheTime: 20000, //20초
-    // },
+  const { error, isLoading, isError, refetch } = useQuery(
+    ["posts", clickOrder, page],
+    () => getCommunity(page, searchTerm, clickOrder, selected),
     {
-      getNextPageParam: (lastPage) =>
-        // const maxPage = lastPage.total_count / 24
-        lastPage.nextPage || undefined,
-
-      //lastPage.next이 없다면 undefined를 설정해 hasNextPage가 flase를 반환하게 한다
+      onSuccess: (data) => {
+        page === 1
+          ? setPostlist([...data.posts]) //data를 하나의 배열로 쌓아둔다
+          : setPostlist([...postList, ...data.posts]); // 다음부터 차곡차곡
+      },
+    },
+    {
+      cacheTime: 20000, //20초
     }
   );
 
@@ -66,22 +60,29 @@ const PostList = () => {
   const throttledRefetch = useCallback(debounce(refetch, 200), []);
 
   useEffect(() => {
-    throttledRefetch({ searchTerm });
-    if (!inView) {
-      return;
+    if (inView) {
+      setPage(page + 1);
     }
-    fetchNextPage();
-  }, [searchTerm, throttledRefetch, inView]);
+  }, [inView]);
+
+  useEffect(() => {
+    refetch();
+  }, [page]);
+
+  useEffect(() => {
+    throttledRefetch({ searchTerm });
+  }, [searchTerm, throttledRefetch, selected]);
 
   if (isLoading) return <h2> 로딩중 .. </h2>;
   if (isError) return <h2> Error : {error.toString()} </h2>;
+  console.log(postList);
 
   return (
     <>
       <StSeleteBox>
         <StSelete>
           <div>
-            <StSeleteAll> 모두보기 </StSeleteAll>
+            {/* <StSeleteAll onClick={() => onHandleAllView}>모든 지역</StSeleteAll> */}
             <StSeleteR name="postLocation1" onChange={HandleChange}>
               <option value="">시,도 선택</option>
               {postLocation1.map((el) => (
@@ -122,23 +123,16 @@ const PostList = () => {
           <StTrend onClick={() => setClickOrder("trend")}>댓글순</StTrend>
         </div>
       </StOrder>
-      {/* {isFetching && <div>Loading..</div>} */}
-      <InfiniteScroll
-        hasMore={hasNextPage && !isLoading}
-        loadMore={fetchNextPage}
-      >
-        <STPostCon>
-          {data.pages[0].posts ? (
-            data.pages[0].posts.map((posts) => {
-              return (
-                <PostListCard key={`main_${posts.postId}`} posts={posts} />
-              );
-            })
-          ) : (
-            <div>No data</div>
-          )}
-        </STPostCon>
-      </InfiniteScroll>
+
+      <STPostCon>
+        {postList ? (
+          postList?.map((posts) => {
+            return <PostListCard key={`main_${postList}`} posts={posts} />;
+          })
+        ) : (
+          <div>No data</div>
+        )}
+      </STPostCon>
       <div ref={ref} style={{ height: "100px" }}></div>
     </>
   );
@@ -155,17 +149,17 @@ const StSeleteBox = styled.div`
   height: 50px;
 `;
 
-const StSeleteAll = styled.button`
-  background-color: white;
-  border: 2px solid powderblue;
-  text-align: center;
-  font-size: 16px;
-  width: 180px;
-  height: 30px;
-  border-radius: 10px;
-  margin-right: 20px;
-  cursor: pointer;
-`;
+// const StSeleteAll = styled.button`
+//   background-color: white;
+//   border: 2px solid powderblue;
+//   text-align: center;
+//   font-size: 16px;
+//   width: 180px;
+//   height: 30px;
+//   border-radius: 10px;
+//   margin-right: 20px;
+//   cursor: pointer;
+// `;
 
 const StSelete = styled.div`
   display: flex;

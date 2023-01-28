@@ -7,19 +7,15 @@ import { instance } from "./instance";
 // const { accessToken} = useCheckLogin
 
 //get(지역별, 무한스크롤, 포스트순서, 검색)
-export const getCommunity = async (
-  pageParam,
-  searchTerm,
-  clickOrder,
-  selected
-) => {
+export const getCommunity = async (page, searchTerm, clickOrder, selected) => {
   const accessToken = getCookie("token");
   setToken(accessToken);
   const headers = { authorization: `Bearer ${accessToken}` };
   const response = await instance.get(
-    `/posts?postLocation1=${selected.postLocation1}&postLocation2=${selected.postLocation2}&page=${pageParam}&type=${clickOrder}&search=${searchTerm}`,
+    `/posts?postLocation1=${selected.postLocation1}&postLocation2=${selected.postLocation2}&page=${page}&type=${clickOrder}&search=${searchTerm}`,
     { headers: headers }
   );
+
   return response.data;
 };
 
@@ -137,7 +133,6 @@ export const deleteComment = async (commentid) => {
 
 // 댓글 edit
 export const updateComment = async (commentid, content) => {
-  console.log(commentid);
   const accessToken = getCookie("token");
   setToken(accessToken);
   const headers = { authorization: `Bearer ${accessToken}` };

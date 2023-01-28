@@ -59,6 +59,7 @@ const MainPage = () => {
                 당신이 알고싶은 진짜 집의 정보를 알려드립니다.
               </div>
               {/* 이 버튼은 왜 작동을 안하는가?????? */}
+
               <button
                 className="aboutBtn1"
                 onClick={() => {

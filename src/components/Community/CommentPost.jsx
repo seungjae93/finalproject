@@ -2,9 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
 import { useAddComment } from "../../redux/api/communityApi";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import { getCookie } from "../../shared/cookie";
 
 const CommentPost = () => {
+  const navigate = useNavigate();
   const [input, setInput] = useState("");
   const { postId } = useParams();
 
@@ -12,6 +14,10 @@ const CommentPost = () => {
 
   const onClickHandler = (event) => {
     event.preventDefault();
+    if (!getCookie("token")) {
+      alert("로그인을 해주세요");
+      navigate("/login");
+    }
     if (!input) return alert("댓글을 입력해 주세요");
     if (input.length > 100) {
       return alert("제목을 100글자 이내로 입력해 주세요");

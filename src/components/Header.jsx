@@ -27,15 +27,18 @@ const Header = () => {
     navigate("/");
   };
 
-  const onLogin = () => {
-    navigate("/login");
-  };
-
   const onCommentHanler = () => {
-    if (login === false) {
+    if (!userStatus) {
       alert("로그인을 해주세요");
+      navigate("/login");
     } else navigate("/review");
   };
+
+  useEffect(() => {
+    if (!userStatus) {
+      deleteCookie("token");
+    }
+  }, [userStatus]);
 
   useEffect(() => {
     checkCookie();
@@ -89,7 +92,9 @@ const Header = () => {
               </StNavbarMenuItem>
             </>
           ) : (
-            <StNavbarMenuItem onClick={onLogin}>로그인</StNavbarMenuItem>
+            <StNavbarMenuItem onClick={() => navigate("/login")}>
+              로그인
+            </StNavbarMenuItem>
           )}
         </StNavbarMenu>
       </StNavbar>
