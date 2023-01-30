@@ -16,26 +16,28 @@ const PostList = () => {
     postLocation2: "",
   });
   const { postLocation1, postLocation2 } = hangjungdong;
-
-  const { ref, inView } = useInView({
-    // ref가 화면에 나타나면 inView는 true, 아니면 false를 반환한다.
-    threshold: 0.5,
-    triggerOnce: true,
-    //API요청을 중복이 아닌 한번만 발생할 수 있게
-    //50%의 화면이 보여질 때 노출되었다고 판단
-  });
+  const [showAll, setShowAll] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [clickOrder, setClickOrder] = useState("");
   const [page, setPage] = useState(1);
   const [postList, setPostlist] = useState([]);
 
+  const { ref, inView } = useInView({
+    // ref가 화면에 나타나면 inView는 true, 아니면 false를 반환한다.
+    threshold: 0.5,
+    triggerOnce: true,
+    //API요청을 중복이 아닌 한번만 발생할 수 있게
+  });
+
   const { login } = useSelector((state) => state.user);
 
   const { data, error, isLoading, isError, refetch } = useQuery(
-    ["posts", clickOrder],
+    ["posts", clickOrder, showAll],
     () => getCommunity(page, searchTerm, clickOrder, selected),
     {
+      // staleTime: 60 * 1000, //1분
+
       onSuccess: (data) => {
         console.log(data);
         page === 1
@@ -44,7 +46,9 @@ const PostList = () => {
       },
     }
   );
-  //데이터 베이스에 요청이 없으면 막는다.
+
+  console.log(postList);
+
   const HandleChange = (e) => {
     const { name, value } = e.target;
     setSelected({ ...selected, [name]: value });
@@ -56,7 +60,15 @@ const PostList = () => {
     } else navigate("/post");
   };
 
-  const throttledRefetch = useCallback(debounce(refetch, 200), []);
+  const onHandleAllView = () => {
+    setShowAll(!showAll);
+    setSelected({
+      postLocation1: "",
+      postLocation2: "",
+    });
+  };
+
+  const throttledRefetch = useCallback(debounce(refetch, 150), []);
 
   useEffect(() => {
     if (inView && data?.posts?.length === 24) {
@@ -68,19 +80,25 @@ const PostList = () => {
     refetch();
   }, [page]);
 
+  // useEffect(() => {
+  //   if (postList.legnth / 2 === page) return;
+  //   refetch();
+  // }, [page]);
+
   useEffect(() => {
-    throttledRefetch();
-  }, [selected]);
+    throttledRefetch({ searchTerm });
+  }, [searchTerm, throttledRefetch, selected]);
 
   if (isLoading) return <h2> 로딩중 .. </h2>;
   if (isError) return <h2> Error : {error.toString()} </h2>;
+  if (!data) return null;
 
   return (
     <>
       <StSeleteBox>
         <StSelete>
           <div>
-            {/* <StSeleteAll onClick={() => onHandleAllView}>모든 지역</StSeleteAll> */}
+            <StSeleteAll onClick={onHandleAllView}>모든 지역</StSeleteAll>
             <StSeleteR name="postLocation1" onChange={HandleChange}>
               <option value="">시,도 선택</option>
               {postLocation1.map((el) => (
@@ -123,10 +141,9 @@ const PostList = () => {
       </StOrder>
 
       <STPostCon>
-        {postList &&
-          postList?.map((posts) => {
-            return <PostListCard key={`main_${posts.postId}`} posts={posts} />;
-          })}
+        {postList?.map((posts) => {
+          return <PostListCard key={`main_${posts.postId}`} posts={posts} />;
+        })}
       </STPostCon>
 
       <div ref={ref} style={{ height: "100px" }}></div>
@@ -143,19 +160,20 @@ const StSeleteBox = styled.div`
   align-items: center;
   background-color: #f0f0f0;
   height: 50px;
+  min-width: 900px;
 `;
 
-// const StSeleteAll = styled.button`
-//   background-color: white;
-//   border: 2px solid powderblue;
-//   text-align: center;
-//   font-size: 16px;
-//   width: 180px;
-//   height: 30px;
-//   border-radius: 10px;
-//   margin-right: 20px;
-//   cursor: pointer;
-// `;
+const StSeleteAll = styled.button`
+  background-color: white;
+  border: 2px solid powderblue;
+  text-align: center;
+  font-size: 16px;
+  width: 180px;
+  height: 30px;
+  border-radius: 10px;
+  margin-right: 20px;
+  cursor: pointer;
+`;
 
 const StSelete = styled.div`
   display: flex;

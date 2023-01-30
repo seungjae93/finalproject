@@ -57,12 +57,14 @@ const StFooterBtn = styled.div`
   width: 700px;
   padding-top: 30px;
   padding-left: 600px;
+
   .btn {
     color: #737d81;
     font-size: 16px;
     font-weight: 500;
     border: none;
     background-color: transparent;
+    text-decoration-line: none;
     margin-left: 4%;
     cursor: pointer;
   }

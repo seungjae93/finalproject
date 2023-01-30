@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
-import { getmypagePosts } from "../redux/api/mypageApi";
+import { getmypagePosts } from "../../redux/api/mypageApi";
 
 const MyCommunity = () => {
   const navigate = useNavigate();
@@ -22,32 +22,37 @@ const MyCommunity = () => {
             <div className="reple">내가 남긴 글</div>
           </StCommBoxTitle>
 
-          {data?.myposts.map((posts) => {
-            return (
-              <StMyComm>
-                <div className="comment_wrapper" key={`mypage_${posts.postId}`}>
-                  <div className="time">
-                    {new Date(posts.createdAt).toLocaleDateString("ko-KR", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
+          <StInnerBox>
+            {data?.myposts.map((posts) => {
+              return (
+                <StMyComm>
+                  <div
+                    className="comment_wrapper"
+                    key={`mypage_${posts.postId}`}
+                  >
+                    <div className="time">
+                      {new Date(posts.createdAt).toLocaleDateString("ko-KR", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </div>
+                    <StMyComm2>
+                      <button
+                        className="title"
+                        onClick={() => {
+                          navigate(`/${posts.postId}`);
+                        }}
+                      >
+                        {posts.title}
+                      </button>
+                      <div className="body">{posts.content}</div>
+                    </StMyComm2>
                   </div>
-                  <StMyComm2>
-                    <button
-                      className="title"
-                      onClick={() => {
-                        navigate(`/${posts.postId}`);
-                      }}
-                    >
-                      {posts.title}
-                    </button>
-                    <div className="body">{posts.content}</div>
-                  </StMyComm2>
-                </div>
-              </StMyComm>
-            );
-          })}
+                </StMyComm>
+              );
+            })}
+          </StInnerBox>
         </StMyCommBox>
       </StCommBoxWrap>
     </>
@@ -63,10 +68,14 @@ const StCommBoxWrap = styled.div`
 
 const StMyCommBox = styled.div`
   width: 1254px;
-  height: 650px;
   border-top: 1px solid #c4cbcd;
   background-color: #ffffff;
   margin: auto;
+`;
+
+const StInnerBox = styled.div`
+  overflow-y: auto;
+  padding-bottom: 50px;
 `;
 
 const StCommBoxTitle = styled.div`
