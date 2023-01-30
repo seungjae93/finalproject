@@ -6,6 +6,7 @@ import { Map, MapMarker, CustomOverlayMap } from "react-kakao-maps-sdk";
 import TotalReview from "../components/Map/TotalReview";
 import Button from "../components/button/Button";
 import clusterer34 from "../images/clusterer34.svg";
+import logoGray from "../images/logoGray.svg";
 
 const { kakao } = window;
 
@@ -252,7 +253,10 @@ const MainMap = () => {
       </>
     );
   };
-
+  // console.log(zoomLevel);
+  // console.log("markerArray", markerArray);
+  // console.log("positions", positions);
+  console.log("markerArrayEstateId", markerArrayEstateId);
   const MarkerClickHandler = (estateId) => {
     setMarkerClickOn(true);
     setMarkerArrayEstateId(estateId);
@@ -330,8 +334,14 @@ const MainMap = () => {
 
         <StWrapper>
           <StReviewContainer>
-            {markerClickOn === true && (
+            {markerClickOn === true && markerArrayEstateId ? (
               <TotalReview estateIdData={markerArrayEstateId} />
+            ) : (
+              <StEmptyContainer>
+                <img src={logoGray} alt="logoGray" />
+                <h4>조건에 맞는 방이 없습니다.</h4>
+                <div>지도를 이동해 검색해주세요.</div>
+              </StEmptyContainer>
             )}
           </StReviewContainer>
           <StMapContainer>
@@ -341,7 +351,7 @@ const MainMap = () => {
               style={{
                 // 지도의 크기
                 width: "100%",
-                height: "86vh",
+                height: "100vh",
               }}
               ref={mapRef}
               // 지도의 확대 레벨
@@ -416,11 +426,8 @@ const ClustererTxt = styled.div`
   font-weight: 550;
 `;
 const StContainer = styled.div`
-  /* max-width: 1920px;
-  min-width: 680px;
-  height: 855px; */
   width: 100%;
-  height: 86vh;
+  height: 100vh;
 `;
 const SearchContainer = styled.div`
   position: relative;
@@ -475,7 +482,16 @@ const StWrapper = styled.div`
 
 const StReviewContainer = styled.div`
   width: 600px;
-  height: 86vh;
+  height: 100vh;
+`;
+const StEmptyContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 400px;
+  height: 100vh;
+  white-space: pre-wrap;
 `;
 
 const StMapContainer = styled.div`
