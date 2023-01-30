@@ -27,6 +27,10 @@ const Header = () => {
     navigate("/");
   };
 
+  const onLogin = () => {
+    navigate("/login");
+  };
+
   const onCommentHanler = () => {
     if (!userStatus) {
       alert("로그인을 해주세요");
@@ -35,14 +39,16 @@ const Header = () => {
   };
 
   useEffect(() => {
-    if (!userStatus) {
-      deleteCookie("token");
-    }
-  }, [userStatus]);
-
-  useEffect(() => {
     checkCookie();
   }, [login]);
+
+  useEffect(() => {
+    const logout = () => {
+      setUserStatus(false);
+    };
+    window.addEventListener("storage", logout);
+    return () => window.removeEventListener("storage", logout);
+  }, []);
 
   return (
     <>
@@ -91,9 +97,7 @@ const Header = () => {
               </StNavbarMenuItem>
             </>
           ) : (
-            <StNavbarMenuItem onClick={() => navigate("/login")}>
-              로그인
-            </StNavbarMenuItem>
+            <StNavbarMenuItem onClick={onLogin}>로그인</StNavbarMenuItem>
           )}
         </StNavbarMenu>
       </StNavbar>

@@ -7,7 +7,9 @@ import { getCookie } from "./shared/cookie";
 import { loginCheck } from "./redux/modules/kakaoSlice";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { refetchOnWindowFocus: true } },
+});
 
 function App() {
   const dispatch = useDispatch();

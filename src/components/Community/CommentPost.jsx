@@ -64,6 +64,7 @@ const StInput = styled.textarea`
   border: 1px solid #c4cbcd;
   resize: none;
   margin-top: 20px;
+  width: 800px;
 `;
 
 const StButton = styled.button`

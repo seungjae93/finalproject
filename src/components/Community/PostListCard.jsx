@@ -10,9 +10,8 @@ const PostListCard = ({ posts }) => {
       ) : null}
 
       <StCommunityBox>
-        <StTitleCarrier>
-          <p>{posts?.title}</p>
-        </StTitleCarrier>
+        <StTitleCarrier>{posts?.title}</StTitleCarrier>
+
         <StContentCarrier>
           <pre> {posts?.content} </pre>
         </StContentCarrier>
@@ -38,10 +37,9 @@ export default PostListCard;
 
 const StCardWrapper = styled(Link)`
   background-color: white;
-  width: 350px;
-  height: 340px;
+  width: 400px;
+  height: 287px;
   border: 0px solid black;
-  border-radius: 10px;
   margin: 20px 0 0 10px;
   z-index: 900px;
   box-shadow: 0px 1px 5px 1px #dddddd;
@@ -54,33 +52,26 @@ const StCardWrapper = styled(Link)`
 `;
 
 const StImageCarrier = styled.img`
-  width: 350px;
-  height: 170px;
-  border-radius: 10px 10px 0 0;
+  width: 400px;
+  height: 166px;
   border: none;
 `;
 
-const StCommunityBox = styled.div`
-  padding: 0 10px 0 10px;
-`;
+const StCommunityBox = styled.div``;
 
-const StTitleCarrier = styled.div`
-  p {
-    margin-left: 5px;
-    font-size: 25px;
-    font-style: bold;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 100%;
-    height: 30px;
-  }
+const StTitleCarrier = styled.pre`
+  margin-left: 5px;
+  font-size: 16px;
+  font-style: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 98%;
+  height: 21px;
+  font-weight: bold;
 `;
 
 const StContentCarrier = styled.div`
-  width: 100%;
-  height: 60px;
-
   pre {
     margin-left: 5px;
     white-space: normal;
@@ -88,7 +79,6 @@ const StContentCarrier = styled.div`
     -webkit-box-orient: vertical;
     overflow: hidden;
     -webkit-line-clamp: 2;
-    font-weight: bold;
   }
 `;
 

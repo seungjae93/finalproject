@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -21,31 +21,30 @@ const PostList = () => {
     // ref가 화면에 나타나면 inView는 true, 아니면 false를 반환한다.
     threshold: 0.5,
     triggerOnce: true,
+    //API요청을 중복이 아닌 한번만 발생할 수 있게
     //50%의 화면이 보여질 때 노출되었다고 판단
   });
 
   const [searchTerm, setSearchTerm] = useState("");
   const [clickOrder, setClickOrder] = useState("");
   const [page, setPage] = useState(1);
-  const [postList, setPostlist] = useState("");
+  const [postList, setPostlist] = useState([]);
 
   const { login } = useSelector((state) => state.user);
 
-  const { error, isLoading, isError, refetch } = useQuery(
-    ["posts", clickOrder, page],
+  const { data, error, isLoading, isError, refetch } = useQuery(
+    ["posts", clickOrder],
     () => getCommunity(page, searchTerm, clickOrder, selected),
     {
       onSuccess: (data) => {
+        console.log(data);
         page === 1
-          ? setPostlist([...data.posts]) //data를 하나의 배열로 쌓아둔다
-          : setPostlist([...postList, ...data.posts]); // 다음부터 차곡차곡
+          ? setPostlist([...data.posts])
+          : setPostlist([...postList, ...data.posts]);
       },
-    },
-    {
-      cacheTime: 20000, //20초
     }
   );
-
+  //데이터 베이스에 요청이 없으면 막는다.
   const HandleChange = (e) => {
     const { name, value } = e.target;
     setSelected({ ...selected, [name]: value });
@@ -60,7 +59,7 @@ const PostList = () => {
   const throttledRefetch = useCallback(debounce(refetch, 200), []);
 
   useEffect(() => {
-    if (inView) {
+    if (inView && data?.posts?.length === 24) {
       setPage(page + 1);
     }
   }, [inView]);
@@ -70,8 +69,8 @@ const PostList = () => {
   }, [page]);
 
   useEffect(() => {
-    throttledRefetch({ searchTerm });
-  }, [searchTerm, throttledRefetch, selected]);
+    throttledRefetch();
+  }, [selected]);
 
   if (isLoading) return <h2> 로딩중 .. </h2>;
   if (isError) return <h2> Error : {error.toString()} </h2>;
@@ -114,24 +113,22 @@ const PostList = () => {
 
       <StOrder>
         <div>
-          <StPost onClick={onPostHandler}> + </StPost>
-        </div>
-        <div>
           <StTrend onClick={() => setClickOrder("recent")}>최신순</StTrend>
 
           <StTrend onClick={() => setClickOrder("trend")}>댓글순</StTrend>
         </div>
+        <div>
+          <StPost onClick={onPostHandler}> 글쓰기 </StPost>
+        </div>
       </StOrder>
 
       <STPostCon>
-        {postList ? (
+        {postList &&
           postList?.map((posts) => {
-            return <PostListCard key={`main_${postList}`} posts={posts} />;
-          })
-        ) : (
-          <div>No data</div>
-        )}
+            return <PostListCard key={`main_${posts.postId}`} posts={posts} />;
+          })}
       </STPostCon>
+
       <div ref={ref} style={{ height: "100px" }}></div>
     </>
   );
@@ -164,14 +161,14 @@ const StSelete = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 60%;
+  width: 1250px;
   height: 40px;
   border-bottom: 3px solid #c4cbcd;
   padding: 0 0 6px 0;
 `;
 
 const StSeleteR = styled.select`
-  border: 2px solid powderblue;
+  border: 2px solid #a6b2b9;
   text-align: center;
   font-size: 16px;
   width: 180px;
@@ -182,7 +179,7 @@ const StSeleteR = styled.select`
 `;
 
 const StSeleteL = styled.select`
-  border: 2px solid powderblue;
+  border: 2px solid #a6b2b9;
   text-align: center;
   font-size: 16px;
   width: 180px;
@@ -192,7 +189,7 @@ const StSeleteL = styled.select`
 `;
 
 const StSearch = styled.input`
-  border: 2px solid powderblue;
+  border: 2px solid #a6b2b9;
   width: 250px;
   height: 30px;
   border-radius: 10px;
@@ -205,36 +202,37 @@ const STPostCon = styled.div`
   flex-wrap: wrap;
   margin-left: auto;
   margin-right: auto;
-  width: 60%;
+  width: 1250px;
 `;
 
 const StOrder = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 55%;
+  align-items: center;
+  width: 1150px;
   margin-left: auto;
   margin-right: auto;
 `;
 
-const StPost = styled.button`
-  font-size: 35px;
-  width: 45px;
-  height: 45px;
-  border-radius: 23px;
-  border: none;
-  margin-top: 10px;
-  background-color: #d9d9d9;
-  cursor: pointer;
-  :hover {
-    background-color: #6688ab;
-    transition: 0.3s;
-  }
-`;
-
 const StTrend = styled.button`
   background-color: #f3f5f5;
-  margin: 20px 10px 0 10px;
-  font-size: 17px;
+  margin: 10px 10px 0 10px;
+  font-size: 16px;
   border: none;
   cursor: pointer;
+`;
+
+const StPost = styled.button`
+  font-size: 13px;
+  width: 60px;
+  height: 30px;
+  border: 1px solid #a6b2b9;
+  border-radius: 5px;
+  margin-top: 10px;
+  background-color: white;
+  cursor: pointer;
+  :hover {
+    background-color: #a8c4e1;
+    transition: 0.2s;
+  }
 `;
