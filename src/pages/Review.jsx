@@ -96,13 +96,14 @@ const Review = () => {
                 />
               </div>
             )}
+
             <StAddress>
               <StInt
                 type="text"
                 name="address"
                 value={address}
                 onChange={() => {}}
-                placeholder="우편번호 찾기를 이용하세요(도로명주소)"
+                placeholder="주소 검색을 이용하세요(도로명주소 입력)"
                 size="45"
               />
             </StAddress>
@@ -112,13 +113,14 @@ const Review = () => {
                 name="setJibunAddress"
                 value={address_jibun}
                 onChange={() => {}}
-                placeholder="우편번호 찾기를 이용하세요(지번주소)"
+                placeholder="주소 검색을 이용하세요(지번주소 입력)"
                 size="45"
               />
             </StSeAddress>
 
             <StHomeSection>
               <StAddStyle> 주거 형태 </StAddStyle>
+
               <StRadioBtnWrap1>
                 <div className="radioBtn">
                   <input
@@ -141,6 +143,7 @@ const Review = () => {
                   <label for="radio-2">투룸</label>
                 </div>
               </StRadioBtnWrap1>
+
               <StBasic>
                 <StBasicTitle>평수</StBasicTitle>
                 <StHomeInput
