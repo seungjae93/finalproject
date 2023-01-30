@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
-import { getmypageReviews } from "../redux/api/mypageApi";
-import { deletePost } from "../redux/api/reviewApi";
+import { getmypageReviews } from "../../redux/api/mypageApi";
+import { deletePost } from "../../redux/api/reviewApi";
 
 const MyReview = () => {
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ const MyReview = () => {
 
                     <img
                       className="star"
-                      src={require("../images/Star 165.png")}
+                      src={require("../../images/Star 165.png")}
                       alt="star"
                     />
                     <div className="starPoint">{reviews.star} / 5</div>

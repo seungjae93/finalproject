@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import MyCommunity from "../components/MyCommunity";
-import MyReview from "../components/MyReview";
+import MyCommunity from "../components/mypage/MyCommunity";
+import MyReview from "../components/mypage/MyReview";
 import Footer from "../components/Footer";
 
-const Mypage = () => {
+const MyPage = () => {
   const email = localStorage.getItem("email");
   return (
     <>
@@ -28,7 +28,7 @@ const Mypage = () => {
   );
 };
 
-export default Mypage;
+export default MyPage;
 
 const StmyPageWrap = styled.div`
   max-width: 1920px;

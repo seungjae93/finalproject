@@ -5,7 +5,7 @@ import { useAddPost } from "../redux/api/reviewApi";
 import useInputItem from "../hooks/useInputItem";
 import DaumPostcode from "react-daum-postcode";
 
-const Review = () => {
+const ReviewPage = () => {
   const navigate = useNavigate();
   const { input, onChangeHandler } = useInputItem();
   const [address, setAddress] = useState("");
@@ -37,25 +37,61 @@ const Review = () => {
     formData.append("address", address);
     formData.append("address_jibun", address_jibun);
 
-    for (let key of formData.keys()) {
-      console.log(key);
-    }
-    for (let value of formData.values()) {
-      console.log(value);
-    }
+    if (input.residence_type.length === 0) {
+      alert("모든 항목을 입력해주세요!");
+    } else if (input.transaction_type.length === 0) {
+      alert("모든 항목을 입력해주세요!");
+    } else if (input.deposit.length === 0) {
+      alert("모든 항목을 입력해주세요!");
+    } else if (input.monthly_payment.length === 0) {
+      alert("모든 항목을 입력해주세요!");
+    } else if (input.acreage.length === 0) {
+      alert("모든 항목을 입력해주세요!");
+    } else if (input.communication.length === 0) {
+      alert("모든 항목을 입력해주세요!");
+    } else if (input.bug.length === 0) {
+      alert("모든 항목을 입력해주세요!");
+    } else if (input.smell.length === 0) {
+      alert("모든 항목을 입력해주세요!");
+    } else if (input.floor_noise.length === 0) {
+      alert("모든 항목을 입력해주세요!");
+    } else if (input.walls_noise.length === 0) {
+      alert("모든 항목을 입력해주세요!");
+    } else if (input.town_noise.length === 0) {
+      alert("모든 항목을 입력해주세요!");
+    } else if (input.mold.length === 0) {
+      alert("모든 항목을 입력해주세요!");
+    } else if (input.parking.length === 0) {
+      alert("모든 항목을 입력해주세요!");
+    } else if (input.safe.length === 0) {
+      alert("모든 항목을 입력해주세요!");
+    } else if (input.good.length === 0) {
+      alert("모든 항목을 입력해주세요!");
+    } else if (input.bad.length === 0) {
+      alert("모든 항목을 입력해주세요!");
+    } else if (input.star.length === 0) {
+      alert("모든 항목을 입력해주세요!");
+    } else {
+      for (let key of formData.keys()) {
+        // console.log(key);
+      }
+      for (let value of formData.values()) {
+        // console.log(value);
+      }
 
-    for (const property in input) {
-      formData.append(`${property}`, input[property]);
+      for (const property in input) {
+        formData.append(`${property}`, input[property]);
+      }
+
+      for (let i = 0; i < image.length; i++) {
+        formData.append("images", image[i]);
+      }
+
+      const review = formData;
+      addPost(review);
+
+      navigate("/mypage");
     }
-
-    for (let i = 0; i < image.length; i++) {
-      formData.append("images", image[i]);
-    }
-
-    const review = formData;
-    addPost(review);
-
-    navigate("/mypage");
   };
 
   const openPostcodeHandler = () => {
@@ -71,7 +107,6 @@ const Review = () => {
 
   const inputValue = (data) => {
     if (data.jibunAddress === "") {
-      console.log(data);
       return data.autoJibunAddress + data.buildingName;
     } else {
       return data.jibunAddress + data.buildingName;
@@ -835,7 +870,7 @@ const Review = () => {
   );
 };
 
-export default Review;
+export default ReviewPage;
 
 const StReviewWrap = styled.div`
   max-width: 1920px;
@@ -987,6 +1022,12 @@ const StRadioBtnWrap1 = styled.div`
     line-height: 32px;
     cursor: pointer;
   }
+
+  /* hover */
+  .radioBtn input[type="radio"]:hover + label {
+    background: #c2de0d;
+    color: #fff;
+  }
   /* Checked */
   .radioBtn input[type="radio"]:checked + label {
     background: #c2de0d;
@@ -1106,12 +1147,15 @@ const StyledImage = styled.img`
 const StUpload = styled.label`
   width: 100px;
   padding: 12px 50px;
-  border: none;
+  border: 2px solid #c4cbcd;
   border-radius: 10px;
-  background-color: #c2de0d;
+  background-color: white;
   color: black;
   font-weight: bold;
   cursor: pointer;
+  :hover {
+    background-color: #c2de0d;
+  }
 `;
 const StSelectStar = styled.select`
   text-align: center;
