@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
-import { getmypageReviews } from "../redux/api/mypageApi";
-import { deletePost } from "../redux/api/reviewApi";
+import { getmypageReviews } from "../../redux/api/mypageApi";
+import { deletePost } from "../../redux/api/reviewApi";
 
 const MyReview = () => {
   const navigate = useNavigate();
@@ -29,7 +29,8 @@ const MyReview = () => {
       <StMyReviewWrap>
         <StMyReviewBox>
           <StReviewBoxTitle>내가 남긴 리뷰</StReviewBoxTitle>
-          <div>
+
+          <StInnerBox>
             {data?.map((reviews) => {
               return (
                 <StMyReview>
@@ -48,7 +49,7 @@ const MyReview = () => {
 
                     <img
                       className="star"
-                      src={require("../images/Star 165.png")}
+                      src={require("../../images/Star 165.png")}
                       alt="star"
                     />
                     <div className="starPoint">{reviews.star} / 5</div>
@@ -62,7 +63,7 @@ const MyReview = () => {
                 </StMyReview>
               );
             })}
-          </div>
+          </StInnerBox>
         </StMyReviewBox>
       </StMyReviewWrap>
     </>
@@ -78,9 +79,9 @@ const StMyReviewWrap = styled.div`
 
 const StMyReviewBox = styled.div`
   width: 1254px;
-  height: 650px;
   background-color: #ffffff;
   margin: auto;
+  padding-bottom: 30px;
 `;
 
 const StReviewBoxTitle = styled.div`
@@ -89,6 +90,10 @@ const StReviewBoxTitle = styled.div`
   padding-bottom: 30px;
   font-size: 16px;
   font-weight: 800;
+`;
+
+const StInnerBox = styled.div`
+  overflow-y: auto;
 `;
 
 const StMyReview = styled.div`
