@@ -6,7 +6,7 @@ import MainMap from "../pages/MainMap";
 import KakaoLogin from "../pages/KakaoLogin";
 import Login from "../pages/Login";
 import ReviewPage from "../pages/ReviewPage";
-import Mypage from "../pages/MyPage";
+import MyPage from "../pages/MyPage";
 import PostList from "../pages/PostCommunity/PostList";
 import PostForm from "../components/Community/PostForm";
 import PostDetail from "../pages/PostCommunity/PostDetail";
@@ -23,7 +23,7 @@ const Router = () => {
         <Route path="/auth/kakao/callback" element={<KakaoLogin />} />
         <Route path="/login" element={<Login />} />
         <Route path="/review" element={<ReviewPage />} />
-        <Route path="/mypage" element={<Mypage />} />
+        <Route path="/mypage" element={<MyPage />} />
         <Route path="/list" element={<PostList />} />
         <Route path="/post" element={<PostForm />} />
         <Route path="/button" element={<FeatureButton />} />
