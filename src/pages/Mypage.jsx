@@ -11,8 +11,12 @@ const Mypage = () => {
       <StmyPageWrap>
         <StmyPageBox>
           <div className="myPageTitle">마이페이지</div>
-          <div className="myPage1">{email} 님 안녕하세요!</div>
-          <div className="myPage2">이 집은 어떤가요?</div>
+          <StmyPageName>
+            <div className="myPage1">
+              <span className="email">{email}</span> 님, 안녕하세요!
+            </div>
+            <div className="myPage2">이집은 어떤가요?</div>
+          </StmyPageName>
         </StmyPageBox>
 
         <MyReview />
@@ -32,12 +36,11 @@ const StmyPageWrap = styled.div`
 `;
 
 const StmyPageBox = styled.div`
-  width: 1085px;
+  width: 1254px;
   height: 150px;
   background-color: #ffffff;
   margin: auto;
   padding-top: 65px;
-  padding-left: 170px;
   text-align: center;
   border-bottom: 1px solid #c4cbcd;
 
@@ -52,5 +55,22 @@ const StmyPageBox = styled.div`
   }
   .myPage2 {
     font-size: 18px;
+  }
+`;
+
+const StmyPageName = styled.div`
+  text-align: left;
+  width: 300px;
+  padding-left: 120px;
+
+  .myPage1 {
+    font-size: 20px;
+    padding-bottom: 9px;
+  }
+  .myPage2 {
+    font-size: 18px;
+  }
+  .email {
+    font-weight: bold;
   }
 `;

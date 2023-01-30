@@ -29,7 +29,8 @@ const MyReview = () => {
       <StMyReviewWrap>
         <StMyReviewBox>
           <StReviewBoxTitle>내가 남긴 리뷰</StReviewBoxTitle>
-          <div>
+
+          <StInnerBox>
             {data?.map((reviews) => {
               return (
                 <StMyReview>
@@ -62,7 +63,7 @@ const MyReview = () => {
                 </StMyReview>
               );
             })}
-          </div>
+          </StInnerBox>
         </StMyReviewBox>
       </StMyReviewWrap>
     </>
@@ -78,9 +79,9 @@ const StMyReviewWrap = styled.div`
 
 const StMyReviewBox = styled.div`
   width: 1254px;
-  height: 650px;
   background-color: #ffffff;
   margin: auto;
+  padding-bottom: 30px;
 `;
 
 const StReviewBoxTitle = styled.div`
@@ -89,6 +90,10 @@ const StReviewBoxTitle = styled.div`
   padding-bottom: 30px;
   font-size: 16px;
   font-weight: 800;
+`;
+
+const StInnerBox = styled.div`
+  overflow-y: auto;
 `;
 
 const StMyReview = styled.div`
