@@ -118,7 +118,7 @@ const StNavbar = styled.div`
   align-items: center;
   font-family: "Open Sans", sans-serif;
   .header {
-    width: 1700px;
+    width: 1600px;
     display: flex;
     align-items: center;
     justify-content: space-around;

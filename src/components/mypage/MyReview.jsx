@@ -24,6 +24,7 @@ const MyReview = () => {
   if (isLoading) return <h2> 로딩중 .. </h2>;
   if (isError) return <h2> Error : {error.toString()} </h2>;
 
+  console.log(data);
   return (
     <>
       <StMyReviewWrap>
@@ -53,12 +54,7 @@ const MyReview = () => {
                       alt="star"
                     />
                     <div className="starPoint">{reviews.star} / 5</div>
-                    <button
-                      className="delBtn"
-                      // onClick={() => deleteHandler(reviewId)}
-                    >
-                      삭제
-                    </button>
+                    <button className="delBtn">삭제</button>
                   </div>
                 </StMyReview>
               );

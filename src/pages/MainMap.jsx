@@ -30,7 +30,7 @@ const MainMap = () => {
   const scrollRef = useRef(null);
 
   //지도 레벨
-  const [zoomLevel, setZoomLevel] = useState(3.5);
+  const [zoomLevel, setZoomLevel] = useState(5.5);
 
   //서버에서 받는 지도 좌표
   const [positions, setPositions] = useState();
@@ -256,7 +256,7 @@ const MainMap = () => {
   // console.log(zoomLevel);
   // console.log("markerArray", markerArray);
   // console.log("positions", positions);
-  console.log("markerArrayEstateId", markerArrayEstateId);
+
   const MarkerClickHandler = (estateId) => {
     setMarkerClickOn(true);
     setMarkerArrayEstateId(estateId);
@@ -278,7 +278,9 @@ const MainMap = () => {
       });
     }
   }, [zoomLevel, positions]);
-
+  console.log(zoomLevel);
+  console.log("markerArray", markerArray);
+  console.log("positions", positions);
   useEffect(() => {
     /* 현재 보이는 위치에 대한 좌표 값을 받아와주는 부분 */
     const mapObject = mapRef.current;
@@ -351,11 +353,11 @@ const MainMap = () => {
               style={{
                 // 지도의 크기
                 width: "100%",
-                height: "100vh",
+                height: "86vh",
               }}
               ref={mapRef}
               // 지도의 확대 레벨
-              level={3}
+              level={5}
               maxLevel={11}
               onZoomChanged={(map) => setZoomLevel(map.getLevel())}
               onDragEnd={(map) => {
@@ -427,7 +429,7 @@ const ClustererTxt = styled.div`
 `;
 const StContainer = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 86vh;
 `;
 const SearchContainer = styled.div`
   position: relative;
@@ -477,24 +479,24 @@ const StWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: 86vh;
 `;
 
 const StReviewContainer = styled.div`
   width: 600px;
-  height: 100vh;
+  height: 86vh;
 `;
 const StEmptyContainer = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   width: 400px;
-  height: 100vh;
-  white-space: pre-wrap;
+  height: 86vh;
 `;
 
 const StMapContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: 86vh;
 `;
