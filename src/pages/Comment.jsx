@@ -47,7 +47,10 @@ const Comment = () => {
   return (
     <>
       <StCommentlistBox>
-        <StCount> 댓글 {data.comments.length} 개</StCount>
+        <div>
+          <StCount> 댓글 {data.comments.length} 개</StCount>
+        </div>
+
         <CommentPost />
 
         {data.comments.map((comments, i) => {
@@ -132,14 +135,14 @@ const Comment = () => {
 export default Comment;
 
 const StCommentlistBox = styled.div`
-  width: 70%;
+  width: 1000px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 10px;
 `;
 
 const StCount = styled.div`
-  font-size: 13px;
+  font-size: 16px;
 `;
 
 const StCommentlist = styled.div`

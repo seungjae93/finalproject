@@ -43,8 +43,7 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
         <StCloseBut onClick={closeModal}>X</StCloseBut>
 
         <StTitle>
-          {" "}
-          이 집에는 {estateIdData?.reviewArr.length} 개의 후기가 있습니다.{" "}
+          이 집에는 {estateIdData?.reviewArr.length} 개의 후기가 있습니다.
         </StTitle>
 
         {estateIdData?.reviewArr.map((review) => {
@@ -59,17 +58,15 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
 
                   <StAverage> {review.star} </StAverage>
 
-                  <div> / 5.0</div>
+                  <div className="TotalFontSize"> / 5.0</div>
                 </StScore>
 
                 <div>
-                  <StDate>
-                    {new Date(review?.updatedAt).toLocaleDateString("ko-KR", {
-                      year: "numeric",
-                      month: "2-digit",
-                      day: "2-digit",
-                    })}
-                  </StDate>
+                  {new Date(review?.updatedAt).toLocaleDateString("ko-KR", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                  })}
                 </div>
               </StReview>
 
@@ -79,11 +76,6 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
                     ref={modalRef}
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <StMonthly>
-                      보증금 : {review.deposit} / 월세 :{" "}
-                      {review.monthly_payment}
-                    </StMonthly>
-
                     <StContents>
                       {review?.imageUrl.map((image) => (
                         <StPictureOne
@@ -94,22 +86,31 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
                         />
                       ))}
                     </StContents>
+                    <StMonthly>
+                      보증금 : {review.deposit} / 월세 :{" "}
+                      {review.monthly_payment}
+                    </StMonthly>
 
-                    <StGoodBadBox>
-                      <StGoodBad>장점</StGoodBad>
-                      <StContent> {review.good} </StContent>
-                    </StGoodBadBox>
+                    <StGoodBadContainer>
+                      <StGoodBadBox>
+                        <StGoodBad>장점</StGoodBad>
+                        <StContent>
+                          <pre>{review.good}</pre>
+                        </StContent>
+                      </StGoodBadBox>
 
-                    <StGoodBadBox>
-                      <StGoodBad> 단점 </StGoodBad>
-                      <StContent>{review.bad}</StContent>
-                    </StGoodBadBox>
+                      <StGoodBadBox>
+                        <StGoodBad>단점</StGoodBad>
+                        <StContent>
+                          <pre>{review.bad}</pre>
+                        </StContent>
+                      </StGoodBadBox>
+                    </StGoodBadContainer>
 
                     {imageModal && (
                       <ModalBackdrop>
                         <StimageDetail>
                           <ImageDetailCarousel imageUrl={review.imageUrl} />
-                          {/* <StDetailImg alt="" src={imageModal} /> */}
                           <StCloseButton onClick={DetailCloseModal}>
                             X
                           </StCloseButton>
@@ -130,16 +131,16 @@ export default ServeReviewModal;
 
 const StContainer = styled.div`
   position: fixed;
-  top: 95px;
+  justify-content: center;
+  top: 120px;
+  width: 390px;
+  height: 100vh;
   right: 0;
   z-index: 100;
-  width: 20%;
-  height: 100%;
   padding: 30px;
-  justify-content: center;
   background-color: white;
 
-  animation: fadeInRight 1s;
+  animation: fadeInRight 0.6s;
   @keyframes fadeInRight {
     0% {
       opacity: 0;
@@ -153,8 +154,7 @@ const StContainer = styled.div`
 `;
 
 const StTitle = styled.div`
-  font-size: 20px;
-  font-weight: bold;
+  font-weight: 500;
 `;
 
 const StCloseBut = styled.button`
@@ -164,17 +164,14 @@ const StCloseBut = styled.button`
 `;
 
 const StReviewBox = styled.div`
-  margin: 30px 0 0 0;
-  width: 490px;
+  width: 370px;
 `;
 
 const StReview = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background-color: #f3f5f5;
-  padding-left: 20px;
-  width: 390px;
+  justify-content: space-around;
+  width: 370px;
   height: 60px;
   .star {
     position: relative;
@@ -186,17 +183,17 @@ const StReview = styled.div`
 const StScore = styled.div`
   display: flex;
   align-items: center;
+  .TotalFontSize {
+    color: #737d81;
+    font-size: 20px;
+  }
 `;
 
 const StAverage = styled.div`
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
-  color: rgb(129, 150, 8);
+  color: #819608;
   margin-left: 15px;
-`;
-
-const StDate = styled.div`
-  margin-right: 30px;
 `;
 
 const StDetailModal = styled.div`
@@ -205,8 +202,8 @@ const StDetailModal = styled.div`
   border: 5px solid #f3f5f5;
   border-radius: 15px;
   margin-top: 5px;
-  width: 405px;
-  height: 600px;
+  width: 400px;
+  height: 100vh;
   animation: DetailModal 0.3s;
   @keyframes DetailModal {
     0% {
@@ -221,50 +218,63 @@ const StDetailModal = styled.div`
 `;
 
 const StMonthly = styled.div`
+  margin-top: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 365px;
-  height: 40px;
-  border-bottom: 5px solid #f3f5f5;
-  padding: 20px;
   font-size: 18px;
   font-weight: bold;
 `;
 
 const StContents = styled.div`
   display: flex;
-  padding: 20px;
-  width: 370px;
+  justify-content: center;
+  width: 400px;
   height: 90px;
+  gap: 5px;
 `;
 
 const StPictureOne = styled.img`
   width: 120px;
   height: 100px;
-  margin: 3px;
+  margin-left: 5px;
   border-radius: 5px;
-  background-color: powderblue;
   cursor: pointer;
 `;
 
+const StGoodBadContainer = styled.div`
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
 const StGoodBadBox = styled.div`
-  border: 0px solid white;
   width: 370px;
   height: 150px;
   margin: 20px;
 `;
 
 const StGoodBad = styled.div`
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 0.95rem;
+  font-weight: 600;
   margin-bottom: 6px;
+  color: #819608;
 `;
 
 const StContent = styled.div`
   width: 370px;
   height: 120px;
-  font-size: 13px;
+  font-size: 0.8rem;
+  pre {
+    margin-left: 5px;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 4;
+    font-weight: bold;
+  }
 `;
 
 const ModalBackdrop = styled.div`
@@ -294,10 +304,4 @@ const StCloseButton = styled.button`
   position: absolute;
   right: 10px;
   top: 10px;
-`;
-
-const StDetailImg = styled.img`
-  width: 500px;
-  height: 400px;
-  border-radius: 10px;
 `;

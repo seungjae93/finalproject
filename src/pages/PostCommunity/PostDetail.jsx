@@ -111,11 +111,11 @@ const StDetailBox = styled.div`
   margin-left: auto;
   margin-right: auto;
   background-color: white;
-  width: 1200px;
+  width: 1254px;
 `;
 
 const StContainer = styled.div`
-  width: 70%;
+  width: 990px;
   margin-left: auto;
   margin-right: auto;
 `;
@@ -124,7 +124,7 @@ const StPostTitle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 40px;
+  font-size: 32px;
   font-weight: bold;
   margin-top: 10px;
 `;
@@ -143,6 +143,7 @@ const StInfor = styled.div`
 `;
 
 const StNicDa = styled.div`
+  font-size: 16px;
   display: flex;
 `;
 
@@ -158,7 +159,7 @@ const StDetailImage = styled.img`
   border: none;
   margin-top: 30px;
   width: 100%;
-  height: 500px;
+  height: 459px;
 `;
 
 const StContent = styled.div`
@@ -179,7 +180,7 @@ const StCommentBox = styled.div`
   margin-left: auto;
   margin-right: auto;
   background-color: white;
-  width: 1200px;
+  width: 1254px;
 `;
 
 const StNextPrevious = styled.div`
