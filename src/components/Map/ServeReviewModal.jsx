@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import styled from "styled-components";
 import ImageDetailCarousel from "./ImageDetailCarousel";
+import { CgClose, CgChevronDown } from "react-icons/cg";
 
 const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
   const [detailModal, setDetailModal] = useState(false);
@@ -40,7 +41,17 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
   return (
     <>
       <StContainer>
-        <StCloseBut onClick={closeModal}>X</StCloseBut>
+        <CgClose
+          style={{
+            color: "737D81",
+            position: "absolute",
+            width: "25px",
+            height: "25px",
+            right: "10px",
+            top: "10px",
+          }}
+          onClick={closeModal}
+        />
 
         <StTitle>
           이 집에는 {estateIdData?.reviewArr.length} 개의 후기가 있습니다.
@@ -67,6 +78,16 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
                     month: "2-digit",
                     day: "2-digit",
                   })}
+                </div>
+                <div>
+                  <CgChevronDown
+                    style={{
+                      color: "737D81",
+
+                      width: "20px",
+                      height: "20px",
+                    }}
+                  />
                 </div>
               </StReview>
 
@@ -111,9 +132,17 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
                       <ModalBackdrop>
                         <StimageDetail>
                           <ImageDetailCarousel imageUrl={review.imageUrl} />
-                          <StCloseButton onClick={DetailCloseModal}>
-                            X
-                          </StCloseButton>
+                          <CgClose
+                            style={{
+                              color: "737D81",
+                              position: "absolute",
+                              width: "25px",
+                              height: "25px",
+                              right: "10px",
+                              top: "10px",
+                            }}
+                            onClick={DetailCloseModal}
+                          />
                         </StimageDetail>
                       </ModalBackdrop>
                     )}
@@ -130,7 +159,7 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
 export default ServeReviewModal;
 
 const StContainer = styled.div`
-  position: fixed;
+  position: absolute;
   justify-content: center;
   top: 120px;
   width: 390px;
@@ -157,17 +186,12 @@ const StTitle = styled.div`
   font-weight: 500;
 `;
 
-const StCloseBut = styled.button`
-  position: absolute;
-  right: 10px;
-  top: 10px;
-`;
-
 const StReviewBox = styled.div`
   width: 370px;
 `;
 
 const StReview = styled.div`
+  margin-top: 30px;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -227,6 +251,7 @@ const StMonthly = styled.div`
 `;
 
 const StContents = styled.div`
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   width: 400px;
@@ -289,7 +314,7 @@ const ModalBackdrop = styled.div`
 `;
 
 const StimageDetail = styled.div`
-  width: 500px;
+  width: 550px;
   height: 400px;
   z-index: 10;
   position: absolute;
@@ -297,11 +322,4 @@ const StimageDetail = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
-  border: 1px solid black;
-`;
-
-const StCloseButton = styled.button`
-  position: absolute;
-  right: 10px;
-  top: 10px;
 `;

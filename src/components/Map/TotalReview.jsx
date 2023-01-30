@@ -4,6 +4,8 @@ import styled from "styled-components";
 import axios from "axios";
 import ReviewInfoBar from "../../elements/ReviewInfoBar";
 import ServeReviewModal from "./ServeReviewModal";
+import dabangLogo from "../../images/dabangLogo.svg";
+import zigbangLogo from "../../images/zigbangLogo.svg";
 
 const TotalReview = ({ estateIdData }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -39,11 +41,20 @@ const TotalReview = ({ estateIdData }) => {
             )}
           </div>
         </StAddressWrap>
-        <div>다방 매물보기</div>
-        <div>직방 매물보기</div>
+        <div className="crawlInfo">
+          <div className="crawlWrapper">
+            <img src={dabangLogo} alt="dabangLogo" />
+            <div className="crawlMarginLeft">다방 이 집 매물보기</div>
+          </div>
+          <div className="crawlWrapper">
+            <img src={zigbangLogo} alt="zigbangLogo" />
+            <div className="crawlMarginLeft">직방 이 집 매물보기</div>
+          </div>
+        </div>
+
         {estateInfoData?.map((el, index) => {
           return (
-            <StModalContainer key={estateInfoData.index}>
+            <StModalContainer>
               <div className="totalWrap">
                 <div className="addressScoreWrap">
                   <div>집주인이 문제를 잘 해결해주시나요?</div>
@@ -168,7 +179,24 @@ const StReviewContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 400px;
-  height: 86vh;
+  height: 100vh;
+
+  .crawlInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .crawlWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .crawlMarginLeft {
+    margin-top: 20px;
+    margin-left: 10px;
+  }
 `;
 
 const StAddressWrap = styled.div`
@@ -203,6 +231,7 @@ const StAddressWrap = styled.div`
   }
 `;
 const StModalContainer = styled.div`
+  margin-top: 20px;
   width: 400px;
   height: 650px;
   display: flex;
