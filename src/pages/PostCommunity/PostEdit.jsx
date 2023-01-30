@@ -166,7 +166,7 @@ const StAddContainer = styled.div`
 `;
 
 const StAddBox = styled.div`
-  width: 60%;
+  width: 1250px;
   background-color: white;
   padding: 2rem 000;
 `;
@@ -254,15 +254,16 @@ const StInfor = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 15px;
-  width: 45%;
+  min-width: 45%;
 `;
 
 const StButton = styled.button`
-  padding: 0.5rem 6rem 0.5rem 6rem;
   font-size: 16px;
   font-weight: bold;
   border: none;
   border-radius: 5px;
   background-color: #c1de0d;
+  width: 200px;
+  height: 30px;
   cursor: pointer;
 `;

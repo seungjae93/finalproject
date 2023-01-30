@@ -40,6 +40,7 @@ const StCardWrapper = styled(Link)`
   width: 400px;
   height: 287px;
   border: 0px solid black;
+  border-radius: 10px;
   margin: 20px 0 0 10px;
   z-index: 900px;
   box-shadow: 0px 1px 5px 1px #dddddd;
@@ -55,6 +56,7 @@ const StImageCarrier = styled.img`
   width: 400px;
   height: 166px;
   border: none;
+  border-radius: 10px 10px 0 0;
 `;
 
 const StCommunityBox = styled.div``;
@@ -72,6 +74,8 @@ const StTitleCarrier = styled.pre`
 `;
 
 const StContentCarrier = styled.div`
+  width: 98%;
+  height: 40px;
   pre {
     margin-left: 5px;
     white-space: normal;

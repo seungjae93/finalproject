@@ -119,13 +119,6 @@ const Comment = () => {
             </StCommentlist>
           );
         })}
-        {/* <StPost>
-        <StPostBut>다음글 |</StPostBut>
-      </StPost>
-
-      <StPost>
-        <StPostBut>이전글 |</StPostBut>
-      </StPost> */}
       </StCommentlistBox>
       <div style={{ height: "50px" }}></div>
     </>
@@ -186,17 +179,3 @@ const Stinput = styled.input`
   border: 1px solid powderblue;
   width: 98%;
 `;
-
-// const StPost = styled.div`
-//   display: flex;
-//   align-items: center;
-//   background-color: #f0f0f0;
-//   margin-top: 5px;
-//   height: 30px;
-// `;
-
-// const StPostBut = styled.button`
-//   margin: 0 0 0 30px;
-//   border: none;
-//   cursor: pointer;
-// `;
