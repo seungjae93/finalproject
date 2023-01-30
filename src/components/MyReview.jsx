@@ -1,13 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router";
 import { getmypageReviews } from "../redux/api/mypageApi";
+import { deletePost } from "../redux/api/reviewApi";
 
 const MyReview = () => {
+  const navigate = useNavigate();
+
   const { data, error, isLoading, isError } = useQuery(
     ["myreview"],
-    getmypageReviews
+    getmypageReviews,
+    {
+      onSuccess: (data) => {},
+    }
   );
+
+  // const deleteHandler = (reviewId) => {
+  //   deletePost(reviewId);
+  //   navigate("/mypage");
+  // };
 
   if (isLoading) return <h2> 로딩중 .. </h2>;
   if (isError) return <h2> Error : {error.toString()} </h2>;
@@ -40,7 +52,12 @@ const MyReview = () => {
                       alt="star"
                     />
                     <div className="starPoint">{reviews.star} / 5</div>
-                    <button className="delBtn">삭제</button>
+                    <button
+                      className="delBtn"
+                      // onClick={() => deleteHandler(reviewId)}
+                    >
+                      삭제
+                    </button>
                   </div>
                 </StMyReview>
               );
@@ -90,8 +107,9 @@ const StMyReview = styled.div`
   }
 
   .time {
-    width: 120px;
+    width: 130px;
     padding-left: 10px;
+    font-size: 15px;
   }
   .address {
     width: 450px;
@@ -103,7 +121,7 @@ const StMyReview = styled.div`
     -webkit-line-clamp: 1;
   }
   .star {
-    margin-left: 150px;
+    margin-left: 160px;
     padding-right: 5px;
   }
   .starPoint {
