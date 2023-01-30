@@ -21,10 +21,16 @@ const PostDetail = () => {
     navigate("/list");
   };
 
+  const onPrevious = () => {
+    navigate(`/${data.post.previoustPostId}`);
+  };
+
+  const onNext = () => {
+    navigate(`/${data.post.nextPostId}`);
+  };
+
   if (isLoading) return <h2> 로딩중 .. </h2>;
   if (isError) return <h2> Error : {error.toString()} </h2>;
-
-  console.log(data);
 
   return (
     <>
@@ -71,19 +77,30 @@ const PostDetail = () => {
 
       <StCommentBox>
         <Comment />
-      </StCommentBox>
-      {/* 
-      <StPostNextBefore>
-        <StPost>
-          <StPostBut onClick={() => navigate(`/detail/${postId + 1}`)}>
-            다음글 |
-          </StPostBut>
-        </StPost>
 
-        <StPost>
-          <StPostBut>이전글 |</StPostBut>
-        </StPost>
-      </StPostNextBefore> */}
+        {data.post.nextPostTitle ? (
+          <StNextPrevious>
+            <StNext onClick={onNext}>
+              <div>다음글 |</div>
+              <StTitleVeiw>{data.post.nextPostTitle} </StTitleVeiw>
+            </StNext>
+          </StNextPrevious>
+        ) : null}
+
+        <div style={{ height: "10px" }}></div>
+
+        {data.post.previoustPostTitle ? (
+          <StNextPrevious>
+            <StNext onClick={onPrevious}>
+              <div>이전글 |</div>
+              <StTitleVeiw>{data.post.previoustPostTitle} </StTitleVeiw>
+            </StNext>
+          </StNextPrevious>
+        ) : null}
+
+        <div style={{ height: "20px" }}></div>
+      </StCommentBox>
+      <div style={{ height: "100px" }}></div>
     </>
   );
 };
@@ -94,7 +111,7 @@ const StDetailBox = styled.div`
   margin-left: auto;
   margin-right: auto;
   background-color: white;
-  width: 60%;
+  width: 1200px;
 `;
 
 const StContainer = styled.div`
@@ -162,5 +179,27 @@ const StCommentBox = styled.div`
   margin-left: auto;
   margin-right: auto;
   background-color: white;
-  width: 60%;
+  width: 1200px;
+`;
+
+const StNextPrevious = styled.div`
+  background-color: #f3f5f5;
+  height: 30px;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+const StNext = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f3f5f5;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+`;
+
+const StTitleVeiw = styled.div`
+  margin-left: 15px;
 `;
