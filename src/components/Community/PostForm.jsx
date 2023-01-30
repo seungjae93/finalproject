@@ -51,57 +51,55 @@ const PostForm = () => {
   return (
     <>
       <StAddContainer>
-        <StAddBox>
-          <StForm onSubmit={onHandleAddPost}>
-            <StSeleteBox>
-              <StSeleteR name="postLocation1" onChange={HandleChange}>
-                <StOption value="">시,도 선택</StOption>
-                {postLocation1.map((el) => (
-                  <StOption key={el.postLocation1} value={el.postLocation1}>
+        <StForm onSubmit={onHandleAddPost}>
+          <StSeleteBox>
+            <StSeleteR name="postLocation1" onChange={HandleChange}>
+              <StOption value="">시,도 선택</StOption>
+              {postLocation1.map((el) => (
+                <StOption key={el.postLocation1} value={el.postLocation1}>
+                  {el.codeNm}
+                </StOption>
+              ))}
+            </StSeleteR>
+            <StSeleteL name="postLocation2" onChange={HandleChange}>
+              <StOption value="">구,군 선택</StOption>
+              {postLocation2
+                .filter((el) => el.postLocation1 === selected.postLocation1)
+                .map((el) => (
+                  <StOption key={el.postLocation2} value={el.codeNm}>
                     {el.codeNm}
                   </StOption>
                 ))}
-              </StSeleteR>
-              <StSeleteL name="postLocation2" onChange={HandleChange}>
-                <StOption value="">구,군 선택</StOption>
-                {postLocation2
-                  .filter((el) => el.postLocation1 === selected.postLocation1)
-                  .map((el) => (
-                    <StOption key={el.postLocation2} value={el.codeNm}>
-                      {el.codeNm}
-                    </StOption>
-                  ))}
-              </StSeleteL>
-            </StSeleteBox>
+            </StSeleteL>
+          </StSeleteBox>
 
-            <StTitleInput
-              type="text"
-              value={title}
-              placeholder="제목을 입력해 주세요 (최대 50자)"
-              onChange={(e) => setTitle(e.target.value)}
+          <StTitleInput
+            type="text"
+            value={title}
+            placeholder="제목을 입력해 주세요 (최대 50자)"
+            onChange={(e) => setTitle(e.target.value)}
+          />
+
+          <StImageBox>
+            <StUpload htmlFor="file"> + </StUpload>
+            <input
+              type="file"
+              id="file"
+              onChange={onPreviewImage}
+              style={{ display: "none" }}
             />
+            <StyledImage src={preview} />
+          </StImageBox>
 
-            <StImageBox>
-              <StUpload htmlFor="file"> + </StUpload>
-              <input
-                type="file"
-                id="file"
-                onChange={onPreviewImage}
-                style={{ display: "none" }}
-              />
-              <StyledImage src={preview} />
-            </StImageBox>
+          <StContentInput
+            type="text"
+            value={content}
+            placeholder="내용을 입력해 주세요 "
+            onChange={(e) => setContent(e.target.value)}
+          />
 
-            <StContentInput
-              type="text"
-              value={content}
-              placeholder="내용을 입력해 주세요 "
-              onChange={(e) => setContent(e.target.value)}
-            />
-
-            <StButton type="submit"> 작성 완료 </StButton>
-          </StForm>
-        </StAddBox>
+          <StButton type="submit"> 작성 완료 </StButton>
+        </StForm>
       </StAddContainer>
     </>
   );
@@ -114,21 +112,19 @@ const StAddContainer = styled.div`
   justify-content: center;
 `;
 
-const StAddBox = styled.div`
-  width: 60%;
-  background-color: white;
-  padding: 2rem 000;
-`;
-
 const StForm = styled.form`
+  background-color: white;
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: 60%;
+  min-width: 600px;
+  height: 100%;
 `;
 
 const StSeleteBox = styled.div`
+  margin: 30px 0 20px 0;
   width: 70%;
-  margin: 0 0 20px 0;
 `;
 
 const StSeleteR = styled.select`
@@ -207,6 +203,6 @@ const StButton = styled.button`
   border: none;
   border-radius: 5px;
   background-color: #c1de0d;
-  margin-top: 20px;
+  margin: 20px 0 20px 0;
   cursor: pointer;
 `;
