@@ -97,13 +97,31 @@ const Review = () => {
                 />
               </div>
             )}
+
+            <input
+              type="text"
+              name="address"
+              value={address}
+              onChange={() => {}}
+              placeholder="우편번호 찾기를 이용하세요(도로명주소)"
+              size="45"
+            />
+            <input
+              type="text"
+              name="setJibunAddress"
+              value={address_jibun}
+              onChange={() => {}}
+              placeholder="우편번호 찾기를 이용하세요(지번주소)"
+              size="45"
+            />
+            {/* <StButton onClick={handle.clickButton}> 주소 검색 </StButton>
             <StAddress>
               <StInt
                 type="text"
                 name="address"
                 value={address}
                 onChange={() => {}}
-                placeholder="우편번호 찾기를 이용하세요(도로명주소)"
+                placeholder="주소 검색을 이용하세요(도로명주소 입력)"
                 size="45"
               />
             </StAddress>
@@ -113,35 +131,32 @@ const Review = () => {
                 name="setJibunAddress"
                 value={address_jibun}
                 onChange={() => {}}
-                placeholder="우편번호 찾기를 이용하세요(지번주소)"
+                placeholder="주소 검색을 이용하세요(지번주소 입력)"
                 size="45"
               />
-            </StSeAddress>
+            </StSeAddress> */}
 
             <StHomeSection>
               <StAddStyle> 주거 형태 </StAddStyle>
               <StRadioBtnWrap>
-                <div className="radioBtn">
-                  <input
-                    id="radio-1"
-                    type="radio"
-                    name="residence_type"
-                    value="원룸"
-                    onChange={onChangeHandler}
-                    checked
-                  />
-                  <label for="radio-1">원룸</label>
-                </div>
-                <div className="radioBtn">
-                  <input
-                    id="select2"
-                    type="radio"
-                    name="residence_type"
-                    value="투룸"
-                    onChange={onChangeHandler}
-                  />
-                  <label for="radio-2">투룸</label>
-                </div>
+                <input
+                  id="radio-1"
+                  type="radio"
+                  name="residence_type"
+                  value="원룸"
+                  onChange={onChangeHandler}
+                  checked
+                />
+                <label for="radio-1">원룸</label>
+
+                <input
+                  id="select2"
+                  type="radio"
+                  name="residence_type"
+                  value="투룸"
+                  onChange={onChangeHandler}
+                />
+                <label for="radio-2">투룸</label>
               </StRadioBtnWrap>
               <StBasic>
                 <StBasicTitle>평수</StBasicTitle>
