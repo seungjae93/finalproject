@@ -5,6 +5,7 @@ import { throttle, debounce } from "lodash";
 import { Map, MapMarker, CustomOverlayMap } from "react-kakao-maps-sdk";
 import TotalReview from "../components/Map/TotalReview";
 import Button from "../components/button/Button";
+import clusterer34 from "../images/clusterer34.svg";
 
 const { kakao } = window;
 
@@ -240,17 +241,10 @@ const MainMap = () => {
                   position={el.locate ?? el}
                 >
                   {/* 커스텀 오버레이에 표시할 내용입니다 */}
-                  <div
-                    className="label"
-                    style={{
-                      color: "white",
-                      backgroundColor: "skyblue",
-                    }}
-                  >
-                    <span className="left"></span>
-                    <span className="center">{el.index}</span>
-                    <span className="right"></span>
-                  </div>
+                  <ClustererImg>
+                    <img src={clusterer34} alt="clusterer32" />
+                    <ClustererTxt>{el.index}</ClustererTxt>
+                  </ClustererImg>
                 </CustomOverlayMap>
               );
             })
@@ -329,7 +323,7 @@ const MainMap = () => {
               </AutoSearchWrap>
             </AutoSearchContainer>
           )}
-          <Button.Primary size="small" onClick={onSearchHandler}>
+          <Button.Primary size="small" onClick={() => onSearchHandler()}>
             검색하기
           </Button.Primary>
         </SearchContainer>
@@ -408,7 +402,19 @@ const MainMap = () => {
   );
 };
 export default MainMap;
-
+const ClustererImg = styled.div`
+  background-size: cover;
+  position: relative;
+`;
+const ClustererTxt = styled.div`
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 550;
+`;
 const StContainer = styled.div`
   /* max-width: 1920px;
   min-width: 680px;
@@ -469,7 +475,7 @@ const StWrapper = styled.div`
 
 const StReviewContainer = styled.div`
   width: 600px;
-  height: 100%;
+  height: 86vh;
 `;
 
 const StMapContainer = styled.div`

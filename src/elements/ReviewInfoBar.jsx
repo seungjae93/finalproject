@@ -42,8 +42,8 @@ const ReviewInfoBar = ({
   return (
     <>
       <ReviewContainer>
-        {reviewInfo.map((el) => {
-          return <ReviewBar point={el} />;
+        {reviewInfo.map((el, index) => {
+          return <ReviewBar key={reviewInfo.index} point={el} />;
         })}
         {[1, 2, 3, 4, 5, 6].map((value) => {
           return <ReviewPoint />;
@@ -56,7 +56,7 @@ export default ReviewInfoBar;
 
 const ReviewContainer = styled.div`
   height: 10px;
-  width: 300px;
+  width: 320px;
   background-color: #c4cbcd;
   border-radius: 20px;
   position: relative;
@@ -76,7 +76,7 @@ const ReviewPoint = styled.div`
 const ReviewBar = styled.div`
   height: 10px;
   width: 180px;
-  width: ${({ point }) => (point ? `${(300 * point) / 5}` : 0)}px;
+  width: ${({ point }) => (point ? `${(320 * point) / 5}` : 0)}px;
   background-color: #819608;
   border-radius: 20px;
   position: absolute;
