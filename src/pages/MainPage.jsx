@@ -283,7 +283,8 @@ const StSectionReview = styled.div`
 `;
 
 const StReviewWrap = styled.div`
-  margin-left: 50px;
+  width: 510px;
+  margin-left: 55px;
   text-align: left;
   display: flex;
 `;
@@ -356,9 +357,7 @@ const StDetailBox1 = styled.div`
   background-color: white;
   box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  margin-bottom: 30px;
-  margin-top: 20px;
-  margin-left: 150px;
+  margin: 20px 0 30px 180px;
 
   .detailBoxImage {
     width: 500px;
@@ -397,9 +396,7 @@ const StDetailBox2 = styled.div`
   background-color: white;
   box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  margin-bottom: 30px;
-  margin-top: 20px;
-  margin-left: 150px;
+  margin: 20px 0 30px 180px;
 
   .detailBoxImage {
     width: 500px;
@@ -438,9 +435,7 @@ const StDetailBox3 = styled.div`
   background-color: white;
   box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  margin-bottom: 30px;
-  margin-top: 20px;
-  margin-left: 150px;
+  margin: 20px 0 30px 180px;
 
   .detailBoxImage {
     width: 500px;
