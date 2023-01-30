@@ -1,24 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import { getmypageReviews } from "../redux/api/mypageApi";
 import { deletePost } from "../redux/api/reviewApi";
 
 const MyReview = () => {
   const navigate = useNavigate();
-  const { reviewId } = useParams();
 
   const { data, error, isLoading, isError } = useQuery(
     ["myreview"],
-    getmypageReviews
+    getmypageReviews,
+    {
+      onSuccess: (data) => {},
+    }
   );
 
-  const deleteHandler = (reviewId) => {
-    deletePost(reviewId);
-    navigate("/mypage");
-    console.log(reviewId);
-  };
+  // const deleteHandler = (reviewId) => {
+  //   deletePost(reviewId);
+  //   navigate("/mypage");
+  // };
 
   if (isLoading) return <h2> 로딩중 .. </h2>;
   if (isError) return <h2> Error : {error.toString()} </h2>;
@@ -53,7 +54,7 @@ const MyReview = () => {
                     <div className="starPoint">{reviews.star} / 5</div>
                     <button
                       className="delBtn"
-                      onClick={() => deleteHandler(reviewId)}
+                      // onClick={() => deleteHandler(reviewId)}
                     >
                       삭제
                     </button>

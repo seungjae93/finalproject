@@ -3,6 +3,12 @@ import { instance } from "./instance";
 import setToken from "../../shared/setToken";
 import { getCookie } from "../../shared/cookie";
 
+// GET
+export const getPosts = async () => {
+  const response = await instance.get("/review");
+  return response.data;
+};
+
 // POST
 export const addPost = async (post) => {
   const accessToken = getCookie("token");
@@ -16,7 +22,6 @@ export const addPost = async (post) => {
 
 export const useAddPost = () => {
   const queryClient = useQueryClient();
-
   return useMutation(addPost, {
     //후기를 작성하면 새로고침 없이 자동 리랜더링
     onSuccess: () => {
@@ -25,13 +30,7 @@ export const useAddPost = () => {
   });
 };
 
-//GET
-export const getPosts = async () => {
-  const response = await instance.get("/review");
-  return response.data;
-};
-
-//DELETE
+// DELETE
 export const deletePost = async (reviewId) => {
   const accessToken = getCookie("token");
   setToken(accessToken);
@@ -40,4 +39,14 @@ export const deletePost = async (reviewId) => {
     headers: headers,
   });
   return response.data;
+};
+
+export const useDeletePost = () => {
+  const queryClient = useQueryClient();
+  return useMutation(deletePost, {
+    //후기를 작성하면 새로고침 없이 자동 리랜더링
+    onSuccess: () => {
+      queryClient.invalidateQueries("review");
+    },
+  });
 };

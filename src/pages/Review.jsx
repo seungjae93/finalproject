@@ -956,7 +956,7 @@ const StRadioBtnWrap2 = styled.div`
   align-items: center;
   justify-content: space-around;
   width: 400px;
-  border: 1px solid blue;
+
   .radioBtn {
     font-size: 18px;
   }
@@ -965,7 +965,7 @@ const StRadioBtnWrap2 = styled.div`
   }
   .radioBtn label {
     display: block;
-    border-radius: 10px;
+    border-radius: 15px;
     margin: 0 auto;
     text-align: center;
     width: 30px;
