@@ -13,7 +13,7 @@ export const __kakaoLogin = createAsyncThunk(
       );
       setCookie("token", response.data.accessToken, {
         path: "/",
-        expire: "after720m",
+        expire: "after60m",
       });
       const email = response.data.email;
       const nickEmail = email.substring(0, email.indexOf("@"));
