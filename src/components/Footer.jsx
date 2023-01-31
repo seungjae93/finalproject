@@ -57,6 +57,7 @@ const StFooterBtn = styled.div`
   width: 700px;
   padding-top: 30px;
   padding-left: 600px;
+  font-family: "Pretendard";
 
   .btn {
     color: #737d81;
@@ -72,11 +73,13 @@ const StFooterBtn = styled.div`
 
 const StFooterWrap = styled.div`
   display: flex;
+  width: 1920px;
 `;
 
 const StFooterContent = styled.div`
-  padding-top: 60px;
-  padding-left: 200px;
+  width: 400px;
+  margin-top: 60px;
+  margin-left: 200px;
 
   .footerTitle {
     color: #737d81;
@@ -92,10 +95,11 @@ const StFooterContent = styled.div`
 `;
 
 const StFooterLogo = styled.div`
-  padding-left: 480px;
-  padding-top: 60px;
+  width: 250px;
+  margin-left: 450px;
+  margin-top: 60px;
   .footerCopy {
     color: #737d81;
-    padding-top: 15px;
+    padding-top: 5px;
   }
 `;

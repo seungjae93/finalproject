@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import GlobalStyle from "../components/styles/GlobalStyle";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import Footer from "../components/Footer";
@@ -16,197 +17,204 @@ const MainPage = () => {
 
   return (
     <>
-      <StBody>
-        {/* Home */}
-        <StSectionHome>
-          <StMainImage>
-            <img
-              className="mainImg"
-              src={require("../images/main.jpg")}
-              alt="main"
-            />
-          </StMainImage>
-          <StHomeBox>
-            <StHomeBoxContent>
-              <div className="content1">이 집은 어떨까?</div>
-              <div className="content2">
-                원룸,투룸,역세권 말고
-                <br /> 진짜 살아봐야 아는 정보
-              </div>
-              <div className="content3">
-                중개인도, 집주인도 알려주지 않는 꿀정보를 알아보세요.
-              </div>
-              <button
-                className="reviewBtn"
-                onClick={() => {
-                  navigate("/map");
-                }}
-              >
-                <img src={require("../images/Group 388.jpg")} alt="button" />
-              </button>
-            </StHomeBoxContent>
-          </StHomeBox>
-        </StSectionHome>
-
-        {/* Riview  */}
-        <StSectionReview>
-          <StReviewWrap>
-            <StReviewBox1>
-              <div className="reviewContent1">
-                진짜 살아본 사람들의 <br /> 생생한 후기
-              </div>
-              <div className="reviewContent2">
-                당신이 알고싶은 진짜 집의 정보를 알려드립니다.
-              </div>
-
-              <button
-                className="aboutBtn1"
-                onClick={() => {
-                  navigate("/map");
-                }}
-              >
-                후기 보러가기
-              </button>
-
-              <button
-                className="aboutBtn2"
-                onClick={() => {
-                  navigate("/review");
-                }}
-              >
-                후기 쓰러가기
-              </button>
-            </StReviewBox1>
-
-            <StReviewBox2>
+      <GlobalStyle />
+      <StBodyWrap>
+        <StBody>
+          {/* Home */}
+          <StSectionHome>
+            <StMainImage>
               <img
-                className="aboutImg"
-                src={require("../images/Group 421.jpg")}
-                alt="imgbox1"
+                className="mainImg"
+                src={require("../images/main.jpg")}
+                alt="main"
               />
+            </StMainImage>
+            <StHomeBox>
+              <StHomeBoxContent>
+                <div className="content1">이 집은 어떨까?</div>
+                <div className="content2">
+                  원룸,투룸,역세권 말고
+                  <br /> 진짜 살아봐야 아는 정보
+                </div>
+                <div className="content3">
+                  중개인도, 집주인도 알려주지 않는 꿀정보를 알아보세요.
+                </div>
+                <button
+                  className="reviewBtn"
+                  onClick={() => {
+                    navigate("/map");
+                  }}
+                >
+                  <img src={require("../images/Group 388.jpg")} alt="button" />
+                </button>
+              </StHomeBoxContent>
+            </StHomeBox>
+          </StSectionHome>
+
+          {/* Riview  */}
+          <StSectionReview>
+            <StReviewWrap>
+              <StReviewBox1>
+                <div className="reviewContent1">
+                  진짜 살아본 사람들의 <br /> 생생한 후기
+                </div>
+                <div className="reviewContent2">
+                  당신이 알고싶은 진짜 집의 정보를 알려드립니다.
+                </div>
+
+                <button
+                  className="aboutBtn1"
+                  onClick={() => {
+                    navigate("/map");
+                  }}
+                >
+                  후기 보러가기
+                </button>
+
+                <button
+                  className="aboutBtn2"
+                  onClick={() => {
+                    navigate("/review");
+                  }}
+                >
+                  후기 쓰러가기
+                </button>
+              </StReviewBox1>
+
+              <StReviewBox2>
+                <img
+                  className="aboutImg"
+                  src={require("../images/Group 421.jpg")}
+                  alt="imgbox1"
+                />
+                <img
+                  className="aboutImg"
+                  src={require("../images/Group 422.jpg")}
+                  alt="imgbox2"
+                />
+                <img
+                  className="aboutImg"
+                  src={require("../images/Group 423.jpg")}
+                  alt="imgbox3"
+                />
+              </StReviewBox2>
+            </StReviewWrap>
+          </StSectionReview>
+
+          {/* Detail */}
+          <StSectionDetail>
+            <StDetailBox1>
               <img
-                className="aboutImg"
-                src={require("../images/Group 422.jpg")}
-                alt="imgbox2"
+                className="detailBoxImage"
+                src={require("../images/Rectangle 1561.jpg")}
+                alt="img1"
               />
+              <div className="detailBoxContents">
+                <div className="detailTitle">지도로 보는 지역별 후기</div>
+                <div className="detailBody">
+                  지도를 통해 다양한 지역의 생활 후기를 알아볼 수 있습니다.
+                  <br /> 다양한 사람들의 살아본 이야기를 들어보세요.
+                </div>
+
+                <button
+                  className="go"
+                  onClick={() => {
+                    navigate("/map");
+                  }}
+                >
+                  바로가기>
+                </button>
+              </div>
+            </StDetailBox1>
+
+            <StDetailBox2>
               <img
-                className="aboutImg"
-                src={require("../images/Group 423.jpg")}
-                alt="imgbox3"
+                className="detailBoxImage"
+                src={require("../images/Rectangle 1561.jpg")}
+                alt="img2"
               />
-            </StReviewBox2>
-          </StReviewWrap>
-        </StSectionReview>
+              <div className="detailBoxContents">
+                <div className="detailTitle">
+                  꼼꼼하게 돌아볼 수 있는 후기 작성
+                </div>
+                <div className="detailBody">
+                  나를 위한, 다음 거주자를 위한 후기를 작성해보세요.
+                  <br /> 섬세하게 나누어진 문항을 따라오면 꼼꼼하게 리뷰할 수
+                  있습니다.
+                </div>
 
-        {/* Detail */}
-        <StSectionDetail>
-          <StDetailBox1>
-            <img
-              className="detailBoxImage"
-              src={require("../images/Rectangle 1561.jpg")}
-              alt="img1"
-            />
-            <div className="detailBoxContents">
-              <div className="detailTitle">지도로 보는 지역별 후기</div>
-              <div className="detailBody">
-                지도를 통해 다양한 지역의 생활 후기를 알아볼 수 있습니다.
-                <br /> 다양한 사람들의 살아본 이야기를 들어보세요.
+                <button className="go" onClick={reviewHandler}>
+                  바로가기>
+                </button>
               </div>
+            </StDetailBox2>
 
-              <button
-                className="go"
-                onClick={() => {
-                  navigate("/map");
-                }}
-              >
-                바로가기
-              </button>
-            </div>
-          </StDetailBox1>
+            <StDetailBox3>
+              <img
+                className="detailBoxImage"
+                src={require("../images/Rectangle 1561.jpg")}
+                alt="img3"
+              />
+              <div className="detailBoxContents">
+                <div className="detailTitle">
+                  지역 사람들간의 대화를 위한 커뮤니티
+                </div>
+                <div className="detailBody">
+                  내 주변의 이웃들과 주거와 관련된 문제를 나누어요.
+                  <br /> 혼자서는 어려웠던 문제가 이웃들의 지혜로 풀립니다.
+                </div>
 
-          <StDetailBox2>
-            <img
-              className="detailBoxImage"
-              src={require("../images/Rectangle 1562.jpg")}
-              alt="img2"
-            />
-            <div className="detailBoxContents">
-              <div className="detailTitle">
-                꼼꼼하게 돌아볼 수 있는 후기 작성
+                <button
+                  className="go"
+                  onClick={() => {
+                    navigate("/list");
+                  }}
+                >
+                  바로가기>
+                </button>
               </div>
-              <div className="detailBody">
-                나를 위한, 다음 거주자를 위한 후기를 작성해보세요.
-                <br /> 섬세하게 나누어진 문항을 따라오면 꼼꼼하게 리뷰할 수
-                있습니다.
+            </StDetailBox3>
+          </StSectionDetail>
+
+          <StSectionBottom>
+            <div className="bottomContents">
+              <div className="bottomTitle">
+                이웃들과 주거 관련 문제를 논의해요
               </div>
-
-              <button className="go" onClick={reviewHandler}>
-                바로가기
-              </button>
-            </div>
-          </StDetailBox2>
-
-          <StDetailBox3>
-            <img
-              className="detailBoxImage"
-              src={require("../images/Rectangle 1563.jpg")}
-              alt="img3"
-            />
-            <div className="detailBoxContents">
-              <div className="detailTitle">
-                지역 사람들간의 대화를 위한 커뮤니티
+              <div className="bottomBody">
+                마음고생이 많은 법적 분쟁 부터 집안일을 도와줄 사소한 일상의
+                팁까지, 이집은 사랑방에서 모두 모여앉아 이야기꽃을 피워요.
               </div>
-              <div className="detailBody">
-                내 주변의 이웃들과 주거와 관련된 문제를 나누어요.
-                <br /> 혼자서는 어려웠던 문제가 이웃들의 지혜로 풀립니다.
+              <div className="bottomBody">
+                도란도란 이야기 하다보면 동네의 정을 느낄 수 있어요.
               </div>
-
-              <button
-                className="go"
-                onClick={() => {
-                  navigate("/list");
-                }}
-              >
-                바로가기
-              </button>
             </div>
-          </StDetailBox3>
-        </StSectionDetail>
-
-        <StSectionBottom>
-          <div className="bottomContents">
-            <div className="bottomTitle">
-              이웃들과 주거 관련 문제를 논의해요
-            </div>
-            <div className="bottomBody">
-              마음고생이 많은 법적 분쟁 부터 집안일을 도와줄 사한 일상의 팁까지,
-              이집은 사랑방에서 모두 모여앉아 이야기꽃을 피워요.
-            </div>
-            <div className="bottomBody">
-              도란도란 이야기 하다보면 동네의 정을 느낄 수 있어요.
-            </div>
-          </div>
-          <button
-            className="bottomBtn"
-            onClick={() => {
-              navigate("/map");
-            }}
-          >
-            간편가입하고 이야기 나누기
-          </button>
-        </StSectionBottom>
-
+            <button
+              className="bottomBtn"
+              onClick={() => {
+                navigate("/map");
+              }}
+            >
+              간편가입하고 이야기 나누기
+            </button>
+          </StSectionBottom>
+        </StBody>
         <Footer />
-      </StBody>
+      </StBodyWrap>
     </>
   );
 };
 
 export default MainPage;
 
-const StBody = styled.body`
-  font-family: "Open Sans", sans-serif;
-  margin: 0;
+const StBodyWrap = styled.div`
+  max-width: 1920px;
+  overflow: hidden;
+`;
+
+const StBody = styled.div`
+  width: 1920px;
+  margin: auto;
 `;
 
 // Home
@@ -227,30 +235,31 @@ const StMainImage = styled.div`
 `;
 
 const StHomeBox = styled.div`
-  width: 510px;
-  height: 300px;
+  width: 500px;
+  height: 310px;
   background-color: #ffffff;
   opacity: 90%;
   position: absolute;
   margin-top: 110px;
   margin-left: 680px;
+  text-align: left;
 `;
 
 const StHomeBoxContent = styled.div`
-  margin-top: 10px;
-  text-align: left;
-
+  width: 510px;
+  height: 310px;
   .content1 {
     font-size: 17px;
     color: #737d81;
-    margin-top: 25px;
+    margin-top: 40px;
     margin-left: 60px;
   }
   .content2 {
-    margin-top: 5px;
+    margin-top: 15px;
     margin-left: 60px;
     font-size: 36px;
     font-weight: bold;
+    line-height: 45px;
   }
   .content3 {
     margin-top: 15px;
@@ -296,15 +305,15 @@ const StReviewBox1 = styled.div`
   height: 150px;
 
   .reviewContent1 {
+    width: 300px;
     font-size: 32px;
     font-weight: bold;
-    padding-bottom: 20px;
-    padding-left: 80px;
+    line-height: 40px;
+    padding: 10px 0 10px 80px;
   }
   .reviewContent2 {
     font-size: 20px;
-    padding-bottom: 20px;
-    padding-left: 80px;
+    padding: 10px 0 10px 80px;
   }
   .aboutBtn1 {
     background-color: #c1de0d;
@@ -344,10 +353,9 @@ const StReviewBox2 = styled.div`
 
 //Detail
 const StSectionDetail = styled.div`
-  background-color: #f0f0f0;
+  background-color: #f3f5f5;
   max-width: 1920px;
-  margin: auto;
-  height: 1200px;
+  height: 1350px;
   align-items: center;
 `;
 
@@ -355,20 +363,20 @@ const StDetailBox1 = styled.div`
   width: 1192px;
   height: 380px;
   background-color: white;
-  box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  margin: 20px 0 30px 180px;
+  margin: 80px 0 30px 180px;
 
   .detailBoxImage {
     width: 500px;
     height: 300px;
-    position: relative;
-    top: 5vh;
-    left: 10%;
+    margin-left: 110px;
+    margin-top: 35px;
   }
   .detailBoxContents {
+    width: 500px;
     position: relative;
-    top: -15vh;
+    top: -140px;
     left: 55%;
     .detailTitle {
       font-size: 20px;
@@ -376,7 +384,8 @@ const StDetailBox1 = styled.div`
     }
     .detailBody {
       font-size: 17px;
-      padding-top: 2%;
+      padding-top: 3%;
+      line-height: 23px;
     }
   }
   .go {
@@ -386,7 +395,8 @@ const StDetailBox1 = styled.div`
     cursor: pointer;
     font-weight: 600;
     font-size: 16px;
-    padding-top: 2.5%;
+    padding-top: 40px;
+    padding-left: 400px;
   }
 `;
 
@@ -401,13 +411,13 @@ const StDetailBox2 = styled.div`
   .detailBoxImage {
     width: 500px;
     height: 300px;
-    position: relative;
-    top: 5vh;
-    left: 10%;
+    margin-left: 110px;
+    margin-top: 35px;
   }
   .detailBoxContents {
+    width: 500px;
     position: relative;
-    top: -13vh;
+    top: -140px;
     left: 55%;
     .detailTitle {
       font-size: 20px;
@@ -415,7 +425,8 @@ const StDetailBox2 = styled.div`
     }
     .detailBody {
       font-size: 17px;
-      padding-top: 2%;
+      padding-top: 3%;
+      line-height: 23px;
     }
   }
   .go {
@@ -425,7 +436,8 @@ const StDetailBox2 = styled.div`
     cursor: pointer;
     font-weight: 600;
     font-size: 16px;
-    padding-top: 2.5%;
+    padding-top: 40px;
+    padding-left: 400px;
   }
 `;
 
@@ -440,13 +452,13 @@ const StDetailBox3 = styled.div`
   .detailBoxImage {
     width: 500px;
     height: 300px;
-    position: relative;
-    top: 5vh;
-    left: 10%;
+    margin-left: 110px;
+    margin-top: 35px;
   }
   .detailBoxContents {
+    width: 500px;
     position: relative;
-    top: -15vh;
+    top: -140px;
     left: 55%;
     .detailTitle {
       font-size: 20px;
@@ -454,7 +466,8 @@ const StDetailBox3 = styled.div`
     }
     .detailBody {
       font-size: 17px;
-      padding-top: 2%;
+      padding-top: 3%;
+      line-height: 23px;
     }
   }
   .go {
@@ -464,7 +477,8 @@ const StDetailBox3 = styled.div`
     cursor: pointer;
     font-weight: 600;
     font-size: 16px;
-    padding-top: 2.5%;
+    padding-top: 40px;
+    padding-left: 400px;
   }
 `;
 
@@ -473,19 +487,20 @@ const StSectionBottom = styled.div`
   background-color: #d7dbdc;
   max-width: 1920px;
   height: 350px;
-  margin: auto;
-  margin-top: 5%;
   .bottomContents {
+    width: 1000px;
     padding-top: 60px;
-    padding-left: 180px;
+    margin-left: 180px;
     .bottomTitle {
       font-size: 24px;
       font-weight: 600;
-      padding-bottom: 1%;
+      padding-bottom: 20px;
     }
     .bottomBody {
-      font-size: 19px;
+      font-size: 17px;
       font-weight: 400;
+      padding: 0.3%;
+      line-height: 20px;
     }
   }
   .bottomBtn {

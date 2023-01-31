@@ -36,20 +36,22 @@ const StmyPageWrap = styled.div`
 `;
 
 const StmyPageBox = styled.div`
-  width: 1254px;
+  width: 1920px;
   height: 150px;
   background-color: #ffffff;
   margin: auto;
   padding-top: 65px;
-  text-align: center;
   border-bottom: 1px solid #c4cbcd;
 
   .myPageTitle {
+    width: 500px;
     font-size: 28px;
     font-weight: bold;
-    padding-bottom: 25px;
+    margin-bottom: 30px;
+    margin-left: 35%;
   }
   .myPage1 {
+    width: 500;
     font-size: 20px;
     padding-bottom: 9px;
   }
@@ -60,16 +62,9 @@ const StmyPageBox = styled.div`
 
 const StmyPageName = styled.div`
   text-align: left;
-  width: 300px;
-  padding-left: 120px;
+  width: 500px;
+  margin-left: 220px;
 
-  .myPage1 {
-    font-size: 20px;
-    padding-bottom: 9px;
-  }
-  .myPage2 {
-    font-size: 18px;
-  }
   .email {
     font-weight: bold;
   }
