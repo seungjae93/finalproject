@@ -297,6 +297,7 @@ const MainMap = () => {
         <SearchContainer>
           <StSearch
             type="search"
+            placeholder="지역 검색하기"
             onKeyDown={onSubmitSearch}
             onChange={onAddressHandler}
             value={isHaveInputValue ? autoSearchKeyword : searchAddress}
@@ -431,32 +432,42 @@ const ClustererTxt = styled.div`
 const StContainer = styled.div`
   width: 100%;
   height: 86vh;
+  min-width: 1000px;
 `;
 const SearchContainer = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 1360px;
   height: 45px;
   border: 0;
   gap: 10px;
 `;
 const StSearch = styled.input`
-  width: 20%;
-  height: 70%;
-  padding-left: 10px;
+  padding: 10px;
+  width: 351px;
+  height: 31px;
   background-color: #eaeaea;
-  border: 0;
-  outline: 1px;
+  border: 1px solid #a6b2b9;
+  border-radius: 5px;
 `;
 const AutoSearchContainer = styled.div`
   position: absolute;
-  width: 25%;
-  height: 25vh;
+  width: 450px;
+  height: 200px;
   top: 45px;
   z-index: 3;
   background-color: #fff;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #ccc;
+  }
 `;
 const AutoSearchWrap = styled.ul`
   list-style: none;
@@ -464,8 +475,8 @@ const AutoSearchWrap = styled.ul`
 
 const AutoSearchData = styled.li`
   position: relative;
-  width: 90%;
-  padding: 10px 8px;
+  width: 430px;
+  padding: 10px 0px;
   margin: auto;
   font-size: 14px;
   font-weight: bold;
