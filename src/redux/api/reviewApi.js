@@ -2,9 +2,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { instance } from "./instance";
 import setToken from "../../shared/setToken";
 import { getCookie } from "../../shared/cookie";
-// import { checkLogin } from "../../hooks/useCheckLogin";
-
-// const { accessToken, isLogin } = checkLogin();
 
 // GET
 export const getPosts = async () => {
@@ -52,7 +49,6 @@ export const deletePost = async (reviewId) => {
 export const useDeletePost = () => {
   const queryClient = useQueryClient();
   return useMutation(deletePost, {
-    //후기를 작성하면 새로고침 없이 자동 리랜더링
     onSuccess: () => {
       queryClient.invalidateQueries("review");
     },
