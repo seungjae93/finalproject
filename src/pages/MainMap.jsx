@@ -6,6 +6,8 @@ import { Map, MapMarker, CustomOverlayMap } from "react-kakao-maps-sdk";
 import TotalReview from "../components/Map/TotalReview";
 import Button from "../components/button/Button";
 import clusterer34 from "../images/clusterer34.svg";
+import clusterer89 from "../images/clusterer89.svg";
+import marker from "../images/marker.svg";
 import logoGray from "../images/logoGray.svg";
 
 const { kakao } = window;
@@ -30,7 +32,7 @@ const MainMap = () => {
   const scrollRef = useRef(null);
 
   //지도 레벨
-  const [zoomLevel, setZoomLevel] = useState(5.5);
+  const [zoomLevel, setZoomLevel] = useState(9.5);
 
   //서버에서 받는 지도 좌표
   const [positions, setPositions] = useState();
@@ -220,17 +222,10 @@ const MainMap = () => {
                   position={el}
                 >
                   {/* 커스텀 오버레이에 표시할 내용입니다 */}
-                  <div
-                    className="label"
-                    style={{
-                      color: "#000",
-                      backgroundColor: `${getOverlayStyle(zoomLevel)}`,
-                    }}
-                  >
-                    <span className="left"></span>
-                    <span className="center">{name}</span>
-                    <span className="right"></span>
-                  </div>
+                  <ClustererImg>
+                    <img src={clusterer89} alt="clusterer89" />
+                    <Clusterer89Txt>{name}</Clusterer89Txt>
+                  </ClustererImg>
                 </CustomOverlayMap>
               );
             })
@@ -253,9 +248,6 @@ const MainMap = () => {
       </>
     );
   };
-  // console.log(zoomLevel);
-  // console.log("markerArray", markerArray);
-  // console.log("positions", positions);
 
   const MarkerClickHandler = (estateId) => {
     setMarkerClickOn(true);
@@ -278,9 +270,9 @@ const MainMap = () => {
       });
     }
   }, [zoomLevel, positions]);
-  console.log(zoomLevel);
-  console.log("markerArray", markerArray);
-  console.log("positions", positions);
+  // console.log(zoomLevel);
+  // console.log("markerArray", markerArray);
+  // console.log("positions", positions);
   useEffect(() => {
     /* 현재 보이는 위치에 대한 좌표 값을 받아와주는 부분 */
     const mapObject = mapRef.current;
@@ -357,7 +349,7 @@ const MainMap = () => {
               }}
               ref={mapRef}
               // 지도의 확대 레벨
-              level={5}
+              level={9}
               maxLevel={11}
               onZoomChanged={(map) => setZoomLevel(map.getLevel())}
               onDragEnd={(map) => {
@@ -394,11 +386,11 @@ const MainMap = () => {
                       key={el.estateId}
                       position={el}
                       image={{
-                        src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
+                        src: marker,
                         // 마커이미지의 주소입니다
                         size: {
-                          width: 24,
-                          height: 35,
+                          width: 50,
+                          height: 50,
                         }, // 마커이미지의 크기입니다
                       }}
                       onClick={() => MarkerClickHandler(el.estateId)}
@@ -417,6 +409,15 @@ export default MainMap;
 const ClustererImg = styled.div`
   background-size: cover;
   position: relative;
+`;
+const Clusterer89Txt = styled.div`
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 500;
 `;
 const ClustererTxt = styled.div`
   position: absolute;
