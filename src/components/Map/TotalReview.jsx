@@ -184,14 +184,18 @@ const StReviewContainer = styled.div`
   flex-direction: column;
   width: 425px;
   height: 80vh;
-  overflow-y: auto;
+  overflow-y: scroll;
   overflow-x: hidden;
   &::-webkit-scrollbar {
-    width: 5px;
+    width: 6px;
   }
   &::-webkit-scrollbar-thumb {
     border-radius: 5px;
     background: #ccc;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background: grey;
   }
 
   .crawlInfo {
