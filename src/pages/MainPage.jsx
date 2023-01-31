@@ -3,7 +3,8 @@ import styled from "styled-components";
 import GlobalStyle from "../components/styles/GlobalStyle";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
-import Footer from "../components/Footer";
+import Button from "../components/button/Button";
+import { CgChevronRight } from "react-icons/cg";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -17,502 +18,368 @@ const MainPage = () => {
 
   return (
     <>
-      <GlobalStyle />
-      <StBodyWrap>
-        <StBody>
-          {/* Home */}
-          <StSectionHome>
-            <StMainImage>
-              <img
-                className="mainImg"
-                src={require("../images/main.jpg")}
-                alt="main"
-              />
-            </StMainImage>
-            <StHomeBox>
-              <StHomeBoxContent>
-                <div className="content1">이 집은 어떨까?</div>
-                <div className="content2">
-                  원룸,투룸,역세권 말고
-                  <br /> 진짜 살아봐야 아는 정보
-                </div>
-                <div className="content3">
-                  중개인도, 집주인도 알려주지 않는 꿀정보를 알아보세요.
-                </div>
-                <button
-                  className="reviewBtn"
-                  onClick={() => {
-                    navigate("/map");
-                  }}
-                >
-                  <img src={require("../images/Group 388.jpg")} alt="button" />
-                </button>
-              </StHomeBoxContent>
-            </StHomeBox>
-          </StSectionHome>
+      <StHomeContainer>
+        <StTopImage>
+          <img
+            className="mainImg"
+            src={require("../images/main.jpg")}
+            alt="main"
+          />
+        </StTopImage>
+        <StTopBox>
+          <div className="leftContent1">
+            <div className="content1">이 집은 어떨까?</div>
+          </div>
+          <div className="content2">
+            원룸,투룸,역세권 말고
+            <br /> 진짜 살아봐야 아는 정보
+          </div>
+          <div className="content3">
+            중개인도, 집주인도 알려주지 않는 꿀정보를 알아보세요.
+          </div>
+          <StTopButton>
+            <Button.Primary
+              size="large"
+              fs="1.1rem"
+              fw="600"
+              onClick={() => {
+                navigate("/map");
+              }}
+            >
+              후기 보러가기
+            </Button.Primary>
+          </StTopButton>
+        </StTopBox>
+        <StCenterBox>
+          <StCenterWrap>
+            <div className="centerContent1">
+              진짜 살아본 사람들의 <br /> 생생한 후기
+            </div>
+            <div className="centerContent2">
+              당신이 알고싶은 진짜 집의 정보를 알려드립니다.
+            </div>
 
-          {/* Riview  */}
-          <StSectionReview>
-            <StReviewWrap>
-              <StReviewBox1>
-                <div className="reviewContent1">
-                  진짜 살아본 사람들의 <br /> 생생한 후기
-                </div>
-                <div className="reviewContent2">
-                  당신이 알고싶은 진짜 집의 정보를 알려드립니다.
-                </div>
+            <Button.Primary
+              size="large"
+              fs="1.1rem"
+              fw="600"
+              onClick={() => {
+                navigate("/map");
+              }}
+            >
+              후기 보러가기
+            </Button.Primary>
 
-                <button
-                  className="aboutBtn1"
-                  onClick={() => {
-                    navigate("/map");
-                  }}
-                >
-                  후기 보러가기
-                </button>
+            <Button.Primary
+              outlined
+              size="large"
+              fs="1.1rem"
+              fw="600"
+              onClick={() => {
+                navigate("/review");
+              }}
+            >
+              후기 쓰러가기
+            </Button.Primary>
+          </StCenterWrap>
+          <img
+            className="aboutImg"
+            src={require("../images/Group 421.jpg")}
+            alt="imgbox1"
+          />
+          <img
+            className="aboutImg"
+            src={require("../images/Group 422.jpg")}
+            alt="imgbox2"
+          />
+          <img
+            className="aboutImg"
+            src={require("../images/Group 423.jpg")}
+            alt="imgbox3"
+          />
+        </StCenterBox>
+        <StBottomBox>
+          <StBottomWrap>
+            <img src={require("../images/Rectangle 1561.jpg")} alt="img2" />
 
-                <button
-                  className="aboutBtn2"
-                  onClick={() => {
-                    navigate("/review");
-                  }}
-                >
-                  후기 쓰러가기
-                </button>
-              </StReviewBox1>
-
-              <StReviewBox2>
-                <img
-                  className="aboutImg"
-                  src={require("../images/Group 421.jpg")}
-                  alt="imgbox1"
-                />
-                <img
-                  className="aboutImg"
-                  src={require("../images/Group 422.jpg")}
-                  alt="imgbox2"
-                />
-                <img
-                  className="aboutImg"
-                  src={require("../images/Group 423.jpg")}
-                  alt="imgbox3"
-                />
-              </StReviewBox2>
-            </StReviewWrap>
-          </StSectionReview>
-
-          {/* Detail */}
-          <StSectionDetail>
-            <StDetailBox1>
-              <img
-                className="detailBoxImage"
-                src={require("../images/Rectangle 1561.jpg")}
-                alt="img1"
-              />
-              <div className="detailBoxContents">
-                <div className="detailTitle">지도로 보는 지역별 후기</div>
-                <div className="detailBody">
+            <StBottomContent>
+              <div className="bottomContentTitle">지도로 보는 지역별 후기</div>
+              <div className="bottomContent">
+                <div className="bottomContentMargin">
                   지도를 통해 다양한 지역의 생활 후기를 알아볼 수 있습니다.
-                  <br /> 다양한 사람들의 살아본 이야기를 들어보세요.
                 </div>
+                <div> 다양한 사람들의 살아본 이야기를 들어보세요.</div>
+              </div>
 
+              <div className="bottomContentBtnWrap">
                 <button
-                  className="go"
+                  className="bottomContentBtn"
                   onClick={() => {
                     navigate("/map");
                   }}
                 >
-                  바로가기>
+                  바로가기
+                  <CgChevronRight
+                    style={{
+                      color: "#819608",
+                      width: "14px",
+                      height: "14px",
+                    }}
+                  />
                 </button>
               </div>
-            </StDetailBox1>
+            </StBottomContent>
+          </StBottomWrap>
+          <StBottomWrap>
+            <img src={require("../images/Rectangle 1561.jpg")} alt="img2" />
 
-            <StDetailBox2>
-              <img
-                className="detailBoxImage"
-                src={require("../images/Rectangle 1561.jpg")}
-                alt="img2"
-              />
-              <div className="detailBoxContents">
-                <div className="detailTitle">
-                  꼼꼼하게 돌아볼 수 있는 후기 작성
-                </div>
-                <div className="detailBody">
+            <StBottomContent>
+              <div className="bottomContentTitle">
+                꼼꼼하게 돌아볼 수 있는 후기 작성
+              </div>
+              <div className="bottomContent">
+                <div className="bottomContentMargin">
                   나를 위한, 다음 거주자를 위한 후기를 작성해보세요.
-                  <br /> 섬세하게 나누어진 문항을 따라오면 꼼꼼하게 리뷰할 수
-                  있습니다.
                 </div>
+                <div>
+                  섬세하게 나누어진 문항을 따라오면 꼼꼼하게 리뷰할 수 있습니다.
+                </div>
+              </div>
 
-                <button className="go" onClick={reviewHandler}>
-                  바로가기>
+              <div className="bottomContentBtnWrap">
+                <button className="bottomContentBtn" onClick={reviewHandler}>
+                  바로가기
+                  <CgChevronRight
+                    style={{
+                      color: "#819608",
+                      width: "14px",
+                      height: "14px",
+                    }}
+                  />
                 </button>
               </div>
-            </StDetailBox2>
+            </StBottomContent>
+          </StBottomWrap>
+          <StBottomWrap>
+            <img src={require("../images/Rectangle 1567.jpg")} alt="img2" />
 
-            <StDetailBox3>
-              <img
-                className="detailBoxImage"
-                src={require("../images/Rectangle 1561.jpg")}
-                alt="img3"
-              />
-              <div className="detailBoxContents">
-                <div className="detailTitle">
-                  지역 사람들간의 대화를 위한 커뮤니티
-                </div>
-                <div className="detailBody">
+            <StBottomContent>
+              <div className="bottomContentTitle">
+                지역 사람들간의 대화를 위한 커뮤니티
+              </div>
+              <div className="bottomContent">
+                <div className="bottomContentMargin">
                   내 주변의 이웃들과 주거와 관련된 문제를 나누어요.
-                  <br /> 혼자서는 어려웠던 문제가 이웃들의 지혜로 풀립니다.
                 </div>
+                <div> 혼자서는 어려웠던 문제가 이웃들의 지혜로 풀립니다.</div>
+              </div>
 
+              <div className="bottomContentBtnWrap">
                 <button
-                  className="go"
+                  className="bottomContentBtn"
                   onClick={() => {
                     navigate("/list");
                   }}
                 >
-                  바로가기>
+                  바로가기
+                  <CgChevronRight
+                    style={{
+                      color: "#819608",
+                      width: "14px",
+                      height: "14px",
+                    }}
+                  />
                 </button>
               </div>
-            </StDetailBox3>
-          </StSectionDetail>
-
-          <StSectionBottom>
-            <div className="bottomContents">
-              <div className="bottomTitle">
-                이웃들과 주거 관련 문제를 논의해요
-              </div>
-              <div className="bottomBody">
-                마음고생이 많은 법적 분쟁 부터 집안일을 도와줄 사소한 일상의
-                팁까지, 이집은 사랑방에서 모두 모여앉아 이야기꽃을 피워요.
-              </div>
-              <div className="bottomBody">
-                도란도란 이야기 하다보면 동네의 정을 느낄 수 있어요.
-              </div>
+            </StBottomContent>
+          </StBottomWrap>
+        </StBottomBox>
+        <StFooterBox>
+          <div className="footerContentTitle">
+            이웃들과 주거 관련 문제를 논의해요.
+          </div>
+          <div className="footerContent">
+            <div className="footerContentMargin">
+              마음고생이 많은 법적 분쟁 부터 집안일을 도와줄 사소한 일상의
+              팁까지, 이집은 사랑방에서 모두 모여앉아 이야기꽃을 피워요.
             </div>
-            <button
-              className="bottomBtn"
+            <div> 도란도란 이야기 하다보면 동네의 정을 느낄 수 있어요.</div>
+          </div>
+          <StFooterBtn>
+            <Button.Primary
+              size="large"
+              fs="1.1rem"
+              fw="600"
               onClick={() => {
                 navigate("/map");
               }}
             >
               간편가입하고 이야기 나누기
-            </button>
-          </StSectionBottom>
-        </StBody>
-        <Footer />
-      </StBodyWrap>
+            </Button.Primary>
+          </StFooterBtn>
+        </StFooterBox>
+      </StHomeContainer>
     </>
   );
 };
 
 export default MainPage;
 
-const StBodyWrap = styled.div`
-  max-width: 1920px;
-  overflow: hidden;
-`;
-
-const StBody = styled.div`
-  width: 1920px;
-  margin: auto;
-`;
-
-// Home
-const StSectionHome = styled.section`
-  max-width: 1920px;
-  height: 550px;
-  margin: auto;
-  padding-left: 170px;
-  text-align: center;
+//Home
+const StHomeContainer = styled.section`
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 1920px;
+  height: 100%;
 `;
-
-const StMainImage = styled.div`
+const StTopImage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .mainImg {
     width: 1254px;
     height: 550px;
   }
 `;
 
-const StHomeBox = styled.div`
-  width: 500px;
+const StTopBox = styled.div`
+  padding-left: 50px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  flex-direction: column;
+  width: 480px;
   height: 310px;
   background-color: #ffffff;
-  opacity: 90%;
+  opacity: 80%;
   position: absolute;
-  margin-top: 110px;
-  margin-left: 680px;
-  text-align: left;
-`;
+  right: 400px;
+  top: 300px;
 
-const StHomeBoxContent = styled.div`
-  width: 510px;
-  height: 310px;
   .content1 {
     font-size: 17px;
+    font-weight: 600;
     color: #737d81;
-    margin-top: 40px;
-    margin-left: 60px;
   }
   .content2 {
-    margin-top: 15px;
-    margin-left: 60px;
     font-size: 36px;
     font-weight: bold;
     line-height: 45px;
   }
   .content3 {
-    margin-top: 15px;
-    margin-left: 60px;
     font-size: 18px;
+    font-weight: 600;
     color: #4b5054;
   }
-  .reviewBtn {
-    margin-top: 25px;
-    margin-left: 60px;
-    cursor: pointer;
-    border: none;
-    background-color: transparent;
-  }
+`;
+
+const StTopButton = styled.div`
+  margin-left: 45px;
 `;
 
 //Review
-const StSectionReview = styled.div`
-  background-color: #f7fae7;
-  max-width: 1920px;
+const StCenterBox = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  align-items: center;
+  width: 1300px;
   height: 450px;
-  display: flex;
-
-  .aboutImg {
-    width: 250px;
-    height: 257px;
-    display: inline;
-    margin-left: 25px;
-  }
 `;
-
-const StReviewWrap = styled.div`
-  width: 510px;
-  margin-left: 55px;
-  text-align: left;
+const StCenterWrap = styled.div`
   display: flex;
-`;
-
-const StReviewBox1 = styled.div`
-  padding-top: 70px;
-  padding-left: 40px;
-  width: 500px;
-  height: 150px;
-
-  .reviewContent1 {
+  flex-direction: column;
+  gap: 15px;
+  .centerContent1 {
     width: 300px;
-    font-size: 32px;
+    font-size: 1.9rem;
     font-weight: bold;
     line-height: 40px;
-    padding: 10px 0 10px 80px;
   }
-  .reviewContent2 {
-    font-size: 20px;
-    padding: 10px 0 10px 80px;
-  }
-  .aboutBtn1 {
-    background-color: #c1de0d;
-    font-size: 20px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 340px;
-    height: 50px;
-    margin-top: 15px;
-    margin-left: 75px;
-    z-index: 1;
-  }
-  .aboutBtn2 {
-    background-color: white;
-    border: 2px solid #c1de0d;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 340px;
-    height: 50px;
-    display: block;
-    margin-top: 15px;
-    margin-left: 75px;
+  .centerContent2 {
+    font-size: 1rem;
   }
 `;
-
-const StReviewBox2 = styled.div`
-  position: absolute;
-  left: 580px;
-
-  top: 710px;
+const StBottomBox = styled.div`
   display: flex;
-`;
-
-//Detail
-const StSectionDetail = styled.div`
-  background-color: #f3f5f5;
-  max-width: 1920px;
-  height: 1350px;
+  justify-content: flex-start;
   align-items: center;
+  flex-direction: column;
+  margin-top: 50px;
+  gap: 20px;
+  width: 100%;
 `;
+const StBottomWrap = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 1107px;
+  height: 360px;
+  margin-bottom: 20px;
+  padding: 15px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 10px 15px;
+`;
+const StBottomContent = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+  margin-left: 20px;
 
-const StDetailBox1 = styled.div`
-  width: 1192px;
-  height: 380px;
-  background-color: white;
-  box-shadow: 5px 5px 20px 5px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  margin: 80px 0 30px 180px;
-
-  .detailBoxImage {
-    width: 500px;
-    height: 300px;
-    margin-left: 110px;
-    margin-top: 35px;
-  }
-  .detailBoxContents {
-    width: 500px;
-    position: relative;
-    top: -140px;
-    left: 55%;
-    .detailTitle {
-      font-size: 20px;
-      font-weight: 600;
-    }
-    .detailBody {
-      font-size: 17px;
-      padding-top: 3%;
-      line-height: 23px;
-    }
-  }
-  .go {
-    border: none;
-    background-color: transparent;
-    color: #819608;
-    cursor: pointer;
+  .bottomContentTitle {
+    font-size: 1.2rem;
     font-weight: 600;
-    font-size: 16px;
-    padding-top: 40px;
-    padding-left: 400px;
   }
-`;
-
-const StDetailBox2 = styled.div`
-  width: 1192px;
-  height: 380px;
-  background-color: white;
-  box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  margin: 20px 0 30px 180px;
-
-  .detailBoxImage {
-    width: 500px;
-    height: 300px;
-    margin-left: 110px;
-    margin-top: 35px;
+  .bottomContent {
+    font-size: 1rem;
   }
-  .detailBoxContents {
-    width: 500px;
-    position: relative;
-    top: -140px;
-    left: 55%;
-    .detailTitle {
-      font-size: 20px;
-      font-weight: 600;
-    }
-    .detailBody {
-      font-size: 17px;
-      padding-top: 3%;
-      line-height: 23px;
-    }
+  .bottomContentMargin {
+    margin-bottom: 15px;
   }
-  .go {
+  .bottomContentBtnWrap {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .bottomContentBtn {
+    display: inline;
+    outline: none;
+    margin-right: 20px;
     border: none;
-    background-color: transparent;
-    color: #819608;
-    cursor: pointer;
     font-weight: 600;
-    font-size: 16px;
-    padding-top: 40px;
-    padding-left: 400px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #819608;
+    background: none;
+    cursor: pointer;
   }
 `;
-
-const StDetailBox3 = styled.div`
-  width: 1192px;
-  height: 380px;
-  background-color: white;
-  box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  margin: 20px 0 30px 180px;
-
-  .detailBoxImage {
-    width: 500px;
-    height: 300px;
-    margin-left: 110px;
-    margin-top: 35px;
-  }
-  .detailBoxContents {
-    width: 500px;
-    position: relative;
-    top: -140px;
-    left: 55%;
-    .detailTitle {
-      font-size: 20px;
-      font-weight: 600;
-    }
-    .detailBody {
-      font-size: 17px;
-      padding-top: 3%;
-      line-height: 23px;
-    }
-  }
-  .go {
-    border: none;
-    background-color: transparent;
-    color: #819608;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 16px;
-    padding-top: 40px;
-    padding-left: 400px;
-  }
-`;
-
-//Bottom
-const StSectionBottom = styled.div`
+const StFooterBox = styled.div`
+  display: flex;
+  align-items: flex-start;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 300px;
   background-color: #d7dbdc;
-  max-width: 1920px;
-  height: 350px;
-  .bottomContents {
-    width: 1000px;
-    padding-top: 60px;
-    margin-left: 180px;
-    .bottomTitle {
-      font-size: 24px;
-      font-weight: 600;
-      padding-bottom: 20px;
-    }
-    .bottomBody {
-      font-size: 17px;
-      font-weight: 400;
-      padding: 0.3%;
-      line-height: 20px;
-    }
+  margin-top: 50px;
+  gap: 20px;
+  .footerContentTitle {
+    font-size: 1.2rem;
+    font-weight: 600;
   }
-  .bottomBtn {
-    background-color: #c1de0d;
-    font-size: 20px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 360px;
-    height: 50px;
-    margin-top: 60px;
-    margin-left: 630px;
+  .footerContent {
+    font-size: 1rem;
   }
+  .footerContentMargin {
+    margin-bottom: 15px;
+  }
+`;
+const StFooterBtn = styled.div`
+  width: 50%;
+  display: flex;
+  justify-content: center;
 `;

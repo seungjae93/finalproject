@@ -219,6 +219,11 @@ const StAddressWrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  .detailModal {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+  }
   .detailModalBtn {
     display: inline;
     outline: none;
@@ -236,11 +241,6 @@ const StAddressWrap = styled.div`
   }
   .addressJibun {
     font-weight: 500;
-  }
-  .detailModal {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 20px;
   }
 `;
 const StModalContainer = styled.div`
