@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import GlobalStyle from "../components/styles/GlobalStyle";
 import { useNavigate } from "react-router";
 import { useAddPost } from "../redux/api/reviewApi";
 import useInputItem from "../hooks/useInputItem";
@@ -115,6 +116,7 @@ const ReviewPage = () => {
 
   return (
     <>
+      <GlobalStyle />
       <StReviewWrap>
         <StReviewBox>
           <StTitle>이집은 후기 작성하기</StTitle>
@@ -150,7 +152,7 @@ const ReviewPage = () => {
                 placeholder="주소 검색을 이용하세요(지번주소 입력)"
               />
             </StSeAddress>
-            <div>*등기부등본 상의 주소를 입력해주세요.</div>
+            <Stsub>*등기부등본 상의 주소를 입력해주세요.</Stsub>
 
             <StHomeSection>
               <StAddStyle> 주거 형태 </StAddStyle>
@@ -294,9 +296,9 @@ const ReviewPage = () => {
                   </div>
                 </StRadioBtnWrap2>
                 <StRadioBtnTitle>
-                  <span>불편했어요</span>
+                  <span>연락이 안돼요</span>
                   <span>보통</span>
-                  <span>편했어요</span>
+                  <span>잘 해결해줘요</span>
                 </StRadioBtnTitle>
               </StCommentWrap>
               <StCommentWrap>
@@ -357,9 +359,9 @@ const ReviewPage = () => {
                   </div>
                 </StRadioBtnWrap2>
                 <StRadioBtnTitle>
-                  <span>불편했어요</span>
+                  <span>많이나와요</span>
                   <span>보통</span>
-                  <span>편했어요</span>
+                  <span>안나와요</span>
                 </StRadioBtnTitle>
               </StCommentWrap>
 
@@ -420,9 +422,9 @@ const ReviewPage = () => {
                   </div>
                 </StRadioBtnWrap2>
                 <StRadioBtnTitle>
-                  <span>불편했어요</span>
+                  <span>심하게나요</span>
                   <span>보통</span>
-                  <span>편했어요</span>
+                  <span>나지않아요</span>
                 </StRadioBtnTitle>
               </StCommentWrap>
 
@@ -485,9 +487,9 @@ const ReviewPage = () => {
                   </div>
                 </StRadioBtnWrap2>
                 <StRadioBtnTitle>
-                  <span>불편했어요</span>
+                  <span>시끄러워요</span>
                   <span>보통</span>
-                  <span>편했어요</span>
+                  <span>조용해요</span>
                 </StRadioBtnTitle>
               </StCommentWrap>
 
@@ -547,9 +549,9 @@ const ReviewPage = () => {
                   </div>
                 </StRadioBtnWrap2>
                 <StRadioBtnTitle>
-                  <span>불편했어요</span>
+                  <span>시끄러워요</span>
                   <span>보통</span>
-                  <span>편했어요</span>
+                  <span>조용해요</span>
                 </StRadioBtnTitle>
               </StCommentWrap>
 
@@ -608,9 +610,9 @@ const ReviewPage = () => {
                   </div>
                 </StRadioBtnWrap2>
                 <StRadioBtnTitle>
-                  <span>불편했어요</span>
+                  <span>시끄러워요</span>
                   <span>보통</span>
-                  <span>편했어요</span>
+                  <span>조용해요</span>
                 </StRadioBtnTitle>
               </StCommentWrap>
 
@@ -669,9 +671,9 @@ const ReviewPage = () => {
                   </div>
                 </StRadioBtnWrap2>
                 <StRadioBtnTitle>
-                  <span>불편했어요</span>
+                  <span>심해요</span>
                   <span>보통</span>
-                  <span>편했어요</span>
+                  <span>없어요</span>
                 </StRadioBtnTitle>
               </StCommentWrap>
 
@@ -791,9 +793,9 @@ const ReviewPage = () => {
                   </div>
                 </StRadioBtnWrap2>
                 <StRadioBtnTitle>
-                  <span>불편했어요</span>
+                  <span>안전해요</span>
                   <span>보통</span>
-                  <span>편했어요</span>
+                  <span>불안해요</span>
                 </StRadioBtnTitle>
               </StCommentWrap>
 
@@ -901,10 +903,10 @@ const StTitle = styled.div`
 
 const StButton = styled.button`
   position: absolute;
-  top: 345px;
+  top: 331px;
   margin-left: 870px;
   width: 120px;
-  height: 35px;
+  height: 40px;
   background-color: #c4cbcd;
   border: none;
   border-radius: 5px;
@@ -948,6 +950,12 @@ const StInt2 = styled.input`
   ::placeholder {
     font-size: 15px;
   }
+`;
+
+const Stsub = styled.span`
+  font-size: 13px;
+  color: gray;
+  margin: 10px 230px 0 0;
 `;
 
 const StBasic = styled.div`
@@ -1116,14 +1124,15 @@ const Sttextarea = styled.textarea`
 `;
 
 const StTitleComment2 = styled.div`
-  margin: 10% 0 1% 0;
+  margin: 10% 0 2% 0;
   font-size: 20px;
   font-weight: 600;
 `;
 
 const StCommentAdd = styled.div`
   font-size: 15px;
-  margin-bottom: 30px;
+  margin-bottom: 45px;
+  margin-top: 10px;
 `;
 
 const StPicture = styled.div`
@@ -1159,8 +1168,8 @@ const StUpload = styled.label`
 `;
 const StSelectStar = styled.select`
   text-align: center;
-  width: 200px;
-  height: 30px;
+  width: 180px;
+  height: 38px;
   margin-bottom: 100px;
   border: 2px solid #c4cbcd;
   border-radius: 10px;
@@ -1171,6 +1180,6 @@ const StBut = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
-  margin-top: 10%;
-  margin-bottom: 10%;
+  margin-top: 10px;
+  margin-bottom: 150px;
 `;
