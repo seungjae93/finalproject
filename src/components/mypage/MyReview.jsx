@@ -1,22 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 import GlobalStyle from "../styles/GlobalStyle";
-import { useQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getmypageReviews } from "../../redux/api/reviewApi";
 import { deletePost } from "../../redux/api/reviewApi";
 
 const MyReview = () => {
-  const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { data, error, isLoading, isError } = useQuery(["myreview"], () =>
     getmypageReviews()
   );
 
   const deleteHandler = (reviewId) => {
+    window.alert("후기가 삭제되었습니다!");
     deletePost(reviewId);
-    // window.alert("후기가 삭제되었습니다!");
-    navigate("/mypage");
+    queryClient.invalidateQueries(["review"]);
   };
 
   if (isLoading) return <h2> 로딩중 .. </h2>;
