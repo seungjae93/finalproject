@@ -114,16 +114,12 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
                     <StGoodBadContainer>
                       <StGoodBadBox>
                         <StGoodBad>장점</StGoodBad>
-                        <StContent>
-                          <pre>{review.good}</pre>
-                        </StContent>
+                        <StContent>{review.good}</StContent>
                       </StGoodBadBox>
 
                       <StGoodBadBox>
                         <StGoodBad>단점</StGoodBad>
-                        <StContent>
-                          <pre>{review.bad}</pre>
-                        </StContent>
+                        <StContent>{review.bad} </StContent>
                       </StGoodBadBox>
                     </StGoodBadContainer>
 
@@ -287,17 +283,18 @@ const StGoodBad = styled.div`
 `;
 
 const StContent = styled.div`
+  padding: 4px;
   width: 370px;
   height: 120px;
-  font-size: 0.8rem;
-  pre {
-    margin-left: 5px;
-    white-space: normal;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    -webkit-line-clamp: 4;
-    font-weight: bold;
+  font-size: 0.9rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #ccc;
   }
 `;
 

@@ -1,9 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import footerLogo from "../images/footerLogo.svg";
 
 const Footer = () => {
+  const locationNow = useLocation();
+  if (locationNow.pathname === "/map") return null;
+  if (locationNow.pathname === "/list") return null;
+  if (locationNow.pathname === "/login") return null;
+  if (locationNow.pathname === "/review") return null;
+
   return (
     <>
       <StSectionFooter>
