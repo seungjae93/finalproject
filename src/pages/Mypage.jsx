@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import MyCommunity from "../components/mypage/MyCommunity";
 import MyReview from "../components/mypage/MyReview";
-import Footer from "../components/Footer";
 
 const MyPage = () => {
   const email = localStorage.getItem("email");
@@ -23,7 +22,6 @@ const MyPage = () => {
 
         <MyCommunity />
       </StmyPageWrap>
-      <Footer />
     </>
   );
 };
@@ -32,6 +30,7 @@ export default MyPage;
 
 const StmyPageWrap = styled.div`
   max-width: 1920px;
+  height: 100vh;
   background-color: #f3f5f5;
 `;
 

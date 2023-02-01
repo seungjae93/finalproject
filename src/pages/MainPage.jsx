@@ -3,8 +3,15 @@ import styled from "styled-components";
 import GlobalStyle from "../components/styles/GlobalStyle";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
-import Button from "../components/button/Button";
 import { CgChevronRight } from "react-icons/cg";
+import Button from "../components/button/Button";
+import mainPageCommunity from "../images/mainPageCommunity.svg";
+import mainPageReview from "../images/mainPageReview.svg";
+import mainPageMap from "../images/mainPageMap.svg";
+import mainPageCenter from "../images/mainPageCenter.svg";
+import mainPageSubImg1 from "../images/mainPageSubImg1.svg";
+import mainPageSubImg2 from "../images/mainPageSubImg2.svg";
+import mainPageSubImg3 from "../images/mainPageSubImg3.svg";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -21,11 +28,7 @@ const MainPage = () => {
       <GlobalStyle />
       <StHomeContainer>
         <StTopImage>
-          <img
-            className="mainImg"
-            src={require("../images/main.jpg")}
-            alt="main"
-          />
+          <img className="mainImg" src={mainPageCenter} alt="mainPageCenter" />
           <StTopBox>
             <div className="leftContent1">
               <div className="content1">이 집은 어떨까?</div>
@@ -83,25 +86,13 @@ const MainPage = () => {
               후기 쓰러가기
             </Button.Primary>
           </StCenterWrap>
-          <img
-            className="aboutImg"
-            src={require("../images/Group 421.jpg")}
-            alt="imgbox1"
-          />
-          <img
-            className="aboutImg"
-            src={require("../images/Group 422.jpg")}
-            alt="imgbox2"
-          />
-          <img
-            className="aboutImg"
-            src={require("../images/Group 423.jpg")}
-            alt="imgbox3"
-          />
+          <img src={mainPageSubImg1} alt="mainPageSubImg1" />
+          <img src={mainPageSubImg2} alt="mainPageSubImg2" />
+          <img src={mainPageSubImg3} alt="mainPageSubImg3" />
         </StCenterBox>
         <StBottomBox>
           <StBottomWrap>
-            <img src={require("../images/Rectangle 1561.jpg")} alt="img2" />
+            <img src={mainPageMap} alt="mainPageMap" />
 
             <StBottomContent>
               <div className="bottomContentTitle">지도로 보는 지역별 후기</div>
@@ -132,7 +123,7 @@ const MainPage = () => {
             </StBottomContent>
           </StBottomWrap>
           <StBottomWrap>
-            <img src={require("../images/Rectangle 1561.jpg")} alt="img2" />
+            <img src={mainPageReview} alt="mainPageReview" />
 
             <StBottomContent>
               <div className="bottomContentTitle">
@@ -162,7 +153,7 @@ const MainPage = () => {
             </StBottomContent>
           </StBottomWrap>
           <StBottomWrap>
-            <img src={require("../images/Rectangle 1567.jpg")} alt="img2" />
+            <img src={mainPageCommunity} alt="mainPageCommunity" />
 
             <StBottomContent>
               <div className="bottomContentTitle">
