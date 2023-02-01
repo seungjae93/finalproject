@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
-import { debounce } from "lodash";
 import { getCommunity } from "../../redux/api/communityApi";
 import { hangjungdong } from "../../components/Community/hangjungdong";
 import PostListCard from "../../components/Community/PostListCard";
-import { useInView } from "react-intersection-observer";
+import { debounce } from "lodash";
 
 const PostList = () => {
   const navigate = useNavigate();
@@ -18,36 +17,21 @@ const PostList = () => {
   const { postLocation1, postLocation2 } = hangjungdong;
   const [showAll, setShowAll] = useState(false);
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [search, setSearch] = useState("");
   const [clickOrder, setClickOrder] = useState("");
-  const [page, setPage] = useState(1);
-  const [postList, setPostlist] = useState([]);
-
-  const { ref, inView } = useInView({
-    // ref가 화면에 나타나면 inView는 true, 아니면 false를 반환한다.
-    threshold: 0.5,
-    triggerOnce: true,
-    //API요청을 중복이 아닌 한번만 발생할 수 있게
-  });
 
   const { login } = useSelector((state) => state.user);
 
   const { data, error, isLoading, isError, refetch } = useQuery(
-    ["posts", clickOrder, showAll],
-    () => getCommunity(page, searchTerm, clickOrder, selected),
+    ["posts"],
+    () => getCommunity(clickOrder, selected, search),
     {
       // staleTime: 60 * 1000, //1분
-
       onSuccess: (data) => {
         console.log(data);
-        page === 1
-          ? setPostlist([...data.posts])
-          : setPostlist([...postList, ...data.posts]);
       },
     }
   );
-
-  console.log(postList);
 
   const HandleChange = (e) => {
     const { name, value } = e.target;
@@ -68,26 +52,15 @@ const PostList = () => {
     });
   };
 
-  const throttledRefetch = useCallback(debounce(refetch, 150), []);
-
-  useEffect(() => {
-    if (inView && data?.posts?.length === 24) {
-      setPage(page + 1);
-    }
-  }, [inView]);
-
-  useEffect(() => {
-    refetch();
-  }, [page]);
+  const throttledRefetch = debounce(refetch, 150);
 
   // useEffect(() => {
-  //   if (postList.legnth / 2 === page) return;
   //   refetch();
-  // }, [page]);
+  // }, [ ]);
 
   useEffect(() => {
-    throttledRefetch({ searchTerm });
-  }, [searchTerm, throttledRefetch, selected]);
+    throttledRefetch({ search });
+  }, [search, throttledRefetch, selected, showAll, clickOrder]);
 
   if (isLoading) return <h2> 로딩중 .. </h2>;
   if (isError) return <h2> Error : {error.toString()} </h2>;
@@ -120,9 +93,10 @@ const PostList = () => {
           </div>
           <StSearch
             type="text"
+            value={search}
             placeholder="검색하기"
             onChange={(e) => {
-              setSearchTerm(e.target.value);
+              setSearch(e.target.value);
               throttledRefetch();
             }}
           />
@@ -141,12 +115,10 @@ const PostList = () => {
       </StOrder>
 
       <STPostCon>
-        {postList?.map((posts) => {
+        {data?.posts?.map((posts) => {
           return <PostListCard key={`main_${posts.postId}`} posts={posts} />;
         })}
       </STPostCon>
-
-      <div ref={ref} style={{ height: "100px" }}></div>
     </>
   );
 };

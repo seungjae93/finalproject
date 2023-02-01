@@ -47,9 +47,7 @@ const Comment = () => {
   return (
     <>
       <StCommentlistBox>
-        <div>
-          <StCount> 댓글 {data.comments.length} 개</StCount>
-        </div>
+        <StCount> 댓글 {data.comments.length} 개</StCount>
 
         <CommentPost />
 
@@ -131,10 +129,12 @@ const StCommentlistBox = styled.div`
   width: 1000px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 10px;
 `;
 
 const StCount = styled.div`
+  display: flex;
+  align-items: center;
+  height: 60px;
   font-size: 16px;
 `;
 

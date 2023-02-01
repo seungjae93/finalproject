@@ -1,19 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import setToken from "../../shared/setToken";
 import { setCookie } from "../../shared/cookie";
 
 export const __kakaoLogin = createAsyncThunk(
   "__kakaoLogin",
   async (code, thunkAPI) => {
     try {
-      setToken();
       const response = await axios.get(
-        `${process.env.REACT_APP_API_DIRECT}?code=${code}`
+        `${process.env.REACT_APP_API_DIRECT}?code=${code}`,
+        {
+          withCredentials: true,
+        }
       );
       setCookie("token", response.data.accessToken, {
         path: "/",
-        expire: "after60m",
       });
       const email = response.data.email;
       const nickEmail = email.substring(0, email.indexOf("@"));
