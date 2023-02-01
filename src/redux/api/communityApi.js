@@ -1,8 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { instance } from "./instance";
-// import { checkLogin } from "../../hooks/useCheckLogin";
-
-// const { accessToken, setToken } = checkLogin();
 
 //get(지역별, 무한스크롤, 포스트순서, 검색)
 export const getCommunity = async (clickOrder, selected, search) => {

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { setCookie } from "../../shared/cookie";
+import { instance } from "../api/instance";
 
 export const __kakaoLogin = createAsyncThunk(
   "__kakaoLogin",
@@ -12,12 +12,11 @@ export const __kakaoLogin = createAsyncThunk(
           withCredentials: true,
         }
       );
-      setCookie("token", response.data.accessToken, {
-        path: "/",
-      });
+      const token = response.data.accessToken;
       const email = response.data.email;
       const nickEmail = email.substring(0, email.indexOf("@"));
       localStorage.setItem("email", nickEmail);
+      localStorage.setItem("token", token);
       alert(`${nickEmail}님 안녕하세요 :) `);
       return thunkAPI.fulfillWithValue(response);
     } catch (error) {
@@ -25,6 +24,11 @@ export const __kakaoLogin = createAsyncThunk(
     }
   }
 );
+
+export const __kakaoLogout = async () => {
+  const response = await instance.post("/auth/logout");
+  return response.data;
+};
 
 const initialState = {
   login: false,
@@ -43,6 +47,7 @@ const kakaoSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      //로그인
       .addCase(__kakaoLogin.pending, (state) => {
         state.isLoading = true;
       })

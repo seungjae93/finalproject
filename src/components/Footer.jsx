@@ -1,9 +1,21 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import footerLogo from "../images/footerLogo.svg";
 
 const Footer = () => {
+  const navigate = useNavigate();
+  const onReviewPost = () => {
+    if (localStorage.getItem("token") === null) {
+      alert("로그인을 해주세요");
+      navigate("login");
+    } else navigate("/review");
+  };
+  const onLoginPost = () => {
+    if (localStorage.getItem("token")) {
+      alert("로그인이 되었습니다.");
+    } else navigate("/login");
+  };
   const locationNow = useLocation();
   if (locationNow.pathname === "/map") return null;
   if (locationNow.pathname === "/list") return null;
@@ -17,15 +29,15 @@ const Footer = () => {
           <Link to="/map" className="btn">
             지도
           </Link>
-          <Link to="/review" className="btn">
+          <div className="btn" onClick={onReviewPost}>
             후기작성
-          </Link>
+          </div>
           <Link to="/list" className="btn">
             커뮤니티
           </Link>
-          <Link to="/login" className="btn">
+          <div className="btn" onClick={onLoginPost}>
             로그인 / 회원가입
-          </Link>
+          </div>
         </StFooterBtn>
         <StFooterWrap>
           <StFooterContent>
