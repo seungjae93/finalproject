@@ -200,7 +200,7 @@ const MainPage = () => {
               fs="1.1rem"
               fw="600"
               onClick={() => {
-                navigate("/map");
+                navigate("/login");
               }}
             >
               간편가입하고 이야기 나누기

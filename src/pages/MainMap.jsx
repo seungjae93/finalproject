@@ -184,18 +184,6 @@ const MainMap = () => {
     } catch (error) {}
   };
 
-  const getOverlayStyle = (zoomLevel) => {
-    if (zoomLevel > 8) {
-      return "red";
-    } else if (zoomLevel === 6 || zoomLevel === 5) {
-      return "green";
-    } else if (zoomLevel === 7 || zoomLevel === 8) {
-      return "blue";
-    } else {
-      return;
-    }
-  };
-
   const getOverlayAreaName = (zoomLevel) => {
     if (zoomLevel > 8) {
       return "doName";
@@ -270,9 +258,10 @@ const MainMap = () => {
       });
     }
   }, [zoomLevel, positions]);
-  // console.log(zoomLevel);
-  // console.log("markerArray", markerArray);
-  // console.log("positions", positions);
+
+  console.log(zoomLevel);
+  console.log("markerArray", markerArray);
+  console.log("positions", positions);
   useEffect(() => {
     /* 현재 보이는 위치에 대한 좌표 값을 받아와주는 부분 */
     const mapObject = mapRef.current;
@@ -334,7 +323,7 @@ const MainMap = () => {
             ) : (
               <StEmptyContainer>
                 <img src={logoGray} alt="logoGray" />
-                <h4>조건에 맞는 방이 없습니다.</h4>
+                <div>조건에 맞는 방이 없습니다.</div>
                 <div>지도를 이동해 검색해주세요.</div>
               </StEmptyContainer>
             )}
@@ -346,7 +335,7 @@ const MainMap = () => {
               style={{
                 // 지도의 크기
                 width: "100%",
-                height: "86vh",
+                height: "86.4vh",
               }}
               ref={mapRef}
               // 지도의 확대 레벨
@@ -385,7 +374,7 @@ const MainMap = () => {
                   return (
                     <MapMarker
                       key={el.estateId}
-                      position={el}
+                      position={el ?? el}
                       image={{
                         src: marker,
                         // 마커이미지의 주소입니다
@@ -431,7 +420,7 @@ const ClustererTxt = styled.div`
 `;
 const StContainer = styled.div`
   width: 100%;
-  height: 86vh;
+  height: 86.4vh;
   min-width: 1000px;
 `;
 const SearchContainer = styled.div`
@@ -491,24 +480,24 @@ const StWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 86vh;
+  height: 86.4vh;
 `;
 
 const StReviewContainer = styled.div`
   width: 600px;
-  height: 86vh;
+  height: 86.4vh;
 `;
 const StEmptyContainer = styled.div`
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   width: 400px;
-  height: 86vh;
+  height: 86.4vh;
+  gap: 10px;
 `;
 
 const StMapContainer = styled.div`
   width: 100%;
-  height: 86vh;
+  height: 86.4vh;
 `;
