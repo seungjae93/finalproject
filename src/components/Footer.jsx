@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import GlobalStyle from "./styles/GlobalStyle";
 import footerLogo from "../images/footerLogo.svg";
 
 const Footer = () => {
@@ -24,6 +25,7 @@ const Footer = () => {
 
   return (
     <>
+      <GlobalStyle />
       <StSectionFooter>
         <StFooterBtn>
           <Link to="/map" className="btn">
