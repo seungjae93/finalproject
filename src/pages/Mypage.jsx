@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import GlobalStyle from "../components/styles/GlobalStyle";
 import MyCommunity from "../components/mypage/MyCommunity";
 import MyReview from "../components/mypage/MyReview";
 import Footer from "../components/Footer";
