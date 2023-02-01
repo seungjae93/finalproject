@@ -67,13 +67,13 @@ const PostDetail = () => {
             </div>
           </StInfor>
 
-          <div>
-            <StDetailImage src={data?.post?.postImage} />
-          </div>
+          <StDetailImage src={data?.post?.postImage} />
 
           <StContent> {data?.post.content} </StContent>
         </StContainer>
       </StDetailBox>
+
+      <div style={{ height: "10px" }}></div>
 
       <StCommentBox>
         <Comment />
@@ -162,11 +162,12 @@ const StDetailImage = styled.img`
   height: 459px;
 `;
 
-const StContent = styled.div`
-  margin: 30px 0 10px 0;
+const StContent = styled.pre`
+  margin: 20px 0 10px 0;
   font-size: 16px;
   overflow-y: auto;
   white-space: pre-wrap;
+  padding-bottom: 20px;
   /* @media (min-width: 600px) { 
     max-height: 300px;
     // 너비가 600px이상인 화면의 경우 최대 높이가 300px로 설정
