@@ -29,15 +29,6 @@ export const deletePost = async (reviewId) => {
   return response.data;
 };
 
-export const useDeletePost = () => {
-  const queryClient = useQueryClient();
-  return useMutation(deletePost, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("review");
-    },
-  });
-};
-
 // ------------------------------------------------
 
 export const getmypageReviews = async () => {
