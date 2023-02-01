@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import GlobalStyle from "./styles/GlobalStyle";
 import footerLogo from "../images/footerLogo.svg";
@@ -17,6 +17,12 @@ const Footer = () => {
       alert("로그인이 되었습니다.");
     } else navigate("/login");
   };
+  const locationNow = useLocation();
+  if (locationNow.pathname === "/map") return null;
+  if (locationNow.pathname === "/list") return null;
+  if (locationNow.pathname === "/login") return null;
+  if (locationNow.pathname === "/review") return null;
+
   return (
     <>
       <GlobalStyle />
