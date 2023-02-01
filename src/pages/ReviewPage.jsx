@@ -3,6 +3,7 @@ import styled from "styled-components";
 import GlobalStyle from "../components/styles/GlobalStyle";
 import { useNavigate } from "react-router";
 import { useAddPost } from "../redux/api/reviewApi";
+import Button from "../components/button/Button";
 import useInputItem from "../hooks/useInputItem";
 import DaumPostcode from "react-daum-postcode";
 
@@ -120,7 +121,7 @@ const ReviewPage = () => {
       <StReviewWrap>
         <StReviewBox>
           <StTitle>이집은 후기 작성하기</StTitle>
-          <StTitle>주소</StTitle>
+          <StTitle1>주소</StTitle1>
           <StButton onClick={openPostcodeHandler}>주소검색</StButton>
           <StContainer>
             {openPostcode && (
@@ -133,30 +134,30 @@ const ReviewPage = () => {
                 />
               </div>
             )}
-
-            <StAddress>
-              <StInt
-                type="text"
-                name="address"
-                value={address}
-                onChange={() => {}}
-                placeholder="주소 검색을 이용하세요(도로명주소 입력)"
-              />
-            </StAddress>
-            <StSeAddress>
-              <StInt2
-                type="text"
-                name="setJibunAddress"
-                value={address_jibun}
-                onChange={() => {}}
-                placeholder="주소 검색을 이용하세요(지번주소 입력)"
-              />
-            </StSeAddress>
-            <Stsub>*등기부등본 상의 주소를 입력해주세요.</Stsub>
+            <StAddressWrap>
+              <StAddress>
+                <StInt
+                  type="text"
+                  name="address"
+                  value={address}
+                  onChange={() => {}}
+                  placeholder="주소 검색을 이용하세요(도로명주소 입력)"
+                />
+              </StAddress>
+              <StSeAddress>
+                <StInt2
+                  type="text"
+                  name="setJibunAddress"
+                  value={address_jibun}
+                  onChange={() => {}}
+                  placeholder="주소 검색을 이용하세요(지번주소 입력)"
+                />
+              </StSeAddress>
+              <Stsub>*등기부등본 상의 주소를 입력해주세요.</Stsub>
+            </StAddressWrap>
 
             <StHomeSection>
               <StAddStyle> 주거 형태 </StAddStyle>
-
               <StRadioBtnWrap1>
                 <div className="radioBtn">
                   <input
@@ -798,26 +799,27 @@ const ReviewPage = () => {
                   <span>불안해요</span>
                 </StRadioBtnTitle>
               </StCommentWrap>
+              <StCommentWrap>
+                <StTitleComment> Q10. 이집의 장점을 적어주세요 </StTitleComment>
+                <Sttextarea
+                  name="good"
+                  value={input.good}
+                  onChange={onChangeHandler}
+                  placeholder="장점을 자유롭게 적어 주세요"
+                  cols="60"
+                  rows="7"
+                />
 
-              <StTitleComment> Q10. 이집의 장점을 적어주세요 </StTitleComment>
-              <Sttextarea
-                name="good"
-                value={input.good}
-                onChange={onChangeHandler}
-                placeholder="장점을 자유롭게 적어 주세요"
-                cols="60"
-                rows="7"
-              />
-
-              <StTitleComment> Q11. 이집의 단점을 적어주세요 </StTitleComment>
-              <Sttextarea
-                name="bad"
-                value={input.bad}
-                onChange={onChangeHandler}
-                placeholder="단점을 자유롭게 적어 주세요"
-                cols="60"
-                rows="7"
-              />
+                <StTitleComment> Q11. 이집의 단점을 적어주세요 </StTitleComment>
+                <Sttextarea
+                  name="bad"
+                  value={input.bad}
+                  onChange={onChangeHandler}
+                  placeholder="단점을 자유롭게 적어 주세요"
+                  cols="60"
+                  rows="7"
+                />
+              </StCommentWrap>
             </StComment>
             <StPicture>
               <StTitleComment2>Q12. 이집의 사진을 추가해주세요</StTitleComment2>
@@ -845,26 +847,30 @@ const ReviewPage = () => {
               </StImageGruop>
             </StPicture>
 
-            <StTitleComment2>
-              Q13.이 집의 종합적인 만족도를 별점으로 표현해 주세요
-            </StTitleComment2>
-            <StSelectStar name="star" onChange={onChangeHandler}>
-              <option value="">별점을 선택해 주세요</option>
-              <option value="1">⭐️</option>
-              <option value="2">⭐️⭐️</option>
-              <option value="3">⭐️⭐️⭐️</option>
-              <option value="4">⭐️⭐️⭐️⭐️</option>
-              <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
-            </StSelectStar>
+            <StCommentWrap>
+              <StTitleComment3>
+                Q13.이 집의 종합적인 만족도를 별점으로 표현해 주세요
+              </StTitleComment3>
+              <StSelectStar name="star" onChange={onChangeHandler}>
+                <option value="">별점을 선택해 주세요</option>
+                <option value="1">⭐️</option>
+                <option value="2">⭐️⭐️</option>
+                <option value="3">⭐️⭐️⭐️</option>
+                <option value="4">⭐️⭐️⭐️⭐️</option>
+                <option value="5">⭐️⭐️⭐️⭐️⭐️</option>
+              </StSelectStar>
+            </StCommentWrap>
 
-            <div>
-              <StBut onClick={onSubmitHandler}>
-                <img
-                  src={require("../images/Group 389.jpg")}
-                  alt="submit button"
-                />
-              </StBut>
-            </div>
+            <StBut>
+              <Button.Primary
+                size="large"
+                fs="20px"
+                fw="600"
+                onClick={onSubmitHandler}
+              >
+                작성완료
+              </Button.Primary>
+            </StBut>
           </StContainer>
         </StReviewBox>
       </StReviewWrap>
@@ -891,6 +897,28 @@ const StContainer = styled.form`
   gap: 4px;
 `;
 
+const StAddressWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const StAddress = styled.div`
+  text-align: center;
+  margin-top: 30px;
+`;
+
+const StSeAddress = styled.div`
+  display: flex;
+  margin-top: 10px;
+`;
+
+const Stsub = styled.span`
+  font-size: 13px;
+  color: gray;
+  margin: 10px 380px 0 0;
+`;
+
 const StTitle = styled.div`
   display: flex;
   flex-direction: column;
@@ -901,12 +929,22 @@ const StTitle = styled.div`
   padding-top: 50px;
 `;
 
+const StTitle1 = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
+  padding-bottom: 10px;
+  padding-top: 70px;
+`;
+
 const StButton = styled.button`
   position: absolute;
-  top: 331px;
-  margin-left: 870px;
+  top: 296px;
+  margin-left: 800px;
   width: 120px;
-  height: 40px;
+  height: 41px;
   background-color: #c4cbcd;
   border: none;
   border-radius: 5px;
@@ -916,18 +954,6 @@ const StButton = styled.button`
     background-color: #c2de0d;
     transition: 0.3s;
   }
-`;
-
-const StAddress = styled.div`
-  text-align: center;
-  padding-top: 80px;
-  padding-left: 150px;
-`;
-
-const StSeAddress = styled.div`
-  display: flex;
-  margin-top: 10px;
-  margin-left: 150px;
 `;
 
 const StInt = styled.input`
@@ -952,20 +978,13 @@ const StInt2 = styled.input`
   }
 `;
 
-const Stsub = styled.span`
-  font-size: 13px;
-  color: gray;
-  margin: 10px 230px 0 0;
-`;
-
 const StBasic = styled.div`
   width: 330px;
   padding-top: 15px;
-  padding-bottom: 15px;
+  padding-bottom: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 5%;
 `;
 
 const StBasicTitle = styled.div`
@@ -1002,8 +1021,8 @@ const StHomeSection = styled.div`
 const StAddStyle = styled.div`
   font-size: 20px;
   font-weight: 600;
-  padding-top: 90px;
-  padding-bottom: 10px;
+  margin-top: 50px;
+  margin-bottom: 10px;
 `;
 
 const StRadioBtnWrap1 = styled.div`
@@ -1017,7 +1036,7 @@ const StRadioBtnWrap1 = styled.div`
     height: 35px;
     border: none;
     border-radius: 10px;
-    padding-left: 20px;
+    padding: 0 10px 0 10px;
   }
   .radioBtn input[type="radio"] {
     display: none;
@@ -1124,7 +1143,15 @@ const Sttextarea = styled.textarea`
 `;
 
 const StTitleComment2 = styled.div`
-  margin: 10% 0 2% 0;
+  margin: 10% 0 0 0;
+  padding-bottom: 10px;
+  font-size: 20px;
+  font-weight: 600;
+`;
+
+const StTitleComment3 = styled.div`
+  margin: 10% 0 0 0;
+  padding-bottom: 40px;
   font-size: 20px;
   font-weight: 600;
 `;
@@ -1132,7 +1159,6 @@ const StTitleComment2 = styled.div`
 const StCommentAdd = styled.div`
   font-size: 15px;
   margin-bottom: 45px;
-  margin-top: 10px;
 `;
 
 const StPicture = styled.div`
@@ -1151,8 +1177,9 @@ const StyledImage = styled.img`
   height: 180px;
   background-color: transparent;
   margin-top: 30px;
-  padding-left: 30px;
+  padding: 0 15px 0 15px;
 `;
+
 const StUpload = styled.label`
   width: 100px;
   padding: 12px 50px;
@@ -1176,9 +1203,9 @@ const StSelectStar = styled.select`
   color: black;
 `;
 
-const StBut = styled.button`
+const StBut = styled.div`
   border: none;
-  background-color: transparent;
+  /* background-color: transparent; */
   cursor: pointer;
   margin-top: 10px;
   margin-bottom: 150px;

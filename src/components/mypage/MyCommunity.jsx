@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import GlobalStyle from "../styles/GlobalStyle";
 import { useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { getmypagePosts } from "../../redux/api/reviewApi";
@@ -16,6 +17,7 @@ const MyCommunity = () => {
 
   return (
     <>
+      <GlobalStyle />
       <StCommBoxWrap>
         <StMyCommBox>
           <StCommBoxTitle>
@@ -74,7 +76,6 @@ const StMyCommBox = styled.div`
 `;
 
 const StInnerBox = styled.div`
-  overflow-y: auto;
   padding-bottom: 50px;
 `;
 
@@ -123,6 +124,7 @@ const StMyComm = styled.div`
     margin-left: 15px;
     font-size: 18px;
     font-weight: 500;
+    line-height: normal;
     white-space: normal;
     display: -webkit-box;
     -webkit-box-orient: vertical;

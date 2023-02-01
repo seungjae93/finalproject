@@ -244,7 +244,7 @@ const StTopBox = styled.div`
   width: 480px;
   height: 310px;
   background-color: #ffffff;
-  opacity: 80%;
+  opacity: 90%;
   position: absolute;
   margin-top: 140px;
   margin-left: 650px;
@@ -254,6 +254,7 @@ const StTopBox = styled.div`
   transform: translate(-30px, -30px); */
 
   .content1 {
+    margin-top: 15px;
     font-size: 17px;
     font-weight: 600;
     color: #737d81;
