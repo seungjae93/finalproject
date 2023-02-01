@@ -122,11 +122,10 @@ const StContainer = styled.div`
 
 const StPostTitle = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  height: 80px;
   font-size: 32px;
   font-weight: bold;
-  margin-top: 10px;
 `;
 
 const StButton = styled.button`
@@ -157,13 +156,15 @@ const StDate = styled.div`
 
 const StDetailImage = styled.img`
   border: none;
+  border-radius: 10px;
   margin-top: 30px;
   width: 100%;
   height: 459px;
 `;
 
 const StContent = styled.div`
-  font-size: 20px;
+  margin: 30px 0 10px 0;
+  font-size: 16px;
   overflow-y: auto;
   white-space: pre-wrap;
   /* @media (min-width: 600px) { 

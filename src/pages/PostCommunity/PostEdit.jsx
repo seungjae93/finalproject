@@ -73,6 +73,7 @@ const PostEdit = () => {
     formData.append("postLocation2", selected.postLocation2);
 
     mutate(formData);
+    alert("수정 되었습니다");
     navigate("/list");
   };
 

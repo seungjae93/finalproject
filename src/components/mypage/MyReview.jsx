@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router";
-import { getmypageReviews } from "../../redux/api/mypageApi";
+import { getmypageReviews } from "../../redux/api/reviewApi";
 import { deletePost } from "../../redux/api/reviewApi";
 
 const MyReview = () => {

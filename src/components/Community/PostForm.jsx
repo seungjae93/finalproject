@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useRef } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useAddCommunity } from "../../redux/api/communityApi";
@@ -26,11 +26,14 @@ const PostForm = () => {
 
   const onHandleAddPost = (event) => {
     event.preventDefault();
-    if (!title || !content || !postLocation1 || !postLocation2)
+    if (
+      !title ||
+      !content ||
+      !image ||
+      !selected.postLocation1 ||
+      !selected.postLocation2
+    )
       return alert("양식을 확인해 주세요 ");
-    if (title.length > 50) {
-      return alert("제목을 50글자 이내로 입력해 주세요");
-    }
 
     const formData = new FormData();
     formData.append("postImage", image);
@@ -51,55 +54,57 @@ const PostForm = () => {
   return (
     <>
       <StAddContainer>
-        <StForm onSubmit={onHandleAddPost}>
-          <StSeleteBox>
-            <StSeleteR name="postLocation1" onChange={HandleChange}>
-              <StOption value="">시,도 선택</StOption>
-              {postLocation1.map((el) => (
-                <StOption key={el.postLocation1} value={el.postLocation1}>
-                  {el.codeNm}
-                </StOption>
-              ))}
-            </StSeleteR>
-            <StSeleteL name="postLocation2" onChange={HandleChange}>
-              <StOption value="">구,군 선택</StOption>
-              {postLocation2
-                .filter((el) => el.postLocation1 === selected.postLocation1)
-                .map((el) => (
-                  <StOption key={el.postLocation2} value={el.codeNm}>
+        <StAddBox>
+          <StForm onSubmit={onHandleAddPost}>
+            <StSeleteBox>
+              <StSeleteR name="postLocation1" onChange={HandleChange}>
+                <StOption value="">시,도 선택</StOption>
+                {postLocation1.map((el) => (
+                  <StOption key={el.postLocation1} value={el.postLocation1}>
                     {el.codeNm}
                   </StOption>
                 ))}
-            </StSeleteL>
-          </StSeleteBox>
+              </StSeleteR>
+              <StSeleteL name="postLocation2" onChange={HandleChange}>
+                <StOption value="">구,군 선택</StOption>
+                {postLocation2
+                  .filter((el) => el.postLocation1 === selected.postLocation1)
+                  .map((el) => (
+                    <StOption key={el.postLocation2} value={el.codeNm}>
+                      {el.codeNm}
+                    </StOption>
+                  ))}
+              </StSeleteL>
+            </StSeleteBox>
 
-          <StTitleInput
-            type="text"
-            value={title}
-            placeholder="제목을 입력해 주세요 (최대 50자)"
-            onChange={(e) => setTitle(e.target.value)}
-          />
-
-          <StImageBox>
-            <StUpload htmlFor="file"> + </StUpload>
-            <input
-              type="file"
-              id="file"
-              onChange={onPreviewImage}
-              style={{ display: "none" }}
+            <StTitleInput
+              type="text"
+              value={title}
+              placeholder="제목을 입력해 주세요 "
+              onChange={(e) => setTitle(e.target.value)}
             />
-            <StyledImage src={preview} />
-          </StImageBox>
 
-          <StContentInput
-            type="text"
-            value={content}
-            placeholder="내용을 입력해 주세요 "
-            onChange={(e) => setContent(e.target.value)}
-          />
+            <StImageBox>
+              <StUpload htmlFor="file"> + </StUpload>
+              <input
+                type="file"
+                id="file"
+                onChange={onPreviewImage}
+                style={{ display: "none" }}
+              />
+              <StyledImage src={preview} />
+            </StImageBox>
 
-          <StButton type="submit"> 작성 완료 </StButton>
-        </StForm>
+            <StContentInput
+              type="text"
+              value={content}
+              placeholder="내용을 입력해 주세요 "
+              onChange={(e) => setContent(e.target.value)}
+            />
+
+            <StButton type="submit"> 작성 완료 </StButton>
+          </StForm>
+        </StAddBox>
       </StAddContainer>
     </>
   );
@@ -108,29 +113,32 @@ const PostForm = () => {
 export default PostForm;
 
 const StAddContainer = styled.div`
-  display: flex;
-  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  width: 1254px;
+`;
+
+const StAddBox = styled.div`
+  height: 1000;
+  background-color: white;
+  padding: 2rem 000;
 `;
 
 const StForm = styled.form`
-  background-color: white;
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 60%;
-  min-width: 600px;
-  height: 100%;
 `;
 
 const StSeleteBox = styled.div`
-  margin: 30px 0 20px 0;
   width: 70%;
 `;
 
 const StSeleteR = styled.select`
   border: 2px solid #a6b2b9;
   text-align: center;
-  font-size: 20px;
+  font-size: 16px;
   width: 200px;
   height: 40px;
   border-radius: 8px;
@@ -140,7 +148,7 @@ const StSeleteR = styled.select`
 const StSeleteL = styled.select`
   border: 2px solid #a6b2b9;
   text-align: center;
-  font-size: 20px;
+  font-size: 16px;
   width: 200px;
   height: 40px;
   border-radius: 8px;
@@ -155,8 +163,15 @@ const StTitleInput = styled.input`
   border: 2px solid #a6b2b9;
   border-radius: 8px;
   width: 70%;
-  height: 2rem;
+  height: 50px;
   margin: 20px 0 20px 0;
+  font-size: 20px;
+
+  ::placeholder {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+  }
 `;
 
 const StImageBox = styled.div`
@@ -184,16 +199,8 @@ const StyledImage = styled.img`
   width: 150px;
   height: 120px;
   border: none;
+  border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-`;
-
-const StContentInput = styled.textarea`
-  margin-top: 20px;
-  border: 2px solid #a6b2b9;
-  border-radius: 8px;
-  width: 70%;
-  height: 20rem;
-  resize: none;
 `;
 
 const StButton = styled.button`
@@ -203,6 +210,15 @@ const StButton = styled.button`
   border: none;
   border-radius: 5px;
   background-color: #c1de0d;
-  margin: 20px 0 20px 0;
+  margin-top: 20px;
   cursor: pointer;
+`;
+
+const StContentInput = styled.textarea`
+  margin-top: 20px;
+  border: 2px solid #a6b2b9;
+  border-radius: 8px;
+  width: 70%;
+  height: 555px;
+  resize: none;
 `;

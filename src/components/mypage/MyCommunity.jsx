@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
-import { getmypagePosts } from "../../redux/api/mypageApi";
+import { getmypagePosts } from "../../redux/api/reviewApi";
 
 const MyCommunity = () => {
   const navigate = useNavigate();
