@@ -6,6 +6,8 @@ import { Map, MapMarker, CustomOverlayMap } from "react-kakao-maps-sdk";
 import TotalReview from "../components/Map/TotalReview";
 import Button from "../components/button/Button";
 import clusterer34 from "../images/clusterer34.svg";
+import clusterer89 from "../images/clusterer89.svg";
+import marker from "../images/marker.svg";
 import logoGray from "../images/logoGray.svg";
 
 const { kakao } = window;
@@ -30,7 +32,7 @@ const MainMap = () => {
   const scrollRef = useRef(null);
 
   //지도 레벨
-  const [zoomLevel, setZoomLevel] = useState(3.5);
+  const [zoomLevel, setZoomLevel] = useState(9.5);
 
   //서버에서 받는 지도 좌표
   const [positions, setPositions] = useState();
@@ -220,17 +222,10 @@ const MainMap = () => {
                   position={el}
                 >
                   {/* 커스텀 오버레이에 표시할 내용입니다 */}
-                  <div
-                    className="label"
-                    style={{
-                      color: "#000",
-                      backgroundColor: `${getOverlayStyle(zoomLevel)}`,
-                    }}
-                  >
-                    <span className="left"></span>
-                    <span className="center">{name}</span>
-                    <span className="right"></span>
-                  </div>
+                  <ClustererImg>
+                    <img src={clusterer89} alt="clusterer89" />
+                    <Clusterer89Txt>{name}</Clusterer89Txt>
+                  </ClustererImg>
                 </CustomOverlayMap>
               );
             })
@@ -253,10 +248,7 @@ const MainMap = () => {
       </>
     );
   };
-  // console.log(zoomLevel);
-  // console.log("markerArray", markerArray);
-  // console.log("positions", positions);
-  console.log("markerArrayEstateId", markerArrayEstateId);
+
   const MarkerClickHandler = (estateId) => {
     setMarkerClickOn(true);
     setMarkerArrayEstateId(estateId);
@@ -278,7 +270,9 @@ const MainMap = () => {
       });
     }
   }, [zoomLevel, positions]);
-
+  // console.log(zoomLevel);
+  // console.log("markerArray", markerArray);
+  // console.log("positions", positions);
   useEffect(() => {
     /* 현재 보이는 위치에 대한 좌표 값을 받아와주는 부분 */
     const mapObject = mapRef.current;
@@ -303,6 +297,7 @@ const MainMap = () => {
         <SearchContainer>
           <StSearch
             type="search"
+            placeholder="지역 검색하기"
             onKeyDown={onSubmitSearch}
             onChange={onAddressHandler}
             value={isHaveInputValue ? autoSearchKeyword : searchAddress}
@@ -351,11 +346,11 @@ const MainMap = () => {
               style={{
                 // 지도의 크기
                 width: "100%",
-                height: "100vh",
+                height: "86vh",
               }}
               ref={mapRef}
               // 지도의 확대 레벨
-              level={3}
+              level={9}
               maxLevel={11}
               onZoomChanged={(map) => setZoomLevel(map.getLevel())}
               onDragEnd={(map) => {
@@ -392,11 +387,11 @@ const MainMap = () => {
                       key={el.estateId}
                       position={el}
                       image={{
-                        src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png",
+                        src: marker,
                         // 마커이미지의 주소입니다
                         size: {
-                          width: 24,
-                          height: 35,
+                          width: 50,
+                          height: 50,
                         }, // 마커이미지의 크기입니다
                       }}
                       onClick={() => MarkerClickHandler(el.estateId)}
@@ -416,6 +411,15 @@ const ClustererImg = styled.div`
   background-size: cover;
   position: relative;
 `;
+const Clusterer89Txt = styled.div`
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 500;
+`;
 const ClustererTxt = styled.div`
   position: absolute;
   top: 45%;
@@ -427,33 +431,43 @@ const ClustererTxt = styled.div`
 `;
 const StContainer = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 86vh;
+  min-width: 1000px;
 `;
 const SearchContainer = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 1360px;
   height: 45px;
   border: 0;
   gap: 10px;
 `;
 const StSearch = styled.input`
-  width: 20%;
-  height: 70%;
-  padding-left: 10px;
+  padding: 10px;
+  width: 351px;
+  height: 31px;
   background-color: #eaeaea;
-  border: 0;
-  outline: 1px;
+  border: 1px solid #a6b2b9;
+  border-radius: 5px;
 `;
 const AutoSearchContainer = styled.div`
   position: absolute;
-  width: 25%;
-  height: 25vh;
+  width: 450px;
+  height: 200px;
   top: 45px;
   z-index: 3;
   background-color: #fff;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #ccc;
+  }
 `;
 const AutoSearchWrap = styled.ul`
   list-style: none;
@@ -461,8 +475,8 @@ const AutoSearchWrap = styled.ul`
 
 const AutoSearchData = styled.li`
   position: relative;
-  width: 90%;
-  padding: 10px 8px;
+  width: 430px;
+  padding: 10px 0px;
   margin: auto;
   font-size: 14px;
   font-weight: bold;
@@ -477,24 +491,24 @@ const StWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: 86vh;
 `;
 
 const StReviewContainer = styled.div`
   width: 600px;
-  height: 100vh;
+  height: 86vh;
 `;
 const StEmptyContainer = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   width: 400px;
-  height: 100vh;
-  white-space: pre-wrap;
+  height: 86vh;
 `;
 
 const StMapContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: 86vh;
 `;

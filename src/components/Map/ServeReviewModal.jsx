@@ -134,7 +134,7 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
                           <ImageDetailCarousel imageUrl={review.imageUrl} />
                           <CgClose
                             style={{
-                              color: "737D81",
+                              color: "2d2d2d",
                               position: "absolute",
                               width: "25px",
                               height: "25px",

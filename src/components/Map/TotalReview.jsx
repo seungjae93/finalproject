@@ -43,11 +43,15 @@ const TotalReview = ({ estateIdData }) => {
         </StAddressWrap>
         <div className="crawlInfo">
           <div className="crawlWrapper">
-            <img src={dabangLogo} alt="dabangLogo" />
+            <div className="crawlMarginLeft">
+              <img src={dabangLogo} alt="dabangLogo" />
+            </div>
             <div className="crawlMarginLeft">다방 이 집 매물보기</div>
           </div>
           <div className="crawlWrapper">
-            <img src={zigbangLogo} alt="zigbangLogo" />
+            <div className="crawlMarginLeft">
+              <img src={zigbangLogo} alt="zigbangLogo" />
+            </div>
             <div className="crawlMarginLeft">직방 이 집 매물보기</div>
           </div>
         </div>
@@ -178,8 +182,17 @@ const StReviewContainer = styled.div`
   margin: auto;
   display: flex;
   flex-direction: column;
-  width: 400px;
-  height: 100vh;
+  width: 425px;
+  height: 85vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #ccc;
+  }
 
   .crawlInfo {
     display: flex;
