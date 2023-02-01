@@ -59,25 +59,25 @@ const StImageCarrier = styled.img`
   border-radius: 10px 10px 0 0;
 `;
 
-const StCommunityBox = styled.div``;
+const StCommunityBox = styled.div`
+  margin: 15px;
+`;
 
 const StTitleCarrier = styled.pre`
-  margin-left: 5px;
   font-size: 16px;
   font-style: bold;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 98%;
-  height: 21px;
   font-weight: bold;
+  margin-bottom: 10px;
 `;
 
 const StContentCarrier = styled.div`
   width: 98%;
   height: 40px;
   pre {
-    margin-left: 5px;
     white-space: normal;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -89,9 +89,10 @@ const StContentCarrier = styled.div`
 const StBox = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-left: 13px;
-  width: 90%;
+  width: 100%;
   font-size: 13px;
+  margin-top: 18px;
+  color: #737d81;
 `;
 
 const StName = styled.div`
