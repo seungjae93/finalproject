@@ -60,6 +60,7 @@ const StyledButton = styled.button`
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  font-size: ${({ fs }) => fs};
   background-color: ${({ bc }) => bc};
   color: ${({ color }) => color};
   font-weight: ${({ fw }) => fw};
@@ -93,7 +94,7 @@ const StyledButton = styled.button`
   ${({ outlined, bc }) => {
     if (outlined) {
       return css`
-        border: 3px solid ${bc};
+        border: 2px solid ${bc};
         background-color: #fff;
         font-weight: 600;
         &:active {

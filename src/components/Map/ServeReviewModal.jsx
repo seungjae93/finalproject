@@ -83,7 +83,6 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
                   <CgChevronDown
                     style={{
                       color: "737D81",
-
                       width: "20px",
                       height: "20px",
                     }}
