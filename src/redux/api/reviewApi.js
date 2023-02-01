@@ -25,6 +25,7 @@ export const useAddPost = () => {
 
 // DELETE
 export const deletePost = async (reviewId) => {
+  console.log(reviewId);
   const response = await instance.delete(`/review/${reviewId}`);
   return response.data;
 };

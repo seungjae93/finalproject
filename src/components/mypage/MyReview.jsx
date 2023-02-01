@@ -1,40 +1,37 @@
 import React from "react";
 import styled from "styled-components";
+import GlobalStyle from "../styles/GlobalStyle";
 import { useQuery } from "@tanstack/react-query";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import { getmypageReviews } from "../../redux/api/reviewApi";
 import { deletePost } from "../../redux/api/reviewApi";
 
 const MyReview = () => {
   const navigate = useNavigate();
 
-  const { reviewId } = useParams();
-
-  const { data, error, isLoading, isError } = useQuery(
-    ["myreview", reviewId],
-    () => getmypageReviews(reviewId)
+  const { data, error, isLoading, isError } = useQuery(["myreview"], () =>
+    getmypageReviews()
   );
-
-  console.log(reviewId);
 
   const deleteHandler = (reviewId) => {
     deletePost(reviewId);
-    window.alert("후기가 삭제되었습니다!");
+    // window.alert("후기가 삭제되었습니다!");
     navigate("/mypage");
   };
 
   if (isLoading) return <h2> 로딩중 .. </h2>;
   if (isError) return <h2> Error : {error.toString()} </h2>;
 
-  console.log(data);
   return (
     <>
+      <GlobalStyle />
       <StMyReviewWrap>
         <StMyReviewBox>
           <StReviewBoxTitle>내가 남긴 리뷰</StReviewBoxTitle>
 
           <StInnerBox>
             {data?.map((reviews) => {
+              console.log(reviews.reviewId);
               return (
                 <StMyReview>
                   <div
@@ -58,7 +55,7 @@ const MyReview = () => {
                     <div className="starPoint">{reviews.star} / 5</div>
                     <button
                       className="delBtn"
-                      onClick={() => deleteHandler(reviewId)}
+                      onClick={() => deleteHandler(reviews.reviewId)}
                     >
                       삭제
                     </button>
@@ -123,6 +120,7 @@ const StMyReview = styled.div`
     width: 450px;
     font-size: 20px;
     font-weight: 600;
+    line-height: normal;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
