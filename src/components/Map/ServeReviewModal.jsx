@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import styled from "styled-components";
 import ImageDetailCarousel from "./ImageDetailCarousel";
 import { CgClose, CgChevronDown } from "react-icons/cg";
+import Star from "../../images/Star.svg";
 
 const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
   const [detailModal, setDetailModal] = useState(false);
@@ -65,7 +66,7 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
             >
               <StReview>
                 <StScore>
-                  <img src={require("../../images/Star 165.png")} alt="star" />
+                  <img src={Star} alt="star" />
 
                   <StAverage> {review.star} </StAverage>
 
@@ -114,16 +115,12 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
                     <StGoodBadContainer>
                       <StGoodBadBox>
                         <StGoodBad>장점</StGoodBad>
-                        <StContent>
-                          <pre>{review.good}</pre>
-                        </StContent>
+                        <StContent>{review.good}</StContent>
                       </StGoodBadBox>
 
                       <StGoodBadBox>
                         <StGoodBad>단점</StGoodBad>
-                        <StContent>
-                          <pre>{review.bad}</pre>
-                        </StContent>
+                        <StContent>{review.bad} </StContent>
                       </StGoodBadBox>
                     </StGoodBadContainer>
 
@@ -161,8 +158,8 @@ const StContainer = styled.div`
   position: absolute;
   justify-content: center;
   top: 120px;
-  width: 390px;
-  height: 100vh;
+  width: 400px;
+  height: 80.5vh;
   right: 0;
   z-index: 100;
   padding: 30px;
@@ -186,7 +183,7 @@ const StTitle = styled.div`
 `;
 
 const StReviewBox = styled.div`
-  width: 370px;
+  width: 400px;
 `;
 
 const StReview = styled.div`
@@ -194,7 +191,7 @@ const StReview = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 370px;
+  width: 400px;
   height: 60px;
   .star {
     position: relative;
@@ -226,7 +223,7 @@ const StDetailModal = styled.div`
   border-radius: 15px;
   margin-top: 5px;
   width: 400px;
-  height: 100vh;
+  height: 60vh;
   animation: DetailModal 0.3s;
   @keyframes DetailModal {
     0% {
@@ -287,17 +284,18 @@ const StGoodBad = styled.div`
 `;
 
 const StContent = styled.div`
+  padding: 4px;
   width: 370px;
   height: 120px;
-  font-size: 0.8rem;
-  pre {
-    margin-left: 5px;
-    white-space: normal;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    -webkit-line-clamp: 4;
-    font-weight: bold;
+  font-size: 0.9rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #ccc;
   }
 `;
 
