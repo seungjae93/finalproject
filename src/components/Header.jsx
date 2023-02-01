@@ -2,8 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import { getCookie, deleteCookie } from "../shared/cookie";
 import { useSelector } from "react-redux";
+import { __kakaoLogout } from "../redux/modules/kakaoSlice";
+import { useMutation } from "@tanstack/react-query";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -11,20 +12,25 @@ const Header = () => {
 
   const { login } = useSelector((state) => state.user);
 
-  const checkCookie = () => {
-    if (getCookie("token")) {
+  const { mutate } = useMutation(__kakaoLogout, {
+    onSuccess: () => {
+      navigate("/");
+    },
+  });
+
+  const logout = () => {
+    window.alert("감사합니다!");
+    localStorage.clear();
+    setUserStatus(false);
+    mutate();
+  };
+
+  const checkToken = () => {
+    if (localStorage.getItem("token")) {
       setUserStatus(true);
     } else {
       setUserStatus(false);
     }
-  };
-
-  const logout = () => {
-    window.alert("로그아웃 하시겠습니까?");
-    deleteCookie("token");
-    localStorage.clear();
-    setUserStatus(false);
-    navigate("/");
   };
 
   const onLogin = () => {
@@ -39,16 +45,8 @@ const Header = () => {
   };
 
   useEffect(() => {
-    checkCookie();
+    checkToken();
   }, [login]);
-
-  useEffect(() => {
-    const logout = () => {
-      setUserStatus(false);
-    };
-    window.addEventListener("storage", logout);
-    return () => window.removeEventListener("storage", logout);
-  }, []);
 
   return (
     <>

@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import GlobalStyle from "../components/styles/GlobalStyle";
 import { useNavigate } from "react-router";
-import { useSelector } from "react-redux";
 import { CgChevronRight } from "react-icons/cg";
 import Button from "../components/button/Button";
 import mainPageCommunity from "../images/mainPageCommunity.svg";
@@ -15,11 +14,11 @@ import mainPageSubImg3 from "../images/mainPageSubImg3.svg";
 
 const MainPage = () => {
   const navigate = useNavigate();
-  const { login } = useSelector((state) => state.user);
 
-  const reviewHandler = () => {
-    if (login === false) {
-      alert("로그인을 해 주세요");
+  const onReviewPost = () => {
+    if (localStorage.getItem("token") === null) {
+      alert("로그인을 해주세요");
+      navigate("/login");
     } else navigate("/review");
   };
 
@@ -79,9 +78,7 @@ const MainPage = () => {
               size="large"
               fs="1.1rem"
               fw="600"
-              onClick={() => {
-                navigate("/review");
-              }}
+              onClick={onReviewPost}
             >
               후기 쓰러가기
             </Button.Primary>
@@ -139,7 +136,7 @@ const MainPage = () => {
               </div>
 
               <div className="bottomContentBtnWrap">
-                <button className="bottomContentBtn" onClick={reviewHandler}>
+                <button className="bottomContentBtn" onClick={onReviewPost}>
                   바로가기
                   <CgChevronRight
                     style={{

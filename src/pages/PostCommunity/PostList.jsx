@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 import { getCommunity } from "../../redux/api/communityApi";
 import { hangjungdong } from "../../components/Community/hangjungdong";
@@ -20,16 +19,11 @@ const PostList = () => {
   const [search, setSearch] = useState("");
   const [clickOrder, setClickOrder] = useState("");
 
-  const { login } = useSelector((state) => state.user);
-
   const { data, error, isLoading, isError, refetch } = useQuery(
     ["posts"],
     () => getCommunity(clickOrder, selected, search),
     {
-      // staleTime: 60 * 1000, //1분
-      onSuccess: (data) => {
-        console.log(data);
-      },
+      staleTime: 60000, //1분
     }
   );
 
@@ -39,7 +33,7 @@ const PostList = () => {
   };
 
   const onPostHandler = () => {
-    if (login === false) {
+    if (localStorage.getItem("token") === null) {
       alert("로그인을 해주세요");
     } else navigate("/post");
   };
@@ -52,19 +46,22 @@ const PostList = () => {
     });
   };
 
-  const throttledRefetch = debounce(refetch, 150);
-
-  // useEffect(() => {
-  //   refetch();
-  // }, [ ]);
+  const throttledRefetch = useCallback(
+    debounce(() => {
+      refetch();
+    }, 200),
+    []
+  );
+  //useCallback으로 디바운스 함수의 재생성을 막아야한다
+  //text를 칠때마다 state값이 바뀌면서, 컴포넌트 리렌더링을 유발하는데,
+  //리렌더링 될때마다 _debounce함수가 재생성 되기 때문
 
   useEffect(() => {
-    throttledRefetch({ search });
-  }, [search, throttledRefetch, selected, showAll, clickOrder]);
+    throttledRefetch();
+  }, [throttledRefetch, selected, showAll, clickOrder]);
 
   if (isLoading) return <h2> 로딩중 .. </h2>;
   if (isError) return <h2> Error : {error.toString()} </h2>;
-  if (!data) return null;
 
   return (
     <>
@@ -137,7 +134,7 @@ const StSeleteBox = styled.div`
 
 const StSeleteAll = styled.button`
   background-color: white;
-  border: 2px solid powderblue;
+  border: 2px solid #c4cbcd;
   text-align: center;
   font-size: 16px;
   width: 180px;
@@ -152,9 +149,8 @@ const StSelete = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 1250px;
-  height: 40px;
+  height: 50px;
   border-bottom: 3px solid #c4cbcd;
-  padding: 0 0 6px 0;
 `;
 
 const StSeleteR = styled.select`

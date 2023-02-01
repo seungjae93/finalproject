@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useAddCommunity } from "../../redux/api/communityApi";
@@ -29,7 +29,6 @@ const PostForm = () => {
     if (
       !title ||
       !content ||
-      !image ||
       !selected.postLocation1 ||
       !selected.postLocation2
     )
