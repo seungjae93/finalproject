@@ -18,6 +18,7 @@ const MainPage = () => {
 
   return (
     <>
+      <GlobalStyle />
       <StHomeContainer>
         <StTopImage>
           <img
@@ -25,31 +26,31 @@ const MainPage = () => {
             src={require("../images/main.jpg")}
             alt="main"
           />
+          <StTopBox>
+            <div className="leftContent1">
+              <div className="content1">이 집은 어떨까?</div>
+            </div>
+            <div className="content2">
+              원룸,투룸,역세권 말고
+              <br /> 진짜 살아봐야 아는 정보
+            </div>
+            <div className="content3">
+              중개인도, 집주인도 알려주지 않는 꿀정보를 알아보세요.
+            </div>
+            <StTopButton>
+              <Button.Primary
+                size="large"
+                fs="1.1rem"
+                fw="600"
+                onClick={() => {
+                  navigate("/map");
+                }}
+              >
+                후기 보러가기
+              </Button.Primary>
+            </StTopButton>
+          </StTopBox>
         </StTopImage>
-        <StTopBox>
-          <div className="leftContent1">
-            <div className="content1">이 집은 어떨까?</div>
-          </div>
-          <div className="content2">
-            원룸,투룸,역세권 말고
-            <br /> 진짜 살아봐야 아는 정보
-          </div>
-          <div className="content3">
-            중개인도, 집주인도 알려주지 않는 꿀정보를 알아보세요.
-          </div>
-          <StTopButton>
-            <Button.Primary
-              size="large"
-              fs="1.1rem"
-              fw="600"
-              onClick={() => {
-                navigate("/map");
-              }}
-            >
-              후기 보러가기
-            </Button.Primary>
-          </StTopButton>
-        </StTopBox>
         <StCenterBox>
           <StCenterWrap>
             <div className="centerContent1">
@@ -231,13 +232,15 @@ const StHomeContainer = styled.section`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 1920px;
+  width: 100%;
+  min-width: 1280px;
   height: 100%;
 `;
 const StTopImage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   .mainImg {
     width: 1254px;
     height: 550px;
@@ -255,8 +258,12 @@ const StTopBox = styled.div`
   background-color: #ffffff;
   opacity: 80%;
   position: absolute;
-  right: 400px;
-  top: 300px;
+  margin-top: 140px;
+  margin-left: 650px;
+  text-align: left;
+  /* top: 300px;
+  right: 300px;
+  transform: translate(-30px, -30px); */
 
   .content1 {
     font-size: 17px;
@@ -379,7 +386,7 @@ const StFooterBox = styled.div`
   }
 `;
 const StFooterBtn = styled.div`
-  width: 50%;
+  width: 1000px;
   display: flex;
   justify-content: center;
 `;
