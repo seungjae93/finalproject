@@ -195,9 +195,7 @@ const MainMap = () => {
       return;
     }
   };
-  console.log(zoomLevel);
-  console.log("positions", positions);
-  console.log("markerArray", markerArray);
+
   const renderItem = () => {
     if (!positions) return null;
     if (zoomLevel < 3) return null;
@@ -299,7 +297,7 @@ const MainMap = () => {
                   return (
                     <AutoSearchData
                       isFocus={dropDownDataIndex === index ? true : false}
-                      key={searchData.index}
+                      key={`map-main-${index}`}
                       onClick={() => clickDropDownItem(el)}
                       onMouseOver={() =>
                         setDropDownDataIndex(dropDownDataIndex)
