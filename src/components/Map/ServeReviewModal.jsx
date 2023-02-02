@@ -160,7 +160,7 @@ const StContainer = styled.div`
   justify-content: center;
   top: 120px;
   width: 400px;
-  height: 748px;
+  height: 83vh;
   right: 0;
   z-index: 100;
   padding: 30px;
