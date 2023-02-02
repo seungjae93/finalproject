@@ -48,8 +48,6 @@ const PostList = () => {
     }
   );
 
-  console.log(data);
-
   const HandleChange = (e) => {
     const { name, value } = e.target;
     setSelected({ ...selected, [name]: value });
