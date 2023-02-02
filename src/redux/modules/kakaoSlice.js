@@ -1,22 +1,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import setToken from "../../shared/setToken";
-import { setCookie } from "../../shared/cookie";
+import { instance } from "../api/instance";
 
 export const __kakaoLogin = createAsyncThunk(
   "__kakaoLogin",
   async (code, thunkAPI) => {
     try {
-      setToken();
       const response = await axios.get(
-        `${process.env.REACT_APP_API_DIRECT}?code=${code}`
+        `${process.env.REACT_APP_API_DIRECT}?code=${code}`,
+        {
+          withCredentials: true,
+        }
       );
-      setCookie("token", response.data.accessToken, {
-        path: "/",
-        expire: "after720m",
-      });
-      localStorage.setItem("nickname", response.data.nickname);
-      alert(`${response.data.nickname}님 안녕하세요 :) `);
+      const token = response.data.accessToken;
+      const email = response.data.email;
+      const nickEmail = email.substring(0, email.indexOf("@"));
+      localStorage.setItem("email", nickEmail);
+      localStorage.setItem("token", token);
+      alert(`${nickEmail}님 안녕하세요 :) `);
       return thunkAPI.fulfillWithValue(response);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -24,12 +25,16 @@ export const __kakaoLogin = createAsyncThunk(
   }
 );
 
+export const __kakaoLogout = async () => {
+  const response = await instance.post("/auth/logout");
+  return response.data;
+};
+
 const initialState = {
   login: false,
   isLoading: false,
   error: null,
   errorMessage: "",
-  nickname: "",
 };
 
 const kakaoSlice = createSlice({
@@ -42,6 +47,7 @@ const kakaoSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      //로그인
       .addCase(__kakaoLogin.pending, (state) => {
         state.isLoading = true;
       })
@@ -49,7 +55,7 @@ const kakaoSlice = createSlice({
         state.isLoading = true;
         state.login = true;
       })
-      .addCase(__kakaoLogin.rejected, (state, action) => {
+      .addCase(__kakaoLogin.rejected, (state) => {
         state.isLoading = false;
       });
   },

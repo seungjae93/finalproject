@@ -5,26 +5,30 @@ import { Link } from "react-router-dom";
 const PostListCard = ({ posts }) => {
   return (
     <StCardWrapper to={`/${posts.postId}`}>
-      <StImageCarrier alt="" src={posts?.postImage}></StImageCarrier>
-      <StTitleCarrier>
-        <p>{posts?.title}</p>
-      </StTitleCarrier>
-      <StContentCarrier>
-        <pre> {posts?.content} </pre>
-      </StContentCarrier>
-      <StBox>
-        <StName>
-          <StNickName> {posts?.nickname} </StNickName>
-          <div>
-            {new Date(posts.createdAt).toLocaleDateString("ko-KR", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </div>
-        </StName>
-        <div> {posts.commentsCount}개의 댓글 </div>
-      </StBox>
+      {posts?.postImage ? (
+        <StImageCarrier alt="" src={posts?.postImage}></StImageCarrier>
+      ) : null}
+
+      <StCommunityBox>
+        <StTitleCarrier>{posts?.title}</StTitleCarrier>
+
+        <StContentCarrier>
+          <pre> {posts?.content} </pre>
+        </StContentCarrier>
+        <StBox>
+          <StName>
+            <StNickName> {posts?.email} </StNickName>
+            <div>
+              {new Date(posts.createdAt).toLocaleDateString("ko-KR", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </div>
+          </StName>
+          <div> {posts.commentsCount}개의 댓글 </div>
+        </StBox>
+      </StCommunityBox>
     </StCardWrapper>
   );
 };
@@ -33,11 +37,11 @@ export default PostListCard;
 
 const StCardWrapper = styled(Link)`
   background-color: white;
-  width: 320px;
-  height: 340px;
+  width: 400px;
+  height: 287px;
   border: 0px solid black;
-  border-radius: 20px;
-  margin: 100px 0 0 35px;
+  border-radius: 10px;
+  margin: 20px 0 0 10px;
   z-index: 900px;
   box-shadow: 0px 1px 5px 1px #dddddd;
   text-decoration-line: none;
@@ -49,45 +53,46 @@ const StCardWrapper = styled(Link)`
 `;
 
 const StImageCarrier = styled.img`
-  width: 320px;
-  height: 170px;
-  border-radius: 20px;
+  width: 400px;
+  height: 166px;
+  border: none;
+  border-radius: 10px 10px 0 0;
 `;
 
-const StTitleCarrier = styled.div`
-  p {
-    margin-left: 5px;
-    font-size: 25px;
-    font-style: bold;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 100%;
-    height: 30px;
-  }
+const StCommunityBox = styled.div`
+  margin: 15px;
+`;
+
+const StTitleCarrier = styled.pre`
+  font-size: 16px;
+  font-style: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 98%;
+  font-weight: bold;
+  margin-bottom: 10px;
 `;
 
 const StContentCarrier = styled.div`
-  width: 100%;
-  height: 60px;
-
+  width: 98%;
+  height: 40px;
   pre {
-    margin-left: 5px;
     white-space: normal;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
     -webkit-line-clamp: 2;
-    font-weight: bold;
   }
 `;
 
 const StBox = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-left: 13px;
-  width: 90%;
+  width: 100%;
   font-size: 13px;
+  margin-top: 18px;
+  color: #737d81;
 `;
 
 const StName = styled.div`

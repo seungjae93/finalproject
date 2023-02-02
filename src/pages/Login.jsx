@@ -30,7 +30,7 @@ export default Login;
 
 const StLoginBox = styled.div`
   text-align: center;
-  width: 20%;
+  width: 350px;
   height: 400px;
   border-radius: 8px;
   margin-left: auto;

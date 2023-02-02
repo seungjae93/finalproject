@@ -10,16 +10,15 @@ const KakaoLogin = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const Auth = () => {
+  const oAuth = () => {
     const code = location.search.split("=")[1];
     dispatch(__kakaoLogin(code));
-    console.log(code);
   };
 
   useEffect(() => {
-    Auth();
+    oAuth();
     navigate("/");
-  }, []);
+  }, [oAuth]);
 
   return (
     <>

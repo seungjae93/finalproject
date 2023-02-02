@@ -24,6 +24,7 @@ const PostEdit = () => {
 
   const queryClient = useQueryClient();
 
+  // 수정 전 가져오기
   const { error, isLoading, isError } = useQuery(
     ["post", postId],
     () => getUpdateCommunity(postId),
@@ -32,6 +33,10 @@ const PostEdit = () => {
         setTitle(post.title);
         setContent(post.content);
         setImage(post.postImage);
+        setSelected({
+          postLocation1: post.postLocation1,
+          postLocation2: post.postLocation2,
+        });
       },
       onError: (error) => {
         console.log(error);
@@ -68,6 +73,7 @@ const PostEdit = () => {
     formData.append("postLocation2", selected.postLocation2);
 
     mutate(formData);
+    alert("수정 되었습니다");
     navigate("/list");
   };
 
@@ -105,36 +111,37 @@ const PostEdit = () => {
               </StSeleteL>
             </StSeleteBox>
 
-            <StyledInput
-              type="file"
-              id="file"
-              name="postImage"
-              onChange={onPreviewImage}
-              style={{ display: "none" }}
-            />
-            <StUpload htmlFor="file">파일 업로드</StUpload>
-            {preview && (
-              <StyledImage
-                alt="sample"
-                src={preview}
-                style={{ display: "none" }}
-              />
-            )}
-            <div>
-              <StyledImage
-                src={image}
-                value={image}
-                onChange={onPreviewImage}
-              />
-            </div>
-
-            <StTitle> 제목 </StTitle>
-            <Stinput
+            <StTitleInput
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
-            <StContent> 내용 </StContent>
+
+            <StImageBox>
+              <input
+                type="file"
+                id="file"
+                name="postImage"
+                onChange={onPreviewImage}
+                style={{ display: "none" }}
+              />
+              <StUpload htmlFor="file"> + </StUpload>
+              {preview && (
+                <StyledImage
+                  alt="sample"
+                  src={preview}
+                  style={{ display: "none" }}
+                />
+              )}
+              <div>
+                <StyledImage
+                  src={image}
+                  value={image}
+                  onChange={onPreviewImage}
+                />
+              </div>{" "}
+            </StImageBox>
+
             <StContentInput
               type="text"
               value={content}
@@ -142,10 +149,8 @@ const PostEdit = () => {
             />
 
             <StInfor>
-              <div>
-                <StButton onClick={updateHandler}>수정 완료</StButton>
-                <StButton onClick={() => navigate("/:postId")}>취소</StButton>
-              </div>
+              <StButton onClick={updateHandler}>수정 완료</StButton>
+              <StButton onClick={() => navigate("/:postId")}>취소</StButton>
             </StInfor>
           </StForm>
         </StAddBox>
@@ -158,25 +163,23 @@ export default PostEdit;
 
 const StAddContainer = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
 `;
 
 const StAddBox = styled.div`
-  width: 60%;
+  width: 1250px;
   background-color: white;
   padding: 2rem 000;
 `;
 
 const StForm = styled.form`
-  height: 110%;
   display: flex;
   align-items: center;
   flex-direction: column;
 `;
 
 const StSeleteBox = styled.div`
-  text-align: center;
+  width: 70%;
   margin: 0 0 20px 0;
 `;
 const StSeleteR = styled.select`
@@ -203,64 +206,65 @@ const StOption = styled.option`
   border: 2px solid powderblue;
 `;
 
-const StTitle = styled.div`
-  font-size: 40px;
-  font-weight: bold;
+const StTitleInput = styled.input`
+  border: 2px solid #a6b2b9;
+  border-radius: 8px;
+  width: 70%;
+  height: 2rem;
+  margin: 20px 0 20px 0;
 `;
 
-const StInfor = styled.div`
+const StImageBox = styled.div`
+  width: 70%;
   display: flex;
-  margin-top: 15px;
-  justify-content: space-between;
-`;
-
-const StContent = styled.div`
-  font-size: 20px;
+  align-items: center;
 `;
 
 const StUpload = styled.label`
-  text-align: center;
-  padding: 6px 25px;
-  margin: 10px 0 30px 0;
-  background-color: powderblue;
-  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  padding: 10px 30px 20px 30px;
+  margin-right: 20px;
+  background-color: #d2d2d2;
+  border-radius: 5px;
   cursor: pointer;
   &:hover {
     background-color: #6688ab;
   }
 `;
 
-const StyledInput = styled.input`
-  padding: 7px;
-  background: white;
-  border-radius: 10px;
-  color: #34495e;
-  height: 30px;
-  outline: none;
-  border: 1px solid #34495e;
-  font-weight: 700;
-`;
-
 const StyledImage = styled.img`
-  width: 400px;
-  height: 300px;
-  border-radius: 200px;
-  background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.23) 0px 0px 5px 6px;
-`;
-
-const Stinput = styled.input`
-  width: 50%;
-  height: 1rem;
+  width: 150px;
+  height: 120px;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 `;
 
 const StContentInput = styled.textarea`
+  margin-top: 20px;
+  border: 2px solid #a6b2b9;
+  border-radius: 8px;
   width: 70%;
   height: 20rem;
   resize: none;
 `;
 
+const StInfor = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  min-width: 45%;
+`;
+
 const StButton = styled.button`
-  padding: 0.5rem 1rem 0.5rem 1rem;
-  font-size: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  background-color: #c1de0d;
+  width: 200px;
+  height: 30px;
+  cursor: pointer;
 `;
