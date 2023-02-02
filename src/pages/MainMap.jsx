@@ -16,7 +16,7 @@ const { kakao } = window;
 const MainMap = () => {
   const [state, setState] = useState({
     // 지도의 초기 위치
-    center: { lat: 36.7738248327742, lng: 127.05384284728 },
+    center: { lat: 37.5472661928352, lng: 127.068276018078 },
     // 지도 위치 변경시 panto를 이용할지(부드럽게 이동)
     isPanto: true,
   });
@@ -32,7 +32,7 @@ const MainMap = () => {
   const scrollRef = useRef(null);
 
   //지도 레벨
-  const [zoomLevel, setZoomLevel] = useState(3.5);
+  const [zoomLevel, setZoomLevel] = useState(6);
 
   //서버에서 받는 지도 좌표
   const [positions, setPositions] = useState();
@@ -195,7 +195,7 @@ const MainMap = () => {
       return;
     }
   };
-
+  console.log(positions);
   const renderItem = () => {
     if (!positions) return null;
     if (zoomLevel < 3) return null;
@@ -259,9 +259,6 @@ const MainMap = () => {
     }
   }, [zoomLevel, positions]);
 
-  console.log(zoomLevel);
-  console.log("markerArray", markerArray);
-  console.log("positions", positions);
   useEffect(() => {
     /* 현재 보이는 위치에 대한 좌표 값을 받아와주는 부분 */
     const mapObject = mapRef.current;
@@ -339,7 +336,7 @@ const MainMap = () => {
               }}
               ref={mapRef}
               // 지도의 확대 레벨
-              level={3}
+              level={6}
               maxLevel={11}
               onZoomChanged={(map) => setZoomLevel(map.getLevel())}
               onDragEnd={(map) => {

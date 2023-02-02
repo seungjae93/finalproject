@@ -30,7 +30,6 @@ const MyReview = () => {
 
           <StInnerBox>
             {data?.map((reviews) => {
-              console.log(reviews.reviewId);
               return (
                 <StMyReview>
                   <div
