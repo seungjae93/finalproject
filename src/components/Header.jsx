@@ -107,6 +107,7 @@ const Header = () => {
 export default Header;
 
 const StNavbar = styled.div`
+  background-color: #ffffff;
   max-width: 1920px;
   min-width: 900px;
   height: 80px;
