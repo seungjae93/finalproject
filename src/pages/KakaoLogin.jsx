@@ -6,7 +6,7 @@ import { __kakaoLogin } from "../redux/modules/kakaoSlice";
 export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=code`;
 
 const KakaoLogin = () => {
-  const isLogin = useSelector((state) => state.login.login);
+  const isLogin = useSelector((state) => state.user.login);
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
