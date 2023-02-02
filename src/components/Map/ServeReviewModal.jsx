@@ -107,6 +107,7 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
                         />
                       ))}
                     </StContents>
+
                     <StMonthly>
                       보증금 : {review.deposit} / 월세 :{" "}
                       {review.monthly_payment}
@@ -159,7 +160,7 @@ const StContainer = styled.div`
   justify-content: center;
   top: 120px;
   width: 400px;
-  height: 80.5vh;
+  height: 83vh;
   right: 0;
   z-index: 100;
   padding: 30px;
@@ -169,7 +170,7 @@ const StContainer = styled.div`
   @keyframes fadeInRight {
     0% {
       opacity: 0;
-      transform: translate3d(100%, 0, 0);
+      transform: translate3d(0%, 0, 0);
     }
     to {
       opacity: 1;
@@ -219,11 +220,10 @@ const StAverage = styled.div`
 const StDetailModal = styled.div`
   background-color: white;
   position: absolute;
-  border: 5px solid #f3f5f5;
   border-radius: 15px;
   margin-top: 5px;
   width: 400px;
-  height: 60vh;
+  height: 50vh;
   animation: DetailModal 0.3s;
   @keyframes DetailModal {
     0% {
@@ -238,7 +238,6 @@ const StDetailModal = styled.div`
 `;
 
 const StMonthly = styled.div`
-  margin-top: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -247,7 +246,7 @@ const StMonthly = styled.div`
 `;
 
 const StContents = styled.div`
-  margin-top: 20px;
+  margin: 20px 0px 30px 0px;
   display: flex;
   justify-content: center;
   width: 400px;

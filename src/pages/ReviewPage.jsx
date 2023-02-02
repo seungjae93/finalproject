@@ -901,7 +901,6 @@ const StReviewWrap = styled.div`
 `;
 
 const StPostbox = styled.div`
-  border: 1px solid black;
   margin-top: 90px;
 `;
 
@@ -1095,7 +1094,6 @@ const StCommentWrap = styled.div`
   align-items: center;
   text-align: center;
   margin-bottom: 5px;
-  border: 2px solid blue;
 `;
 
 const StTitleComment = styled.div`
@@ -1110,7 +1108,6 @@ const StRadioBtnWrap2 = styled.div`
   align-items: center;
   justify-content: space-around;
   width: 400px;
-  border: 1px solid red;
 
   .radioBtn {
     font-size: 18px;
