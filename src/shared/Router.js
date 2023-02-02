@@ -7,7 +7,7 @@ import MainMap from "../pages/MainMap";
 import KakaoLogin from "../pages/KakaoLogin";
 import Login from "../pages/Login";
 import ReviewPage from "../pages/ReviewPage";
-import MyPage from "../pages/MyPage";
+import MyPage from "../pages/Mypage";
 import PostList from "../pages/PostCommunity/PostList";
 import PostForm from "../components/Community/PostForm";
 import PostDetail from "../pages/PostCommunity/PostDetail";
