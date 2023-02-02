@@ -23,7 +23,7 @@ const PostList = () => {
 
   const { ref, inView } = useInView({
     // ref가 화면에 나타나면 inView는 true, 아니면 false를 반환한다.
-    threshold: 0.8,
+    threshold: 0.2,
     triggerOnce: true,
     //API요청을 중복이 아닌 한번만 발생할 수 있게
   });
@@ -36,9 +36,8 @@ const PostList = () => {
     isError,
     fetchNextPage,
     hasNextPage,
-    isFetchingNextPage,
   } = useInfiniteQuery(
-    ["posts"],
+    ["posts", clickOrder],
     ({ pageParam = 1 }) =>
       getCommunity(pageParam, clickOrder, selected, search),
     {
@@ -46,9 +45,10 @@ const PostList = () => {
         !lastPage.isLast ? lastPage.nextPage : undefined,
       //API 에 요청할 때 사용될 pageParam 값을 정할 수 있다.
     }
+    // {
+    //   staleTime: 60000,
+    // }
   );
-
-  console.log(data);
 
   const HandleChange = (e) => {
     const { name, value } = e.target;
@@ -85,7 +85,6 @@ const PostList = () => {
 
   useEffect(() => {
     if (inView) {
-      fetchNextPage();
     }
   }, [inView]);
 
@@ -143,9 +142,6 @@ const PostList = () => {
         {/* hasNextPage 다음 또는 이전 페이지가 있는지 확인 하는 속성
       fetchNextPage 다음 페이지를 가져오기 위한 반환 속성  */}
         <STPostCon>
-          {/* {data?.pages?.map((posts) => {
-            return <PostListCard key={`main_${posts.postId}`} posts={posts} />;
-          })} */}
           {data?.pages?.map((page) => {
             return page?.posts?.map((posts) => {
               return (
@@ -155,14 +151,8 @@ const PostList = () => {
           })}
         </STPostCon>
       </InfiniteScroll>
-      <div style={{ height: "100px" }}></div>
 
-      {isFetchingNextPage ? (
-        // boolean 속성이 반환되어 다음 페이지 또는 이전 페이지를 가져올 때 확인
-        <div>로딩중입니다1!!!!</div>
-      ) : (
-        <div ref={ref}></div>
-      )}
+      <div style={{ height: "100px" }} ref={ref}></div>
     </>
   );
 };
