@@ -195,7 +195,7 @@ const MainMap = () => {
       return;
     }
   };
-  console.log(positions);
+
   const renderItem = () => {
     if (!positions) return null;
     if (zoomLevel < 3) return null;
@@ -204,6 +204,7 @@ const MainMap = () => {
         {zoomLevel > 4
           ? positions?.map((el) => {
               const name = el[getOverlayAreaName(zoomLevel)];
+              if (name === "" || !name) return null;
               return (
                 <CustomOverlayMap // 커스텀 오버레이를 표시할 Container
                   key={el.estateId}
@@ -219,6 +220,7 @@ const MainMap = () => {
             })
           : 2 < zoomLevel < 5
           ? markerArray?.map((el) => {
+              if (!el.index) return null;
               return (
                 <CustomOverlayMap // 커스텀 오버레이를 표시할 Container
                   key={el.estateId}
@@ -295,7 +297,7 @@ const MainMap = () => {
                   return (
                     <AutoSearchData
                       isFocus={dropDownDataIndex === index ? true : false}
-                      key={searchData.index}
+                      key={`map-main-${index}`}
                       onClick={() => clickDropDownItem(el)}
                       onMouseOver={() =>
                         setDropDownDataIndex(dropDownDataIndex)

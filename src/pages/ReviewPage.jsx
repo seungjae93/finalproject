@@ -184,15 +184,13 @@ const ReviewPage = () => {
               <StBasic>
                 <StBasicTitle>평수</StBasicTitle>
                 <StHomeInput
-                  type="number"
+                  type="text"
                   name="acreage"
                   value={input.acreage}
                   onChange={onChangeHandler}
-                  onKeyDown={(e) => {
-                    if (!/^[0-9]+$/.test(e.key)) {
-                      e.preventDefault();
-                    }
-                  }}
+                  onInput={(e) =>
+                    (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
+                  }
                 />
                 <StHomeUnit>평</StHomeUnit>
               </StBasic>
@@ -221,30 +219,26 @@ const ReviewPage = () => {
               <StBasic>
                 <StBasicTitle>보증금</StBasicTitle>
                 <StHomeInput
-                  type="number"
+                  type="text"
                   name="deposit"
                   value={input.deposit}
                   onChange={onChangeHandler}
-                  onKeyDown={(e) => {
-                    if (!/^[0-9]+$/.test(e.key)) {
-                      e.preventDefault();
-                    }
-                  }}
+                  onInput={(e) =>
+                    (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
+                  }
                 />
                 <StHomeUnit>원</StHomeUnit>
               </StBasic>
               <StBasic>
                 <StBasicTitle>월세</StBasicTitle>
                 <StHomeInput
-                  type="number"
+                  type="text"
                   name="monthly_payment"
                   value={input.monthly_payment}
                   onChange={onChangeHandler}
-                  onKeyDown={(e) => {
-                    if (!/^[0-9]+$/.test(e.key)) {
-                      e.preventDefault();
-                    }
-                  }}
+                  onInput={(e) =>
+                    (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
+                  }
                 />
                 <StHomeUnit>원</StHomeUnit>
               </StBasic>

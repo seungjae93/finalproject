@@ -22,6 +22,7 @@ const Footer = () => {
   if (locationNow.pathname === "/list") return null;
   if (locationNow.pathname === "/login") return null;
   if (locationNow.pathname === "/review") return null;
+  if (locationNow.pathname === "/auth/kakao/callback") return null;
 
   return (
     <>

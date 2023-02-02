@@ -58,7 +58,7 @@ const TotalReview = ({ estateIdData }) => {
 
         {estateInfoData?.map((el, index) => {
           return (
-            <StModalContainer>
+            <StModalContainer key={`map-total-${index}`}>
               <div className="totalWrap">
                 <div className="addressScoreWrap">
                   <div>집주인이 문제를 잘 해결해주시나요?</div>

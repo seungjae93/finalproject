@@ -43,7 +43,7 @@ const ReviewInfoBar = ({
     <>
       <ReviewContainer>
         {reviewInfo.map((el, index) => {
-          return <ReviewBar key={reviewInfo.index} point={el} />;
+          return <ReviewBar key={`review-info-${index}`} point={el} />;
         })}
         {[1, 2, 3, 4, 5, 6].map((value) => {
           return <ReviewPoint />;
