@@ -32,7 +32,7 @@ const MainMap = () => {
   const scrollRef = useRef(null);
 
   //지도 레벨
-  const [zoomLevel, setZoomLevel] = useState(9.5);
+  const [zoomLevel, setZoomLevel] = useState(3.5);
 
   //서버에서 받는 지도 좌표
   const [positions, setPositions] = useState();
@@ -339,7 +339,7 @@ const MainMap = () => {
               }}
               ref={mapRef}
               // 지도의 확대 레벨
-              level={9}
+              level={3}
               maxLevel={11}
               onZoomChanged={(map) => setZoomLevel(map.getLevel())}
               onDragEnd={(map) => {

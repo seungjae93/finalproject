@@ -167,7 +167,7 @@ const ReviewPage = () => {
                     value="원룸"
                     onChange={onChangeHandler}
                   />
-                  <label for="radio-1">원룸</label>
+                  <label htmlFor="radio-1">원룸</label>
                 </div>
                 <div className="radioBtn">
                   <input
@@ -177,7 +177,7 @@ const ReviewPage = () => {
                     value="투룸"
                     onChange={onChangeHandler}
                   />
-                  <label for="radio-2">투룸</label>
+                  <label htmlFor="radio-2">투룸</label>
                 </div>
               </StRadioBtnWrap1>
 
@@ -205,7 +205,7 @@ const ReviewPage = () => {
                     value="월세"
                     onChange={onChangeHandler}
                   />
-                  <label for="radio-3">월세</label>
+                  <label htmlFor="radio-3">월세</label>
                 </div>
                 <div className="radioBtn">
                   <input
@@ -215,7 +215,7 @@ const ReviewPage = () => {
                     value="전세"
                     onChange={onChangeHandler}
                   />
-                  <label for="radio-4">전세</label>
+                  <label htmlFor="radio-4">전세</label>
                 </div>
               </StRadioBtnWrap1>
               <StBasic>
@@ -264,7 +264,7 @@ const ReviewPage = () => {
                       value="1"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-5">1</label>
+                    <label htmlFor="radio-5">1</label>
                   </div>
 
                   <div className="radioBtn">
@@ -275,7 +275,7 @@ const ReviewPage = () => {
                       value="2"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-6">2</label>
+                    <label htmlFor="radio-6">2</label>
                   </div>
 
                   <div className="radioBtn">
@@ -286,7 +286,7 @@ const ReviewPage = () => {
                       value="3"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-7">3</label>
+                    <label htmlFor="radio-7">3</label>
                   </div>
 
                   <div className="radioBtn">
@@ -297,7 +297,7 @@ const ReviewPage = () => {
                       value="4"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-8">4</label>
+                    <label htmlFor="radio-8">4</label>
                   </div>
 
                   <div className="radioBtn">
@@ -308,7 +308,7 @@ const ReviewPage = () => {
                       value="5"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-9">5</label>
+                    <label htmlFor="radio-9">5</label>
                   </div>
                 </StRadioBtnWrap2>
                 <StRadioBtnTitle>
@@ -328,7 +328,7 @@ const ReviewPage = () => {
                       value="1"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-10">1</label>
+                    <label htmlFor="radio-10">1</label>
                   </div>
 
                   <div className="radioBtn">
@@ -339,7 +339,7 @@ const ReviewPage = () => {
                       value="2"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-11">2</label>
+                    <label htmlFor="radio-11">2</label>
                   </div>
 
                   <div className="radioBtn">
@@ -350,7 +350,7 @@ const ReviewPage = () => {
                       value="3"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-12">3</label>
+                    <label htmlFor="radio-12">3</label>
                   </div>
 
                   <div className="radioBtn">
@@ -361,7 +361,7 @@ const ReviewPage = () => {
                       value="4"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-13">4</label>
+                    <label htmlFor="radio-13">4</label>
                   </div>
                   <div className="radioBtn">
                     <input
@@ -371,7 +371,7 @@ const ReviewPage = () => {
                       value="5"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-14">5</label>
+                    <label htmlFor="radio-14">5</label>
                   </div>
                 </StRadioBtnWrap2>
                 <StRadioBtnTitle>
@@ -392,7 +392,7 @@ const ReviewPage = () => {
                       value="1"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-15">1</label>
+                    <label htmlFor="radio-15">1</label>
                   </div>
 
                   <div className="radioBtn">
@@ -403,7 +403,7 @@ const ReviewPage = () => {
                       value="2"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-16">2</label>
+                    <label htmlFor="radio-16">2</label>
                   </div>
 
                   <div className="radioBtn">
@@ -414,7 +414,7 @@ const ReviewPage = () => {
                       value="3"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-17">3</label>
+                    <label htmlFor="radio-17">3</label>
                   </div>
                   <div className="radioBtn">
                     <input
@@ -424,7 +424,7 @@ const ReviewPage = () => {
                       value="4"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-18">4</label>
+                    <label htmlFor="radio-18">4</label>
                   </div>
                   <div className="radioBtn">
                     <input
@@ -434,7 +434,7 @@ const ReviewPage = () => {
                       value="5"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-19">5</label>
+                    <label htmlFor="radio-19">5</label>
                   </div>
                 </StRadioBtnWrap2>
                 <StRadioBtnTitle>
@@ -455,7 +455,7 @@ const ReviewPage = () => {
                       value="1"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-20">1</label>
+                    <label htmlFor="radio-20">1</label>
                   </div>
 
                   <div className="radioBtn">
@@ -466,7 +466,7 @@ const ReviewPage = () => {
                       value="2"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-21">2</label>
+                    <label htmlFor="radio-21">2</label>
                   </div>
 
                   <div className="radioBtn">
@@ -477,7 +477,7 @@ const ReviewPage = () => {
                       value="3"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-22">3</label>
+                    <label htmlFor="radio-22">3</label>
                   </div>
 
                   <div className="radioBtn">
@@ -488,7 +488,7 @@ const ReviewPage = () => {
                       value="4"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-23">4</label>
+                    <label htmlFor="radio-23">4</label>
                   </div>
 
                   <div className="radioBtn">
@@ -499,7 +499,7 @@ const ReviewPage = () => {
                       value="5"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-24">5</label>
+                    <label htmlFor="radio-24">5</label>
                   </div>
                 </StRadioBtnWrap2>
                 <StRadioBtnTitle>
@@ -520,7 +520,7 @@ const ReviewPage = () => {
                       value="1"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-25">1</label>
+                    <label htmlFor="radio-25">1</label>
                   </div>
 
                   <div className="radioBtn">
@@ -531,7 +531,7 @@ const ReviewPage = () => {
                       value="2"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-26">2</label>
+                    <label htmlFor="radio-26">2</label>
                   </div>
                   <div className="radioBtn">
                     <input
@@ -541,7 +541,7 @@ const ReviewPage = () => {
                       value="3"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-27">3</label>
+                    <label htmlFor="radio-27">3</label>
                   </div>
                   <div className="radioBtn">
                     <input
@@ -551,7 +551,7 @@ const ReviewPage = () => {
                       value="4"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-28">4</label>
+                    <label htmlFor="radio-28">4</label>
                   </div>
                   <div className="radioBtn">
                     <input
@@ -561,7 +561,7 @@ const ReviewPage = () => {
                       value="5"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-29">5</label>
+                    <label htmlFor="radio-29">5</label>
                   </div>
                 </StRadioBtnWrap2>
                 <StRadioBtnTitle>
@@ -582,7 +582,7 @@ const ReviewPage = () => {
                       value="1"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-30">1</label>
+                    <label htmlFor="radio-30">1</label>
                   </div>
                   <div className="radioBtn">
                     <input
@@ -592,7 +592,7 @@ const ReviewPage = () => {
                       value="2"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-31">2</label>
+                    <label htmlFor="radio-31">2</label>
                   </div>
                   <div className="radioBtn">
                     <input
@@ -602,7 +602,7 @@ const ReviewPage = () => {
                       value="3"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-32">3</label>
+                    <label htmlFor="radio-32">3</label>
                   </div>
                   <div className="radioBtn">
                     <input
@@ -612,7 +612,7 @@ const ReviewPage = () => {
                       value="4"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-33">4</label>
+                    <label htmlFor="radio-33">4</label>
                   </div>
                   <div className="radioBtn">
                     <input
@@ -622,7 +622,7 @@ const ReviewPage = () => {
                       value="5"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-34">5</label>
+                    <label htmlFor="radio-34">5</label>
                   </div>
                 </StRadioBtnWrap2>
                 <StRadioBtnTitle>
@@ -643,7 +643,7 @@ const ReviewPage = () => {
                       value="1"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-35">1</label>
+                    <label htmlFor="radio-35">1</label>
                   </div>
                   <div className="radioBtn">
                     <input
@@ -653,7 +653,7 @@ const ReviewPage = () => {
                       value="2"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-36">2</label>
+                    <label htmlFor="radio-36">2</label>
                   </div>
                   <div className="radioBtn">
                     <input
@@ -663,7 +663,7 @@ const ReviewPage = () => {
                       value="3"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-37">3</label>
+                    <label htmlFor="radio-37">3</label>
                   </div>
                   <div className="radioBtn">
                     <input
@@ -673,7 +673,7 @@ const ReviewPage = () => {
                       value="4"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-38">4</label>
+                    <label htmlFor="radio-38">4</label>
                   </div>
                   <div className="radioBtn">
                     <input
@@ -683,7 +683,7 @@ const ReviewPage = () => {
                       value="5"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-39">5</label>
+                    <label htmlFor="radio-39">5</label>
                   </div>
                 </StRadioBtnWrap2>
                 <StRadioBtnTitle>
@@ -704,7 +704,7 @@ const ReviewPage = () => {
                       value="1"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-40">1</label>
+                    <label htmlFor="radio-40">1</label>
                   </div>
                   <div className="radioBtn">
                     <input
@@ -714,7 +714,7 @@ const ReviewPage = () => {
                       value="2"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-41">2</label>
+                    <label htmlFor="radio-41">2</label>
                   </div>
                   <div className="radioBtn">
                     <input
@@ -724,7 +724,7 @@ const ReviewPage = () => {
                       value="3"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-42">3</label>
+                    <label htmlFor="radio-42">3</label>
                   </div>
                   <div className="radioBtn">
                     <input
@@ -734,7 +734,7 @@ const ReviewPage = () => {
                       value="4"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-43">4</label>
+                    <label htmlFor="radio-43">4</label>
                   </div>
                   <div className="radioBtn">
                     <input
@@ -744,7 +744,7 @@ const ReviewPage = () => {
                       value="5"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-44">5</label>
+                    <label htmlFor="radio-44">5</label>
                   </div>
                 </StRadioBtnWrap2>
                 <StRadioBtnTitle>
@@ -765,7 +765,7 @@ const ReviewPage = () => {
                       value="1"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-45">1</label>
+                    <label htmlFor="radio-45">1</label>
                   </div>
                   <div className="radioBtn">
                     <input
@@ -775,7 +775,7 @@ const ReviewPage = () => {
                       value="2"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-46">2</label>
+                    <label htmlFor="radio-46">2</label>
                   </div>
                   <div className="radioBtn">
                     <input
@@ -785,7 +785,7 @@ const ReviewPage = () => {
                       value="3"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-47">3</label>
+                    <label htmlFor="radio-47">3</label>
                   </div>
                   <div className="radioBtn">
                     <input
@@ -795,7 +795,7 @@ const ReviewPage = () => {
                       value="4"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-48">4</label>
+                    <label htmlFor="radio-48">4</label>
                   </div>
                   <div className="radioBtn">
                     <input
@@ -805,7 +805,7 @@ const ReviewPage = () => {
                       value="5"
                       onChange={onChangeHandler}
                     />
-                    <label for="radio-49">5</label>
+                    <label htmlFor="radio-49">5</label>
                   </div>
                 </StRadioBtnWrap2>
                 <StRadioBtnTitle>
@@ -901,7 +901,6 @@ const StReviewWrap = styled.div`
 `;
 
 const StPostbox = styled.div`
-  border: 1px solid black;
   margin-top: 90px;
 `;
 
@@ -1095,7 +1094,6 @@ const StCommentWrap = styled.div`
   align-items: center;
   text-align: center;
   margin-bottom: 5px;
-  border: 2px solid blue;
 `;
 
 const StTitleComment = styled.div`
@@ -1110,7 +1108,6 @@ const StRadioBtnWrap2 = styled.div`
   align-items: center;
   justify-content: space-around;
   width: 400px;
-  border: 1px solid red;
 
   .radioBtn {
     font-size: 18px;
