@@ -195,7 +195,9 @@ const MainMap = () => {
       return;
     }
   };
-  console.log(positions);
+  console.log(zoomLevel);
+  console.log("positions", positions);
+  console.log("markerArray", markerArray);
   const renderItem = () => {
     if (!positions) return null;
     if (zoomLevel < 3) return null;
