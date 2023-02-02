@@ -227,7 +227,7 @@ const ReviewPage = () => {
                     (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
                   }
                 />
-                <StHomeUnit>원</StHomeUnit>
+                <StHomeUnit>만원</StHomeUnit>
               </StBasic>
               <StBasic>
                 <StBasicTitle>월세</StBasicTitle>
@@ -240,7 +240,7 @@ const ReviewPage = () => {
                     (e.target.value = e.target.value.replace(/[^0-9]/g, ""))
                   }
                 />
-                <StHomeUnit>원</StHomeUnit>
+                <StHomeUnit>만원</StHomeUnit>
               </StBasic>
             </StHomeSection>
 
