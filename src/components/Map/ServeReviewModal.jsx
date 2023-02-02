@@ -159,7 +159,7 @@ const StContainer = styled.div`
   justify-content: center;
   top: 120px;
   width: 400px;
-  height: 80.5vh;
+  height: 80vh;
   right: 0;
   z-index: 100;
   padding: 30px;
@@ -219,11 +219,10 @@ const StAverage = styled.div`
 const StDetailModal = styled.div`
   background-color: white;
   position: absolute;
-  border: 5px solid #f3f5f5;
   border-radius: 15px;
   margin-top: 5px;
   width: 400px;
-  height: 60vh;
+  height: 50vh;
   animation: DetailModal 0.3s;
   @keyframes DetailModal {
     0% {
