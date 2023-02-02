@@ -15,9 +15,14 @@ const KakaoLogin = () => {
     dispatch(__kakaoLogin(code));
   };
 
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    if (!token) return;
+    // navigate("/");
+  }, [token]);
+
   useEffect(() => {
     oAuth();
-    navigate("/");
   }, [oAuth]);
 
   return (

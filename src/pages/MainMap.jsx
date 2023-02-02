@@ -206,6 +206,7 @@ const MainMap = () => {
         {zoomLevel > 4
           ? positions?.map((el) => {
               const name = el[getOverlayAreaName(zoomLevel)];
+              if (name === "" || !name) return null;
               return (
                 <CustomOverlayMap // 커스텀 오버레이를 표시할 Container
                   key={el.estateId}
@@ -221,6 +222,7 @@ const MainMap = () => {
             })
           : 2 < zoomLevel < 5
           ? markerArray?.map((el) => {
+              if (!el.index) return null;
               return (
                 <CustomOverlayMap // 커스텀 오버레이를 표시할 Container
                   key={el.estateId}
