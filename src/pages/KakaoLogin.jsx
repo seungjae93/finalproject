@@ -23,7 +23,7 @@ const KakaoLogin = () => {
 
   useEffect(() => {
     oAuth();
-  }, [oAuth]);
+  }, []);
 
   return (
     <>
