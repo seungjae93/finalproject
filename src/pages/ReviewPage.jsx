@@ -91,7 +91,7 @@ const ReviewPage = () => {
 
       const review = formData;
       addPost(review);
-
+      window.alert("후기가 등록 되었습니다!");
       navigate("/mypage");
     }
   };
@@ -125,14 +125,14 @@ const ReviewPage = () => {
           <StButton onClick={openPostcodeHandler}>주소검색</StButton>
           <StContainer>
             {openPostcode && (
-              <div>
+              <StPostbox>
                 <DaumPostcode
                   style={{ width: "400px", height: "500px" }}
                   onComplete={handle.selectAddress} // 값을 선택할 경우 실행되는 이벤트
                   autoClose={true} // 값을 선택할 경우 사용되는 DOM을 제거하여 자동 닫힘 설정
                   defaultQuery="" // 기본적으로 입력되어있는 검색어
                 />
-              </div>
+              </StPostbox>
             )}
             <StAddressWrap>
               <StAddress>
@@ -188,6 +188,11 @@ const ReviewPage = () => {
                   name="acreage"
                   value={input.acreage}
                   onChange={onChangeHandler}
+                  onKeyDown={(e) => {
+                    if (!/^[0-9]+$/.test(e.key)) {
+                      e.preventDefault();
+                    }
+                  }}
                 />
                 <StHomeUnit>평</StHomeUnit>
               </StBasic>
@@ -220,6 +225,11 @@ const ReviewPage = () => {
                   name="deposit"
                   value={input.deposit}
                   onChange={onChangeHandler}
+                  onKeyDown={(e) => {
+                    if (!/^[0-9]+$/.test(e.key)) {
+                      e.preventDefault();
+                    }
+                  }}
                 />
                 <StHomeUnit>원</StHomeUnit>
               </StBasic>
@@ -230,6 +240,11 @@ const ReviewPage = () => {
                   name="monthly_payment"
                   value={input.monthly_payment}
                   onChange={onChangeHandler}
+                  onKeyDown={(e) => {
+                    if (!/^[0-9]+$/.test(e.key)) {
+                      e.preventDefault();
+                    }
+                  }}
                 />
                 <StHomeUnit>원</StHomeUnit>
               </StBasic>
@@ -840,9 +855,9 @@ const ReviewPage = () => {
               />
               <StImageGruop>
                 {showImages.map((image, id) => (
-                  <div key={id}>
+                  <StImageWrap key={id}>
                     <StyledImage src={image} alt={`${image}-${id}`} />
-                  </div>
+                  </StImageWrap>
                 ))}
               </StImageGruop>
             </StPicture>
@@ -883,6 +898,11 @@ export default ReviewPage;
 const StReviewWrap = styled.div`
   max-width: 1920px;
   background-color: #f3f5f5;
+`;
+
+const StPostbox = styled.div`
+  border: 1px solid black;
+  margin-top: 90px;
 `;
 
 const StReviewBox = styled.div`
@@ -1075,6 +1095,7 @@ const StCommentWrap = styled.div`
   align-items: center;
   text-align: center;
   margin-bottom: 5px;
+  border: 2px solid blue;
 `;
 
 const StTitleComment = styled.div`
@@ -1089,6 +1110,7 @@ const StRadioBtnWrap2 = styled.div`
   align-items: center;
   justify-content: space-around;
   width: 400px;
+  border: 1px solid red;
 
   .radioBtn {
     font-size: 18px;
@@ -1172,6 +1194,13 @@ const StImageGruop = styled.div`
   align-items: center;
 `;
 
+const StImageWrap = styled.div`
+  display: flex;
+  text-align: center;
+  align-items: center;
+  margin: auto;
+`;
+
 const StyledImage = styled.img`
   width: 200px;
   height: 180px;
@@ -1205,7 +1234,6 @@ const StSelectStar = styled.select`
 
 const StBut = styled.div`
   border: none;
-  /* background-color: transparent; */
   cursor: pointer;
   margin-top: 10px;
   margin-bottom: 150px;
