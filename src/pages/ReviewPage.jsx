@@ -809,9 +809,9 @@ const ReviewPage = () => {
                   </div>
                 </StRadioBtnWrap2>
                 <StRadioBtnTitle>
-                  <span>안전해요</span>
-                  <span>보통</span>
                   <span>불안해요</span>
+                  <span>보통</span>
+                  <span>안전해요</span>
                 </StRadioBtnTitle>
               </StCommentWrap>
               <StCommentWrap>

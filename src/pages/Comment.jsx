@@ -24,7 +24,8 @@ const Comment = () => {
 
   const deleteCommentCallback = async (commentId) => {
     await deleteComment(commentId);
-    queryClient.invalidateQueries(["comments", postId]);
+    alert("삭제가 완료되었습니다.");
+    queryClient.invalidateQueries(["comments"]);
   };
 
   const { mutate } = useMutation(
@@ -43,8 +44,6 @@ const Comment = () => {
 
   if (isLoading) return <h2> 로딩중 .. </h2>;
   if (isError) return <h2> Error : {error.toString()} </h2>;
-
-  console.log(data);
 
   return (
     <>

@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getCommunity } from "../../redux/api/communityApi";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { hangjungdong } from "../../components/Community/hangjungdong";
 import PostListCard from "../../components/Community/PostListCard";
 import { debounce } from "lodash";
+import { useInView } from "react-intersection-observer";
+import { getCommunity } from "../../redux/api/communityApi";
+import InfiniteScroll from "react-infinite-scroller";
 
 const PostList = () => {
   const navigate = useNavigate();
@@ -19,13 +21,34 @@ const PostList = () => {
   const [search, setSearch] = useState("");
   const [clickOrder, setClickOrder] = useState("");
 
-  const { data, error, isLoading, isError, refetch } = useQuery(
+  const { ref, inView } = useInView({
+    // ref가 화면에 나타나면 inView는 true, 아니면 false를 반환한다.
+    threshold: 0.8,
+    triggerOnce: true,
+    //API요청을 중복이 아닌 한번만 발생할 수 있게
+  });
+
+  const {
+    data,
+    refetch,
+    error,
+    isLoading,
+    isError,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery(
     ["posts"],
-    () => getCommunity(clickOrder, selected, search),
+    ({ pageParam = 1 }) =>
+      getCommunity(pageParam, clickOrder, selected, search),
     {
-      staleTime: 60000, //1분
+      getNextPageParam: (lastPage) =>
+        !lastPage.isLast ? lastPage.nextPage : undefined,
+      //API 에 요청할 때 사용될 pageParam 값을 정할 수 있다.
     }
   );
+
+  console.log(data);
 
   const HandleChange = (e) => {
     const { name, value } = e.target;
@@ -59,6 +82,12 @@ const PostList = () => {
   useEffect(() => {
     throttledRefetch();
   }, [throttledRefetch, selected, showAll, clickOrder]);
+
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [inView]);
 
   if (isLoading) return <h2> 로딩중 .. </h2>;
   if (isError) return <h2> Error : {error.toString()} </h2>;
@@ -110,12 +139,30 @@ const PostList = () => {
           <StPost onClick={onPostHandler}> 글쓰기 </StPost>
         </div>
       </StOrder>
+      <InfiniteScroll hasMore={hasNextPage} loadMore={fetchNextPage}>
+        {/* hasNextPage 다음 또는 이전 페이지가 있는지 확인 하는 속성
+      fetchNextPage 다음 페이지를 가져오기 위한 반환 속성  */}
+        <STPostCon>
+          {/* {data?.pages?.map((posts) => {
+            return <PostListCard key={`main_${posts.postId}`} posts={posts} />;
+          })} */}
+          {data?.pages?.map((page) => {
+            return page?.posts?.map((posts) => {
+              return (
+                <PostListCard key={`main_${posts.postId}`} posts={posts} />
+              );
+            });
+          })}
+        </STPostCon>
+      </InfiniteScroll>
+      <div style={{ height: "100px" }}></div>
 
-      <STPostCon>
-        {data?.posts?.map((posts) => {
-          return <PostListCard key={`main_${posts.postId}`} posts={posts} />;
-        })}
-      </STPostCon>
+      {isFetchingNextPage ? (
+        // boolean 속성이 반환되어 다음 페이지 또는 이전 페이지를 가져올 때 확인
+        <div>로딩중입니다1!!!!</div>
+      ) : (
+        <div ref={ref}></div>
+      )}
     </>
   );
 };
