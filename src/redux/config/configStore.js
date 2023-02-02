@@ -1,5 +1,5 @@
-// import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
+import user from "../modules/kakaoSlice";
 
-// const store = configureStore({});
-
-// export default store;
+const store = configureStore({ reducer: { user } });
+export default store;
