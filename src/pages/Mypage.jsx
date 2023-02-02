@@ -4,7 +4,7 @@ import GlobalStyle from "../components/styles/GlobalStyle";
 import MyCommunity from "../components/mypage/MyCommunity";
 import MyReview from "../components/mypage/MyReview";
 
-const MyPage = () => {
+const Mypage = () => {
   const email = localStorage.getItem("email");
   return (
     <>
@@ -28,7 +28,7 @@ const MyPage = () => {
   );
 };
 
-export default MyPage;
+export default Mypage;
 
 const StmyPageWrap = styled.div`
   max-width: 1920px;

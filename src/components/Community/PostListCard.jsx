@@ -15,20 +15,20 @@ const PostListCard = ({ posts }) => {
         <StContentCarrier>
           <pre> {posts?.content} </pre>
         </StContentCarrier>
-        <StBox>
-          <StName>
-            <StNickName> {posts?.email} </StNickName>
-            <div>
-              {new Date(posts.createdAt).toLocaleDateString("ko-KR", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </div>
-          </StName>
-          <div> {posts.commentsCount}개의 댓글 </div>
-        </StBox>
       </StCommunityBox>
+      <StBox>
+        <StName>
+          <StNickName> {posts?.email} </StNickName>
+          <div>
+            {new Date(posts.createdAt).toLocaleDateString("ko-KR", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </div>
+        </StName>
+        <div> {posts.commentsCount}개의 댓글 </div>
+      </StBox>
     </StCardWrapper>
   );
 };
@@ -36,6 +36,9 @@ const PostListCard = ({ posts }) => {
 export default PostListCard;
 
 const StCardWrapper = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background-color: white;
   width: 400px;
   height: 287px;
@@ -77,22 +80,24 @@ const StTitleCarrier = styled.pre`
 const StContentCarrier = styled.div`
   width: 98%;
   height: 40px;
+
   pre {
     white-space: normal;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
+    font-size: 13px;
   }
 `;
 
 const StBox = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100%;
   font-size: 13px;
-  margin-top: 18px;
   color: #737d81;
+  margin-bottom: 10px;
 `;
 
 const StName = styled.div`
