@@ -12,10 +12,10 @@ const MyReview = () => {
     getmypageReviews()
   );
 
-  const deleteHandler = (reviewId) => {
+  const deleteHandler = async (reviewId) => {
     window.alert("후기가 삭제되었습니다!");
-    deletePost(reviewId);
-    queryClient.invalidateQueries(["review"]);
+    await deletePost(reviewId);
+    queryClient.invalidateQueries(["myreview"]);
   };
 
   if (isLoading) return <h2> 로딩중 .. </h2>;
