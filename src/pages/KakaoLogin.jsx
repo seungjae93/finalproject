@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
 import { __kakaoLogin } from "../redux/modules/kakaoSlice";
 
 export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=code`;
 
 const KakaoLogin = () => {
+  const isLogin = useSelector((state) => state.login.login);
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -15,11 +16,10 @@ const KakaoLogin = () => {
     dispatch(__kakaoLogin(code));
   };
 
-  const token = localStorage.getItem("token");
   useEffect(() => {
-    if (!token) return;
+    if (!isLogin) return;
     navigate("/");
-  }, [token]);
+  }, [isLogin]);
 
   useEffect(() => {
     oAuth();
