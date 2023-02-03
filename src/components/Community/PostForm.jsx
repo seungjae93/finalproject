@@ -27,8 +27,7 @@ const PostForm = () => {
   const onHandleAddPost = (event) => {
     event.preventDefault();
     if (
-      !title.length < 2 ||
-      title.length > 50 ||
+      !title ||
       !content ||
       !selected.postLocation1 ||
       !selected.postLocation2

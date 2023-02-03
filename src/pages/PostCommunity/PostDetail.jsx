@@ -68,8 +68,9 @@ const PostDetail = () => {
               ) : null}
             </div>
           </StInfor>
-
-          <StDetailImage src={data?.post?.postImage} />
+          {data?.post?.postImage ? (
+            <StDetailImage src={data?.post?.postImage} />
+          ) : null}
 
           <StContent> {data?.post.content} </StContent>
         </StContainer>
