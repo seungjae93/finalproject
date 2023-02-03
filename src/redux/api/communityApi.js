@@ -52,7 +52,6 @@ export const updateCommunity = async (postId, formData) => {
 //댓글 get
 export const getComment = async (postid) => {
   const response = await instance.get(`/posts/${postid}/comments`);
-
   return response.data;
 };
 

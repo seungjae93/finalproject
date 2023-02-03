@@ -44,10 +44,10 @@ const PostList = () => {
       getNextPageParam: (lastPage) =>
         !lastPage.isLast ? lastPage.nextPage : undefined,
       //API 에 요청할 때 사용될 pageParam 값을 정할 수 있다.
+    },
+    {
+      staleTime: 60000,
     }
-    // {
-    //   staleTime: 60000,
-    // }
   );
 
   const HandleChange = (e) => {
