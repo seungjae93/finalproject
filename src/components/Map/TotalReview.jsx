@@ -27,12 +27,14 @@ const TotalReview = ({ estateIdData }) => {
     <>
       <StReviewContainer>
         <StAddressWrap>
-          <div className="addressName">건물명 </div>
-          <div className="addressJibun">{data?.estate?.address_jibun}</div>
-          <div className="detailModal">
+          <div className="addressName">
+            건물명
             <button className="detailModalBtn" onClick={showModal}>
               상세보기
             </button>
+          </div>
+          <div className="addressJibun">{data?.estate?.address_jibun}</div>
+          <div className="detailModal">
             {modalOpen && (
               <ServeReviewModal
                 setModalOpen={setModalOpen}
@@ -222,20 +224,22 @@ const StAddressWrap = styled.div`
   .detailModal {
     display: flex;
     justify-content: flex-end;
-    margin-right: 20px;
   }
   .detailModalBtn {
+    border: 2px solid #819608;
     display: inline;
     outline: none;
-    padding: 0px;
-    border: none;
+    margin-right: 30px;
+    border-radius: 10px;
     font-size: 1rem;
     line-height: 1.5;
-    color: #b8d60b;
+    color: #819608;
     background: none;
     cursor: pointer;
   }
   .addressName {
+    display: flex;
+    justify-content: space-between;
     font-size: 1.5rem;
     font-weight: 600;
   }
