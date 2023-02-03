@@ -31,7 +31,6 @@ const PostList = () => {
   const {
     data,
     refetch,
-    status,
     error,
     isLoading,
     isError,
