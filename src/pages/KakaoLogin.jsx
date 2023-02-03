@@ -25,11 +25,7 @@ const KakaoLogin = () => {
     oAuth();
   }, []);
 
-  return (
-    <>
-      <div> 로딩중 </div>
-    </>
-  );
+  return <>잠시만 기다려 주세요</>;
 };
 
 export default KakaoLogin;
