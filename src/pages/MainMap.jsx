@@ -405,7 +405,7 @@ const Clusterer89Txt = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   color: #ffffff;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   font-weight: 500;
 `;
 const ClustererTxt = styled.div`
@@ -416,6 +416,7 @@ const ClustererTxt = styled.div`
   color: #ffffff;
   font-size: 1.3rem;
   font-weight: 550;
+  font-family: "Pretendard";
 `;
 const StContainer = styled.div`
   width: 100%;

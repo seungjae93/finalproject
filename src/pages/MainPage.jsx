@@ -223,6 +223,7 @@ const StHomeContainer = styled.section`
   width: 100%;
   min-width: 1280px;
   height: 100%;
+  font-family: "Pretendard";
 `;
 const StTopImage = styled.div`
   display: flex;
@@ -249,9 +250,6 @@ const StTopBox = styled.div`
   margin-top: 140px;
   margin-left: 650px;
   text-align: left;
-  /* top: 300px;
-  right: 300px;
-  transform: translate(-30px, -30px); */
 
   .content1 {
     margin-top: 15px;
