@@ -11,7 +11,6 @@ ${reset};
     width: 100%;
     background-color: rgb(243 245 245);         
     font-family: "Pretendard";
-    
   }
 `;
 
