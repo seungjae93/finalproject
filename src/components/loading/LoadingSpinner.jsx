@@ -5,7 +5,6 @@ const LoadingSpinner = () => {
   return (
     <Background>
       <LoadingText>잠시만 기다려 주세요.</LoadingText>
-      {/* <img src={require("..../images/Spinner.jpg")} alt="Spinner" /> */}
     </Background>
   );
 };
