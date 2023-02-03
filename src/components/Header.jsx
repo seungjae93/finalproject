@@ -109,7 +109,6 @@ export default Header;
 const StNavbar = styled.div`
   background-color: #ffffff;
   width: 100%;
-  min-width: 900px;
   height: 80px;
   border-bottom: 1px solid #c4cbcd;
   display: flex;
