@@ -160,7 +160,7 @@ const StContainer = styled.div`
   justify-content: center;
   top: 120px;
   width: 400px;
-  height: 80.5vh;
+  height: 80.6vh;
   right: 0;
   z-index: 100;
   padding: 30px;
@@ -222,7 +222,7 @@ const StDetailModal = styled.div`
   position: absolute;
   border-radius: 15px;
   margin-top: 5px;
-  width: 400px;
+  width: 420px;
   height: 50vh;
   animation: DetailModal 0.3s;
   @keyframes DetailModal {
@@ -234,6 +234,15 @@ const StDetailModal = styled.div`
       opacity: 1;
       transform: translateZ(0);
     }
+  }
+  overflow-y: scroll;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #ccc;
   }
 `;
 
@@ -248,10 +257,18 @@ const StMonthly = styled.div`
 const StContents = styled.div`
   margin: 20px 0px 30px 0px;
   display: flex;
-  justify-content: center;
   width: 400px;
-  height: 90px;
+  height: 120px;
   gap: 5px;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #ccc;
+  }
 `;
 
 const StPictureOne = styled.img`

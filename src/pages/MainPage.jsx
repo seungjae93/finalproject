@@ -279,7 +279,7 @@ const StCenterBox = styled.div`
   justify-content: space-evenly;
   flex-direction: row;
   align-items: center;
-  width: 1300px;
+  width: 70%;
   height: 450px;
 `;
 const StCenterWrap = styled.div`
@@ -308,7 +308,7 @@ const StBottomBox = styled.div`
 const StBottomWrap = styled.div`
   display: flex;
   flex-direction: row;
-  width: 1107px;
+  width: 65%;
   height: 360px;
   margin-bottom: 20px;
   padding: 15px;
@@ -318,7 +318,8 @@ const StBottomContent = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 100%;
+  width: 65%;
+  min-width: 1100px;
   gap: 20px;
   margin-left: 20px;
 
@@ -373,7 +374,7 @@ const StFooterBox = styled.div`
   }
 `;
 const StFooterBtn = styled.div`
-  width: 1000px;
+  width: 100%;
   display: flex;
   justify-content: center;
 `;
