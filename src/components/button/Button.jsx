@@ -1,10 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-/*--------------------------------------------------------*
- *  Primitive Button
- *--------------------------------------------------------*/
-
+// Primitive Button
 const PrimitiveButton = ({ children, rightSlot, ...restProps }) => {
   return (
     <StyledButton {...restProps}>
@@ -20,10 +17,7 @@ const PrimitiveButton = ({ children, rightSlot, ...restProps }) => {
   );
 };
 
-/*--------------------------------------------------------*
- * Primary Style
- *--------------------------------------------------------*/
-
+// Primary Style
 const PrimaryButton = (props) => {
   return (
     <PrimitiveButton
@@ -35,9 +29,7 @@ const PrimaryButton = (props) => {
   );
 };
 
-/*--------------------------------------------------------*
- * Negative Style
- *--------------------------------------------------------*/
+// Negative Style
 
 const NegativeButton = (props) => {
   return (

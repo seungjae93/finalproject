@@ -8,7 +8,7 @@ const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: true } },
 });
 
-function App() {
+const App = () => {
   return (
     <>
       <QueryClientProvider client={queryClient}>
@@ -18,6 +18,6 @@ function App() {
       </QueryClientProvider>
     </>
   );
-}
+};
 
 export default App;

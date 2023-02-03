@@ -31,7 +31,6 @@ const Router = () => {
         <Route path="/:postId" element={<PostDetail />} />
         <Route path="/edit/:postId" element={<PostEdit />} />
       </Routes>
-
       <Footer />
     </BrowserRouter>
   );
