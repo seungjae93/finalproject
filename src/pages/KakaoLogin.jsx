@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
+import LoadingSpinner from "../components/loading/LoadingSpinner";
 import { __kakaoLogin } from "../redux/modules/kakaoSlice";
 import LoadingSpinner from "../components/loading/LoadingSpinner";
 
