@@ -6,7 +6,7 @@ const LoadingSpinner = () => {
   return (
     <Background>
       <img src={footerLogo} alt="footerLogo"></img>
-      <LoadingText>잠시만 기다려 주세요.</LoadingText>
+      <LoadingText>잠시만 기다려 주세요</LoadingText>
     </Background>
   );
 };
