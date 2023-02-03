@@ -69,7 +69,7 @@ const StSectionFooter = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  max-width: 1920px;
+  width: 100%;
   min-width: 900px;
   height: 200px;
   min-height: 200px;
