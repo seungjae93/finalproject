@@ -27,7 +27,8 @@ const PostForm = () => {
   const onHandleAddPost = (event) => {
     event.preventDefault();
     if (
-      !title ||
+      !title.length < 2 ||
+      title.length > 50 ||
       !content ||
       !selected.postLocation1 ||
       !selected.postLocation2
@@ -79,10 +80,9 @@ const PostForm = () => {
             <StTitleInput
               type="text"
               value={title}
-              placeholder="제목을 입력해 주세요 "
+              placeholder="제목을 입력해 주세요(50자 이내로 작성해주세요)"
               onChange={(e) => setTitle(e.target.value)}
             />
-            <StRed length={title.length}>2자 - 50자 사이로 넣어주세요</StRed>
 
             <StImageBox>
               <StUpload htmlFor="file"> + </StUpload>
@@ -111,13 +111,6 @@ const PostForm = () => {
 };
 
 export default PostForm;
-
-const StRed = styled.div`
-  display: ${({ length }) => (length > 2 && length <= 50 ? "none" : "block")};
-  color: #e74c3c;
-  font-weight: 600;
-  position: absolute;
-`;
 
 const StAddContainer = styled.div`
   margin-left: auto;

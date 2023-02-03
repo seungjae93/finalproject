@@ -31,10 +31,8 @@ const Router = () => {
         <Route path="/button" element={<FeatureButton />} />
         <Route path="/:postId" element={<PostDetail />} />
         <Route path="/edit/:postId" element={<PostEdit />} />
-
         <Route path="/123" element={<LoadingSpinner />} />
       </Routes>
-
       <Footer />
     </BrowserRouter>
   );
