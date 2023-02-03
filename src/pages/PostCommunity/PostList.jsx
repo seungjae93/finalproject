@@ -142,13 +142,19 @@ const PostList = () => {
         {/* hasNextPage 다음 또는 이전 페이지가 있는지 확인 하는 속성
       fetchNextPage 다음 페이지를 가져오기 위한 반환 속성  */}
         <STPostCon>
-          {data?.pages?.map((page) => {
-            return page?.posts?.map((posts) => {
-              return (
-                <PostListCard key={`main_${posts.postId}`} posts={posts} />
-              );
-            });
-          })}
+          {data?.pages[0]?.posts.length !== 0 ? (
+            data?.pages?.map((page) => {
+              return page?.posts?.map((posts) => {
+                return (
+                  <PostListCard key={`main_${posts.postId}`} posts={posts} />
+                );
+              });
+            })
+          ) : (
+            <>
+              <Stpost>해당 지역 게시물이 존재하지 않습니다.</Stpost>
+            </>
+          )}
         </STPostCon>
       </InfiniteScroll>
 
@@ -258,4 +264,10 @@ const StPost = styled.button`
     background-color: #a8c4e1;
     transition: 0.2s;
   }
+`;
+
+const Stpost = styled.div`
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 150px;
 `;
