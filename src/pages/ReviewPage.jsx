@@ -188,11 +188,13 @@ const ReviewPage = () => {
                   name="acreage"
                   value={input.acreage}
                   onChange={onChangeHandler}
-                  onKeyDown={(e) => {
-                    if (!/^[0-9]+$/.test(e.key)) {
-                      e.preventDefault();
-                    }
-                  }}
+                  // onKeyDown={(e) => {
+                  //   if (!/^[0-9\b]+$/.test(e.key)) {
+                  //     e.preventDefault();
+                  //   }
+                  // }}
+
+                  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
                 />
                 <StHomeUnit>평</StHomeUnit>
               </StBasic>
