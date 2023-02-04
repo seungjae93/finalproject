@@ -269,7 +269,7 @@ const MainMap = () => {
         <SearchContainer>
           <StSearch
             type="search"
-            placeholder="지역 검색하기"
+            placeholder="지역, 지하철역, 학교 검색하기"
             onKeyDown={onSubmitSearch}
             onChange={onAddressHandler}
             value={isHaveInputValue ? autoSearchKeyword : searchAddress}
