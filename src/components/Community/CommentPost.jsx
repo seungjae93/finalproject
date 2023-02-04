@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useAddComment } from "../../redux/api/communityApi";
 import { useNavigate, useParams } from "react-router";
-import { getCookie } from "../../shared/cookie";
 
 const CommentPost = () => {
   const navigate = useNavigate();
@@ -14,7 +13,7 @@ const CommentPost = () => {
 
   const onClickHandler = (event) => {
     event.preventDefault();
-    if (!getCookie("token")) {
+    if (!localStorage.getItem("token")) {
       alert("로그인을 해주세요");
       navigate("/login");
     }

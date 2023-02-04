@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getCommunity } from "../../redux/api/communityApi";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { hangjungdong } from "../../components/Community/hangjungdong";
 import PostListCard from "../../components/Community/PostListCard";
 import { debounce } from "lodash";
+import { useInView } from "react-intersection-observer";
+import { getCommunity } from "../../redux/api/communityApi";
+import InfiniteScroll from "react-infinite-scroller";
 
 const PostList = () => {
   const navigate = useNavigate();
@@ -19,11 +21,32 @@ const PostList = () => {
   const [search, setSearch] = useState("");
   const [clickOrder, setClickOrder] = useState("");
 
-  const { data, error, isLoading, isError, refetch } = useQuery(
-    ["posts"],
-    () => getCommunity(clickOrder, selected, search),
+  const { ref, inView } = useInView({
+    // ref가 화면에 나타나면 inView는 true, 아니면 false를 반환한다.
+    threshold: 0.2,
+    triggerOnce: true,
+    //API요청을 중복이 아닌 한번만 발생할 수 있게
+  });
+
+  const {
+    data,
+    refetch,
+    error,
+    isLoading,
+    isError,
+    fetchNextPage,
+    hasNextPage,
+  } = useInfiniteQuery(
+    ["posts", clickOrder],
+    ({ pageParam = 1 }) =>
+      getCommunity(pageParam, clickOrder, selected, search),
     {
-      staleTime: 60000, //1분
+      getNextPageParam: (lastPage) =>
+        !lastPage.isLast ? lastPage.nextPage : undefined,
+      //API 에 요청할 때 사용될 pageParam 값을 정할 수 있다.
+    },
+    {
+      staleTime: 60000,
     }
   );
 
@@ -59,6 +82,11 @@ const PostList = () => {
   useEffect(() => {
     throttledRefetch();
   }, [throttledRefetch, selected, showAll, clickOrder]);
+
+  useEffect(() => {
+    if (inView) {
+    }
+  }, [inView]);
 
   if (isLoading) return <h2> 로딩중 .. </h2>;
   if (isError) return <h2> Error : {error.toString()} </h2>;
@@ -110,12 +138,27 @@ const PostList = () => {
           <StPost onClick={onPostHandler}> 글쓰기 </StPost>
         </div>
       </StOrder>
+      <InfiniteScroll hasMore={hasNextPage} loadMore={fetchNextPage}>
+        {/* hasNextPage 다음 또는 이전 페이지가 있는지 확인 하는 속성
+      fetchNextPage 다음 페이지를 가져오기 위한 반환 속성  */}
+        <STPostCon>
+          {data?.pages[0]?.posts.length !== 0 ? (
+            data?.pages?.map((page) => {
+              return page?.posts?.map((posts) => {
+                return (
+                  <PostListCard key={`main_${posts.postId}`} posts={posts} />
+                );
+              });
+            })
+          ) : (
+            <>
+              <Stpost>해당 지역 게시물이 존재하지 않습니다.</Stpost>
+            </>
+          )}
+        </STPostCon>
+      </InfiniteScroll>
 
-      <STPostCon>
-        {data?.posts?.map((posts) => {
-          return <PostListCard key={`main_${posts.postId}`} posts={posts} />;
-        })}
-      </STPostCon>
+      <div style={{ height: "100px" }} ref={ref}></div>
     </>
   );
 };
@@ -221,4 +264,10 @@ const StPost = styled.button`
     background-color: #a8c4e1;
     transition: 0.2s;
   }
+`;
+
+const Stpost = styled.div`
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 150px;
 `;

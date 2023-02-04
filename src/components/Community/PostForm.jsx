@@ -79,7 +79,7 @@ const PostForm = () => {
             <StTitleInput
               type="text"
               value={title}
-              placeholder="제목을 입력해 주세요 "
+              placeholder="제목을 입력해 주세요(50자 이내로 작성해주세요)"
               onChange={(e) => setTitle(e.target.value)}
             />
 

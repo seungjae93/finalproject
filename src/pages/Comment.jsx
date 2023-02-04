@@ -24,7 +24,8 @@ const Comment = () => {
 
   const deleteCommentCallback = async (commentId) => {
     await deleteComment(commentId);
-    queryClient.invalidateQueries(["comments", postId]);
+    alert("삭제가 완료되었습니다.");
+    queryClient.invalidateQueries(["comments"]);
   };
 
   const { mutate } = useMutation(
@@ -43,8 +44,6 @@ const Comment = () => {
 
   if (isLoading) return <h2> 로딩중 .. </h2>;
   if (isError) return <h2> Error : {error.toString()} </h2>;
-
-  console.log(data);
 
   return (
     <>
@@ -141,6 +140,9 @@ const StCount = styled.div`
 `;
 
 const StCommentlist = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   background-color: #f0f0f0;
   width: 100%;
   height: 90px;
@@ -159,8 +161,7 @@ const StCommentBut = styled.div`
   display: flex;
   align-items: center;
   font-size: 11px;
-  margin-top: 15px;
-  margin-left: 20px;
+  margin: 0 0 0 15px;
 `;
 
 const StNickDate = styled.div`

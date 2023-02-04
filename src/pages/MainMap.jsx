@@ -16,7 +16,7 @@ const { kakao } = window;
 const MainMap = () => {
   const [state, setState] = useState({
     // 지도의 초기 위치
-    center: { lat: 36.7738248327742, lng: 127.05384284728 },
+    center: { lat: 37.5472661928352, lng: 127.068276018078 },
     // 지도 위치 변경시 panto를 이용할지(부드럽게 이동)
     isPanto: true,
   });
@@ -32,7 +32,7 @@ const MainMap = () => {
   const scrollRef = useRef(null);
 
   //지도 레벨
-  const [zoomLevel, setZoomLevel] = useState(9.5);
+  const [zoomLevel, setZoomLevel] = useState(6);
 
   //서버에서 받는 지도 좌표
   const [positions, setPositions] = useState();
@@ -204,6 +204,7 @@ const MainMap = () => {
         {zoomLevel > 4
           ? positions?.map((el) => {
               const name = el[getOverlayAreaName(zoomLevel)];
+              if (name === "" || !name) return null;
               return (
                 <CustomOverlayMap // 커스텀 오버레이를 표시할 Container
                   key={el.estateId}
@@ -219,6 +220,7 @@ const MainMap = () => {
             })
           : 2 < zoomLevel < 5
           ? markerArray?.map((el) => {
+              if (!el.index) return null;
               return (
                 <CustomOverlayMap // 커스텀 오버레이를 표시할 Container
                   key={el.estateId}
@@ -259,9 +261,6 @@ const MainMap = () => {
     }
   }, [zoomLevel, positions]);
 
-  console.log(zoomLevel);
-  console.log("markerArray", markerArray);
-  console.log("positions", positions);
   useEffect(() => {
     /* 현재 보이는 위치에 대한 좌표 값을 받아와주는 부분 */
     const mapObject = mapRef.current;
@@ -298,7 +297,7 @@ const MainMap = () => {
                   return (
                     <AutoSearchData
                       isFocus={dropDownDataIndex === index ? true : false}
-                      key={searchData.index}
+                      key={`map-main-${index}`}
                       onClick={() => clickDropDownItem(el)}
                       onMouseOver={() =>
                         setDropDownDataIndex(dropDownDataIndex)
@@ -339,7 +338,7 @@ const MainMap = () => {
               }}
               ref={mapRef}
               // 지도의 확대 레벨
-              level={9}
+              level={6}
               maxLevel={11}
               onZoomChanged={(map) => setZoomLevel(map.getLevel())}
               onDragEnd={(map) => {
@@ -406,7 +405,7 @@ const Clusterer89Txt = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   color: #ffffff;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   font-weight: 500;
 `;
 const ClustererTxt = styled.div`
@@ -417,6 +416,7 @@ const ClustererTxt = styled.div`
   color: #ffffff;
   font-size: 1.3rem;
   font-weight: 550;
+  font-family: "Pretendard";
 `;
 const StContainer = styled.div`
   width: 100%;

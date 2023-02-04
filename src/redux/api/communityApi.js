@@ -2,13 +2,12 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { instance } from "./instance";
 
 //get(지역별, 무한스크롤, 포스트순서, 검색)
-export const getCommunity = async (clickOrder, selected, search) => {
+export const getCommunity = async (pageParam, clickOrder, selected, search) => {
   const response = await instance.get(
-    `/posts?postLocation1=${selected.postLocation1}&postLocation2=${
-      selected.postLocation2
-    }&page=${""}&type=${clickOrder}&search=${search}`
+    `/posts?postLocation1=${selected.postLocation1}&postLocation2=${selected.postLocation2}&page=${pageParam}&type=${clickOrder}&search=${search}`
   );
-  return response.data;
+  const { posts, isLast } = response.data;
+  return { posts, nextPage: pageParam + 1, isLast };
 };
 
 //post
@@ -53,7 +52,6 @@ export const updateCommunity = async (postId, formData) => {
 //댓글 get
 export const getComment = async (postid) => {
   const response = await instance.get(`/posts/${postid}/comments`);
-
   return response.data;
 };
 

@@ -108,16 +108,15 @@ export default Header;
 
 const StNavbar = styled.div`
   background-color: #ffffff;
-  max-width: 1920px;
-  min-width: 900px;
+  width: 100%;
   height: 80px;
   border-bottom: 1px solid #c4cbcd;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Pretendard";
   .header {
-    width: 1600px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-around;

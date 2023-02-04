@@ -223,6 +223,7 @@ const StHomeContainer = styled.section`
   width: 100%;
   min-width: 1280px;
   height: 100%;
+  font-family: "Pretendard";
 `;
 const StTopImage = styled.div`
   display: flex;
@@ -249,9 +250,6 @@ const StTopBox = styled.div`
   margin-top: 140px;
   margin-left: 650px;
   text-align: left;
-  /* top: 300px;
-  right: 300px;
-  transform: translate(-30px, -30px); */
 
   .content1 {
     margin-top: 15px;
@@ -281,7 +279,7 @@ const StCenterBox = styled.div`
   justify-content: space-evenly;
   flex-direction: row;
   align-items: center;
-  width: 1300px;
+  width: 70%;
   height: 450px;
 `;
 const StCenterWrap = styled.div`
@@ -310,7 +308,7 @@ const StBottomBox = styled.div`
 const StBottomWrap = styled.div`
   display: flex;
   flex-direction: row;
-  width: 1107px;
+  width: 65%;
   height: 360px;
   margin-bottom: 20px;
   padding: 15px;
@@ -320,7 +318,7 @@ const StBottomContent = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 100%;
+  width: 65%;
   gap: 20px;
   margin-left: 20px;
 
@@ -351,9 +349,10 @@ const StBottomContent = styled.div`
     cursor: pointer;
   }
 `;
+
 const StFooterBox = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   align-content: center;
   justify-content: center;
   flex-direction: column;
@@ -375,7 +374,7 @@ const StFooterBox = styled.div`
   }
 `;
 const StFooterBtn = styled.div`
-  width: 1000px;
+  width: 100%;
   display: flex;
   justify-content: center;
 `;

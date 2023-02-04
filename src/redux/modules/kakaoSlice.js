@@ -32,19 +32,13 @@ export const __kakaoLogout = async () => {
 
 const initialState = {
   login: false,
-  isLoading: false,
   error: null,
-  errorMessage: "",
 };
 
 const kakaoSlice = createSlice({
   name: "kakao",
   initialState,
-  reducers: {
-    loginCheck: (state, action) => {
-      state.login = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       //로그인
@@ -60,5 +54,5 @@ const kakaoSlice = createSlice({
       });
   },
 });
-export const { loginCheck } = kakaoSlice.actions;
+
 export default kakaoSlice.reducer;
