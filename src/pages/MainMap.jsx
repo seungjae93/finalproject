@@ -49,6 +49,7 @@ const MainMap = () => {
   //검색어 받아오는 로직
   const onAddressHandler = throttle(async (e) => {
     const { value } = e.target;
+    console.log(value);
     setSearchAddress(value);
     try {
       const response = await axios.get(
@@ -60,8 +61,9 @@ const MainMap = () => {
 
       const { data } = response?.data;
       setSearchData(data);
+      console.log(data);
     } catch (error) {}
-  }, 700);
+  }, 1000);
 
   //검색어 클릭시 input값 변환
   const clickDropDownItem = (el) => {
@@ -96,6 +98,8 @@ const MainMap = () => {
     }
   }, 200);
 
+  console.log("positions", positions);
+  console.log("markerArray", markerArray);
   //장소 검색 객체 생성
   const ps = new kakao.maps.services.Places();
 
@@ -197,6 +201,7 @@ const MainMap = () => {
                   {/* 커스텀 오버레이에 표시할 내용입니다 */}
                   <ClustererImg>
                     <img src={clusterer89} alt="clusterer89" />
+                    <Clusterer89Index>{el.review}</Clusterer89Index>
                     <Clusterer89Txt>{name}</Clusterer89Txt>
                   </ClustererImg>
                 </CustomOverlayMap>
@@ -307,7 +312,7 @@ const MainMap = () => {
               <StEmptyContainer>
                 <img src={logoGray} alt="logoGray" />
                 <div>검색창을 이용해주세요</div>
-                <div>마커를 클릭하면 정보가 나와요</div>
+                <div>마커를 클릭하면 정보가 나와요.</div>
               </StEmptyContainer>
             )}
           </StReviewContainer>
@@ -383,14 +388,23 @@ const ClustererImg = styled.div`
   background-size: cover;
   position: relative;
 `;
+const Clusterer89Index = styled.div`
+  position: absolute;
+  top: 45%;
+  left: 18%;
+  transform: translate(-50%, -50%);
+  color: #515e00;
+  font-size: 0.9rem;
+  font-weight: 600;
+`;
 const Clusterer89Txt = styled.div`
   position: absolute;
   top: 45%;
-  left: 50%;
+  left: 60%;
   transform: translate(-50%, -50%);
   color: #ffffff;
   font-size: 0.7rem;
-  font-weight: 500;
+  font-weight: 550;
 `;
 const ClustererTxt = styled.div`
   position: absolute;
