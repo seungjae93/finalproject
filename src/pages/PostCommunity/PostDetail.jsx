@@ -13,8 +13,6 @@ const PostDetail = () => {
     detailCommunity(postId)
   );
 
-  console.log(data);
-
   const email = localStorage.getItem("email");
 
   const deleteCommunityCallback = async (postId) => {

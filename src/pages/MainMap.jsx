@@ -78,22 +78,6 @@ const MainMap = () => {
     if (e.key === Enter) {
       onSearchHandler();
     }
-    // if (searchData.length > 0) {
-    //   switch (e.key) {
-    //     case ArrowDown:
-    //       setDropDownDataIndex(dropDownDataIndex + 1);
-    //       if (inputRef.current?.childElementCount === dropDownDataIndex + 1)
-    //         setDropDownDataIndex(0);
-    //       break;
-    //     case ArrowUp:
-    //       setDropDownDataIndex(dropDownDataIndex - 1);
-    //       if (dropDownDataIndex <= 0) {
-    //         searchData([]);
-    //         setDropDownDataIndex(-1);
-    //       }
-    //       break;
-    //   }
-    // }
 
     if (e.key === ArrowDown) {
       setDropDownDataIndex(dropDownDataIndex + 1);

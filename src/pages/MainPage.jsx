@@ -276,11 +276,12 @@ const StTopButton = styled.div`
 //Review
 const StCenterBox = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   flex-direction: row;
   align-items: center;
   width: 70%;
   height: 450px;
+  gap: 30px;
 `;
 const StCenterWrap = styled.div`
   display: flex;
