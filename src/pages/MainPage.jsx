@@ -319,7 +319,6 @@ const StBottomContent = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 65%;
-  min-width: 1100px;
   gap: 20px;
   margin-left: 20px;
 
@@ -350,9 +349,10 @@ const StBottomContent = styled.div`
     cursor: pointer;
   }
 `;
+
 const StFooterBox = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   align-content: center;
   justify-content: center;
   flex-direction: column;
