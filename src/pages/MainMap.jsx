@@ -306,8 +306,8 @@ const MainMap = () => {
             ) : (
               <StEmptyContainer>
                 <img src={logoGray} alt="logoGray" />
-                <div>지역, 지하철역, 학교</div>
-                <div>검색창을 이용해 검색해주세요.</div>
+                <div>검색창을 이용해주세요</div>
+                <div>마커를 클릭하면 정보가 나와요</div>
               </StEmptyContainer>
             )}
           </StReviewContainer>
