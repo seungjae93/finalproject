@@ -306,8 +306,8 @@ const MainMap = () => {
             ) : (
               <StEmptyContainer>
                 <img src={logoGray} alt="logoGray" />
-                <div>조건에 맞는 방이 없습니다.</div>
-                <div>지도를 이동해 검색해주세요.</div>
+                <div>지역, 지하철역, 학교</div>
+                <div>검색창을 이용해 검색해주세요.</div>
               </StEmptyContainer>
             )}
           </StReviewContainer>
