@@ -49,7 +49,6 @@ const MainMap = () => {
   //검색어 받아오는 로직
   const onAddressHandler = throttle(async (e) => {
     const { value } = e.target;
-    console.log(value);
     setSearchAddress(value);
     try {
       const response = await axios.get(
@@ -61,7 +60,6 @@ const MainMap = () => {
 
       const { data } = response?.data;
       setSearchData(data);
-      console.log(data);
     } catch (error) {}
   }, 1000);
 
@@ -98,8 +96,6 @@ const MainMap = () => {
     }
   }, 200);
 
-  console.log("positions", positions);
-  console.log("markerArray", markerArray);
   //장소 검색 객체 생성
   const ps = new kakao.maps.services.Places();
 
