@@ -111,8 +111,8 @@ const MainPage = () => {
                   <CgChevronRight
                     style={{
                       color: "#819608",
-                      width: "14px",
-                      height: "14px",
+                      width: "15px",
+                      height: "15px",
                     }}
                   />
                 </button>
@@ -141,8 +141,8 @@ const MainPage = () => {
                   <CgChevronRight
                     style={{
                       color: "#819608",
-                      width: "14px",
-                      height: "14px",
+                      width: "15px",
+                      height: "15px",
                     }}
                   />
                 </button>
@@ -174,8 +174,8 @@ const MainPage = () => {
                   <CgChevronRight
                     style={{
                       color: "#819608",
-                      width: "14px",
-                      height: "14px",
+                      width: "15px",
+                      height: "15px",
                     }}
                   />
                 </button>
@@ -184,16 +184,18 @@ const MainPage = () => {
           </StBottomWrap>
         </StBottomBox>
         <StFooterBox>
-          <div className="footerContentTitle">
-            이웃들과 주거 관련 문제를 논의해요.
-          </div>
-          <div className="footerContent">
-            <div className="footerContentMargin">
-              마음고생이 많은 법적 분쟁 부터 집안일을 도와줄 사소한 일상의
-              팁까지, 이집은 사랑방에서 모두 모여앉아 이야기꽃을 피워요.
+          <StFooterWrap>
+            <div className="footerContentTitle">
+              이웃들과 주거 관련 문제를 논의해요.
             </div>
-            <div> 도란도란 이야기 하다보면 동네의 정을 느낄 수 있어요.</div>
-          </div>
+            <div className="footerContent">
+              <div className="footerContentMargin">
+                마음고생이 많은 법적 분쟁 부터 집안일을 도와줄 사소한 일상의
+                팁까지, 이집은 사랑방에서 모두 모여앉아 이야기꽃을 피워요.
+              </div>
+              <div> 도란도란 이야기 하다보면 동네의 정을 느낄 수 있어요.</div>
+            </div>
+          </StFooterWrap>
           <StFooterBtn>
             <Button.Primary
               size="large"
@@ -279,7 +281,7 @@ const StCenterBox = styled.div`
   justify-content: center;
   flex-direction: row;
   align-items: center;
-  width: 70%;
+  width: 1919px;
   height: 450px;
   gap: 30px;
 `;
@@ -309,8 +311,8 @@ const StBottomBox = styled.div`
 const StBottomWrap = styled.div`
   display: flex;
   flex-direction: row;
-  width: 65%;
-  height: 360px;
+  width: 1192px;
+  height: 380px;
   margin-bottom: 20px;
   padding: 15px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 10px 15px;
@@ -324,11 +326,11 @@ const StBottomContent = styled.div`
   margin-left: 20px;
 
   .bottomContentTitle {
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: 24px;
+    font-weight: bold;
   }
   .bottomContent {
-    font-size: 1rem;
+    font-size: 18px;
   }
   .bottomContentMargin {
     margin-bottom: 15px;
@@ -343,7 +345,7 @@ const StBottomContent = styled.div`
     margin-right: 20px;
     border: none;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 16px;
     line-height: 1.5;
     color: #819608;
     background: none;
@@ -354,15 +356,21 @@ const StBottomContent = styled.div`
 const StFooterBox = styled.div`
   display: flex;
   align-items: center;
-  align-content: center;
   justify-content: center;
   flex-direction: column;
-  flex-wrap: wrap;
   width: 100%;
   height: 300px;
   background-color: #d7dbdc;
   margin-top: 50px;
-  gap: 20px;
+`;
+const StFooterWrap = styled.div`
+  width: 790px;
+  height: 190px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 25px;
   .footerContentTitle {
     font-size: 1.2rem;
     font-weight: 600;
@@ -371,7 +379,7 @@ const StFooterBox = styled.div`
     font-size: 1rem;
   }
   .footerContentMargin {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
 `;
 const StFooterBtn = styled.div`
