@@ -37,7 +37,7 @@ const Header = () => {
     navigate("/login");
   };
 
-  const onCommentHanler = () => {
+  const onCommentHandler = () => {
     if (!userStatus) {
       alert("로그인을 해주세요");
       navigate("/login");
@@ -69,7 +69,7 @@ const Header = () => {
               지도
             </StNavbarMenuItem>
 
-            <StNavbarMenuItem onClick={onCommentHanler}>
+            <StNavbarMenuItem onClick={onCommentHandler}>
               후기작성
             </StNavbarMenuItem>
 
