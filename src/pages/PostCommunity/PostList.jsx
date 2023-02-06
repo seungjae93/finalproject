@@ -8,6 +8,7 @@ import { debounce } from "lodash";
 import { useInView } from "react-intersection-observer";
 import { getCommunity } from "../../redux/api/communityApi";
 import InfiniteScroll from "react-infinite-scroller";
+import { SeletedOne } from "../../components/Community/Selected";
 
 const PostList = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const PostList = () => {
 
   const { ref, inView } = useInView({
     // ref가 화면에 나타나면 inView는 true, 아니면 false를 반환한다.
-    threshold: 0.2,
+    threshold: 0.9,
     triggerOnce: true,
     //API요청을 중복이 아닌 한번만 발생할 수 있게
   });
@@ -93,40 +94,16 @@ const PostList = () => {
 
   return (
     <>
-      <StSeleteBox>
-        <StSelete>
-          <div>
-            <StSeleteAll onClick={onHandleAllView}>모든 지역</StSeleteAll>
-            <StSeleteR name="postLocation1" onChange={HandleChange}>
-              <option value="">시,도 선택</option>
-              {postLocation1.map((el) => (
-                <option key={el.postLocation1} value={el.postLocation1}>
-                  {el.codeNm}
-                </option>
-              ))}
-            </StSeleteR>
-            <StSeleteL name="postLocation2" onChange={HandleChange}>
-              <option value="">구,군 선택</option>
-              {postLocation2
-                .filter((el) => el.postLocation1 === selected.postLocation1)
-                .map((el) => (
-                  <option key={el.postLocation2} value={el.codeNm}>
-                    {el.codeNm}
-                  </option>
-                ))}
-            </StSeleteL>
-          </div>
-          <StSearch
-            type="text"
-            value={search}
-            placeholder="검색하기"
-            onChange={(e) => {
-              setSearch(e.target.value);
-              throttledRefetch();
-            }}
-          />
-        </StSelete>
-      </StSeleteBox>
+      <SeletedOne
+        onHandleAllView={onHandleAllView}
+        HandleChange={HandleChange}
+        postLocation1={postLocation1}
+        postLocation2={postLocation2}
+        selected={selected}
+        search={search}
+        setSearch={setSearch}
+        throttledRefetch={throttledRefetch}
+      />
 
       <StOrder>
         <div>
@@ -152,7 +129,7 @@ const PostList = () => {
             })
           ) : (
             <>
-              <Stpost>해당 지역 게시물이 존재하지 않습니다.</Stpost>
+              <StNonePost>해당 지역 게시물이 존재하지 않습니다.</StNonePost>
             </>
           )}
         </STPostCon>
@@ -165,69 +142,8 @@ const PostList = () => {
 
 export default PostList;
 
-const StSeleteBox = styled.div`
-  display: flex;
-  justify-content: center;
-  justify-content: space-around;
-  align-items: center;
-  background-color: #f0f0f0;
-  height: 50px;
-  min-width: 900px;
-`;
-
-const StSeleteAll = styled.button`
-  background-color: white;
-  border: 2px solid #c4cbcd;
-  text-align: center;
-  font-size: 16px;
-  width: 180px;
-  height: 30px;
-  border-radius: 10px;
-  margin-right: 20px;
-  cursor: pointer;
-`;
-
-const StSelete = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 1250px;
-  height: 50px;
-  border-bottom: 3px solid #c4cbcd;
-`;
-
-const StSeleteR = styled.select`
-  border: 2px solid #a6b2b9;
-  text-align: center;
-  font-size: 16px;
-  width: 180px;
-  height: 30px;
-  border-radius: 10px;
-  margin-right: 20px;
-  cursor: pointer;
-`;
-
-const StSeleteL = styled.select`
-  border: 2px solid #a6b2b9;
-  text-align: center;
-  font-size: 16px;
-  width: 180px;
-  height: 30px;
-  border-radius: 10px;
-  cursor: pointer;
-`;
-
-const StSearch = styled.input`
-  border: 2px solid #a6b2b9;
-  width: 250px;
-  height: 30px;
-  border-radius: 10px;
-`;
-
 const STPostCon = styled.div`
   display: flex;
-  justify-content: center;
-  justify-content: space-around;
   flex-wrap: wrap;
   margin-left: auto;
   margin-right: auto;
@@ -266,7 +182,10 @@ const StPost = styled.button`
   }
 `;
 
-const Stpost = styled.div`
+const StNonePost = styled.div`
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
   font-size: 25px;
   font-weight: bold;
   margin-top: 150px;

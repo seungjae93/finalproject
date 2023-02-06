@@ -41,7 +41,6 @@ const kakaoSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      //로그인
       .addCase(__kakaoLogin.pending, (state) => {
         state.isLoading = true;
       })

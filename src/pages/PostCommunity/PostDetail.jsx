@@ -4,6 +4,10 @@ import { useNavigate, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { deleteCommunity, detailCommunity } from "../../redux/api/communityApi";
 import Comment from "../Comment";
+import {
+  NextPost,
+  PreviousPost,
+} from "../../components/Community/NextPreviousPost";
 
 const PostDetail = () => {
   const navigate = useNavigate();
@@ -12,8 +16,6 @@ const PostDetail = () => {
   const { isLoading, isError, error, data } = useQuery(["posts", postId], () =>
     detailCommunity(postId)
   );
-
-  console.log(data);
 
   const email = localStorage.getItem("email");
 
@@ -82,28 +84,17 @@ const PostDetail = () => {
         <Comment />
 
         {data.post.nextPostTitle ? (
-          <StNextPrevious>
-            <StNext onClick={onNext}>
-              <div>다음글 |</div>
-              <StTitleVeiw>{data.post.nextPostTitle} </StTitleVeiw>
-            </StNext>
-          </StNextPrevious>
+          <NextPost onNext={onNext} data={data} />
         ) : null}
 
         <div style={{ height: "10px" }}></div>
 
         {data.post.previoustPostTitle ? (
-          <StNextPrevious>
-            <StNext onClick={onPrevious}>
-              <div>이전글 |</div>
-              <StTitleVeiw>{data.post.previoustPostTitle} </StTitleVeiw>
-            </StNext>
-          </StNextPrevious>
+          <PreviousPost onPrevious={onPrevious} data={data} />
         ) : null}
 
         <div style={{ height: "20px" }}></div>
       </StCommentBox>
-      <div style={{ height: "100px" }}></div>
     </>
   );
 };
@@ -158,13 +149,16 @@ const StDate = styled.div`
 `;
 
 const StDetailImage = styled.img`
-  border: none;
+  display: flex;
   border-radius: 10px;
-  margin-top: 30px;
-  width: 100%;
-  height: 459px;
+  margin: 30px 0 30px 0;
+  margin-right: auto;
+  margin-left: auto;
+  width: 65%;
+  height: 15%;
 `;
-
+// width: 100%;
+// height: 459px;
 const StContent = styled.pre`
   margin: 20px 0 10px 0;
   font-size: 16px;
@@ -186,26 +180,4 @@ const StCommentBox = styled.div`
   margin-right: auto;
   background-color: white;
   width: 1254px;
-`;
-
-const StNextPrevious = styled.div`
-  background-color: #f3f5f5;
-  height: 30px;
-  width: 70%;
-  margin-left: auto;
-  margin-right: auto;
-`;
-
-const StNext = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f3f5f5;
-  border: none;
-  font-size: 15px;
-  cursor: pointer;
-`;
-
-const StTitleVeiw = styled.div`
-  margin-left: 15px;
 `;

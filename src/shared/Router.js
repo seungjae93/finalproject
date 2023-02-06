@@ -13,11 +13,13 @@ import PostForm from "../components/Community/PostForm";
 import PostDetail from "../pages/PostCommunity/PostDetail";
 import PostEdit from "../pages/PostCommunity/PostEdit";
 import FeatureButton from "../pages/Button";
+import ScrollToTop from "../components/ScrollToTop";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Header />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/map" element={<MainMap />} />
