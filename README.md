@@ -5,8 +5,9 @@
 ## 📝 목차
 
 [1. 프로젝트 소개](#프로젝트-소개)<br>
-[2. 주요 기능](#주요기능)<br>
+[2. 주요기능](#주요기능)<br>
 [3. STACK](#STACK)<br>
+[4. 팀원소개](#팀원소개)<br>
 
 <!-- [5. 기술적 의사결정](#기술적-의사결정)<br>
 [6. 팀 구성](#팀-구성)<br> -->
@@ -37,4 +38,11 @@
 
 ### 💻 STACK
 
-<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/ReduxToolkit-764ABC?style=for-the-badge&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=white"> <img src="https://img.shields.io/badge/ReactQuery-FF4154?style=for-the-badge&logo=ReactQuery&logoColor=white"> <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"><img src="https://img.shields.io/badge/Kakao API-FFCD00?style=for-the-badge&logo=Kakao&logoColor=white"><img src="https://img.shields.io/badge/AmazonS3-569A31?style=for-the-badge&logo=Amazon-S3&logoColor=white">
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/ReduxToolkit-764ABC?style=for-the-badge&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=white"> <img src="https://img.shields.io/badge/ReactQuery-FF4154?style=for-the-badge&logo=ReactQuery&logoColor=white"> <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"> <img src="https://img.shields.io/badge/Kakao API-FFCD00?style=for-the-badge&logo=Kakao&logoColor=white"> <img src="https://img.shields.io/badge/AmazonS3-569A31?style=for-the-badge&logo=Amazon-S3&logoColor=white">
+
+### 👪 팀원소개
+
+|              Name(Github)               | Position | Role                                                          |
+| :-------------------------------------: | :------- | ------------------------------------------------------------- |
+| [이승재](https://github.com/seungjae93) | FE(VL)   | - 지도 페이지<br> - 메인 페이지<br>                           |
+|  [조민욱](https://github.com/jominuk)   | FE       | - 커뮤니티 CRUD<br> - 댓글 CRUD <br> - 소셜 로그인(kakao)<br> |
