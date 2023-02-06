@@ -38,9 +38,6 @@ const PostEdit = () => {
           postLocation2: post.postLocation2,
         });
       },
-      onError: (error) => {
-        console.log(error);
-      },
     }
   );
 

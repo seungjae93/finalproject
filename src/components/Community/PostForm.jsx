@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useAddCommunity } from "../../redux/api/communityApi";
 import { hangjungdong } from "./hangjungdong";
+import { Selected } from "./Selected";
 
 const PostForm = () => {
   const navigate = useNavigate();
@@ -55,26 +56,12 @@ const PostForm = () => {
       <StAddContainer>
         <StAddBox>
           <StForm onSubmit={onHandleAddPost}>
-            <StSeleteBox>
-              <StSeleteR name="postLocation1" onChange={HandleChange}>
-                <StOption value="">시,도 선택</StOption>
-                {postLocation1.map((el) => (
-                  <StOption key={el.postLocation1} value={el.postLocation1}>
-                    {el.codeNm}
-                  </StOption>
-                ))}
-              </StSeleteR>
-              <StSeleteL name="postLocation2" onChange={HandleChange}>
-                <StOption value="">구,군 선택</StOption>
-                {postLocation2
-                  .filter((el) => el.postLocation1 === selected.postLocation1)
-                  .map((el) => (
-                    <StOption key={el.postLocation2} value={el.codeNm}>
-                      {el.codeNm}
-                    </StOption>
-                  ))}
-              </StSeleteL>
-            </StSeleteBox>
+            <Selected
+              HandleChange={HandleChange}
+              postLocation1={postLocation1}
+              postLocation2={postLocation2}
+              selected={selected}
+            />
 
             <StTitleInput
               type="text"
@@ -130,39 +117,11 @@ const StForm = styled.form`
   flex-direction: column;
 `;
 
-const StSeleteBox = styled.div`
-  width: 70%;
-`;
-
-const StSeleteR = styled.select`
-  border: 2px solid #a6b2b9;
-  text-align: center;
-  font-size: 16px;
-  width: 200px;
-  height: 40px;
-  border-radius: 8px;
-  margin-right: 20px;
-`;
-
-const StSeleteL = styled.select`
-  border: 2px solid #a6b2b9;
-  text-align: center;
-  font-size: 16px;
-  width: 200px;
-  height: 40px;
-  border-radius: 8px;
-`;
-
-const StOption = styled.option`
-  border: none;
-  border: 2px solid #a6b2b9;
-`;
-
 const StTitleInput = styled.input`
   border: 2px solid #a6b2b9;
   border-radius: 8px;
   width: 70%;
-  height: 50px;
+  height: 40px;
   margin: 20px 0 20px 0;
   font-size: 20px;
 

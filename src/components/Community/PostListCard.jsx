@@ -44,7 +44,7 @@ const StCardWrapper = styled(Link)`
   height: 287px;
   border: 0px solid black;
   border-radius: 10px;
-  margin: 20px 0 0 10px;
+  margin: 10px 0 0 10px;
   z-index: 900px;
   box-shadow: 0px 1px 5px 1px #dddddd;
   text-decoration-line: none;
@@ -55,8 +55,12 @@ const StCardWrapper = styled(Link)`
   }
 `;
 
-const StImageCarrier = styled.img`
-  width: 400px;
+const StImageCarrier = styled.div`
+  background-image: url(${(props) => props.src});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 100%;
   height: 166px;
   border: none;
   border-radius: 10px 10px 0 0;
