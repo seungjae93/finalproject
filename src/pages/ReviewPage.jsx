@@ -6,6 +6,7 @@ import { useAddPost } from "../redux/api/reviewApi";
 import Button from "../components/button/Button";
 import useInputItem from "../hooks/useInputItem";
 import DaumPostcode from "react-daum-postcode";
+import { Radio } from "../components/Community/Radio";
 
 const ReviewPage = () => {
   const navigate = useNavigate();
@@ -249,62 +250,14 @@ const ReviewPage = () => {
                 <StTitleComment>
                   Q1.집주인과의 원활한 소통이 가능했나요?
                 </StTitleComment>
-                <StRadioBtnWrap2>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-5"
-                      type="radio"
-                      name="communication"
-                      value="1"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-5">1</label>
-                  </div>
 
-                  <div className="radioBtn">
-                    <input
-                      id="radio-6"
-                      type="radio"
-                      name="communication"
-                      value="2"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-6">2</label>
-                  </div>
+                <Radio
+                  id={[5, 6, 7, 8, 9]}
+                  name="communication"
+                  onChangeHandler={onChangeHandler}
+                  values={[1, 2, 3, 4, 5]}
+                />
 
-                  <div className="radioBtn">
-                    <input
-                      id="radio-7"
-                      type="radio"
-                      name="communication"
-                      value="3"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-7">3</label>
-                  </div>
-
-                  <div className="radioBtn">
-                    <input
-                      id="radio-8"
-                      type="radio"
-                      name="communication"
-                      value="4"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-8">4</label>
-                  </div>
-
-                  <div className="radioBtn">
-                    <input
-                      id="radio-9"
-                      type="radio"
-                      name="communication"
-                      value="5"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-9">5</label>
-                  </div>
-                </StRadioBtnWrap2>
                 <StRadioBtnTitle>
                   <span>연락이 안돼요</span>
                   <span>보통</span>
@@ -313,61 +266,14 @@ const ReviewPage = () => {
               </StCommentWrap>
               <StCommentWrap>
                 <StTitleComment>Q2. 벌레가 많이 나오나요?</StTitleComment>
-                <StRadioBtnWrap2>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-10"
-                      type="radio"
-                      name="bug"
-                      value="1"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-10">1</label>
-                  </div>
 
-                  <div className="radioBtn">
-                    <input
-                      id="radio-11"
-                      type="radio"
-                      name="bug"
-                      value="2"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-11">2</label>
-                  </div>
+                <Radio
+                  id={[10, 11, 12, 13, 14]}
+                  name="bug"
+                  onChangeHandler={onChangeHandler}
+                  values={[1, 2, 3, 4, 5]}
+                />
 
-                  <div className="radioBtn">
-                    <input
-                      id="radio-12"
-                      type="radio"
-                      name="bug"
-                      value="3"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-12">3</label>
-                  </div>
-
-                  <div className="radioBtn">
-                    <input
-                      id="radio-13"
-                      type="radio"
-                      name="bug"
-                      value="4"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-13">4</label>
-                  </div>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-14"
-                      type="radio"
-                      name="bug"
-                      value="5"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-14">5</label>
-                  </div>
-                </StRadioBtnWrap2>
                 <StRadioBtnTitle>
                   <span>많이나와요</span>
                   <span>보통</span>

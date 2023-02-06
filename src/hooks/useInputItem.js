@@ -24,6 +24,7 @@ const useInputItem = () => {
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
+    console.log(name, value);
   };
 
   const reset = () => {
