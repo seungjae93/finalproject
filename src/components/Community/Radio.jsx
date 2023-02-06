@@ -15,19 +15,6 @@ export const Radio = ({ name, onChangeHandler, values, id }) => {
           <label htmlFor={`radio-${id[values.indexOf(value)]}`}>{value}</label>
         </div>
       ))}
-
-      {/* {values.map((value) => (
-        <div className="radioBtn">
-          <input
-            id={`radio-${id}`}
-            type="radio"
-            name={name}
-            value={value}
-            onChange={onChangeHandler}
-          />
-          <label htmlFor={`radio-${id}`}>{value}</label>
-        </div>
-      ))} */}
     </StRadioBtnWrap2>
   );
 };
