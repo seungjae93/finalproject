@@ -102,16 +102,14 @@ const PostDetail = () => {
 export default PostDetail;
 
 const StDetailBox = styled.div`
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
   background-color: white;
   width: 1254px;
 `;
 
 const StContainer = styled.div`
   width: 990px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
 `;
 
 const StPostTitle = styled.div`

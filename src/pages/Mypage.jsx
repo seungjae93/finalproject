@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import GlobalStyle from "../components/styles/GlobalStyle";
 import MyCommunity from "../components/mypage/MyCommunity";
 import MyReview from "../components/mypage/MyReview";
 
@@ -8,7 +7,6 @@ const Mypage = () => {
   const email = localStorage.getItem("email");
   return (
     <>
-      <GlobalStyle />
       <StmyPageWrap>
         <StmyPageBox>
           <div className="myPageTitle">마이페이지</div>
@@ -33,21 +31,22 @@ export default Mypage;
 const StmyPageWrap = styled.div`
   max-width: 1920px;
   background-color: #f3f5f5;
+  margin: auto;
 `;
 
 const StmyPageBox = styled.div`
+  margin: auto;
   width: 1254px;
   height: 150px;
   background-color: #ffffff;
-  margin: auto;
-  padding-top: 65px;
+  padding-top: 50px;
   border-bottom: 1px solid #c4cbcd;
   justify-content: center;
   text-align: center;
 
   .myPageTitle {
     width: 1254px;
-    font-size: 28px;
+    font-size: 35px;
     font-weight: bold;
     margin-bottom: 30px;
   }
