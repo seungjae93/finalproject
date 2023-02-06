@@ -102,4 +102,5 @@ const ButtonInner = styled.div`
   align-items: center;
   justify-content: center;
   gap: 7px;
+  font-family: "Pretendard";
 `;

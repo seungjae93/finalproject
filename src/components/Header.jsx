@@ -37,7 +37,7 @@ const Header = () => {
     navigate("/login");
   };
 
-  const onCommentHanler = () => {
+  const onCommentHandler = () => {
     if (!userStatus) {
       alert("로그인을 해주세요");
       navigate("/login");
@@ -69,7 +69,7 @@ const Header = () => {
               지도
             </StNavbarMenuItem>
 
-            <StNavbarMenuItem onClick={onCommentHanler}>
+            <StNavbarMenuItem onClick={onCommentHandler}>
               후기작성
             </StNavbarMenuItem>
 
@@ -108,16 +108,16 @@ export default Header;
 
 const StNavbar = styled.div`
   background-color: #ffffff;
-  width: 100%;
-  min-width: 900px;
+  width: 100vw;
+  min-width: 1420px;
   height: 80px;
   border-bottom: 1px solid #c4cbcd;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Pretendard";
   .header {
-    width: 1600px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -133,7 +133,7 @@ const StLogo = styled.img`
 const StNavbarMenu = styled.div`
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  gap: 25px;
 `;
 
 const StNavbarMenuItem = styled.div`
