@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import GlobalStyle from "../components/styles/GlobalStyle";
 import { useNavigate } from "react-router";
 import { CgChevronRight } from "react-icons/cg";
 import Button from "../components/button/Button";
@@ -24,7 +23,6 @@ const MainPage = () => {
 
   return (
     <>
-      <GlobalStyle />
       <StHomeContainer>
         <StTopImage>
           <img className="mainImg" src={mainPageCenter} alt="mainPageCenter" />
