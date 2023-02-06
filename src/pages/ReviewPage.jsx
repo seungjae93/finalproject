@@ -40,63 +40,47 @@ const ReviewPage = () => {
     formData.append("address", address);
     formData.append("address_jibun", address_jibun);
 
-    if (input.residence_type.length === 0) {
-      alert("모든 항목을 입력해주세요!");
-    } else if (input.transaction_type.length === 0) {
-      alert("모든 항목을 입력해주세요!");
-    } else if (input.deposit.length === 0) {
-      alert("모든 항목을 입력해주세요!");
-    } else if (input.monthly_payment.length === 0) {
-      alert("모든 항목을 입력해주세요!");
-    } else if (input.acreage.length === 0) {
-      alert("모든 항목을 입력해주세요!");
-    } else if (input.communication.length === 0) {
-      alert("모든 항목을 입력해주세요!");
-    } else if (input.bug.length === 0) {
-      alert("모든 항목을 입력해주세요!");
-    } else if (input.smell.length === 0) {
-      alert("모든 항목을 입력해주세요!");
-    } else if (input.floor_noise.length === 0) {
-      alert("모든 항목을 입력해주세요!");
-    } else if (input.walls_noise.length === 0) {
-      alert("모든 항목을 입력해주세요!");
-    } else if (input.town_noise.length === 0) {
-      alert("모든 항목을 입력해주세요!");
-    } else if (input.mold.length === 0) {
-      alert("모든 항목을 입력해주세요!");
-    } else if (input.parking.length === 0) {
-      alert("모든 항목을 입력해주세요!");
-    } else if (input.safe.length === 0) {
-      alert("모든 항목을 입력해주세요!");
-    } else if (input.good.length === 0) {
-      alert("모든 항목을 입력해주세요!");
-    } else if (input.bad.length === 0) {
-      alert("모든 항목을 입력해주세요!");
-    } else if (input.star.length === 0) {
+    const nameLengths = [
+      "residence_type",
+      "transaction_type",
+      "deposit",
+      "monthly_payment",
+      "acreage",
+      "communication",
+      "bug",
+      "smell",
+      "floor_noise",
+      "walls_noise",
+      "town_noise",
+      "mold",
+      "parking",
+      "safe",
+      "good",
+      "bad",
+      "star",
+    ];
+    let empty = false;
+    for (const nameLength of nameLengths) {
+      if (input[nameLength].length === 0) {
+        empty = true;
+        break;
+      }
+    }
+    if (empty) {
       alert("모든 항목을 입력해주세요!");
     } else {
-      for (let key of formData.keys()) {
-        // console.log(key);
+      for (const nameLength in input) {
+        formData.append(`${nameLength}`, input[nameLength]);
       }
-      for (let value of formData.values()) {
-        // console.log(value);
-      }
-
-      for (const property in input) {
-        formData.append(`${property}`, input[property]);
-      }
-
       for (let i = 0; i < image.length; i++) {
         formData.append("images", image[i]);
       }
-
       const review = formData;
       addPost(review);
       window.alert("후기가 등록 되었습니다!");
       navigate("/mypage");
     }
   };
-
   const openPostcodeHandler = () => {
     setOpenPostcode(!openPostcode);
   };
@@ -283,60 +267,14 @@ const ReviewPage = () => {
 
               <StCommentWrap>
                 <StTitleComment> Q3. 하수구 냄새가 많이 나나요?</StTitleComment>
-                <StRadioBtnWrap2>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-15"
-                      type="radio"
-                      name="smell"
-                      value="1"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-15">1</label>
-                  </div>
 
-                  <div className="radioBtn">
-                    <input
-                      id="radio-16"
-                      type="radio"
-                      name="smell"
-                      value="2"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-16">2</label>
-                  </div>
+                <Radio
+                  id={[15, 16, 17, 18, 19]}
+                  name="smell"
+                  onChangeHandler={onChangeHandler}
+                  values={[1, 2, 3, 4, 5]}
+                />
 
-                  <div className="radioBtn">
-                    <input
-                      id="radio-17"
-                      type="radio"
-                      name="smell"
-                      value="3"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-17">3</label>
-                  </div>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-18"
-                      type="radio"
-                      name="smell"
-                      value="4"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-18">4</label>
-                  </div>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-19"
-                      type="radio"
-                      name="smell"
-                      value="5"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-19">5</label>
-                  </div>
-                </StRadioBtnWrap2>
                 <StRadioBtnTitle>
                   <span>심하게나요</span>
                   <span>보통</span>
@@ -346,62 +284,14 @@ const ReviewPage = () => {
 
               <StCommentWrap>
                 <StTitleComment>Q4.층간소음이 심한가요? </StTitleComment>
-                <StRadioBtnWrap2>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-20"
-                      type="radio"
-                      name="floor_noise"
-                      value="1"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-20">1</label>
-                  </div>
 
-                  <div className="radioBtn">
-                    <input
-                      id="radio-21"
-                      type="radio"
-                      name="floor_noise"
-                      value="2"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-21">2</label>
-                  </div>
+                <Radio
+                  id={[20, 21, 22, 23, 24]}
+                  name="floor_noise"
+                  onChangeHandler={onChangeHandler}
+                  values={[1, 2, 3, 4, 5]}
+                />
 
-                  <div className="radioBtn">
-                    <input
-                      id="radio-22"
-                      type="radio"
-                      name="floor_noise"
-                      value="3"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-22">3</label>
-                  </div>
-
-                  <div className="radioBtn">
-                    <input
-                      id="radio-23"
-                      type="radio"
-                      name="floor_noise"
-                      value="4"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-23">4</label>
-                  </div>
-
-                  <div className="radioBtn">
-                    <input
-                      id="radio-24"
-                      type="radio"
-                      name="floor_noise"
-                      value="5"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-24">5</label>
-                  </div>
-                </StRadioBtnWrap2>
                 <StRadioBtnTitle>
                   <span>시끄러워요</span>
                   <span>보통</span>
@@ -411,59 +301,14 @@ const ReviewPage = () => {
 
               <StCommentWrap>
                 <StTitleComment>Q5 벽간 소음이 심한가요?</StTitleComment>
-                <StRadioBtnWrap2>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-25"
-                      type="radio"
-                      name="walls_noise"
-                      value="1"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-25">1</label>
-                  </div>
 
-                  <div className="radioBtn">
-                    <input
-                      id="radio-26"
-                      type="radio"
-                      name="walls_noise"
-                      value="2"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-26">2</label>
-                  </div>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-27"
-                      type="radio"
-                      name="walls_noise"
-                      value="3"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-27">3</label>
-                  </div>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-28"
-                      type="radio"
-                      name="walls_noise"
-                      value="4"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-28">4</label>
-                  </div>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-29"
-                      type="radio"
-                      name="walls_noise"
-                      value="5"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-29">5</label>
-                  </div>
-                </StRadioBtnWrap2>
+                <Radio
+                  id={[25, 26, 27, 28, 29]}
+                  name="walls_noise"
+                  onChangeHandler={onChangeHandler}
+                  values={[1, 2, 3, 4, 5]}
+                />
+
                 <StRadioBtnTitle>
                   <span>시끄러워요</span>
                   <span>보통</span>
@@ -473,58 +318,14 @@ const ReviewPage = () => {
 
               <StCommentWrap>
                 <StTitleComment>Q6.집 주변 환경이 조용한가요? </StTitleComment>
-                <StRadioBtnWrap2>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-30"
-                      type="radio"
-                      name="town_noise"
-                      value="1"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-30">1</label>
-                  </div>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-31"
-                      type="radio"
-                      name="town_noise"
-                      value="2"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-31">2</label>
-                  </div>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-32"
-                      type="radio"
-                      name="town_noise"
-                      value="3"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-32">3</label>
-                  </div>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-33"
-                      type="radio"
-                      name="town_noise"
-                      value="4"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-33">4</label>
-                  </div>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-34"
-                      type="radio"
-                      name="town_noise"
-                      value="5"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-34">5</label>
-                  </div>
-                </StRadioBtnWrap2>
+
+                <Radio
+                  id={[30, 31, 32, 33, 34]}
+                  name="town_noise"
+                  onChangeHandler={onChangeHandler}
+                  values={[1, 2, 3, 4, 5]}
+                />
+
                 <StRadioBtnTitle>
                   <span>시끄러워요</span>
                   <span>보통</span>
@@ -534,58 +335,14 @@ const ReviewPage = () => {
 
               <StCommentWrap>
                 <StTitleComment>Q7.결로, 곰팡이가 심한가요?</StTitleComment>
-                <StRadioBtnWrap2>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-35"
-                      type="radio"
-                      name="mold"
-                      value="1"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-35">1</label>
-                  </div>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-36"
-                      type="radio"
-                      name="mold"
-                      value="2"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-36">2</label>
-                  </div>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-37"
-                      type="radio"
-                      name="mold"
-                      value="3"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-37">3</label>
-                  </div>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-38"
-                      type="radio"
-                      name="mold"
-                      value="4"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-38">4</label>
-                  </div>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-39"
-                      type="radio"
-                      name="mold"
-                      value="5"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-39">5</label>
-                  </div>
-                </StRadioBtnWrap2>
+
+                <Radio
+                  id={[35, 36, 37, 38, 39]}
+                  name="mold"
+                  onChangeHandler={onChangeHandler}
+                  values={[1, 2, 3, 4, 5]}
+                />
+
                 <StRadioBtnTitle>
                   <span>심해요</span>
                   <span>보통</span>
@@ -595,58 +352,14 @@ const ReviewPage = () => {
 
               <StCommentWrap>
                 <StTitleComment>Q8.주차가 편한가요?</StTitleComment>
-                <StRadioBtnWrap2>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-40"
-                      type="radio"
-                      name="parking"
-                      value="1"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-40">1</label>
-                  </div>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-41"
-                      type="radio"
-                      name="parking"
-                      value="2"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-41">2</label>
-                  </div>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-42"
-                      type="radio"
-                      name="parking"
-                      value="3"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-42">3</label>
-                  </div>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-43"
-                      type="radio"
-                      name="parking"
-                      value="4"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-43">4</label>
-                  </div>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-44"
-                      type="radio"
-                      name="parking"
-                      value="5"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-44">5</label>
-                  </div>
-                </StRadioBtnWrap2>
+
+                <Radio
+                  id={[40, 41, 42, 43, 44]}
+                  name="parking"
+                  onChangeHandler={onChangeHandler}
+                  values={[1, 2, 3, 4, 5]}
+                />
+
                 <StRadioBtnTitle>
                   <span>불편했어요</span>
                   <span>보통</span>
@@ -656,58 +369,14 @@ const ReviewPage = () => {
 
               <StCommentWrap>
                 <StTitleComment>Q9.보안이 잘 되어있나요?</StTitleComment>
-                <StRadioBtnWrap2>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-45"
-                      type="radio"
-                      name="safe"
-                      value="1"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-45">1</label>
-                  </div>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-46"
-                      type="radio"
-                      name="safe"
-                      value="2"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-46">2</label>
-                  </div>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-47"
-                      type="radio"
-                      name="safe"
-                      value="3"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-47">3</label>
-                  </div>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-48"
-                      type="radio"
-                      name="safe"
-                      value="4"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-48">4</label>
-                  </div>
-                  <div className="radioBtn">
-                    <input
-                      id="radio-49"
-                      type="radio"
-                      name="safe"
-                      value="5"
-                      onChange={onChangeHandler}
-                    />
-                    <label htmlFor="radio-49">5</label>
-                  </div>
-                </StRadioBtnWrap2>
+
+                <Radio
+                  id={[45, 46, 47, 48, 49]}
+                  name="safe"
+                  onChangeHandler={onChangeHandler}
+                  values={[1, 2, 3, 4, 5]}
+                />
+
                 <StRadioBtnTitle>
                   <span>불안해요</span>
                   <span>보통</span>
@@ -1000,46 +669,6 @@ const StTitleComment = styled.div`
   margin: 10% 0 5% 0;
   font-size: 20px;
   font-weight: 600;
-`;
-
-const StRadioBtnWrap2 = styled.div`
-  margin-left: 45px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 400px;
-
-  .radioBtn {
-    font-size: 18px;
-  }
-  .radioBtn input[type="radio"] {
-    display: none;
-  }
-  .radioBtn label {
-    display: block;
-    border-radius: 15px;
-    margin: 0 auto;
-    text-align: center;
-    width: 30px;
-    height: 30px;
-    line-height: 35px;
-    cursor: pointer;
-  }
-  /* hover */
-  .radioBtn input[type="radio"]:hover + label {
-    background: #c2de0d;
-    color: #fff;
-  }
-  /* Checked */
-  .radioBtn input[type="radio"]:checked + label {
-    background: #c2de0d;
-    color: #fff;
-  }
-  /* Disabled */
-  .radioBtn input[type="radio"] + label {
-    border: 2px solid #c4cbcd;
-    color: black;
-  }
 `;
 
 const StRadioBtnTitle = styled.div`

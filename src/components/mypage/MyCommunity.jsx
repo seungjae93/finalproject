@@ -23,7 +23,7 @@ const MyCommunity = () => {
           {data?.myposts.map((posts) => {
             return (
               <StMyComm>
-                <div className="comment_wrapper" key={`mypage_${posts.postId}`}>
+                <div className="comment_wrapper" key={`${posts.postId}`}>
                   <div className="time">
                     {new Date(posts?.createdAt).toLocaleDateString("ko-KR", {
                       year: "numeric",
