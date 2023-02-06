@@ -35,29 +35,29 @@
 
   - 사진 올리고 후기 작성시 지도에 마커 반영
 
-  ### 💡 기술적 의사결정
+### 💡 기술적 의사결정
 
   <details>
     <summary>FE 기술적 의사결정</summary>
     <div markdown="1">
-      - **React-query**
+      - React-query
         - 도입 이유
           - 로그인을 제외한 모든 페이지에서 전역으로 관리할 이유가 없어 캐싱관리를 사용해 API요청의 부담을 덜기 위해 사용
           - 데이터 업데이트 시 빠르게 반영이 된다.
           - 페이징 처리나 지연 로딩 데이터와 같은 성능 최적화를 해준다.
-      - **Redux—toolkit**
+      - Redux—toolkit
         - 도입 이유
           - Redux—toolkit은 redux의 단점인 보일러플레이트코드와 복잡한 스토어 설정, 페키지설정을 완화시킴
           - 로그인 파트 부분에서 email과 모든 페이지의 로그인 상태 관리 등을 전역으로 관리해야 한다는 생각에 결정
           - Redux—toolkit 사용후 추후에 React-query로 리펙토링 예정
-      - **React-infinitequery**
+      - React-infinitequery
         - 도입 이유
           - react-query를 사용하면서 장점이라고 할 수 있기에 infinitequery를 사용
           - 무한스크롤을 사용하기 위한 observer는 필수라 생각이 들고, 후크를 사용하여 상태를 useInView쉽게 모니터링 할 수 있기 때문
     </div>
   </details>
 
-  ### 💻 STACK
+### 💻 STACK
 
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/ReduxToolkit-764ABC?style=for-the-badge&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=white"> <img src="https://img.shields.io/badge/ReactQuery-FF4154?style=for-the-badge&logo=ReactQuery&logoColor=white"> <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"> <img src="https://img.shields.io/badge/Kakao API-FFCD00?style=for-the-badge&logo=Kakao&logoColor=white"> <img src="https://img.shields.io/badge/AmazonS3-569A31?style=for-the-badge&logo=Amazon-S3&logoColor=white">
 
