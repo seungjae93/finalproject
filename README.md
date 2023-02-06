@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+# 🏠 이집은
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![main](https://user-images.githubusercontent.com/116165520/216952191-52be6865-05d4-4c37-a0f3-6524492677f5.png)
 
-## Available Scripts
+## 📝 목차
 
-In the project directory, you can run:
+[1. 프로젝트 소개](#프로젝트-소개)<br>
+[2. 주요 기능](#주요기능)<br>
+[3. STACK](#STACK)<br>
 
-### `npm start`
+<!-- [5. 기술적 의사결정](#기술적-의사결정)<br>
+[6. 팀 구성](#팀-구성)<br> -->
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 📢 프로젝트 소개
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- 실제 거주 해 본 사람들이 작성하는 찐 리뷰 사이트!
+- 집주인도, 중개사도 모르는 진짜 후기를 알려주는 웹서비스 입니다.
+- 밤낮, 계절, 날씨, 이웃등의 다양한 변수들은 중개인이나 집주인이 알 수 없어요.
+- 정말 살아본 사람들의 이야기를 들을 수 있는 원룸 후기 플랫폼입니다!
 
-### `npm test`
+### ✨ 주요기능
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- 회원가입/로그인 기능
+  - 회원가입시 : 원룸 리뷰작성, 커뮤니티 글쓰기, 커뮤니티 댓글쓰기
+  - 비회원시 : 지도, 커뮤니티, 댓글 보기만 가능
+- 지도 페이지
+  - 자동 검색어 기능
+  - 지역별 리뷰 개수 파악가능
+  - 마커 클릭 시 해당 주소 및 후기 작성 점수 제공
+  - 사진 클릭시 확대 및 슬라이드 구현
+- 커뮤니티 기능
+  - 지역별로 자유롭게 소통하는 페이지
+  - 지역별 조회, 검색기능, 최신순, 댓글순 표시
+  - 작성된 게시글에 대한 댓글 기능
+- 후기작성 페이지
+  - 사진 올리고 후기 작성시 지도에 마커 반영
 
-### `npm run build`
+### 💻 STACK
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/ReduxToolkit-764ABC?style=for-the-badge&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=white"> <img src="https://img.shields.io/badge/ReactQuery-FF4154?style=for-the-badge&logo=ReactQuery&logoColor=white"> <img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"><img src="https://img.shields.io/badge/Kakao API-FFCD00?style=for-the-badge&logo=Kakao&logoColor=white"><img src="https://img.shields.io/badge/AmazonS3-569A31?style=for-the-badge&logo=Amazon-S3&logoColor=white">
