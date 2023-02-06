@@ -17,7 +17,6 @@ export const __kakaoLogin = createAsyncThunk(
       const nickEmail = email.substring(0, email.indexOf("@"));
       localStorage.setItem("email", nickEmail);
       localStorage.setItem("token", token);
-      alert(`${nickEmail}님 안녕하세요 :) `);
       return thunkAPI.fulfillWithValue(response);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);

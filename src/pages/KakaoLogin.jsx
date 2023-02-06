@@ -11,6 +11,7 @@ const KakaoLogin = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
+  const email = localStorage.getItem("email");
 
   const oAuth = () => {
     const code = location.search.split("=")[1];
@@ -20,6 +21,7 @@ const KakaoLogin = () => {
   useEffect(() => {
     if (!isLogin) return;
     navigate("/");
+    alert(`${email}님 안녕하세요 :) `);
   }, [isLogin]);
 
   useEffect(() => {
