@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import GlobalStyle from "../styles/GlobalStyle";
 import { useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { getmypagePosts } from "../../redux/api/reviewApi";
@@ -17,56 +16,44 @@ const MyCommunity = () => {
 
   return (
     <>
-      <GlobalStyle />
-      <StCommBoxWrap>
-        <StMyCommBox>
-          <StCommBoxTitle>
-            <div className="reple">내가 남긴 글</div>
-          </StCommBoxTitle>
+      <StMyCommBox>
+        <StInnerBox>
+          <StCommBoxTitle>내가 남긴 글</StCommBoxTitle>
 
-          <StInnerBox>
-            {data?.myposts.map((posts) => {
-              return (
-                <StMyComm>
-                  <div
-                    className="comment_wrapper"
-                    key={`mypage_${posts.postId}`}
-                  >
-                    <div className="time">
-                      {new Date(posts.createdAt).toLocaleDateString("ko-KR", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </div>
-                    <StMyComm2>
-                      <button
-                        className="title"
-                        onClick={() => {
-                          navigate(`/${posts.postId}`);
-                        }}
-                      >
-                        {posts.title}
-                      </button>
-                      <div className="body">{posts.content}</div>
-                    </StMyComm2>
+          {data?.myposts.map((posts) => {
+            return (
+              <StMyComm>
+                <div className="comment_wrapper" key={`mypage_${posts.postId}`}>
+                  <div className="time">
+                    {new Date(posts?.createdAt).toLocaleDateString("ko-KR", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                    })}
                   </div>
-                </StMyComm>
-              );
-            })}
-          </StInnerBox>
-        </StMyCommBox>
-      </StCommBoxWrap>
+                  <div>
+                    <button
+                      className="title"
+                      onClick={() => {
+                        navigate(`/${posts.postId}`);
+                      }}
+                    >
+                      {posts.title}
+                    </button>
+                    <div className="body">{posts.content}</div>
+                  </div>
+                </div>
+              </StMyComm>
+            );
+          })}
+        </StInnerBox>
+        <div style={{ height: "40px" }}></div>
+      </StMyCommBox>
     </>
   );
 };
 
 export default MyCommunity;
-
-const StCommBoxWrap = styled.div`
-  max-width: 1920px;
-  background-color: #f3f5f5;
-`;
 
 const StMyCommBox = styled.div`
   width: 1254px;
@@ -76,16 +63,14 @@ const StMyCommBox = styled.div`
 `;
 
 const StInnerBox = styled.div`
-  padding-bottom: 50px;
+  width: 990px;
+  margin: auto;
 `;
 
 const StCommBoxTitle = styled.div`
-  display: flex;
-  .reple {
-    font-size: 16px;
-    font-weight: 800;
-    padding: 50px 0 40px 110px;
-  }
+  font-size: 20px;
+  font-weight: 800;
+  margin: 30px 0 30px 0;
 `;
 
 const StMyComm = styled.div`
@@ -93,24 +78,23 @@ const StMyComm = styled.div`
   border-bottom: 0.2px solid #c4cbcd;
   width: 1000px;
   height: 100px;
-  padding: 1%;
-  margin: auto;
+  display: flex;
+  align-items: center;
 
   .comment_wrapper {
-    text-align: left;
     display: flex;
   }
-
   .time {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
     width: 150px;
-    margin-top: 40px;
     font-size: 15px;
   }
   .title {
     background-color: transparent;
     cursor: pointer;
     border: none;
-    margin-left: 15px;
     font-size: 20px;
     font-weight: 600;
     white-space: normal;
@@ -121,9 +105,7 @@ const StMyComm = styled.div`
   }
   .body {
     padding-top: 5px;
-    margin-left: 15px;
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 16px;
     line-height: normal;
     white-space: normal;
     display: -webkit-box;
@@ -131,8 +113,4 @@ const StMyComm = styled.div`
     overflow: hidden;
     -webkit-line-clamp: 3;
   }
-`;
-
-const StMyComm2 = styled.div`
-  width: 1000px;
 `;
