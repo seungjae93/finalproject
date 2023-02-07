@@ -40,8 +40,10 @@ const MainMap = () => {
   //마커 좌표
   const [markerArray, setMarkerArray] = useState([]);
 
-  //estateId props 넘길때
+  //estateId props 넘길때 1~2레벨
   const [markerArrayEstateId, setMarkerArrayEstateId] = useState(0);
+  //estateId props 넘길때 3~4레벨
+  const [estateIds, setEstateIds] = useState([]);
 
   //마커 클릭시 props 넘기기
   const [markerClickOn, setMarkerClickOn] = useState(false);
@@ -232,6 +234,7 @@ const MainMap = () => {
   useEffect(() => {
     if (!positions) return;
     let newArray = [];
+    let secondArray = [];
 
     if (zoomLevel < 3) {
       newArray.push(...positions);
@@ -241,6 +244,10 @@ const MainMap = () => {
         if (Array.isArray(el)) {
           newArray.push({ locate: el[0], index: el.length });
           setMarkerArray(newArray);
+          el?.map((value) => {
+            secondArray.push(value);
+          });
+          setEstateIds(secondArray);
         }
       });
     }
