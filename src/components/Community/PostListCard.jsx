@@ -2,12 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-const PostListCard = ({ posts }) => {
+const PostListCard = React.memo(({ posts }) => {
   return (
     <StCardWrapper to={`/${posts.postId}`}>
-      {posts?.postImage ? (
-        <StImageCarrier alt="" src={posts?.postImage}></StImageCarrier>
-      ) : null}
+      <StImageCarrier alt="" src={posts?.postImage}></StImageCarrier>
 
       <StCommunityBox>
         <StTitleCarrier>{posts?.title}</StTitleCarrier>
@@ -19,19 +17,13 @@ const PostListCard = ({ posts }) => {
       <StBox>
         <StName>
           <StNickName> {posts?.email} </StNickName>
-          <div>
-            {new Date(posts.createdAt).toLocaleDateString("ko-KR", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </div>
+          <div>{new Date(posts.createdAt).toLocaleDateString("ko-KR")}</div>
         </StName>
         <div> {posts.commentsCount}개의 댓글 </div>
       </StBox>
     </StCardWrapper>
   );
-};
+});
 
 export default PostListCard;
 

@@ -46,11 +46,7 @@ const PostDetail = () => {
             <StNicDa>
               <StNicName> {data?.post.email} | </StNicName>
               <StDate>
-                {new Date(data?.post.createdAt).toLocaleDateString("ko-KR", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
+                {new Date(data?.post.createdAt).toLocaleDateString("ko-KR")}
               </StDate>
             </StNicDa>
 
@@ -70,9 +66,8 @@ const PostDetail = () => {
               ) : null}
             </div>
           </StInfor>
-          {data?.post?.postImage ? (
-            <StDetailImage src={data?.post?.postImage} />
-          ) : null}
+
+          <StDetailImage alt="" src={data?.post?.postImage} />
 
           <StContent> {data?.post.content} </StContent>
         </StContainer>
