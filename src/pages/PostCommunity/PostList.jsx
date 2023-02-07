@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useInfiniteQuery } from "@tanstack/react-query";
@@ -45,23 +45,20 @@ const PostList = () => {
       getNextPageParam: (lastPage) =>
         !lastPage.isLast ? lastPage.nextPage : undefined,
       //API 에 요청할 때 사용될 pageParam 값을 정할 수 있다.
-    },
-    {
-      staleTime: 60000,
     }
   );
-
-  const HandleChange = (e) => {
-    const { name, value } = e.target;
-    setSelected({ ...selected, [name]: value });
-  };
-
+  const HandleChange = useCallback(
+    (e) => {
+      const { name, value } = e.target;
+      setSelected({ ...selected, [name]: value });
+    },
+    [selected]
+  );
   const onPostHandler = () => {
     if (localStorage.getItem("token") === null) {
       alert("로그인을 해주세요");
     } else navigate("/post");
   };
-
   const onHandleAllView = () => {
     setShowAll(!showAll);
     setSelected({
@@ -91,7 +88,6 @@ const PostList = () => {
 
   if (isLoading) return <h2> 로딩중 .. </h2>;
   if (isError) return <h2> Error : {error.toString()} </h2>;
-
   return (
     <>
       <SeletedOne
@@ -121,6 +117,7 @@ const PostList = () => {
         <STPostCon>
           {data?.pages[0]?.posts.length !== 0 ? (
             data?.pages?.map((page) => {
+              console.log(page);
               return page?.posts?.map((posts) => {
                 return (
                   <PostListCard key={`main_${posts.postId}`} posts={posts} />
