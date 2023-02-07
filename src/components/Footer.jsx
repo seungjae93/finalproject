@@ -46,8 +46,7 @@ const Footer = () => {
           <StFooterContent>
             <div className="footerTitle">이집은(Ezipeun)</div>
             <div className="footerName">
-              참여자: 박영호(팀장), 서정득, 권태형, 이승재(부팀장), 조민욱,
-              이희승
+              참여자: 박영호(팀장), 서정득, 권태형, 이승재(부팀장), 조민욱
             </div>
           </StFooterContent>
           <StFooterLogo>

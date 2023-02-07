@@ -21,7 +21,6 @@ const KakaoLogin = () => {
   useEffect(() => {
     if (!isLogin) return;
     navigate("/");
-    alert(`${email}님 안녕하세요 :) `);
   }, [isLogin]);
 
   useEffect(() => {
