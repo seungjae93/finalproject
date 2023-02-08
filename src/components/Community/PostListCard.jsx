@@ -71,6 +71,7 @@ const StTitleCarrier = styled.pre`
   width: 98%;
   font-weight: bold;
   margin-bottom: 10px;
+  background-color: red;
 `;
 
 const StContentCarrier = styled.div`
