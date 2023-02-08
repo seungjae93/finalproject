@@ -42,10 +42,25 @@ const NegativeButton = (props) => {
   );
 };
 
+// Community Style
+
+const CommunityButton = (props) => {
+  return (
+    <PrimitiveButton
+      {...props}
+      bc="white"
+      ma="10px 0 0 0"
+      color="#000000"
+      hoverBc="#a8c4e1"
+    />
+  );
+};
+
 const Primary = PrimaryButton;
 const Negative = NegativeButton;
+const Community = CommunityButton;
 
-const Button = { Negative, Primary };
+const Button = { Negative, Primary, Community };
 export default Button;
 
 const StyledButton = styled.button`
@@ -55,9 +70,14 @@ const StyledButton = styled.button`
   font-size: ${({ fs }) => fs};
   background-color: ${({ bc }) => bc};
   color: ${({ color }) => color};
+  margin: ${({ ma }) => ma};
   font-weight: ${({ fw }) => fw};
   &:active {
     background-color: ${({ activeBc }) => activeBc};
+    transition: 0.2s;
+  }
+  &:hover {
+    background-color: ${({ hoverBc }) => hoverBc};
   }
   ${({ size }) => {
     switch (size) {
@@ -78,8 +98,8 @@ const StyledButton = styled.button`
         `;
       default:
         return css`
-          height: 40px;
-          width: 100px;
+          height: 30px;
+          width: 70px;
         `;
     }
   }}
