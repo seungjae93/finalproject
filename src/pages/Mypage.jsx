@@ -8,9 +8,9 @@ const Mypage = () => {
   const navigate = useNavigate();
   const email = localStorage.getItem("email");
   useEffect(() => {
-    if (!!email) {
+    if (!email) {
       navigate("/login");
-      alert("로그인");
+      alert("로그인을 해주세요");
     }
   }, []);
 
