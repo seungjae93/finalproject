@@ -4,10 +4,6 @@ import { useNavigate, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { deleteCommunity, detailCommunity } from "../../redux/api/communityApi";
 import Comment from "../Comment";
-import {
-  NextPost,
-  PreviousPost,
-} from "../../components/Community/NextPreviousPost";
 
 const PostDetail = () => {
   const navigate = useNavigate();
@@ -67,28 +63,24 @@ const PostDetail = () => {
             </div>
           </StInfor>
 
-          <StDetailImage alt="" src={data?.post?.postImage} />
+          <StImageNextBox>
+            {data.post.nextPostTitle ? (
+              <div className="StPr" onClick={onNext} />
+            ) : null}
+
+            <StDetailImage alt="" src={data?.post?.postImage} />
+
+            {data.post.previoustPostTitle ? (
+              <div className="StNe" onClick={onPrevious} />
+            ) : null}
+          </StImageNextBox>
 
           <StContent> {data?.post.content} </StContent>
         </StContainer>
       </StDetailBox>
 
-      <div style={{ height: "10px" }}></div>
-
       <StCommentBox>
         <Comment />
-
-        {data.post.nextPostTitle ? (
-          <NextPost onNext={onNext} data={data} />
-        ) : null}
-
-        <div style={{ height: "10px" }}></div>
-
-        {data.post.previoustPostTitle ? (
-          <PreviousPost onPrevious={onPrevious} data={data} />
-        ) : null}
-
-        <div style={{ height: "20px" }}></div>
       </StCommentBox>
     </>
   );
@@ -150,8 +142,6 @@ const StDetailImage = styled.img`
   width: 65%;
   height: 15%;
 `;
-// width: 100%;
-// height: 459px;
 const StContent = styled.pre`
   margin: 20px 0 10px 0;
   font-size: 16px;
@@ -173,4 +163,31 @@ const StCommentBox = styled.div`
   margin-right: auto;
   background-color: white;
   width: 1254px;
+`;
+
+const StImageNextBox = styled.div`
+  display: flex;
+  align-items: center;
+
+  .StPr {
+    content: "";
+    width: 20px; /* 사이즈 */
+    height: 20px; /* 사이즈 */
+    border-top: 5px solid #000; /* 선 두께 */
+    border-right: 5px solid #000; /* 선 두께 */
+    transform: rotate(225deg);
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .StNe {
+    content: "";
+    width: 20px; /* 사이즈 */
+    height: 20px; /* 사이즈 */
+    border-top: 5px solid #000; /* 선 두께 */
+    border-right: 5px solid #000; /* 선 두께 */
+    transform: rotate(45deg);
+    border-radius: 5px;
+    cursor: pointer;
+  }
 `;

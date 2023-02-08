@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useInfiniteQuery } from "@tanstack/react-query";
@@ -9,6 +9,8 @@ import { useInView } from "react-intersection-observer";
 import { getCommunity } from "../../redux/api/communityApi";
 import InfiniteScroll from "react-infinite-scroller";
 import { SeletedOne } from "../../components/Community/Selected";
+import Button from "../../components/button/Button";
+import PostListCardSkeleton from "../../components/Community/PostListCardSkeleton";
 
 const PostList = () => {
   const navigate = useNavigate();
@@ -47,16 +49,14 @@ const PostList = () => {
       //API 에 요청할 때 사용될 pageParam 값을 정할 수 있다.
     }
   );
-  const HandleChange = useCallback(
-    (e) => {
-      const { name, value } = e.target;
-      setSelected({ ...selected, [name]: value });
-    },
-    [selected]
-  );
+  const HandleChange = (e) => {
+    const { name, value } = e.target;
+    setSelected({ ...selected, [name]: value });
+  };
   const onPostHandler = () => {
     if (localStorage.getItem("token") === null) {
       alert("로그인을 해주세요");
+      navigate("/login");
     } else navigate("/post");
   };
   const onHandleAllView = () => {
@@ -86,7 +86,7 @@ const PostList = () => {
     }
   }, [inView]);
 
-  if (isLoading) return <h2> 로딩중 .. </h2>;
+  // if (isLoading) return <h2> 로딩중 .. </h2>;
   if (isError) return <h2> Error : {error.toString()} </h2>;
   return (
     <>
@@ -104,20 +104,26 @@ const PostList = () => {
       <StOrder>
         <div>
           <StTrend onClick={() => setClickOrder("recent")}>최신순</StTrend>
-
           <StTrend onClick={() => setClickOrder("trend")}>댓글순</StTrend>
         </div>
         <div>
-          <StPost onClick={onPostHandler}> 글쓰기 </StPost>
+          <Button.Community
+            gap={10}
+            style={{ border: " 1px solid #a6b2b9" }}
+            onClick={onPostHandler}
+          >
+            글쓰기
+          </Button.Community>
         </div>
       </StOrder>
       <InfiniteScroll hasMore={hasNextPage} loadMore={fetchNextPage}>
         {/* hasNextPage 다음 또는 이전 페이지가 있는지 확인 하는 속성
       fetchNextPage 다음 페이지를 가져오기 위한 반환 속성  */}
         <STPostCon>
-          {data?.pages[0]?.posts.length !== 0 ? (
+          {isLoading === true ? (
+            <PostListCardSkeleton />
+          ) : data?.pages[0]?.posts.length !== 0 ? (
             data?.pages?.map((page) => {
-              console.log(page);
               return page?.posts?.map((posts) => {
                 return (
                   <PostListCard key={`main_${posts.postId}`} posts={posts} />
@@ -162,21 +168,6 @@ const StTrend = styled.button`
   font-size: 16px;
   border: none;
   cursor: pointer;
-`;
-
-const StPost = styled.button`
-  font-size: 13px;
-  width: 60px;
-  height: 30px;
-  border: 1px solid #a6b2b9;
-  border-radius: 5px;
-  margin-top: 10px;
-  background-color: white;
-  cursor: pointer;
-  :hover {
-    background-color: #a8c4e1;
-    transition: 0.2s;
-  }
 `;
 
 const StNonePost = styled.div`
