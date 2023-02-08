@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useAddCommunity } from "../../redux/api/communityApi";
@@ -13,6 +13,8 @@ const PostForm = () => {
   const [content, setContent] = useState("");
   const [selected, setSelected] = useState({});
   const { postLocation1, postLocation2 } = hangjungdong;
+
+  const email = localStorage.getItem("email");
 
   const onPreviewImage = (e) => {
     setImage(e.target.files[0]);
@@ -50,6 +52,13 @@ const PostForm = () => {
     const { name, value } = e.target;
     setSelected({ ...selected, [name]: value });
   };
+
+  useEffect(() => {
+    if (!email) {
+      navigate("/login");
+      alert("로그인을 해주세요");
+    }
+  }, []);
 
   return (
     <>
