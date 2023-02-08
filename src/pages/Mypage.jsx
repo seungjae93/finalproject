@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router";
 import MyCommunity from "../components/mypage/MyCommunity";
 import MyReview from "../components/mypage/MyReview";
 
 const Mypage = () => {
+  const navigate = useNavigate();
   const email = localStorage.getItem("email");
+  useEffect(() => {
+    if (!!email) {
+      navigate("/login");
+      alert("로그인");
+    }
+  }, []);
+
   return (
     <>
       <StmyPageWrap>

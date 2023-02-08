@@ -14,7 +14,6 @@ import PostDetail from "../pages/PostCommunity/PostDetail";
 import PostEdit from "../pages/PostCommunity/PostEdit";
 import FeatureButton from "../pages/Button";
 import ScrollToTop from "../components/ScrollToTop";
-import PostListCardSkeleton from "../components/Community/PostListCardSkeleton";
 
 const Router = () => {
   return (
@@ -33,8 +32,6 @@ const Router = () => {
         <Route path="/button" element={<FeatureButton />} />
         <Route path="/:postId" element={<PostDetail />} />
         <Route path="/edit/:postId" element={<PostEdit />} />
-
-        <Route path="/123" element={<PostListCardSkeleton />} />
       </Routes>
       <Footer />
     </BrowserRouter>
