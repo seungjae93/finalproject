@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
 import LoadingSpinner from "../components/loading/LoadingSpinner";
@@ -11,17 +11,17 @@ const KakaoLogin = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  const email = localStorage.getItem("email");
 
-  const oAuth = () => {
-    const code = location.search.split("=")[1];
-    dispatch(__kakaoLogin(code));
-  };
+  const oAuth = useMemo(() => {
+    return () => {
+      const code = location.search.split("=")[1];
+      dispatch(__kakaoLogin(code));
+    };
+  }, [location, dispatch]);
 
   useEffect(() => {
     if (!isLogin) return;
     navigate("/");
-    alert(`${email}님 안녕하세요 :) `);
   }, [isLogin]);
 
   useEffect(() => {

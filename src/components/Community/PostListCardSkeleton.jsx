@@ -1,36 +1,34 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
-const PostListCard = React.memo(({ posts }) => {
+const PostListCardSkeleton = () => {
   return (
-    <StCardWrapper to={`/${posts.postId}`}>
-      <StImageCarrier alt="" src={posts?.postImage}></StImageCarrier>
+    <>
+      <StCardWrapper>
+        <StImageCarrier></StImageCarrier>
 
-      <StCommunityBox>
-        <StTitleCarrier>{posts?.title}</StTitleCarrier>
+        <StCommunityBox>
+          <StTitleCarrier></StTitleCarrier>
 
-        <StContentCarrier>
-          <pre> {posts?.content} </pre>
-        </StContentCarrier>
-      </StCommunityBox>
-      <StBox>
-        <StName>
-          <StNickName> {posts?.email} </StNickName>
-          <div>{new Date(posts.createdAt).toLocaleDateString("ko-KR")}</div>
-        </StName>
-        <div> {posts.commentsCount}개의 댓글 </div>
-      </StBox>
-    </StCardWrapper>
+          <StContentCarrier>
+            <pre> </pre>
+          </StContentCarrier>
+        </StCommunityBox>
+        <StBox>
+          <StName>
+            <StNickName> </StNickName>
+            <div></div>
+          </StName>
+          <div> </div>
+        </StBox>
+      </StCardWrapper>
+    </>
   );
-});
+};
 
-export default PostListCard;
+export default PostListCardSkeleton;
 
-const StCardWrapper = styled(Link)`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+const StCardWrapper = styled.div`
   background-color: white;
   width: 400px;
   height: 287px;
@@ -48,10 +46,7 @@ const StCardWrapper = styled(Link)`
 `;
 
 const StImageCarrier = styled.div`
-  background-image: url(${(props) => props.src});
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  background-color: #ececec;
   width: 100%;
   height: 166px;
   border: none;
@@ -63,6 +58,7 @@ const StCommunityBox = styled.div`
 `;
 
 const StTitleCarrier = styled.pre`
+  background-color: #ececec;
   font-size: 16px;
   font-style: bold;
   overflow: hidden;
@@ -74,6 +70,7 @@ const StTitleCarrier = styled.pre`
 `;
 
 const StContentCarrier = styled.div`
+  background-color: #ececec;
   width: 98%;
   height: 40px;
 
@@ -88,12 +85,14 @@ const StContentCarrier = styled.div`
 `;
 
 const StBox = styled.div`
+  background-color: #ececec;
   display: flex;
   justify-content: space-around;
-  width: 100%;
+  width: 80%;
   font-size: 13px;
   color: #737d81;
-  margin-bottom: 10px;
+  margin: auto;
+  height: 20px;
 `;
 
 const StName = styled.div`
