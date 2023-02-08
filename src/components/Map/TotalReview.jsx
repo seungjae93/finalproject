@@ -7,18 +7,35 @@ import ServeReviewModal from "./ServeReviewModal";
 import dabangLogo from "../../images/dabangLogo.svg";
 import zigbangLogo from "../../images/zigbangLogo.svg";
 
-const TotalReview = ({ estateIdData }) => {
+const TotalReview = ({ estateIdData, estateIds }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [estateInfoData, setEstateInfoData] = useState([]);
-  const { data } = useQuery(["showReview", estateIdData], async () => {
-    const response = await axios.get(
-      `${process.env.REACT_APP_API_MAP_SERVER}/review/items/${estateIdData}`
-    );
-    const { data } = response.data;
-    const { estateInfoArr } = data;
-    setEstateInfoData([estateInfoArr]);
-    return data;
-  });
+  const { data: showReview } = useQuery(
+    ["showReview", estateIdData],
+    async () => {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_MAP_SERVER}/review/items/${estateIdData}`
+      );
+      const { data } = response.data;
+      const { estateInfoArr } = data;
+      setEstateInfoData([estateInfoArr]);
+      return data;
+    }
+  );
+  const { data: showReviewList } = useQuery(
+    ["showReviewList", estateIds],
+    async () => {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_MAP_SERVER}/review/auto`,
+        { estateIds: estateIds }
+      );
+      const { data } = response.data;
+      return data;
+    }
+  );
+  console.log(showReviewList);
+  console.log(showReview);
+
   const showModal = () => {
     setModalOpen(!modalOpen);
   };
@@ -33,12 +50,14 @@ const TotalReview = ({ estateIdData }) => {
               상세보기
             </button>
           </div>
-          <div className="addressJibun">{data?.estate?.address_jibun}</div>
+          <div className="addressJibun">
+            {showReview?.estate?.address_jibun}
+          </div>
           <div className="detailModal">
             {modalOpen && (
               <ServeReviewModal
                 setModalOpen={setModalOpen}
-                estateIdData={data}
+                estateIdData={showReview}
               />
             )}
           </div>
@@ -62,121 +81,126 @@ const TotalReview = ({ estateIdData }) => {
           </div>
         </div>
 
-        {estateInfoData?.map((el, index) => {
-          return (
-            <StModalContainer key={`map-total-${index}`}>
-              <div className="totalWrap">
-                <div className="addressScoreWrap">
-                  <div>집주인이 문제를 잘 해결해주시나요?</div>
-                  <div className="scoreWrap">
-                    {el.communication.toFixed(1)}점
+        {estateInfoData &&
+          estateInfoData?.map((el, index) => {
+            return (
+              <StModalContainer key={`map-total-${index}`}>
+                <div className="totalWrap">
+                  <div className="addressScoreWrap">
+                    <div>집주인이 문제를 잘 해결해주시나요?</div>
+                    <div className="scoreWrap">
+                      {el?.communication.toFixed(1)}점
+                    </div>
+                  </div>
+                  <div>
+                    <ReviewInfoBar
+                      communication={el?.communication.toFixed(1)}
+                    />
+                  </div>
+                  <div className="evalWrap">
+                    <div>연락이 안되요</div>
+                    <div>잘 해결해줘요</div>
                   </div>
                 </div>
-                <div>
-                  <ReviewInfoBar communication={el.communication.toFixed(1)} />
-                </div>
-                <div className="evalWrap">
-                  <div>연락이 안되요</div>
-                  <div>잘 해결해줘요</div>
-                </div>
-              </div>
-              <div className="totalWrap">
-                <div className="addressScoreWrap">
-                  <div>보안은 어떤가요?</div>
-                  <div className="scoreWrap">{el.safe.toFixed(1)}점</div>
-                </div>
-                <div>
-                  <ReviewInfoBar safe={el.safe.toFixed(1)} />
-                </div>
-                <div className="evalWrap">
-                  <div>불안해요</div>
-                  <div>안전해요</div>
-                </div>
-              </div>
-              <div className="totalWrap">
-                <div className="addressScoreWrap">
-                  <div>벌레가 나오나요?</div>
-                  <div className="scoreWrap"> {el.bug.toFixed(1)}점</div>
-                </div>
-                <div>
-                  <ReviewInfoBar bug={el.bug.toFixed(1)} />
-                </div>
-                <div className="evalWrap">
-                  <div>많아요</div>
-                  <div>없어요</div>
-                </div>
-              </div>
-              <div className="totalWrap">
-                <div className="addressScoreWrap">
-                  <div> 하수구 냄새가 나나요? </div>
-                  <div className="scoreWrap"> {el.smell.toFixed(1)}점</div>
-                </div>
-                <div>
-                  <ReviewInfoBar smell={el.smell.toFixed(1)} />
-                </div>
-                <div className="evalWrap">
-                  <div>심해요</div>
-                  <div>안나요</div>
-                </div>
-              </div>
-              <div className="totalWrap">
-                <div className="addressScoreWrap">
-                  <div> 벽간소음이 심한가요? </div>
-                  <div className="scoreWrap">
-                    {" "}
-                    {el.walls_noise.toFixed(1)}점
+                <div className="totalWrap">
+                  <div className="addressScoreWrap">
+                    <div>보안은 어떤가요?</div>
+                    <div className="scoreWrap">{el?.safe.toFixed(1)}점</div>
+                  </div>
+                  <div>
+                    <ReviewInfoBar safe={el?.safe.toFixed(1)} />
+                  </div>
+                  <div className="evalWrap">
+                    <div>불안해요</div>
+                    <div>안전해요</div>
                   </div>
                 </div>
-                <div>
-                  <ReviewInfoBar walls_noise={el.walls_noise.toFixed(1)} />
+                <div className="totalWrap">
+                  <div className="addressScoreWrap">
+                    <div>벌레가 나오나요?</div>
+                    <div className="scoreWrap"> {el?.bug.toFixed(1)}점</div>
+                  </div>
+                  <div>
+                    <ReviewInfoBar bug={el?.bug.toFixed(1)} />
+                  </div>
+                  <div className="evalWrap">
+                    <div>많아요</div>
+                    <div>없어요</div>
+                  </div>
                 </div>
-                <div className="evalWrap">
-                  <div>심해요</div>
-                  <div>조용해요</div>
+                <div className="totalWrap">
+                  <div className="addressScoreWrap">
+                    <div> 하수구 냄새가 나나요? </div>
+                    <div className="scoreWrap"> {el?.smell.toFixed(1)}점</div>
+                  </div>
+                  <div>
+                    <ReviewInfoBar smell={el?.smell.toFixed(1)} />
+                  </div>
+                  <div className="evalWrap">
+                    <div>심해요</div>
+                    <div>안나요</div>
+                  </div>
                 </div>
-              </div>
-              <div className="totalWrap">
-                <div className="addressScoreWrap">
-                  <div>동네소음이 심한가요? </div>
-                  <div className="scoreWrap">{el.town_noise.toFixed(1)}점</div>
+                <div className="totalWrap">
+                  <div className="addressScoreWrap">
+                    <div> 벽간소음이 심한가요? </div>
+                    <div className="scoreWrap">
+                      {" "}
+                      {el?.walls_noise.toFixed(1)}점
+                    </div>
+                  </div>
+                  <div>
+                    <ReviewInfoBar walls_noise={el?.walls_noise.toFixed(1)} />
+                  </div>
+                  <div className="evalWrap">
+                    <div>심해요</div>
+                    <div>조용해요</div>
+                  </div>
                 </div>
-                <div>
-                  <ReviewInfoBar town_noise={el.town_noise.toFixed(1)} />
+                <div className="totalWrap">
+                  <div className="addressScoreWrap">
+                    <div>동네소음이 심한가요? </div>
+                    <div className="scoreWrap">
+                      {el?.town_noise.toFixed(1)}점
+                    </div>
+                  </div>
+                  <div>
+                    <ReviewInfoBar town_noise={el?.town_noise.toFixed(1)} />
+                  </div>
+                  <div className="evalWrap">
+                    <div>심해요</div>
+                    <div>조용해요</div>
+                  </div>
                 </div>
-                <div className="evalWrap">
-                  <div>심해요</div>
-                  <div>조용해요</div>
+                <div className="totalWrap">
+                  <div className="addressScoreWrap">
+                    <div> 결로/곰팡이가 생기나요?</div>
+                    <div className="scoreWrap"> {el?.mold.toFixed(1)}점</div>
+                  </div>
+                  <div>
+                    <ReviewInfoBar mold={el?.mold.toFixed(1)} />
+                  </div>
+                  <div className="evalWrap">
+                    <div>잘생겨요</div>
+                    <div>없어요</div>
+                  </div>
                 </div>
-              </div>
-              <div className="totalWrap">
-                <div className="addressScoreWrap">
-                  <div> 결로/곰팡이가 생기나요?</div>
-                  <div className="scoreWrap"> {el.mold.toFixed(1)}점</div>
+                <div className="totalWrap">
+                  <div className="addressScoreWrap">
+                    <div>주차가 편리한가요? </div>
+                    <div className="scoreWrap"> {el?.parking.toFixed(1)}점</div>
+                  </div>
+                  <div>
+                    <ReviewInfoBar parking={el?.parking.toFixed(1)} />
+                  </div>
+                  <div className="evalWrap">
+                    <div>불편해요</div>
+                    <div>편해요</div>
+                  </div>
                 </div>
-                <div>
-                  <ReviewInfoBar mold={el.mold.toFixed(1)} />
-                </div>
-                <div className="evalWrap">
-                  <div>잘생겨요</div>
-                  <div>없어요</div>
-                </div>
-              </div>
-              <div className="totalWrap">
-                <div className="addressScoreWrap">
-                  <div>주차가 편리한가요? </div>
-                  <div className="scoreWrap"> {el.parking.toFixed(1)}점</div>
-                </div>
-                <div>
-                  <ReviewInfoBar parking={el.parking.toFixed(1)} />
-                </div>
-                <div className="evalWrap">
-                  <div>불편해요</div>
-                  <div>편해요</div>
-                </div>
-              </div>
-            </StModalContainer>
-          );
-        })}
+              </StModalContainer>
+            );
+          })}
       </StReviewContainer>
     </>
   );

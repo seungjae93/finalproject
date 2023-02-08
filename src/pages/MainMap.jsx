@@ -226,6 +226,27 @@ const MainMap = () => {
     );
   };
 
+  // const estateIdhandler = () => {
+  //   if (!positions) return null;
+  //   return (
+  //     <StReviewContainer>
+  //       {(markerClickOn === true && markerArrayEstateId) ||
+  //       (estateIds && estateIds) ? (
+  //         <TotalReview
+  //           estateIdData={markerArrayEstateId}
+  //           estateIds={estateIds}
+  //         />
+  //       ) : (
+  //         <StEmptyContainer>
+  //           <img src={logoGray} alt="logoGray" />
+  //           <div>검색창을 이용해주세요</div>
+  //           <div>마커를 클릭하면 정보가 나와요</div>
+  //         </StEmptyContainer>
+  //       )}
+  //     </StReviewContainer>
+  //   );
+  // };
+
   const MarkerClickHandler = (estateId) => {
     setMarkerClickOn(true);
     setMarkerArrayEstateId(estateId);
@@ -245,7 +266,7 @@ const MainMap = () => {
           newArray.push({ locate: el[0], index: el.length });
           setMarkerArray(newArray);
           el?.map((value) => {
-            secondArray.push(value);
+            secondArray.push(value.estateId);
           });
           setEstateIds(secondArray);
         }
@@ -311,12 +332,14 @@ const MainMap = () => {
           <StReviewContainer>
             {markerClickOn === true && markerArrayEstateId ? (
               <TotalReview estateIdData={markerArrayEstateId} />
-            ) : (
+            ) : estateIds?.length === 0 ? (
               <StEmptyContainer>
                 <img src={logoGray} alt="logoGray" />
                 <div>검색창을 이용해주세요</div>
-                <div>마커를 클릭하면 정보가 나와요.</div>
+                <div>마커를 클릭하면 정보가 나와요</div>
               </StEmptyContainer>
+            ) : (
+              <TotalReview estateIds={estateIds} />
             )}
           </StReviewContainer>
           <StMapContainer>

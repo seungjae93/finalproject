@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useRef } from "react";
 import styled from "styled-components";
 import ImageDetailCarousel from "./ImageDetailCarousel";
@@ -153,7 +154,7 @@ const ServeReviewModal = ({ setModalOpen, estateIdData }) => {
     </>
   );
 };
-export default ServeReviewModal;
+export default React.memo(ServeReviewModal);
 
 const StContainer = styled.div`
   position: absolute;

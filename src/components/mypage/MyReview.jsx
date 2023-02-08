@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getmypageReviews } from "../../redux/api/reviewApi";
 import { deletePost } from "../../redux/api/reviewApi";
+import Star from "../../images/Star.svg";
 
 const MyReview = () => {
   const queryClient = useQueryClient();
@@ -42,11 +43,7 @@ const MyReview = () => {
                   </div>
                   <div className="address">{reviews.address}</div>
 
-                  <img
-                    className="star"
-                    src={require("../../images/Star 165.png")}
-                    alt="star"
-                  />
+                  <img className="Star" src={Star} alt="Star" />
                   <div className="starPoint">{reviews.star} / 5</div>
                   <button
                     className="delBtn"

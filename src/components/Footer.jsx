@@ -18,11 +18,15 @@ const Footer = () => {
     } else navigate("/login");
   };
   const locationNow = useLocation();
-  if (locationNow.pathname === "/map") return null;
-  if (locationNow.pathname === "/list") return null;
-  if (locationNow.pathname === "/login") return null;
-  if (locationNow.pathname === "/review") return null;
-  if (locationNow.pathname === "/auth/kakao/callback") return null;
+  if (
+    locationNow.pathname === "/map" ||
+    locationNow.pathname === "/list" ||
+    locationNow.pathname === "/login" ||
+    locationNow.pathname === "/review" ||
+    locationNow.pathname === "/auth/kakao/callback"
+  ) {
+    return null;
+  }
 
   return (
     <>

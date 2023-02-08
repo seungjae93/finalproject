@@ -52,7 +52,7 @@ const ImageDetailCarousel = ({ imageUrl }) => {
   );
 };
 
-export default ImageDetailCarousel;
+export default React.memo(ImageDetailCarousel);
 
 const StCardImg = styled.img`
   width: 550px;
