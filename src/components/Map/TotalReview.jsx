@@ -7,7 +7,7 @@ import ServeReviewModal from "./ServeReviewModal";
 import dabangLogo from "../../images/dabangLogo.svg";
 import zigbangLogo from "../../images/zigbangLogo.svg";
 
-const TotalReview = ({ estateIdData, estateIds }) => {
+const TotalReview = ({ estateIdData }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [estateInfoData, setEstateInfoData] = useState([]);
   const { data: showReview } = useQuery(
@@ -22,19 +22,20 @@ const TotalReview = ({ estateIdData, estateIds }) => {
       return data;
     }
   );
-  const { data: showReviewList } = useQuery(
-    ["showReviewList", estateIds],
-    async () => {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_MAP_SERVER}/review/auto`,
-        { estateIds: estateIds }
-      );
-      const { data } = response.data;
-      return data;
-    }
-  );
-  console.log(showReviewList);
-  console.log(showReview);
+  // const { data: showReviewList } = useQuery(
+  //   ["showReviewList", estateIds],
+  //   async () => {
+  //     const response = await axios.post(
+  //       `${process.env.REACT_APP_API_MAP_SERVER}/review/auto`,
+  //       { estateIds: estateIds }
+  //     );
+  //     const { data } = response.data;
+  //     // console.log(data);
+  //     return data;
+  //   }
+  // );
+  // console.log(showReviewList);
+  // console.log(showReview);
 
   const showModal = () => {
     setModalOpen(!modalOpen);
@@ -206,7 +207,7 @@ const TotalReview = ({ estateIdData, estateIds }) => {
   );
 };
 
-export default TotalReview;
+export default React.memo(TotalReview);
 
 const StReviewContainer = styled.div`
   margin: auto;
