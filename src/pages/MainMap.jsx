@@ -4,11 +4,13 @@ import axios from "axios";
 import { throttle, debounce } from "lodash";
 import { Map, MapMarker, CustomOverlayMap } from "react-kakao-maps-sdk";
 import TotalReview from "../components/Map/TotalReview";
+import ReviewList from "../components/Map/ReviewList";
 import Button from "../components/button/Button";
 import clusterer34 from "../images/clusterer34.svg";
 import clusterer89 from "../images/clusterer89.svg";
 import marker from "../images/marker.svg";
 import logoGray from "../images/logoGray.svg";
+import { async } from "q";
 
 const { kakao } = window;
 
@@ -29,7 +31,8 @@ const MainMap = () => {
   const [isHaveInputValue, setIsHaveInputValue] = useState(false);
   const [dropDownDataIndex, setDropDownDataIndex] = useState(-1);
   const inputRef = useRef(null);
-  const scrollRef = useRef(null);
+
+  const markerRef = useRef(null);
 
   //지도 레벨
   const [zoomLevel, setZoomLevel] = useState(6);
@@ -261,6 +264,7 @@ const MainMap = () => {
       newArray.push(...positions);
       setMarkerArray(newArray);
     } else if (2 < zoomLevel < 5) {
+      setMarkerClickOn(false);
       positions?.map((el) => {
         if (Array.isArray(el)) {
           newArray.push({ locate: el[0], index: el.length });
@@ -332,14 +336,14 @@ const MainMap = () => {
           <StReviewContainer>
             {markerClickOn === true && markerArrayEstateId ? (
               <TotalReview estateIdData={markerArrayEstateId} />
-            ) : estateIds?.length === 0 ? (
+            ) : zoomLevel > 4 ? (
               <StEmptyContainer>
                 <img src={logoGray} alt="logoGray" />
                 <div>검색창을 이용해주세요</div>
                 <div>마커를 클릭하면 정보가 나와요</div>
               </StEmptyContainer>
             ) : (
-              <TotalReview estateIds={estateIds} />
+              <ReviewList estateIds={estateIds} />
             )}
           </StReviewContainer>
           <StMapContainer>
@@ -389,6 +393,7 @@ const MainMap = () => {
                     <MapMarker
                       key={el.estateId}
                       position={el ?? el}
+                      ref={markerRef}
                       image={{
                         src: marker,
                         // 마커이미지의 주소입니다
