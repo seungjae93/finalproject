@@ -3,13 +3,13 @@ import styled from "styled-components";
 import { useNavigate } from "react-router";
 import { CgChevronRight } from "react-icons/cg";
 import Button from "../components/button/Button";
-import mainPageCommunity from "../images/mainPageCommunity.svg";
-import mainPageReview from "../images/mainPageReview.svg";
-import mainPageMap from "../images/mainPageMap.svg";
-import mainPageCenter from "../images/mainPageCenter.svg";
-import mainPageSubImg1 from "../images/mainPageSubImg1.svg";
-import mainPageSubImg2 from "../images/mainPageSubImg2.svg";
-import mainPageSubImg3 from "../images/mainPageSubImg3.svg";
+import mainPageCommunity from "../images/mainPageCommunity.webp";
+import mainPageReview from "../images/mainPageReview.webp";
+import mainPageMap from "../images/mainPageMap.webp";
+import mainPageCenter from "../images/mainPageCenter.webp";
+import mainPageSubImg1 from "../images/mainPageSubImg1.webp";
+import mainPageSubImg2 from "../images/mainPageSubImg2.webp";
+import mainPageSubImg3 from "../images/mainPageSubImg3.webp";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -245,7 +245,7 @@ const StTopBox = styled.div`
   width: 480px;
   height: 310px;
   background-color: #ffffff;
-  opacity: 90%;
+  opacity: 75%;
   position: absolute;
   margin-top: 140px;
   margin-left: 650px;
