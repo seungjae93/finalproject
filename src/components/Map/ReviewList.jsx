@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
 import axios from "axios";
@@ -13,28 +13,40 @@ const ReviewList = ({ estateIds }) => {
     const { data } = response.data;
     return data;
   });
-  console.log(data);
-  return (
-    <>
-      <StReviewContainer>
+
+  const renderItem = useMemo(() => {
+    return (
+      <>
         {data?.map((el, index) => {
           return (
             <StReviewWrap key={`map-list-${index}`}>
-              <div className="reviewAddress">{el?.estates?.address}</div>
-              <div className="reviewDeposit">
-                {el?.review?.transaction_type} {el?.review?.deposit} /{" "}
-                {el?.review?.monthly_payment}
-              </div>
-              <div>{el?.review?.residence_type}</div>
-              <div className="reviewStar">
-                <img src={Star} alt="Star" />
-                {el?.review?.star}
-                <div className="reveiwTotalScore"> / 5.0</div>
+              <span className="reviewAddress">{el?.estates?.address}</span>
+
+              <div className="bottomWrapper">
+                <div className="bottomWrapper_left">
+                  <span className="reviewDeposit">
+                    {el?.review?.transaction_type} {el?.review?.deposit} /{" "}
+                    {el?.review?.monthly_payment}
+                  </span>
+                  <span className="residenceType">
+                    {el?.review?.residence_type}
+                  </span>
+                </div>
+                <div className="reviewStar">
+                  <img src={Star} alt="Star" />
+                  <span>{el?.review?.star}</span>
+                  <span className="reveiwTotalScore"> / 5.0</span>
+                </div>
               </div>
             </StReviewWrap>
           );
         })}
-      </StReviewContainer>
+      </>
+    );
+  }, [data]);
+  return (
+    <>
+      <StReviewContainer>{renderItem}</StReviewContainer>
     </>
   );
 };
@@ -42,14 +54,13 @@ const ReviewList = ({ estateIds }) => {
 export default ReviewList;
 
 const StReviewContainer = styled.div`
-  margin: auto;
   display: flex;
   flex-direction: column;
-  width: 425px;
   height: 85vh;
-  gap: 20px;
   overflow-y: scroll;
-  overflow-x: hidden;
+  padding: 0px 10px 10px 10px;
+  box-sizing: border-box;
+
   &::-webkit-scrollbar {
     width: 7px;
   }
@@ -59,19 +70,35 @@ const StReviewContainer = styled.div`
   }
 `;
 const StReviewWrap = styled.div`
+  border-radius: 10px;
+  background-color: white;
   display: flex;
+  margin-bottom: 20px;
   flex-direction: column;
-  width: 400px;
+  justify-content: space-between;
   height: 100px;
-  padding: 10px 0px 10px 10px;
-  border-bottom: 1px solid #ccc;
-  gap: 10px;
+  padding: 30px 30px;
+
   .reviewAddress {
     font-weight: bold;
     font-size: 18px;
+    margin-bottom: 20px;
+  }
+  .bottomWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    .bottomWrapper_left {
+      display: flex;
+      flex-direction: column;
+    }
   }
   .reviewDeposit {
     font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+  .residenceType {
     font-size: 15px;
   }
   .reviewStar {
@@ -81,9 +108,14 @@ const StReviewWrap = styled.div`
     font-size: 20px;
     font-weight: bold;
     color: #819608;
+    img {
+      width: 18px;
+      margin-right: 3px;
+    }
   }
   .reveiwTotalScore {
     color: #737d81;
     font-size: 17px;
+    margin-left: 4px;
   }
 `;
