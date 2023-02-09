@@ -15,6 +15,7 @@ const PostForm = () => {
   const { postLocation1, postLocation2 } = hangjungdong;
 
   const email = localStorage.getItem("email");
+  //console.log(email)
 
   const onPreviewImage = (e) => {
     setImage(e.target.files[0]);
