@@ -1,9 +1,8 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainPage from "../pages/MainPage";
-import Header from "../shared/Header";
-import Footer from "../shared/Footer";
-import ScrollToTop from "../shared/ScrollToTop";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import MainMap from "../pages/MainMap";
 import KakaoLogin from "../pages/KakaoLogin";
 import Login from "../pages/Login";
