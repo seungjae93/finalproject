@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useAddCommunity } from "../../redux/api/communityApi";
-import { hangjungdong } from "./hangjungdong";
+import { hangjungdong } from "../Community/hangjungdong";
 import { Selected } from "./Selected";
 
 const PostForm = () => {
