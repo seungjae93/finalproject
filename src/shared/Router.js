@@ -10,7 +10,6 @@ import Login from "../pages/login/Login";
 import ReviewPage from "../pages/reviewpage/ReviewPage";
 import Mypage from "../pages/mypage/Mypage";
 import PostList from "../pages/community/PostList";
-import PostForm from "../components/community/PostForm";
 import PostDetail from "../pages/community/PostDetail";
 import PostEdit from "../pages/community/PostEdit";
 
@@ -27,7 +26,6 @@ const Router = () => {
         <Route path="/review" element={<ReviewPage />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/list" element={<PostList />} />
-        <Route path="/post" element={<PostForm />} />
         <Route path="/:postId" element={<PostDetail />} />
         <Route path="/edit/:postId" element={<PostEdit />} />
       </Routes>
