@@ -18,7 +18,7 @@ const Login = () => {
         <a href={KAKAO_AUTH_URL}>
           <StImg
             alt="kakao_login"
-            src={require("../../images/kakao_login.jpg")}
+            src={require("../images/kakao_login.jpg")}
           ></StImg>
         </a>
       </StLoginBox>
