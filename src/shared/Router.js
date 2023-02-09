@@ -12,6 +12,7 @@ import Mypage from "../pages/mypage/Mypage";
 import PostList from "../pages/community/PostList";
 import PostDetail from "../pages/community/PostDetail";
 import PostEdit from "../pages/community/PostEdit";
+import PrivateRoutes from "./PrivateRoutes";
 
 const Router = () => {
   return (
@@ -23,8 +24,10 @@ const Router = () => {
         <Route path="/map" element={<MainMap />} />
         <Route path="/auth/kakao/callback" element={<KakaoLogin />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/review" element={<ReviewPage />} />
-        <Route path="/mypage" element={<Mypage />} />
+        <Route element={<PrivateRoutes />}>
+          <Route path="/review" element={<ReviewPage />} />
+          <Route path="/mypage" element={<Mypage />} />
+        </Route>
         <Route path="/list" element={<PostList />} />
         <Route path="/:postId" element={<PostDetail />} />
         <Route path="/edit/:postId" element={<PostEdit />} />

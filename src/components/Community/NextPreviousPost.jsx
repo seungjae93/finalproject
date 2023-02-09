@@ -70,11 +70,9 @@ const StNextPost = styled.div`
 `;
 
 const StNextTitle = styled.div`
-  display: flex;
-  justify-content: flex-end;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 40%;
+  max-width: 40%;
   margin-right: 10px;
 `;

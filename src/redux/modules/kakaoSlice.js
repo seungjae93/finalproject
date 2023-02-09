@@ -23,7 +23,7 @@ export const __kakaoLogin = createAsyncThunk(
     }
   }
 );
-
+// mutate 를 이용
 export const __kakaoLogout = async () => {
   const response = await instance.post("/auth/logout");
   return response.data;
