@@ -48,7 +48,6 @@ const MainMap = () => {
 
   //검색어 받아오는 로직
 
-  // const delaySetSearchAddress = useCallback(debounce((searchAddress) => {}));
   console.log(searchAddress);
   const onAddressHandler = throttle(async (e) => {
     const { value } = e.target;
