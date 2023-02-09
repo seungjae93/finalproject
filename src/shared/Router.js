@@ -9,9 +9,12 @@ import KakaoLogin from "../pages/KakaoLogin";
 import Login from "../pages/Login";
 import ReviewPage from "../pages/ReviewPage";
 import Mypage from "../pages/Mypage";
-import PostList from "../pages/PostList";
-import PostDetail from "../pages/PostDetail";
-import PostEdit from "../pages/PostEdit";
+import PostList from "../pages/PostCommunity/PostList";
+import PostForm from "../components/Community/PostForm";
+import PostDetail from "../pages/PostCommunity/PostDetail";
+import PostEdit from "../pages/PostCommunity/PostEdit";
+import FeatureButton from "../pages/Button";
+import ScrollToTop from "../components/ScrollToTop";
 import PrivateRoutes from "./PrivateRoutes";
 
 const Router = () => {
