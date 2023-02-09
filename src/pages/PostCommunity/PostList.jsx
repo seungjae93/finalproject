@@ -8,7 +8,7 @@ import { debounce } from "lodash";
 import { useInView } from "react-intersection-observer";
 import { getCommunity } from "../../redux/api/communityApi";
 import InfiniteScroll from "react-infinite-scroller";
-import { SeletedOne } from "../components/Community/Selected";
+import { SeletedOne } from "../../components/Community/Selected";
 import Button from "../components/button/Button";
 
 const PostList = () => {
