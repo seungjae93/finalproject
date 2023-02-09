@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { hangjungdong } from "../../components/Community/hangjungdong";
-import PostListCard from "../components/Community/PostListCard";
+import PostListCard from "../../components/Community/PostListCard";
 import { debounce } from "lodash";
 import { useInView } from "react-intersection-observer";
 import { getCommunity } from "../redux/api/communityApi";
