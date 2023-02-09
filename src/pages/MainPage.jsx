@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
 import { CgChevronRight } from "react-icons/cg";
-import Button from "../../components/button/Button";
+import Button from "../components/button/Button";
 import mainPageCommunity from "../../images/mainPageCommunity.webp";
 import mainPageReview from "../../images/mainPageReview.webp";
 import mainPageMap from "../../images/mainPageMap.webp";
