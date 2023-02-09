@@ -7,7 +7,7 @@ import {
   getUpdateCommunity,
   updateCommunity,
 } from "../../redux/api/communityApi";
-import { hangjungdong } from "../../components/Community/hangjungdong";
+import { hangjungdong } from "../../components/community/hangjungdong";
 
 const PostEdit = () => {
   const navigate = useNavigate();

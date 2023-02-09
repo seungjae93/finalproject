@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import GlobalStyle from "../components/styles/GlobalStyle";
 import { useNavigate } from "react-router";
 import { useAddPost } from "../redux/api/reviewApi";
 import Button from "../components/button/Button";
@@ -99,7 +98,6 @@ const ReviewPage = () => {
   };
   return (
     <>
-      <GlobalStyle />
       <StReviewWrap>
         <StReviewBox>
           <StTitle>이집은 후기 작성하기</StTitle>

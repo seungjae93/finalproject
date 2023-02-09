@@ -1,8 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainPage from "../pages/MainPage";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../shared/Header";
+import Footer from "../shared/Footer";
+import ScrollToTop from "../shared/ScrollToTop";
 import MainMap from "../pages/MainMap";
 import KakaoLogin from "../pages/KakaoLogin";
 import Login from "../pages/Login";
@@ -31,8 +32,6 @@ const Router = () => {
           <Route path="/mypage" element={<Mypage />} />
         </Route>
         <Route path="/list" element={<PostList />} />
-        <Route path="/post" element={<PostForm />} />
-        <Route path="/button" element={<FeatureButton />} />
         <Route path="/:postId" element={<PostDetail />} />
         <Route path="/edit/:postId" element={<PostEdit />} />
       </Routes>

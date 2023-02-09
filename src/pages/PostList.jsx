@@ -2,15 +2,14 @@ import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { hangjungdong } from "../../components/Community/hangjungdong";
-import PostListCard from "../../components/Community/PostListCard";
+import { hangjungdong } from "../components/community/hangjungdong";
+import PostListCard from "../components/community/PostListCard";
 import { debounce } from "lodash";
 import { useInView } from "react-intersection-observer";
-import { getCommunity } from "../../redux/api/communityApi";
+import { getCommunity } from "../redux/api/communityApi";
 import InfiniteScroll from "react-infinite-scroller";
-import { SeletedOne } from "../../components/Community/Selected";
-import Button from "../../components/button/Button";
-import PostListCardSkeleton from "../../components/Community/PostListCardSkeleton";
+import { SeletedOne } from "../components/community/Selected";
+import Button from "../components/button/Button";
 
 const PostList = () => {
   const navigate = useNavigate();
@@ -86,7 +85,7 @@ const PostList = () => {
     }
   }, [inView]);
 
-  // if (isLoading) return <h2> 로딩중 .. </h2>;
+  if (isLoading) return <h2> 잠시만 기다려 주세요 </h2>;
   if (isError) return <h2> Error : {error.toString()} </h2>;
   return (
     <>
@@ -120,9 +119,7 @@ const PostList = () => {
         {/* hasNextPage 다음 또는 이전 페이지가 있는지 확인 하는 속성
       fetchNextPage 다음 페이지를 가져오기 위한 반환 속성  */}
         <STPostCon>
-          {isLoading === true ? (
-            <PostListCardSkeleton />
-          ) : data?.pages[0]?.posts.length !== 0 ? (
+          {data?.pages[0]?.posts.length !== 0 ? (
             data?.pages?.map((page) => {
               return page?.posts?.map((posts) => {
                 return (

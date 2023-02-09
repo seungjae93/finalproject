@@ -6,8 +6,8 @@ import {
   deleteComment,
   getComment,
   updateComment,
-} from "../redux/api/communityApi";
-import CommentPost from "../components/Community/CommentPost";
+} from "../../redux/api/communityApi";
+import CommentPost from "../../components/community/CommentPost";
 
 const Comment = () => {
   const queryClient = useQueryClient();
