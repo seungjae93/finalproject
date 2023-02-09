@@ -4,8 +4,8 @@ import { useNavigate } from "react-router";
 import { useAddPost } from "../../redux/api/reviewApi";
 import Button from "../../components/button/Button";
 import useInputItem from "../../hooks/useInputItem";
-import { Radio } from "../../components/community/Radio";
-import { KakaoAddress } from "../../components/community/KakaoAddress";
+import { Radio } from "../../components/Community/Radio";
+import { KakaoAddress } from "../../components/Community/KakaoAddress";
 
 const ReviewPage = () => {
   const navigate = useNavigate();
