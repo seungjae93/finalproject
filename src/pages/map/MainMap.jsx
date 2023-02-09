@@ -48,7 +48,6 @@ const MainMap = () => {
 
   //검색어 받아오는 로직
 
-  console.log(searchAddress);
   const onAddressHandler = throttle(async (e) => {
     const { value } = e.target;
     console.log(value);
