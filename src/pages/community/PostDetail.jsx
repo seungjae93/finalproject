@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { useNavigate, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { deleteCommunity, detailCommunity } from "../../redux/api/communityApi";
-import Comment from "../Comment";
-import { NextPreviousPost } from "../../components/Community/NextPreviousPost";
+import Comment from "./Comment";
+import { NextPreviousPost } from "../../components/community/NextPreviousPost";
 
 const PostDetail = () => {
   const navigate = useNavigate();

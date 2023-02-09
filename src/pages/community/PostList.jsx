@@ -2,15 +2,15 @@ import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { hangjungdong } from "../../components/Community/hangjungdong";
-import PostListCard from "../../components/Community/PostListCard";
+import { hangjungdong } from "../../components/community/hangjungdong";
+import PostListCard from "../../components/community/PostListCard";
 import { debounce } from "lodash";
 import { useInView } from "react-intersection-observer";
 import { getCommunity } from "../../redux/api/communityApi";
 import InfiniteScroll from "react-infinite-scroller";
-import { SeletedOne } from "../../components/Community/Selected";
+import { SeletedOne } from "../../components/community/Selected";
 import Button from "../../components/button/Button";
-import PostListCardSkeleton from "../../components/Community/PostListCardSkeleton";
+import PostListCardSkeleton from "../../components/community/PostListCardSkeleton";
 
 const PostList = () => {
   const navigate = useNavigate();

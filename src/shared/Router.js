@@ -1,19 +1,18 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import MainPage from "../pages/MainPage";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import MainMap from "../pages/MainMap";
-import KakaoLogin from "../pages/KakaoLogin";
-import Login from "../pages/Login";
-import ReviewPage from "../pages/ReviewPage";
-import Mypage from "../pages/Mypage";
-import PostList from "../pages/PostCommunity/PostList";
-import PostForm from "../components/Community/PostForm";
-import PostDetail from "../pages/PostCommunity/PostDetail";
-import PostEdit from "../pages/PostCommunity/PostEdit";
-import FeatureButton from "../pages/Button";
-import ScrollToTop from "../components/ScrollToTop";
+import MainPage from "../pages/mainpage/MainPage";
+import Header from "../shared/Header";
+import Footer from "../shared/Footer";
+import ScrollToTop from "../shared/ScrollToTop";
+import MainMap from "../pages/map/MainMap";
+import KakaoLogin from "../pages/login/KakaoLogin";
+import Login from "../pages/login/Login";
+import ReviewPage from "../pages/reviewpage/ReviewPage";
+import Mypage from "../pages/mypage/Mypage";
+import PostList from "../pages/community/PostList";
+import PostForm from "../components/community/PostForm";
+import PostDetail from "../pages/community/PostDetail";
+import PostEdit from "../pages/community/PostEdit";
 
 const Router = () => {
   return (
@@ -29,7 +28,6 @@ const Router = () => {
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/list" element={<PostList />} />
         <Route path="/post" element={<PostForm />} />
-        <Route path="/button" element={<FeatureButton />} />
         <Route path="/:postId" element={<PostDetail />} />
         <Route path="/edit/:postId" element={<PostEdit />} />
       </Routes>

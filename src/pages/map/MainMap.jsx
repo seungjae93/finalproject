@@ -3,13 +3,13 @@ import styled from "styled-components";
 import axios from "axios";
 import { throttle, debounce } from "lodash";
 import { Map, MapMarker, CustomOverlayMap } from "react-kakao-maps-sdk";
-import TotalReview from "../components/Map/TotalReview";
-import ReviewList from "../components/Map/ReviewList";
-import Button from "../components/button/Button";
-import clusterer34 from "../images/clusterer34.svg";
-import clusterer89 from "../images/clusterer89.svg";
-import marker from "../images/marker.svg";
-import logoGray from "../images/logoGray.svg";
+import TotalReview from "../../components/map/TotalReview";
+import ReviewList from "../../components/map/ReviewList";
+import Button from "../../components/button/Button";
+import clusterer34 from "../../images/clusterer34.svg";
+import clusterer89 from "../../images/clusterer89.svg";
+import marker from "../../images/marker.svg";
+import logoGray from "../../images/logoGray.svg";
 
 const { kakao } = window;
 
