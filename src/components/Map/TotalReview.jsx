@@ -54,17 +54,13 @@ const TotalReview = ({ estateIdData }) => {
             <div className="crawlMarginLeft">
               <img src={dabangLogo} alt="dabangLogo" />
             </div>
-            <div className="crawlMarginLeft">
-              다방 이 집 매물보기 (준비중..)
-            </div>
+            <div className="crawlMarginLeft">다방 이 집 매물보기</div>
           </div>
           <div className="crawlWrapper">
             <div className="crawlMarginLeft">
               <img src={zigbangLogo} alt="zigbangLogo" />
             </div>
-            <div className="crawlMarginLeft">
-              직방 이 집 매물보기 (준비중..)
-            </div>
+            <div className="crawlMarginLeft">직방 이 집 매물보기</div>
           </div>
         </div>
 
