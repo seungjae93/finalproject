@@ -10,7 +10,6 @@ import clusterer34 from "../images/clusterer34.svg";
 import clusterer89 from "../images/clusterer89.svg";
 import marker from "../images/marker.svg";
 import logoGray from "../images/logoGray.svg";
-import { async } from "q";
 
 const { kakao } = window;
 
@@ -26,11 +25,7 @@ const MainMap = () => {
 
   //자동검색
   const [searchAddress, setSearchAddress] = useState("");
-  const [autoSearchKeyword, setAutoSearchKeyword] = useState("");
   const [searchData, setSearchData] = useState([]);
-  const [isHaveInputValue, setIsHaveInputValue] = useState(false);
-  const [dropDownDataIndex, setDropDownDataIndex] = useState(-1);
-  const inputRef = useRef(null);
 
   const markerRef = useRef(null);
 
@@ -52,8 +47,12 @@ const MainMap = () => {
   const [markerClickOn, setMarkerClickOn] = useState(false);
 
   //검색어 받아오는 로직
+
+  // const delaySetSearchAddress = useCallback(debounce((searchAddress) => {}));
+  console.log(searchAddress);
   const onAddressHandler = throttle(async (e) => {
     const { value } = e.target;
+    console.log(value);
     setSearchAddress(value);
     try {
       const response = await axios.get(
@@ -75,29 +74,10 @@ const MainMap = () => {
   };
 
   // 검색창 키보드 이동
-  const ArrowDown = "ArrowDown";
-  const ArrowUp = "ArrowUp";
   const Enter = "Enter";
-
   const onSubmitSearch = debounce((e) => {
     if (e.key === Enter) {
       onSearchHandler();
-    }
-
-    if (e.key === ArrowDown) {
-      setDropDownDataIndex(dropDownDataIndex + 1);
-      /* childElementCount는 li tag의 개수를 의미하고, 검색 내역 인덱스 키워드에서
-           또 아래 키를 누르면 맨처음 인덱스 키워드로 돌아가라는 의미이다. */
-      if (inputRef.current === dropDownDataIndex + 1) {
-        setDropDownDataIndex(0);
-      }
-    }
-    if (e.key === ArrowUp) {
-      setDropDownDataIndex(dropDownDataIndex - 1);
-
-      if (dropDownDataIndex <= 0) {
-        setDropDownDataIndex(-1);
-      }
     }
   }, 200);
 
@@ -229,27 +209,6 @@ const MainMap = () => {
     );
   };
 
-  // const estateIdhandler = () => {
-  //   if (!positions) return null;
-  //   return (
-  //     <StReviewContainer>
-  //       {(markerClickOn === true && markerArrayEstateId) ||
-  //       (estateIds && estateIds) ? (
-  //         <TotalReview
-  //           estateIdData={markerArrayEstateId}
-  //           estateIds={estateIds}
-  //         />
-  //       ) : (
-  //         <StEmptyContainer>
-  //           <img src={logoGray} alt="logoGray" />
-  //           <div>검색창을 이용해주세요</div>
-  //           <div>마커를 클릭하면 정보가 나와요</div>
-  //         </StEmptyContainer>
-  //       )}
-  //     </StReviewContainer>
-  //   );
-  // };
-
   const MarkerClickHandler = (estateId) => {
     setMarkerClickOn(true);
     setMarkerArrayEstateId(estateId);
@@ -305,20 +264,16 @@ const MainMap = () => {
             placeholder="지역, 지하철역, 학교 검색하기"
             onKeyDown={onSubmitSearch}
             onChange={onAddressHandler}
-            value={isHaveInputValue ? autoSearchKeyword : searchAddress}
+            value={searchAddress}
           />
           {searchAddress && (
             <AutoSearchContainer>
-              <AutoSearchWrap ref={inputRef}>
+              <AutoSearchWrap>
                 {searchData?.map((el, index) => {
                   return (
                     <AutoSearchData
-                      isFocus={dropDownDataIndex === index ? true : false}
                       key={`map-main-${index}`}
                       onClick={() => clickDropDownItem(el)}
-                      onMouseOver={() =>
-                        setDropDownDataIndex(dropDownDataIndex)
-                      }
                     >
                       {el}
                     </AutoSearchData>
