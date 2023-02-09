@@ -12,14 +12,12 @@ import Mypage from "../pages/Mypage";
 import PostList from "../pages/PostCommunity/PostList";
 import PostDetail from "../pages/PostCommunity/PostDetail";
 import PostEdit from "../pages/PostCommunity/PostEdit";
-import ScrollToTop from "../components/ScrollToTop";
 import PrivateRoutes from "./PrivateRoutes";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Header />
-      <ScrollToTop />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/map" element={<MainMap />} />
