@@ -13,6 +13,7 @@ import PostDetail from "../pages/PostCommunity/PostDetail";
 import PostEdit from "../pages/PostCommunity/PostEdit";
 import PrivateRoutes from "../shared/PrivateRoutes";
 import ScrollToTop from "./ScrollToTop";
+import PostForm from "../components/Community/PostForm";
 
 const Router = () => {
   return (
@@ -26,11 +27,12 @@ const Router = () => {
         <Route path="/login" element={<Login />} />
         <Route element={<PrivateRoutes />}>
           <Route path="/review" element={<ReviewPage />} />
+          <Route path="/post" element={<PostForm />} />
           <Route path="/mypage" element={<Mypage />} />
+          <Route path="/edit/:postId" element={<PostEdit />} />
         </Route>
         <Route path="/list" element={<PostList />} />
         <Route path="/:postId" element={<PostDetail />} />
-        <Route path="/edit/:postId" element={<PostEdit />} />
       </Routes>
       <Footer />
     </BrowserRouter>
