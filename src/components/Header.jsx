@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { __kakaoLogout } from "../redux/modules/kakaoSlice";
 import { useMutation } from "@tanstack/react-query";
+import logo from "../images/logo.webp";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ const Header = () => {
       <StNavbar>
         <div className="header">
           <StLogo
-            src={require("../images/logo.jpg")}
+            src={logo}
             alt="logo"
             onClick={() => {
               navigate("/");
