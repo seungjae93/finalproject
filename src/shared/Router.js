@@ -11,7 +11,7 @@ import Mypage from "../pages/Mypage";
 import PostList from "../pages/PostCommunity/PostList";
 import PostDetail from "../pages/PostCommunity/PostDetail";
 import PostEdit from "../pages/PostCommunity/PostEdit";
-import PrivateRoutes from "./PrivateRoutes";
+import PrivateRoutes from "../shared/PrivateRoutes";
 import ScrollToTop from "./ScrollToTop";
 
 const Router = () => {
