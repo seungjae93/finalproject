@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import GlobalStyle from "./styles/GlobalStyle";
-import footerLogo from "../images/footerLogo.svg";
+import footerLogo from "../images/footerLogo.webp";
 
 const Footer = () => {
   const navigate = useNavigate();

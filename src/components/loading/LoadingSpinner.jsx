@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import footerLogo from "../../images/footerLogo.svg";
+import footerLogo from "../../images/footerLogo.webp";
 
 const LoadingSpinner = () => {
   return (
     <Background>
-      <img src={footerLogo} alt="footerLogo"></img>
+      <img src={footerLogo} alt="footerLogo" />
       <LoadingText>잠시만 기다려 주세요</LoadingText>
     </Background>
   );
