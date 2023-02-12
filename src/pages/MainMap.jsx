@@ -48,7 +48,7 @@ const MainMap = () => {
 
   //검색어 받아오는 로직
 
-  const onAddressHandler = throttle(async (e) => {
+  const onAddressHandler = async (e) => {
     const { value } = e.target;
     console.log(value);
     setSearchAddress(value);
@@ -63,7 +63,7 @@ const MainMap = () => {
       const { data } = response?.data;
       setSearchData(data);
     } catch (error) {}
-  }, 1000);
+  };
 
   //검색어 클릭시 input값 변환
   const clickDropDownItem = (el) => {
