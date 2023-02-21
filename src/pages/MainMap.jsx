@@ -50,7 +50,6 @@ const MainMap = () => {
 
   const onAddressHandler = async (e) => {
     const { value } = e.target;
-    console.log(value);
     setSearchAddress(value);
     try {
       const response = await axios.get(
